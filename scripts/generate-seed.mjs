@@ -9,6 +9,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const assets = path.join(root, 'assets');
 const outputPath = path.join(root, 'server/db/setup/seed.sql');
 const linksPath = path.join(root, 'server/db/setup/project-cheatsheets.sql');
+const resourcesPath = path.join(root, 'server/db/setup/project-resources.sql');
 
 const avatars = JSON.parse(await readFile(path.join(assets, 'student-avatars.json'), 'utf8'));
 const studentProjects = JSON.parse(await readFile(path.join(assets, 'student-projects.json'), 'utf8'));
@@ -93,6 +94,55 @@ if (linkedCheatsheets.size !== cheatsheetSlugs.size) {
   throw new Error('A cheatsheet is not linked to any project');
 }
 
+const projectTopics = new Set(projects.flatMap(({ tags }) => tags));
+const resourceLines = (await readFile(path.join(assets, 'resources.md'), 'utf8')).split('\n');
+const resources = [];
+let currentTopic = null;
+
+for (const line of resourceLines) {
+  const topic = line.match(/^- ([^:]+):$/);
+  if (topic) {
+    currentTopic = topic[1];
+    continue;
+  }
+
+  const entry = line.match(/^  - ([^:]+): (https?:\/\/\S+)$/);
+  if (!entry || !projectTopics.has(currentTopic)) continue;
+
+  const [, label, url] = entry;
+  const title = label.startsWith(`${currentTopic} `) ? label : `${currentTopic} ${label}`;
+  if (title.length > 150 || url.length > 255) throw new Error(`Resource is too long: ${url}`);
+  resources.push({ topic: currentTopic, label, title, url });
+}
+
+if (new Set(resources.map(({ url }) => url)).size !== resources.length) {
+  throw new Error('Duplicate resource URL');
+}
+
+const resourceRows = resources.map(({ title, url }) => [title, url]);
+const resourceStatements = [];
+const linkedResources = new Set();
+
+for (const { name, tags } of projects) {
+  for (const { topic, label, url } of resources) {
+    if (!tags.includes(topic)) continue;
+    // The React Router guide belongs to the router exercise, not every React exercise.
+    if (label === 'React Router' && name !== 'react-router') continue;
+
+    linkedResources.add(url);
+    resourceStatements.push(
+      `INSERT IGNORE INTO project_resources (project_id, resource_id)\n` +
+      `SELECT projects.id, resources.id\n` +
+      `FROM projects CROSS JOIN resources\n` +
+      `WHERE projects.slug = ${sqlString(name)} AND resources.url = ${sqlString(url)};`,
+    );
+  }
+}
+
+if (linkedResources.size !== resources.length) {
+  throw new Error('A resource is not linked to any project');
+}
+
 const seenPairs = new Set();
 const associationStatements = studentProjects.map(({ github, project, repoUrl }) => {
   const key = `${github}/${project}`;
@@ -121,10 +171,13 @@ const sql = [
   insert('students', ['name', 'github_username', 'avatar_path'], studentRows, ['name', 'avatar_path']),
   insert('projects', ['slug', 'title', 'description', 'topics'], projectRows, ['title', 'description', 'topics']),
   insert('cheatsheets', ['slug', 'title', 'file_path'], cheatsheetRows, ['title', 'file_path']),
+  insert('resources', ['title', 'url'], resourceRows, ['title']),
   '-- Only verified, exact public repository URLs are included.',
   ...associationStatements,
   '-- Curated project-to-PDF links; also available separately in project-cheatsheets.sql.',
   ...projectCheatsheetStatements,
+  '-- Topic-based project-to-resource links; also available separately in project-resources.sql.',
+  ...resourceStatements,
   'COMMIT;',
   'SET SQL_MODE = @OLD_SQL_MODE;',
   '',
@@ -140,15 +193,28 @@ const linksSql = [
   '',
 ].join('\n\n');
 
+const resourcesSql = [
+  '-- Generated from assets/resources.md by node scripts/generate-seed.mjs.',
+  '-- Run schema.sql first. This file adds only resources and project-resource links.',
+  'USE class14;',
+  'START TRANSACTION;',
+  insert('resources', ['title', 'url'], resourceRows, ['title']),
+  ...resourceStatements,
+  'COMMIT;',
+  '',
+].join('\n\n');
+
 if (process.argv.includes('--check')) {
   const current = await readFile(outputPath, 'utf8');
   const currentLinks = await readFile(linksPath, 'utf8');
-  if (current !== sql || currentLinks !== linksSql) {
+  const currentResources = await readFile(resourcesPath, 'utf8');
+  if (current !== sql || currentLinks !== linksSql || currentResources !== resourcesSql) {
     throw new Error('Generated SQL is out of date; run node scripts/generate-seed.mjs');
   }
-  console.log(`Seed is current: ${students.length} students, ${projects.length} projects, ${pdfFiles.length} PDFs, ${studentProjects.length} repositories, ${projectCheatsheetStatements.length} PDF links`);
+  console.log(`Seed is current: ${students.length} students, ${projects.length} projects, ${pdfFiles.length} PDFs, ${studentProjects.length} repositories, ${projectCheatsheetStatements.length} PDF links, ${resources.length} resources, ${resourceStatements.length} resource links`);
 } else {
   await writeFile(outputPath, sql);
   await writeFile(linksPath, linksSql);
-  console.log(`Generated seed: ${students.length} students, ${projects.length} projects, ${pdfFiles.length} PDFs, ${studentProjects.length} repositories, ${projectCheatsheetStatements.length} PDF links`);
+  await writeFile(resourcesPath, resourcesSql);
+  console.log(`Generated seed: ${students.length} students, ${projects.length} projects, ${pdfFiles.length} PDFs, ${studentProjects.length} repositories, ${projectCheatsheetStatements.length} PDF links, ${resources.length} resources, ${resourceStatements.length} resource links`);
 }

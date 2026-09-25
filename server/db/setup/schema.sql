@@ -58,3 +58,23 @@ CREATE TABLE IF NOT EXISTS project_cheatsheets (
   CONSTRAINT project_cheatsheets_cheatsheet_id_foreign
     FOREIGN KEY (cheatsheet_id) REFERENCES cheatsheets (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS resources (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  title VARCHAR(150) NOT NULL,
+  url VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY resources_url_unique (url)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS project_resources (
+  project_id INT UNSIGNED NOT NULL,
+  resource_id INT UNSIGNED NOT NULL,
+  PRIMARY KEY (project_id, resource_id),
+  KEY project_resources_resource_id_index (resource_id),
+  CONSTRAINT project_resources_project_id_foreign
+    FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
+  CONSTRAINT project_resources_resource_id_foreign
+    FOREIGN KEY (resource_id) REFERENCES resources (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

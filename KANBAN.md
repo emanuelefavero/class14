@@ -4,7 +4,7 @@ Aggiornare le caselle quando una fase è verificata. Mantenere qui solo le attiv
 
 ## Da fare
 
-- [ ] Creare API Express per lista e dettaglio di studenti e progetti, con relazioni e link ai PDF.
+- [ ] Creare API Express per lista e dettaglio di studenti e progetti, con repository, PDF e risorse esterne.
 - [ ] Creare frontend React per esplorare progetti, studenti, argomenti e risorse.
 - [ ] Verificare navigazione, stati vuoti, API ed esperienza mobile.
 
@@ -21,3 +21,4 @@ Nessuna attività aperta.
 - [x] Preparare schema MySQL e seed generato da studenti, progetti, PDF e repository verificate.
 - [x] Importare e verificare il database locale: 15 studenti, 15 progetti, 18 PDF e 124 repository.
 - [x] Associare 39 PDF ai progetti e verificare che ogni progetto e ogni PDF sia collegato.
+- [x] Importare 17 risorse esterne e collegarle ai progetti con 54 associazioni verificate.

@@ -1,6 +1,6 @@
 # 📌 Piano di Progetto: Class14 (WDPT14)
 
-> **Stato degli asset:** `assets/students.js` contiene 15 studenti identificati dal solo nome e dallo username GitHub; `assets/projects.js` contiene i 15 progetti del periodo React e successivo, con una descrizione Markdown per ciascuno. I 18 PDF sono in `assets/cheatsheets/` e 39 associazioni progetto–PDF sono definite in `assets/project-cheatsheets.js`. Sono stati salvati 15 avatar e verificate 124 associazioni con repository pubbliche su 225 URL esatti tramite `node scripts/sync-github-assets.mjs`.
+> **Stato degli asset:** `assets/students.js` contiene 15 studenti identificati dal solo nome e dallo username GitHub; `assets/projects.js` contiene i 15 progetti del periodo React e successivo, con una descrizione Markdown per ciascuno. I 18 PDF sono in `assets/cheatsheets/` e 39 associazioni progetto–PDF sono definite in `assets/project-cheatsheets.js`. Le 17 risorse esterne pertinenti e le 54 associazioni con i progetti derivano da `assets/resources.md`. Sono stati salvati 15 avatar e verificate 124 associazioni con repository pubbliche su 225 URL esatti tramite `node scripts/sync-github-assets.mjs`.
 
 ---
 
@@ -87,6 +87,20 @@ Permette di associare **uno o più cheat sheet** a un singolo progetto.
 - `project_id` (INT, FK -> `projects.id` ON DELETE CASCADE)
 - `cheatsheet_id` (INT, FK -> `cheatsheets.id` ON DELETE CASCADE)
 - **PRIMARY KEY:** (`project_id`, `cheatsheet_id`)
+
+### 6. `resources`
+
+I link esterni di ripasso relativi agli argomenti dei progetti.
+
+- `id` (INT, PK, AUTO_INCREMENT)
+- `title` (VARCHAR(150), NOT NULL)
+- `url` (VARCHAR(255), NOT NULL, UNIQUE)
+
+### 7. `project_resources` (Tabella Ponte N:M tra Progetti e Risorse)
+
+- `project_id` (INT, FK -> `projects.id` ON DELETE CASCADE)
+- `resource_id` (INT, FK -> `resources.id` ON DELETE CASCADE)
+- **PRIMARY KEY:** (`project_id`, `resource_id`)
 
 ---
 
