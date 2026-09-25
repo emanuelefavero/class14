@@ -1,0 +1,38 @@
+# Tag Resources
+
+- mysql2:
+  - Documentation: https://sidorares.github.io/node-mysql2/docs
+- MySQL:
+  - Documentation: https://dev.mysql.com/doc/
+  - Tutorial: https://www.w3schools.com/MYSQL/default.asp
+  - Workbench download: https://dev.mysql.com/downloads/workbench/
+  - Community server download: https://dev.mysql.com/downloads/mysql/
+- Database:
+  - DrawSQL: https://drawsql.app/
+- Express:
+  - Documentation: https://expressjs.com/en/5x/starter/installing/
+  - Tutorial: https://www.w3schools.com/nodejs/nodejs_express.asp
+  - REST: https://restfulapi.net/
+  - HTTP: https://developer.mozilla.org/en-US/docs/Web/HTTP
+- Node.js:
+  - Documentation: https://nodejs.org/en/docs/
+  - Tutorial: https://www.w3schools.com/nodejs/default.asp
+- NPM:
+  - Documentation: https://docs.npmjs.com/about-npm
+  - Tutorial: https://www.w3schools.com/nodejs/nodejs_npm.asp
+- React:
+  - Documentation: https://reactjs.org/docs/getting-started.html
+  - Tutorial: https://www.w3schools.com/react/
+  - React Router: https://reactrouter.com/
+- JavaScript:
+  - Documentation: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  - Tutorial: https://www.w3schools.com/js/
+- Bootstrap:
+  - Documentation: https://getbootstrap.com/docs/5.3/getting-started/introduction/
+  - Tutorial: https://www.w3schools.com/bootstrap5/
+- CSS:
+  - Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS
+  - Tutorial: https://www.w3schools.com/css/
+- HTML:
+  - Documentation: https://developer.mozilla.org/en-US/docs/Web/HTML
+  - Tutorial: https://www.w3schools.com/html/

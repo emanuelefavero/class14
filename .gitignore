@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.DS_Store
+
+# Agents
+.agents/
+.playwright-mcp
+.playwright-cli
+
+.local/

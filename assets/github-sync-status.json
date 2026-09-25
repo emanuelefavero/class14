@@ -1,0 +1,882 @@
+{
+  "profiles": {
+    "emanuelefavero": {
+      "status": "found",
+      "avatar": "avatars/emanuelefavero.jpg",
+      "profileUrl": "https://github.com/emanuelefavero"
+    },
+    "francescoguttuso": {
+      "status": "found",
+      "avatar": "avatars/francescoguttuso.png",
+      "profileUrl": "https://github.com/francescoguttuso"
+    },
+    "FilippoGraziano": {
+      "status": "found",
+      "avatar": "avatars/FilippoGraziano.png",
+      "profileUrl": "https://github.com/FilippoGraziano"
+    },
+    "EleonoraLosciuto": {
+      "status": "found",
+      "avatar": "avatars/EleonoraLosciuto.jpg",
+      "profileUrl": "https://github.com/EleonoraLosciuto"
+    },
+    "DarioM1992": {
+      "status": "found",
+      "avatar": "avatars/DarioM1992.png",
+      "profileUrl": "https://github.com/DarioM1992"
+    },
+    "daviderocco85": {
+      "status": "found",
+      "avatar": "avatars/daviderocco85.png",
+      "profileUrl": "https://github.com/daviderocco85"
+    },
+    "thomaslazzeri": {
+      "status": "found",
+      "avatar": "avatars/thomaslazzeri.png",
+      "profileUrl": "https://github.com/thomaslazzeri"
+    },
+    "chrisxwave": {
+      "status": "found",
+      "avatar": "avatars/chrisxwave.png",
+      "profileUrl": "https://github.com/chrisxwave"
+    },
+    "guidogig": {
+      "status": "found",
+      "avatar": "avatars/guidogig.jpg",
+      "profileUrl": "https://github.com/guidogig"
+    },
+    "JacopoAugelli-13": {
+      "status": "found",
+      "avatar": "avatars/JacopoAugelli-13.png",
+      "profileUrl": "https://github.com/JacopoAugelli-13"
+    },
+    "francesca-yui": {
+      "status": "found",
+      "avatar": "avatars/francesca-yui.png",
+      "profileUrl": "https://github.com/francesca-yui"
+    },
+    "oumouniaonedabre-dot": {
+      "status": "found",
+      "avatar": "avatars/oumouniaonedabre-dot.png",
+      "profileUrl": "https://github.com/oumouniaonedabre-dot"
+    },
+    "rrope01": {
+      "status": "found",
+      "avatar": "avatars/rrope01.png",
+      "profileUrl": "https://github.com/rrope01"
+    },
+    "VitantonioPasqualicchio": {
+      "status": "found",
+      "avatar": "avatars/VitantonioPasqualicchio.jpg",
+      "profileUrl": "https://github.com/VitantonioPasqualicchio"
+    },
+    "noemi-tartaglino": {
+      "status": "found",
+      "avatar": "avatars/noemi-tartaglino.png",
+      "profileUrl": "https://github.com/noemi-tartaglino"
+    }
+  },
+  "repositories": {
+    "emanuelefavero/express-blog-sql": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/express-blog-sql"
+    },
+    "emanuelefavero/express-blog-api-crud": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/express-blog-api-crud"
+    },
+    "emanuelefavero/db-university": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/db-university"
+    },
+    "emanuelefavero/db-first": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/db-first"
+    },
+    "emanuelefavero/react-context-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/react-context-api"
+    },
+    "emanuelefavero/node-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/node-hello-world"
+    },
+    "emanuelefavero/express-blog-routing": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/express-blog-routing"
+    },
+    "emanuelefavero/express-blog-intro": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/express-blog-intro"
+    },
+    "emanuelefavero/react-movie-filter": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/react-movie-filter"
+    },
+    "emanuelefavero/react-form": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/react-form"
+    },
+    "emanuelefavero/react-router": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/react-router"
+    },
+    "emanuelefavero/react-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/react-api"
+    },
+    "francescoguttuso/express-blog-sql": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/express-blog-sql"
+    },
+    "emanuelefavero/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/react-use-state"
+    },
+    "emanuelefavero/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/react-dc-comics"
+    },
+    "emanuelefavero/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/emanuelefavero/react-hello-world"
+    },
+    "francescoguttuso/express-blog-routing": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/express-blog-routing"
+    },
+    "francescoguttuso/db-university": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/db-university"
+    },
+    "francescoguttuso/db-first": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/db-first"
+    },
+    "francescoguttuso/express-blog-api-crud": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/express-blog-api-crud"
+    },
+    "francescoguttuso/node-hello-world": {
+      "status": "missing"
+    },
+    "francescoguttuso/express-blog-intro": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/express-blog-intro"
+    },
+    "francescoguttuso/react-context-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/react-context-api"
+    },
+    "francescoguttuso/react-router": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/react-router"
+    },
+    "francescoguttuso/react-movie-filter": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/react-movie-filter"
+    },
+    "francescoguttuso/react-form": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/react-form"
+    },
+    "francescoguttuso/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/react-use-state"
+    },
+    "francescoguttuso/react-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/react-api"
+    },
+    "francescoguttuso/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/react-hello-world"
+    },
+    "francescoguttuso/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/francescoguttuso/react-dc-comics"
+    },
+    "FilippoGraziano/express-blog-sql": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/express-blog-sql"
+    },
+    "FilippoGraziano/db-university": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/db-university"
+    },
+    "FilippoGraziano/express-blog-api-crud": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/express-blog-api-crud"
+    },
+    "FilippoGraziano/express-blog-intro": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/express-blog-intro"
+    },
+    "FilippoGraziano/db-first": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/db-first"
+    },
+    "FilippoGraziano/express-blog-routing": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/express-blog-routing"
+    },
+    "FilippoGraziano/react-router": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/react-router"
+    },
+    "FilippoGraziano/react-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/react-api"
+    },
+    "FilippoGraziano/react-context-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/react-context-api"
+    },
+    "FilippoGraziano/node-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/node-hello-world"
+    },
+    "FilippoGraziano/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/react-dc-comics"
+    },
+    "FilippoGraziano/react-form": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/react-form"
+    },
+    "FilippoGraziano/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/react-use-state"
+    },
+    "FilippoGraziano/react-movie-filter": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/react-movie-filter"
+    },
+    "EleonoraLosciuto/express-blog-sql": {
+      "status": "missing"
+    },
+    "EleonoraLosciuto/db-first": {
+      "status": "missing"
+    },
+    "EleonoraLosciuto/db-university": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/db-university"
+    },
+    "FilippoGraziano/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/FilippoGraziano/react-hello-world"
+    },
+    "EleonoraLosciuto/node-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/node-hello-world"
+    },
+    "EleonoraLosciuto/express-blog-intro": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/express-blog-intro"
+    },
+    "EleonoraLosciuto/express-blog-routing": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/express-blog-routing"
+    },
+    "EleonoraLosciuto/express-blog-api-crud": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/express-blog-api-crud"
+    },
+    "EleonoraLosciuto/react-context-api": {
+      "status": "missing"
+    },
+    "EleonoraLosciuto/react-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/react-api"
+    },
+    "EleonoraLosciuto/react-router": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/react-router"
+    },
+    "EleonoraLosciuto/react-movie-filter": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/react-movie-filter"
+    },
+    "EleonoraLosciuto/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/react-use-state"
+    },
+    "EleonoraLosciuto/react-form": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/react-form"
+    },
+    "EleonoraLosciuto/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/react-hello-world"
+    },
+    "EleonoraLosciuto/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/EleonoraLosciuto/react-dc-comics"
+    },
+    "DarioM1992/express-blog-sql": {
+      "status": "missing"
+    },
+    "DarioM1992/db-university": {
+      "status": "missing"
+    },
+    "DarioM1992/express-blog-api-crud": {
+      "status": "missing"
+    },
+    "DarioM1992/db-first": {
+      "status": "found",
+      "repoUrl": "https://github.com/DarioM1992/db-first"
+    },
+    "DarioM1992/node-hello-world": {
+      "status": "missing"
+    },
+    "DarioM1992/express-blog-routing": {
+      "status": "missing"
+    },
+    "DarioM1992/react-context-api": {
+      "status": "missing"
+    },
+    "DarioM1992/express-blog-intro": {
+      "status": "found",
+      "repoUrl": "https://github.com/DarioM1992/express-blog-intro"
+    },
+    "DarioM1992/react-movie-filter": {
+      "status": "missing"
+    },
+    "DarioM1992/react-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/DarioM1992/react-api"
+    },
+    "DarioM1992/react-form": {
+      "status": "found",
+      "repoUrl": "https://github.com/DarioM1992/react-form"
+    },
+    "DarioM1992/react-router": {
+      "status": "found",
+      "repoUrl": "https://github.com/DarioM1992/react-router"
+    },
+    "daviderocco85/express-blog-sql": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/express-blog-sql"
+    },
+    "DarioM1992/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/DarioM1992/react-hello-world"
+    },
+    "DarioM1992/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/DarioM1992/react-dc-comics"
+    },
+    "DarioM1992/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/DarioM1992/react-use-state"
+    },
+    "daviderocco85/db-first": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/db-first"
+    },
+    "daviderocco85/db-university": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/db-university"
+    },
+    "daviderocco85/express-blog-routing": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/express-blog-routing"
+    },
+    "daviderocco85/express-blog-api-crud": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/express-blog-api-crud"
+    },
+    "daviderocco85/react-context-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/react-context-api"
+    },
+    "daviderocco85/node-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/node-hello-world"
+    },
+    "daviderocco85/express-blog-intro": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/express-blog-intro"
+    },
+    "daviderocco85/react-router": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/react-router"
+    },
+    "daviderocco85/react-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/react-api"
+    },
+    "daviderocco85/react-movie-filter": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/react-movie-filter"
+    },
+    "daviderocco85/react-form": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/react-form"
+    },
+    "daviderocco85/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/react-use-state"
+    },
+    "thomaslazzeri/express-blog-sql": {
+      "status": "missing"
+    },
+    "daviderocco85/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/react-hello-world"
+    },
+    "thomaslazzeri/db-university": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/db-university"
+    },
+    "daviderocco85/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/daviderocco85/react-dc-comics"
+    },
+    "thomaslazzeri/db-first": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/db-first"
+    },
+    "thomaslazzeri/express-blog-routing": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/express-blog-routing"
+    },
+    "thomaslazzeri/express-blog-intro": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/express-blog-intro"
+    },
+    "thomaslazzeri/express-blog-api-crud": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/express-blog-api-crud"
+    },
+    "thomaslazzeri/react-context-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/react-context-api"
+    },
+    "thomaslazzeri/react-router": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/react-router"
+    },
+    "thomaslazzeri/node-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/node-hello-world"
+    },
+    "thomaslazzeri/react-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/react-api"
+    },
+    "thomaslazzeri/react-movie-filter": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/react-movie-filter"
+    },
+    "thomaslazzeri/react-form": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/react-form"
+    },
+    "thomaslazzeri/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/react-use-state"
+    },
+    "thomaslazzeri/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/react-dc-comics"
+    },
+    "chrisxwave/express-blog-sql": {
+      "status": "missing"
+    },
+    "chrisxwave/db-first": {
+      "status": "missing"
+    },
+    "chrisxwave/db-university": {
+      "status": "missing"
+    },
+    "thomaslazzeri/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/thomaslazzeri/react-hello-world"
+    },
+    "chrisxwave/express-blog-intro": {
+      "status": "missing"
+    },
+    "chrisxwave/express-blog-routing": {
+      "status": "missing"
+    },
+    "chrisxwave/node-hello-world": {
+      "status": "missing"
+    },
+    "chrisxwave/express-blog-api-crud": {
+      "status": "missing"
+    },
+    "chrisxwave/react-router": {
+      "status": "missing"
+    },
+    "chrisxwave/react-api": {
+      "status": "missing"
+    },
+    "chrisxwave/react-context-api": {
+      "status": "missing"
+    },
+    "chrisxwave/react-movie-filter": {
+      "status": "missing"
+    },
+    "chrisxwave/react-hello-world": {
+      "status": "missing"
+    },
+    "chrisxwave/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/chrisxwave/react-dc-comics"
+    },
+    "chrisxwave/react-form": {
+      "status": "found",
+      "repoUrl": "https://github.com/chrisxwave/react-form"
+    },
+    "chrisxwave/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/chrisxwave/react-use-state"
+    },
+    "guidogig/express-blog-api-crud": {
+      "status": "missing"
+    },
+    "guidogig/express-blog-sql": {
+      "status": "missing"
+    },
+    "guidogig/db-first": {
+      "status": "found",
+      "repoUrl": "https://github.com/guidogig/db-first"
+    },
+    "guidogig/db-university": {
+      "status": "found",
+      "repoUrl": "https://github.com/guidogig/db-university"
+    },
+    "guidogig/react-context-api": {
+      "status": "missing"
+    },
+    "guidogig/express-blog-routing": {
+      "status": "found",
+      "repoUrl": "https://github.com/guidogig/express-blog-routing"
+    },
+    "guidogig/node-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/guidogig/node-hello-world"
+    },
+    "guidogig/express-blog-intro": {
+      "status": "found",
+      "repoUrl": "https://github.com/guidogig/express-blog-intro"
+    },
+    "guidogig/react-api": {
+      "status": "missing"
+    },
+    "guidogig/react-movie-filter": {
+      "status": "missing"
+    },
+    "guidogig/react-router": {
+      "status": "missing"
+    },
+    "guidogig/react-form": {
+      "status": "missing"
+    },
+    "JacopoAugelli-13/express-blog-sql": {
+      "status": "missing"
+    },
+    "guidogig/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/guidogig/react-hello-world"
+    },
+    "guidogig/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/guidogig/react-use-state"
+    },
+    "guidogig/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/guidogig/react-dc-comics"
+    },
+    "JacopoAugelli-13/express-blog-routing": {
+      "status": "missing",
+      "redirectedTo": "https://github.com/JacopoAugelli-13/express-blog-api-crud"
+    },
+    "JacopoAugelli-13/express-blog-api-crud": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/express-blog-api-crud"
+    },
+    "JacopoAugelli-13/db-university": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/db-university"
+    },
+    "JacopoAugelli-13/db-first": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/db-first"
+    },
+    "JacopoAugelli-13/express-blog-intro": {
+      "status": "missing",
+      "redirectedTo": "https://github.com/JacopoAugelli-13/express-blog-api-crud"
+    },
+    "JacopoAugelli-13/react-context-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/react-context-api"
+    },
+    "JacopoAugelli-13/node-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/node-hello-world"
+    },
+    "JacopoAugelli-13/react-router": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/react-router"
+    },
+    "JacopoAugelli-13/react-form": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/react-form"
+    },
+    "JacopoAugelli-13/react-api": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/react-api"
+    },
+    "JacopoAugelli-13/react-movie-filter": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/react-movie-filter"
+    },
+    "JacopoAugelli-13/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/react-use-state"
+    },
+    "francesca-yui/express-blog-sql": {
+      "status": "missing"
+    },
+    "francesca-yui/db-university": {
+      "status": "missing"
+    },
+    "JacopoAugelli-13/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/react-dc-comics"
+    },
+    "JacopoAugelli-13/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/JacopoAugelli-13/react-hello-world"
+    },
+    "francesca-yui/express-blog-intro": {
+      "status": "missing"
+    },
+    "francesca-yui/express-blog-routing": {
+      "status": "missing"
+    },
+    "francesca-yui/db-first": {
+      "status": "missing"
+    },
+    "francesca-yui/express-blog-api-crud": {
+      "status": "missing"
+    },
+    "francesca-yui/react-context-api": {
+      "status": "missing"
+    },
+    "francesca-yui/react-api": {
+      "status": "missing"
+    },
+    "francesca-yui/node-hello-world": {
+      "status": "missing"
+    },
+    "francesca-yui/react-router": {
+      "status": "missing"
+    },
+    "francesca-yui/react-form": {
+      "status": "missing"
+    },
+    "francesca-yui/react-movie-filter": {
+      "status": "missing"
+    },
+    "francesca-yui/react-use-state": {
+      "status": "missing"
+    },
+    "francesca-yui/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/francesca-yui/react-dc-comics"
+    },
+    "oumouniaonedabre-dot/express-blog-sql": {
+      "status": "missing"
+    },
+    "oumouniaonedabre-dot/db-first": {
+      "status": "missing"
+    },
+    "oumouniaonedabre-dot/db-university": {
+      "status": "missing"
+    },
+    "francesca-yui/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/francesca-yui/react-hello-world"
+    },
+    "oumouniaonedabre-dot/express-blog-api-crud": {
+      "status": "missing"
+    },
+    "oumouniaonedabre-dot/express-blog-routing": {
+      "status": "found",
+      "repoUrl": "https://github.com/oumouniaonedabre-dot/express-blog-routing"
+    },
+    "oumouniaonedabre-dot/node-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/oumouniaonedabre-dot/node-hello-world"
+    },
+    "oumouniaonedabre-dot/express-blog-intro": {
+      "status": "found",
+      "repoUrl": "https://github.com/oumouniaonedabre-dot/express-blog-intro"
+    },
+    "oumouniaonedabre-dot/react-router": {
+      "status": "missing"
+    },
+    "oumouniaonedabre-dot/react-context-api": {
+      "status": "missing"
+    },
+    "oumouniaonedabre-dot/react-api": {
+      "status": "missing"
+    },
+    "oumouniaonedabre-dot/react-movie-filter": {
+      "status": "missing"
+    },
+    "oumouniaonedabre-dot/react-form": {
+      "status": "missing"
+    },
+    "oumouniaonedabre-dot/react-dc-comics": {
+      "status": "found",
+      "repoUrl": "https://github.com/oumouniaonedabre-dot/react-dc-comics"
+    },
+    "oumouniaonedabre-dot/react-use-state": {
+      "status": "found",
+      "repoUrl": "https://github.com/oumouniaonedabre-dot/react-use-state"
+    },
+    "oumouniaonedabre-dot/react-hello-world": {
+      "status": "found",
+      "repoUrl": "https://github.com/oumouniaonedabre-dot/react-hello-world"
+    },
+    "rrope01/express-blog-sql": {
+      "status": "missing"
+    },
+    "rrope01/db-university": {
+      "status": "missing"
+    },
+    "rrope01/express-blog-api-crud": {
+      "status": "missing"
+    },
+    "rrope01/db-first": {
+      "status": "missing"
+    },
+    "rrope01/express-blog-intro": {
+      "status": "missing"
+    },
+    "rrope01/react-context-api": {
+      "status": "missing"
+    },
+    "rrope01/express-blog-routing": {
+      "status": "missing"
+    },
+    "rrope01/node-hello-world": {
+      "status": "missing"
+    },
+    "rrope01/react-api": {
+      "status": "missing"
+    },
+    "rrope01/react-movie-filter": {
+      "status": "missing"
+    },
+    "rrope01/react-router": {
+      "status": "missing"
+    },
+    "rrope01/react-form": {
+      "status": "missing"
+    },
+    "rrope01/react-use-state": {
+      "status": "missing"
+    },
+    "rrope01/react-hello-world": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/express-blog-sql": {
+      "status": "missing"
+    },
+    "rrope01/react-dc-comics": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/express-blog-api-crud": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/db-university": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/db-first": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/express-blog-routing": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/react-router": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/react-context-api": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/node-hello-world": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/express-blog-intro": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/react-movie-filter": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/react-api": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/react-form": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/react-use-state": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/db-university": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/express-blog-sql": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/react-hello-world": {
+      "status": "missing"
+    },
+    "VitantonioPasqualicchio/react-dc-comics": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/express-blog-routing": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/express-blog-api-crud": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/express-blog-intro": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/db-first": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/react-api": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/react-context-api": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/node-hello-world": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/react-router": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/react-movie-filter": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/react-dc-comics": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/react-form": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/react-use-state": {
+      "status": "missing"
+    },
+    "noemi-tartaglino/react-hello-world": {
+      "status": "missing"
+    }
+  }
+}

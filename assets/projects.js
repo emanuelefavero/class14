@@ -1,0 +1,17 @@
+export const projects = [
+  { name: 'express-blog-sql', tags: ['mysql2', 'MySQL', 'Express'] },
+  { name: 'db-university', tags: ['MySQL', 'Database'] },
+  { name: 'db-first', tags: ['Database'] },
+  { name: 'express-blog-api-crud', tags: ['Node.js', 'Express'] },
+  { name: 'express-blog-routing', tags: ['Node.js', 'Express'] },
+  { name: 'express-blog-intro', tags: ['Node.js', 'Express'] },
+  { name: 'node-hello-world', tags: ['Node.js', 'NPM'] },
+  { name: 'react-context-api', tags: ['React'] },
+  { name: 'react-router', tags: ['React'] },
+  { name: 'react-api', tags: ['React'] },
+  { name: 'react-movie-filter', tags: ['React'] },
+  { name: 'react-form', tags: ['React'] },
+  { name: 'react-use-state', tags: ['React'] },
+  { name: 'react-dc-comics', tags: ['React'] },
+  { name: 'react-hello-world', tags: ['React'] },
+];
