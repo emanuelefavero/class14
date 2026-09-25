@@ -1,6 +1,6 @@
 # 📌 Piano di Progetto: Class14 (WDPT14)
 
-> **Stato degli asset:** `assets/students.js` contiene 15 studenti identificati dal solo nome e dallo username GitHub; `assets/projects.js` contiene i 15 progetti del periodo React e successivo, con una descrizione Markdown per ciascuno. I PDF sono in `assets/cheatsheets/`. Sono stati salvati 15 avatar e verificate 124 associazioni con repository pubbliche su 225 URL esatti tramite `node scripts/sync-github-assets.mjs`.
+> **Stato degli asset:** `assets/students.js` contiene 15 studenti identificati dal solo nome e dallo username GitHub; `assets/projects.js` contiene i 15 progetti del periodo React e successivo, con una descrizione Markdown per ciascuno. I 18 PDF sono in `assets/cheatsheets/` e 39 associazioni progetto–PDF sono definite in `assets/project-cheatsheets.js`. Sono stati salvati 15 avatar e verificate 124 associazioni con repository pubbliche su 225 URL esatti tramite `node scripts/sync-github-assets.mjs`.
 
 ---
 
