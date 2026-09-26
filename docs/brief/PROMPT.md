@@ -38,12 +38,12 @@ Inserire un middleware per la gestione errori
 
 ## La mia idea per questo progetto
 
-Leggi `plan.md` per avere una panoramica completa della mia idea e dei passi successivi per lo sviluppo del progetto.
+Leggi `docs/plan.md` per avere una panoramica completa della mia idea e dei passi successivi per lo sviluppo del progetto.
 
 ## Info riguardo agli assets
 
 Gli assets per questo progetto si trovano in `assets/`.
-Leggi `assets-info.md` per avere informazioni dettagliate sugli assets disponibili.
+Leggi `docs/assets-info.md` per avere informazioni dettagliate sugli assets disponibili.
 
 ## Obbiettivo iniziale
 
