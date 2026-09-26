@@ -1,63 +1,66 @@
-# Express Blog SQL
+# Class14 — backend Express
 
-An Express.js blog API with MySQL integration (through mysql2) featuring CRUD operations.
+Backend del Learning Hub e Student Showcase della classe Boolean WDPT14.
+Node.js, Express, JavaScript ESM, mysql2/promise e Zod per la validazione.
 
-<img src="logo.svg" alt="Node.js logo" width="100">
+## Stato
 
-## Set up the `blog` database
+Configurazione e avvio sono adattati a Class14. `GET /` restituisce il brand e lo stato della conversione.
+Le API MVP sono definite nel [contratto](../docs/API-CONTRACT.md) e devono ancora essere implementate.
+Le routes posts e le routes di prova errors restano temporaneamente come riferimento: posts usa il modello del vecchio blog, non i dati Class14. Non usare il CRUD posts sul database Class14.
 
-- Create an empty `blog` database in MySQL.
-- Import `db/setup/blog_db.sql`, which contains the schema and initial data.
-- Verify the import, for example with `SELECT * FROM posts;`.
+## Configurazione locale
 
-The application connects to MySQL on `localhost` as `root`. If the user has a
-password, provide it through the `DB_PASSWORD` environment variable:
+Richiede Node.js 24.14 o successivo e MySQL con il database `class14` già popolato.
+Per una nuova installazione consultare [setup SQL](db/setup/README.md); non ricreare o reimportare il database locale esistente.
+
+Dalla root del progetto:
 
 ```bash
-DB_PASSWORD=your_password npm start
+npm run install:all
+cp server/.env.example server/.env
 ```
 
-## Run locally
+Se `server/.env` esiste già, modificarlo senza sovrascriverlo. Impostare utente/password MySQL locali; `.env` è ignorato da Git.
 
-- Clone the repo `https://github.com/emanuelefavero/express-blog-sql.git`
-- `cd` into the project folder
-- Run:
+| Variabile | Default / requisito |
+| --- | --- |
+| PORT | 3000; intero 1–65535 |
+| DB_HOST | localhost; stringa non vuota |
+| DB_PORT | 3306; intero 1–65535 |
+| DB_USER | Obbligatoria; utente MySQL locale, senza default nel codice |
+| DB_PASSWORD | Stringa vuota se il proprio utente locale non richiede password |
+| DB_NAME | class14; stringa non vuota |
+| DB_CONNECTION_LIMIT | 10; intero 1–100 |
+| DB_CONNECT_TIMEOUT | 10000 millisecondi; intero 1–60000 |
 
-  ```bash
-  npm install
-  npm start
-  ```
+Gli script caricano `server/.env` se presente. Le variabili esportate nel terminale hanno precedenza.
+La `.env` della root e il token GitHub non sono utilizzati dal backend.
 
-- Open your browser and go to `http://localhost:3000` to see the app running.
+## Avvio
 
-> To run the project in dev mode, use `npm run dev`.
+Dalla root:
 
-## API documentation
+```bash
+npm run dev:server
+```
 
-See the complete [API reference](docs/API.md) for the available endpoints, query
-parameters, responses, and errors.
+`npm start` avvia il server senza watch. `npm run dev` avvia server e client insieme.
+Dalla cartella server sono disponibili `npm run dev` e `npm start`.
 
-## Test the routes
+La configurazione viene validata prima di creare il pool. Il server esegue `SELECT 1` prima di ascoltare sulla porta configurata.
+In caso di configurazione non valida o connessione fallita termina con codice non zero; i log non stampano credenziali né l’oggetto di configurazione.
+Un errore di ascolto (per esempio porta occupata) chiude il pool e segnala un codice di errore.
 
-### Postman
+```bash
+curl http://localhost:3000/
+```
 
-Import `postman/express-blog-sql.postman_collection.json` into Postman. Run the
-requests in the `CRUD flow` folder in order so the created post is reused for
-the update and delete requests.
+Le richieste in `test.http` sono ancora quelle del blog: verranno sostituite durante le fasi API.
 
-### REST Client
+## Riferimenti
 
-You can also use the [REST Client extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) for VS Code. After installing it, open the `test.http` file and click on "Send Request" to test the routes.
-
-> Tip: We can also use `curl` to quickly test the routes from the command line (e.g. `curl http://localhost:3000/`).
-
-## License
-
-- [MIT](LICENSE.md)
-
-## Resources
-
-- [MySQL Documentation](https://dev.mysql.com/doc/)
-- [mysql2 Documentation](https://sidorares.github.io/node-mysql2/docs)
-- [Express.js Documentation](https://expressjs.com/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
+- [Kanban](../KANBAN.md): ordine delle fasi e criteri di verifica.
+- [Setup completo](../docs/SETUP.md): script root e client.
+- [Linee guida](../docs/CODE-STYLE-GUIDELINES.md): stile procedurale.
+- [Contesto](../AGENTS.md): dati, asset e limiti dell’MVP.

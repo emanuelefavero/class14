@@ -22,9 +22,9 @@ Avvia Express e Vite insieme. Ctrl+C termina entrambi. Il server usa la porta 30
 
 Per avviarli separatamente: `npm run dev:server` e `npm run dev:client`.
 
-Il server carica `server/.env` se presente. Per configurare la password locale, copiare `server/.env.example` in `server/.env` e impostare `DB_PASSWORD`. Le variabili già esportate nel terminale hanno precedenza. La `.env` root non viene caricata dal backend. Non occorre un token GitHub.
+Il server carica `server/.env` se presente. Copiare `server/.env.example` in `server/.env` solo se il file non esiste e impostare `DB_USER` (obbligatoria) e `DB_PASSWORD` per il proprio MySQL locale. Le variabili già esportate nel terminale hanno precedenza. La `.env` root non viene caricata dal backend. Non occorre un token GitHub.
 
-Il pool attuale usa ancora localhost/root e il database class14: la configurazione completa del pool resta nella fase backend. Non ricreare il database esistente.
+Il pool legge host, porta, utente, password, database, limite connessioni e timeout dalle variabili d’ambiente, validate in `server/config/env.js`. I default e i requisiti sono documentati nel [README server](../server/README.md); non ci sono credenziali fisse nel codice. Non ricreare il database esistente.
 
 ## Comandi dalla root
 

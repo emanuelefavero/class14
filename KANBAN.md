@@ -33,14 +33,16 @@ Procedere nell’ordine indicato, una fase verificabile alla volta: **prima back
 
 Specifica: [docs/API-CONTRACT.md](docs/API-CONTRACT.md). Contratto definito e verificato rispetto a schema/generatore; endpoint ancora da implementare.
 
-### 2. Configurazione e adattamento backend — prossimo passo
+### 2. Configurazione e adattamento backend — completato
 
-- [ ] Completare branding dei contenuti iniziali dell’API e documentazione server.
-- [ ] Riallineare README e riferimenti alle linee guida copiati dal blog.
-- [ ] Completare configurazione ambiente del pool MySQL e `server/.env.example`, senza credenziali fisse né segreti.
-- [ ] Verificare configurazione personalizzata e gestione del fallimento della connessione; l’avvio con MySQL disponibile è già verificato.
+- [x] Completare branding dei contenuti iniziali dell’API e documentazione server.
+- [x] Riallineare README e riferimenti alle linee guida copiati dal blog.
+- [x] Completare configurazione ambiente del pool MySQL e `server/.env.example`, senza credenziali fisse né segreti.
+- [x] Verificare configurazione personalizzata e gestione del fallimento della connessione; l’avvio con MySQL disponibile è già verificato.
 
-### 3. API Projects
+Verificati configurazione personalizzata, root Class14, configurazione non valida, connessione rifiutata e porta HTTP occupata; dettagli in `server/README.md`. Nessuna modifica ai dati.
+
+### 3. API Projects — prossimo passo
 
 - [ ] Creare routes, controller e repository secondo lo stile server esistente.
 - [ ] Implementare lista con titolo, slug e topics.
@@ -124,7 +126,7 @@ Specifica: [docs/API-CONTRACT.md](docs/API-CONTRACT.md). Contratto definito e ve
 
 ## In corso
 
-Nessuna attività di implementazione aperta. Prossima attività: fase 2, configurazione e adattamento backend.
+Nessuna attività di implementazione aperta. Prossima attività: fase 3, API Projects.
 
 ## Fatto
 
@@ -144,3 +146,5 @@ Nessuna attività di implementazione aperta. Prossima attività: fase 2, configu
 - [x] Confermare la nuova direzione e pianificare l’MVP senza modifiche allo schema, con Topics derivati, cataloghi materiali autonomi e contatori Home.
 
 - [x] Definire e verificare il contratto API MVP: endpoint, identificatori, JSON, topics/materiali indiretti, contatori, ricerca/filtri, ordinamento ed errori; nessuna paginazione per il catalogo attuale.
+
+- [x] Completare configurazione ambiente/pool, branding root e README backend; verificare avvio e fallimenti controllati.

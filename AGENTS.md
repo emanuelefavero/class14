@@ -113,13 +113,13 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 
 L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` dentro `client/`. Entrambi hanno struttura, `package.json` e lockfile; **le dipendenze dei tre package sono state installate e verificate**. Non fare nuovo scaffolding e non considerare queste app già convertite o verificate per Class14.
 
-- `server/app.js` registra ancora `posts`, `root` ed `errors`. `server/db/db.js` usa già il database `class14`, ma conserva host/utente della base e password da variabile d’ambiente. Le routes `posts` interrogano ancora il modello del blog e non sono feature di Class14.
-- Il package server si chiama `class14-server`; `server/README.md`, dati root, logo e altri contenuti conservano riferimenti al blog. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
+- `server/app.js` registra ancora `posts`, `root` ed `errors`. `server/db/db.js` legge la configurazione validata da `server/config/env.js`: host, porta, utente, password, database, limite e timeout. `DB_USER` è obbligatoria; il database predefinito è `class14`. Le routes `posts` interrogano ancora il modello del blog e non sono feature di Class14.
+- Il package server si chiama `class14-server`; README e risposta root sono adattati a Class14; le feature posts/errors restano temporaneamente come riferimento. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
 - `server/test.http` contiene richieste per posts: sostituirle con richieste Class14 man mano che si implementano e verificano le nuove risorse.
 - `client/src/features/products/`, `client/src/pages/products/`, i provider in `App.jsx`, router, Header e contenuti Home/AboutUs appartengono ancora al negozio di esempio/Fake Store API. Il package si chiama `class14-client`; titoli e interfaccia mostrano ancora React Context API.
 - Non cancellare preventivamente posts/products: sono esempi di stile da consultare durante la conversione. Rimuovere la vecchia feature e i relativi import, route, provider, richieste e contenuti quando la nuova feature che la sostituisce è pronta. Non lasciare riferimenti pendenti.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. Rinominare progressivamente package, titoli, documentazione e contenuti al brand Class14 nel sottoprogetto su cui si sta lavorando; non rinominare la repository.
-- Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. Cita `.agents/CODE-STYLE-GUIDELINES.md`; le linee guida generali disponibili nella root del progetto sono ora `docs/CODE-STYLE-GUIDELINES.md`. Tenere presente questo riferimento da riallineare durante la conversione.
+- Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. I riferimenti sono riallineati a `../AGENTS.md`, `../docs/CODE-STYLE-GUIDELINES.md` e `../docs/API-CONTRACT.md`.
 - È stata rilevata anche una cartella aggiuntiva `express-blog-sql/` nella root. Non è il backend attivo, che è `server/`; non rimuoverla o modificarla senza verificarne lo scopo con l’utente.
 
 Il database locale **class14** è stato creato e popolato dall'utente. Successivamente sono stati applicati e verificati anche i collegamenti ai PDF e le risorse esterne.
@@ -187,8 +187,8 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 1. Backend Express: prossima fase concreta
 
-- Contratto API completato in `docs/API-CONTRACT.md`. Prossimo passo: fase 2 del Kanban, completare configurazione e branding del server già presente. Package e dipendenze sono già adattati/installati.
-- Configurare variabili d'ambiente e pool MySQL; adattare `server/.env.example` già presente senza segreti e verificare il controllo della connessione all'avvio già implementato.
+- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Prossimo passo: fase 3 del Kanban, implementare API Projects. Package e dipendenze sono già adattati/installati.
+- Configurazione ambiente, pool, template e controllo connessione sono completati; usare `server/README.md` per il setup.
 - Preparare i file statici dai sorgenti in `assets/`, mantenendo funzionanti i percorsi già salvati nel database.
 - Implementare lista e dettaglio di progetti e studenti. Il dettaglio progetto deve poter fornire studenti/repository, PDF e risorse; il dettaglio studente i suoi progetti pubblici.
 - Implementare cataloghi autonomi PDF/risorse, topics derivati e contatori secondo `docs/API-CONTRACT.md`. Percorsi, identificatori, filtri, assenza di paginazione e forme JSON sono ora definiti: mantenere coerenti implementazione e documento.
@@ -222,3 +222,10 @@ node scripts/sync-github-assets.mjs --refresh
 - Rimossi script typecheck, dipendenza diretta TypeScript e tipi React; il client usa JavaScript e jsconfig per alias/editor. Nessuna richiesta di aggiungere JSDoc. Il formatter usa il plugin di ordinamento import già impiegato nel server.
 - Verificati build, lint, audit dei tre package (zero vulnerabilità), connessione MySQL e HTTP 200 delle root server/client. Le feature posts/products sono ancora esempi, non API Class14 convertite.
 - Gli script server caricano opzionalmente `server/.env`; la `.env` root non viene caricata dal server. Non richiedere il token GitHub per avviare l’app.
+
+## Fase 2 backend verificata
+
+- Configurazione ambiente con Zod in `server/config/env.js`; credenziali solo da ambiente. `server/.env.example` elenca tutte le opzioni; creato localmente `server/.env` dal template, ignorato da Git. Non stamparne i valori.
+- Risposta `GET /` e README server adattati a Class14, senza dichiarare attive le API ancora da implementare. Preservate posts/errors fino alle fasi pertinenti.
+- Verificati avvio con configurazione personalizzata (porta HTTP 3314, host TCP, pool/timeout), risposta root Class14, configurazione non valida, connessione rifiutata e porta HTTP occupata. I fallimenti terminano con codice non zero e senza log di credenziali.
+- Nessuna modifica allo schema/dati MySQL; processo di verifica arrestato. Prossima fase: API Projects.

@@ -1,5 +1,6 @@
 import path from 'node:path';
 import express from 'express';
+import { env } from './config/env.js';
 import { db } from './db/db.js';
 import * as middleware from './middleware/index.js';
 import {
@@ -7,8 +8,6 @@ import {
   registerPosts,
   registerRoot,
 } from './resources/index.js';
-
-const PORT = process.env.PORT ?? 3000;
 
 const app = express();
 
@@ -28,11 +27,24 @@ const startServer = async () => {
     await db.query('SELECT 1');
     console.log('Database connection successful');
 
-    app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}/`);
+    const server = app.listen(env.PORT, (error) => {
+      if (error) return;
+      console.log(`Class14 API running at http://localhost:${env.PORT}/`);
+    });
+
+    server.on('error', async (error) => {
+      console.error(
+        'Unable to start Class14 API:',
+        error.code ?? 'LISTEN_ERROR',
+      );
+      await db.end();
+      process.exitCode = 1;
     });
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.error(
+      'Unable to connect to the database:',
+      error.code ?? 'DB_CONNECTION_ERROR',
+    );
     await db.end();
     process.exitCode = 1;
   }

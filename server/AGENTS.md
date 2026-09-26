@@ -4,7 +4,8 @@
 
 - Read `README.md`, `package.json`, and relevant project documentation if present.
 - Inspect the existing structure, conventions, and current Git changes before editing.
-- Read and follow `.agents/CODE-STYLE-GUIDELINES.md`. If project requirements
+- Read and follow `../AGENTS.md`, `../docs/CODE-STYLE-GUIDELINES.md`, and
+  `../docs/API-CONTRACT.md`. If project requirements
   conflict with it, report the conflict instead of choosing silently.
 - If `.agents/skills/` exists, use only skills relevant to the current task and
   read their `SKILL.md` before acting.
