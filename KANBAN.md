@@ -42,15 +42,17 @@ Specifica: [docs/API-CONTRACT.md](docs/API-CONTRACT.md). Contratto definito e ve
 
 Verificati configurazione personalizzata, root Class14, configurazione non valida, connessione rifiutata e porta HTTP occupata; dettagli in `server/README.md`. Nessuna modifica ai dati.
 
-### 3. API Projects — prossimo passo
+### 3. API Projects — completato
 
-- [ ] Creare routes, controller e repository secondo lo stile server esistente.
-- [ ] Implementare lista con titolo, slug e topics.
-- [ ] Implementare dettaglio con descrizione Markdown, studenti/repository, PDF e risorse.
-- [ ] Verificare lista, dettaglio inesistente, relazioni e assenza di duplicati.
-- [ ] Dopo la verifica, rimuovere `server/resources/posts/` e registrazione; sostituire le richieste posts in `server/test.http`.
+- [x] Creare routes, controller e repository secondo lo stile server esistente.
+- [x] Implementare lista con titolo, slug e topics.
+- [x] Implementare dettaglio con descrizione Markdown, studenti/repository, PDF e risorse.
+- [x] Verificare lista, dettaglio inesistente, relazioni e assenza di duplicati.
+- [x] Dopo la verifica, rimuovere `server/resources/posts/` e registrazione; sostituire le richieste posts in `server/test.http`.
 
-### 4. API Students
+Verifica HTTP e confronto di tutte le relazioni con query DB di sola lettura: 15 progetti, 124 repository, 39 PDF e 54 risorse associate. Verificati ordinamento, filtri, ricerca letterale, 400/404 e rimozione /posts.
+
+### 4. API Students — prossimo passo
 
 - [ ] Implementare lista con nome, username, link GitHub e avatar.
 - [ ] Implementare profilo con repository pubbliche dei progetti del catalogo.
@@ -126,7 +128,7 @@ Verificati configurazione personalizzata, root Class14, configurazione non valid
 
 ## In corso
 
-Nessuna attività di implementazione aperta. Prossima attività: fase 3, API Projects.
+Nessuna attività di implementazione aperta. Prossima attività: fase 4, API Students.
 
 ## Fatto
 
@@ -148,3 +150,5 @@ Nessuna attività di implementazione aperta. Prossima attività: fase 3, API Pro
 - [x] Definire e verificare il contratto API MVP: endpoint, identificatori, JSON, topics/materiali indiretti, contatori, ricerca/filtri, ordinamento ed errori; nessuna paginazione per il catalogo attuale.
 
 - [x] Completare configurazione ambiente/pool, branding root e README backend; verificare avvio e fallimenti controllati.
+
+- [x] Implementare e verificare API Projects e sostituire posts e le richieste legacy con i flussi Class14.

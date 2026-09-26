@@ -6,8 +6,12 @@ Node.js, Express, JavaScript ESM, mysql2/promise e Zod per la validazione.
 ## Stato
 
 Configurazione e avvio sono adattati a Class14. `GET /` restituisce il brand e lo stato della conversione.
-Le API MVP sono definite nel [contratto](../docs/API-CONTRACT.md) e devono ancora essere implementate.
-Le routes posts e le routes di prova errors restano temporaneamente come riferimento: posts usa il modello del vecchio blog, non i dati Class14. Non usare il CRUD posts sul database Class14.
+Le API Projects sono implementate secondo il [contratto](../docs/API-CONTRACT.md):
+
+- `GET /api/projects`: lista ordinata, ricerca `q` su titolo/slug e filtro `topic` sul tag intero.
+- `GET /api/projects/:slug`: descrizione Markdown, studenti con repository, PDF e risorse collegati.
+
+Le altre API MVP restano da implementare. La feature posts è stata rimossa; le routes di prova errors restano per i controlli dei middleware.
 
 ## Configurazione locale
 
@@ -23,16 +27,16 @@ cp server/.env.example server/.env
 
 Se `server/.env` esiste già, modificarlo senza sovrascriverlo. Impostare utente/password MySQL locali; `.env` è ignorato da Git.
 
-| Variabile | Default / requisito |
-| --- | --- |
-| PORT | 3000; intero 1–65535 |
-| DB_HOST | localhost; stringa non vuota |
-| DB_PORT | 3306; intero 1–65535 |
-| DB_USER | Obbligatoria; utente MySQL locale, senza default nel codice |
-| DB_PASSWORD | Stringa vuota se il proprio utente locale non richiede password |
-| DB_NAME | class14; stringa non vuota |
-| DB_CONNECTION_LIMIT | 10; intero 1–100 |
-| DB_CONNECT_TIMEOUT | 10000 millisecondi; intero 1–60000 |
+| Variabile           | Default / requisito                                             |
+| ------------------- | --------------------------------------------------------------- |
+| PORT                | 3000; intero 1–65535                                            |
+| DB_HOST             | localhost; stringa non vuota                                    |
+| DB_PORT             | 3306; intero 1–65535                                            |
+| DB_USER             | Obbligatoria; utente MySQL locale, senza default nel codice     |
+| DB_PASSWORD         | Stringa vuota se il proprio utente locale non richiede password |
+| DB_NAME             | class14; stringa non vuota                                      |
+| DB_CONNECTION_LIMIT | 10; intero 1–100                                                |
+| DB_CONNECT_TIMEOUT  | 10000 millisecondi; intero 1–60000                              |
 
 Gli script caricano `server/.env` se presente. Le variabili esportate nel terminale hanno precedenza.
 La `.env` della root e il token GitHub non sono utilizzati dal backend.
@@ -56,7 +60,7 @@ Un errore di ascolto (per esempio porta occupata) chiude il pool e segnala un co
 curl http://localhost:3000/
 ```
 
-Le richieste in `test.http` sono ancora quelle del blog: verranno sostituite durante le fasi API.
+`test.http` contiene richieste Projects ripetibili, inclusi filtri, risultati vuoti e casi 400/404/500. La verifica effettuata ha confrontato tutte le relazioni dei 15 dettagli con il database: 124 repository, 39 associazioni PDF e 54 risorse, senza duplicati. Non implica che i file statici siano già preparati: avatar/PDF saranno serviti nella fase 7.
 
 ## Riferimenti
 

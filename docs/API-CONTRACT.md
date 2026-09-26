@@ -4,7 +4,7 @@
 
 Contratto definito il 26 settembre 2026 per implementare l’MVP concordato in
 [AGENTS.md](../AGENTS.md) e [KANBAN.md](../KANBAN.md), secondo la direzione
-[PLAN.md](../PLAN.md). **Questo documento è la specifica da implementare: gli endpoint Class14 non sono ancora disponibili.**
+[PLAN.md](../PLAN.md). **Questo documento è la specifica di riferimento: lista e dettaglio Projects sono implementati; gli altri endpoint sono ancora da implementare.**
 
 API pubblica di sola lettura, senza autenticazione, CRUD o chiamate GitHub live.
 Riutilizza le sette tabelle di [schema.sql](../server/db/setup/schema.sql), senza

@@ -1,7 +1,7 @@
 {
   "name": "Class14",
   "message": "Class14 — Learning Hub and Student Showcase for WDPT14",
-  "status": "Backend conversion in progress; MVP endpoints are not available yet",
+  "status": "Projects API available; remaining MVP endpoints are being implemented",
   "documentation": "docs/API-CONTRACT.md (repository file)",
   "endpoints": [
     {
@@ -10,6 +10,24 @@
         {
           "method": "GET",
           "description": "Informazioni generali e stato del backend Class14"
+        }
+      ]
+    },
+    {
+      "path": "/api/projects",
+      "methods": [
+        {
+          "method": "GET",
+          "description": "Lista progetti; ricerca q e filtro topic opzionali"
+        }
+      ]
+    },
+    {
+      "path": "/api/projects/:slug",
+      "methods": [
+        {
+          "method": "GET",
+          "description": "Dettaglio con studenti/repository, PDF e risorse"
         }
       ]
     }

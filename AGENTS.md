@@ -49,7 +49,7 @@ L’utente ha approvato la prima versione proposta dopo il confronto di `PLAN.md
 
 ### Contratto API definito — fase 1 completata
 
-La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificata rispetto allo schema e ai percorsi del generatore. **È un contratto da implementare, non una descrizione di endpoint già funzionanti.**
+La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificata rispetto allo schema e ai percorsi del generatore. **Lista e dettaglio Projects sono implementati; gli altri endpoint restano da implementare.**
 
 - GET sotto `/api`: projects e students con lista/dettaglio; cheatsheets e resources come cataloghi autonomi con progetti collegati; topics con lista/dettaglio; stats per i cinque contatori globali.
 - Dettagli progetto per slug, studente per github_username; topic per nome del tag URL-encoded (non un nuovo slug o ID). Lookup case insensitive con grafia salvata/canonica in risposta.
@@ -100,7 +100,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Il frontend usa Axios e la validazione manuale in `client/src/lib/validation.js`, con validatori per feature. **Non introdurre Zod nel frontend adesso**; un’eventuale migrazione è futura. Zod è già presente nel backend e può continuare a essere usato lì.
 - CSS nativo, CSS nesting, custom properties e tema automatico con `prefers-color-scheme`. Nessun Bootstrap o framework CSS. L'ispirazione shadcn/ui è visiva, non una richiesta di installarlo.
 - Componenti separati in `components/ui`, `components/shared`, `components/layout`; CSS vicino ai componenti. Stato locale e props, Context solo per esigenze concrete.
-- Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Per ora niente JSDoc. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
+- Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Evitare JSDoc per typing; l’utente ha richiesto un commento esplicativo con esempio input/output per `normalizeProjectTopics`, che va conservato. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
 
 ### Riferimenti locali da consultare
 
@@ -109,13 +109,13 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Queste app sono ora copiate in `server/` e `client/`: usare soprattutto il codice presente nel progetto come riferimento. I componenti UI/shared, `cx`, le icone e il CSS sono già in `client/`; riutilizzarli dove pertinenti.
 - Non leggere `node_modules`, build o cache dei riferimenti. Non copiare indiscriminatamente il router o l'intera applicazione.
 
-## Stato attuale: app di riferimento copiate, conversione da iniziare
+## Stato attuale: conversione backend avviata, Projects implementato
 
 L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` dentro `client/`. Entrambi hanno struttura, `package.json` e lockfile; **le dipendenze dei tre package sono state installate e verificate**. Non fare nuovo scaffolding e non considerare queste app già convertite o verificate per Class14.
 
-- `server/app.js` registra ancora `posts`, `root` ed `errors`. `server/db/db.js` legge la configurazione validata da `server/config/env.js`: host, porta, utente, password, database, limite e timeout. `DB_USER` è obbligatoria; il database predefinito è `class14`. Le routes `posts` interrogano ancora il modello del blog e non sono feature di Class14.
-- Il package server si chiama `class14-server`; README e risposta root sono adattati a Class14; le feature posts/errors restano temporaneamente come riferimento. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
-- `server/test.http` contiene richieste per posts: sostituirle con richieste Class14 man mano che si implementano e verificano le nuove risorse.
+- `server/app.js` registra `projects`, `root` ed `errors`; posts è stato rimosso. `server/db/db.js` legge la configurazione validata da `server/config/env.js`: host, porta, utente, password, database, limite e timeout. `DB_USER` è obbligatoria; il database predefinito è `class14`. Le routes Projects leggono soltanto il database Class14.
+- Il package server si chiama `class14-server`; README e risposta root sono adattati a Class14; posts è stato rimosso; errors resta temporaneamente per le verifiche dei middleware. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
+- `server/test.http` contiene richieste Projects e casi di validazione/errori; aggiungere le nuove risorse nelle rispettive fasi.
 - `client/src/features/products/`, `client/src/pages/products/`, i provider in `App.jsx`, router, Header e contenuti Home/AboutUs appartengono ancora al negozio di esempio/Fake Store API. Il package si chiama `class14-client`; titoli e interfaccia mostrano ancora React Context API.
 - Non cancellare preventivamente posts/products: sono esempi di stile da consultare durante la conversione. Rimuovere la vecchia feature e i relativi import, route, provider, richieste e contenuti quando la nuova feature che la sostituisce è pronta. Non lasciare riferimenti pendenti.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. Rinominare progressivamente package, titoli, documentazione e contenuti al brand Class14 nel sottoprogetto su cui si sta lavorando; non rinominare la repository.
@@ -187,7 +187,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 1. Backend Express: prossima fase concreta
 
-- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Prossimo passo: fase 3 del Kanban, implementare API Projects. Package e dipendenze sono già adattati/installati.
+- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Prossimo passo: fase 3 del Kanban, implementare API Students. Package e dipendenze sono già adattati/installati.
 - Configurazione ambiente, pool, template e controllo connessione sono completati; usare `server/README.md` per il setup.
 - Preparare i file statici dai sorgenti in `assets/`, mantenendo funzionanti i percorsi già salvati nel database.
 - Implementare lista e dettaglio di progetti e studenti. Il dettaglio progetto deve poter fornire studenti/repository, PDF e risorse; il dettaglio studente i suoi progetti pubblici.
@@ -209,6 +209,8 @@ node scripts/sync-github-assets.mjs --refresh
 
 ## Regole operative per gli agenti
 
+- La leggibilità ha precedenza sulla compattezza, sia nel backend sia nel frontend. Usare liberamente `&&`, `||`, `??`, ternari e spread quando il significato si comprende al primo sguardo; evitare condizioni annidate e catene di trasformazioni concentrate in una sola espressione. Quando una riga richiede di essere decifrata, separare i passaggi con variabili dai nomi descrittivi o condizioni esplicite. Cercare una via di mezzo: non espandere inutilmente le espressioni semplici.
+
 - Rispondere normalmente in italiano. Preservare modifiche dell'utente e controllare il diff prima e dopo ogni fase.
 - Aggiornare `KANBAN.md` e i documenti pertinenti quando una fase è verificata; aggiornare questo file quando cambia una decisione importante.
 - Evitare letture massive di SQL generato, PDF e dati di checkpoint quando bastano sorgenti piccoli.
@@ -219,13 +221,24 @@ node scripts/sync-github-assets.mjs --refresh
 
 - Il package root privato `class14` coordina server e client con concurrently, senza workspaces. I tre package hanno lockfile separati.
 - Comandi e configurazione: [docs/SETUP.md](docs/SETUP.md). `npm run dev` avvia entrambi; `npm run install:all` reinstalla dai lockfile.
-- Rimossi script typecheck, dipendenza diretta TypeScript e tipi React; il client usa JavaScript e jsconfig per alias/editor. Nessuna richiesta di aggiungere JSDoc. Il formatter usa il plugin di ordinamento import già impiegato nel server.
-- Verificati build, lint, audit dei tre package (zero vulnerabilità), connessione MySQL e HTTP 200 delle root server/client. Le feature posts/products sono ancora esempi, non API Class14 convertite.
+- Rimossi script typecheck, dipendenza diretta TypeScript e tipi React; il client usa JavaScript e jsconfig per alias/editor. Nessun JSDoc per typing; conservare l’esempio esplicativo richiesto per `normalizeProjectTopics`. Il formatter usa il plugin di ordinamento import già impiegato nel server.
+- Verificati build, lint, audit dei tre package (zero vulnerabilità), connessione MySQL e HTTP 200 delle root server/client. Le feature iniziali erano esempi: Projects è ora convertito e verificato; products resta nel client.
 - Gli script server caricano opzionalmente `server/.env`; la `.env` root non viene caricata dal server. Non richiedere il token GitHub per avviare l’app.
 
 ## Fase 2 backend verificata
 
 - Configurazione ambiente con Zod in `server/config/env.js`; credenziali solo da ambiente. `server/.env.example` elenca tutte le opzioni; creato localmente `server/.env` dal template, ignorato da Git. Non stamparne i valori.
-- Risposta `GET /` e README server adattati a Class14, senza dichiarare attive le API ancora da implementare. Preservate posts/errors fino alle fasi pertinenti.
+- Risposta `GET /` e README server adattati a Class14, senza dichiarare attive le API ancora da implementare. Posts è stato sostituito nella fase 3; errors resta per i controlli middleware.
 - Verificati avvio con configurazione personalizzata (porta HTTP 3314, host TCP, pool/timeout), risposta root Class14, configurazione non valida, connessione rifiutata e porta HTTP occupata. I fallimenti terminano con codice non zero e senza log di credenziali.
-- Nessuna modifica allo schema/dati MySQL; processo di verifica arrestato. Prossima fase: API Projects.
+- Nessuna modifica allo schema/dati MySQL; processo di verifica arrestato. Prossima fase: API Students.
+
+## Fase 3 Projects verificata
+
+- `server/resources/projects/` contiene routes, controller, schemas e repository. GET `/api/projects` e GET `/api/projects/:slug` sono attivi; nessun CRUD.
+- Lista filtrata in JavaScript per il catalogo piccolo: q letterale case insensitive, topic intero, AND; niente wildcard SQL. Dettaglio con query parametrizzate separate per le tre relazioni, evitando moltiplicazioni da join.
+- `server/utils/catalog.js` normalizza i topics usando la grafia della prima occorrenza nei progetti ordinati per ID e ordina i tag; è riutilizzabile nelle prossime risorse.
+- Rimosso `server/resources/posts/` e la registrazione. Root/README/test.http aggiornati; 404 comune `{ "message": "Not Found" }` e URIError nei percorsi API restituisce 400 generico.
+- Verificati tutti i 15 dettagli contro il DB: 124 collegamenti studenti, 39 PDF, 54 risorse, campi e ordinamento coerenti, nessun duplicato. Verificati slug case insensitive, AND, risultati vuoti, q letterale, query sconosciute/ripetute/strutturate, controllo lunghezze/caratteri, 400/404 e /posts rimosso.
+- Nessuna modifica ai dati. I percorsi dei file sono restituiti dal DB, ma la preparazione/verifica degli statici è ancora fase 7. Prossimo passo: fase 4 Students.
+
+- Preferenza di leggibilità confermata: nomi descrittivi nei repository (`search`, non `q`); `q` resta il parametro HTTP del contratto, tradotto nel controller. Separare trasformazioni e ordinamenti in variabili intermedie quando rendono più chiaro il flusso.

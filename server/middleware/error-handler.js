@@ -3,6 +3,10 @@ import { STATUS_CODES } from 'node:http';
 export const errorHandler = (err, req, res, next) => {
   if (res.headersSent) return next(err);
 
+  if (err instanceof URIError && req.path.startsWith('/api/')) {
+    return res.status(400).json({ message: 'Invalid request parameters' });
+  }
+
   const errorStatus = err.status ?? err.statusCode;
   const status =
     Number.isInteger(errorStatus) && errorStatus >= 400 && errorStatus <= 599

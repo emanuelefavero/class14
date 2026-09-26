@@ -1,75 +1,70 @@
 @baseUrl = http://localhost:3000
 
-### GET root endpoint
+### 200 - Class14 overview
 GET {{baseUrl}}/
 
-### GET posts
-GET {{baseUrl}}/posts
+### 200 - All projects, ordered by title then slug
+GET {{baseUrl}}/api/projects
 
-### GET posts filtered, searched and sorted
-GET {{baseUrl}}/posts?tag=dolci&search=torta&sortBy=title&order=desc
+### 200 - Search and exact topic filter (AND)
+GET {{baseUrl}}/api/projects?q=react&topic=React
 
-### GET limited posts
-GET {{baseUrl}}/posts?sortBy=id&order=desc&_limit=2
+### 200 - Case insensitive topic
+GET {{baseUrl}}/api/projects?topic=mysql
 
-### 400 - Invalid limit
-GET {{baseUrl}}/posts?_limit=abc
+### 200 - Whitespace trimmed
+GET {{baseUrl}}/api/projects?q=%20react%20&topic=%20React%20
 
-### 400 - Invalid sort field
-GET {{baseUrl}}/posts?sortBy=date
+### 200 - Empty filter means no filter
+GET {{baseUrl}}/api/projects?q=%20&topic=%20
 
-### GET single post by ID
-GET {{baseUrl}}/posts/1
+### 200 - No results for an unknown topic
+GET {{baseUrl}}/api/projects?topic=missing
 
-### 400 - Invalid post ID
-GET {{baseUrl}}/posts/abc
+### 200 - Topic matches the whole tag, not a substring
+GET {{baseUrl}}/api/projects?topic=Reac
 
-### 404 - Post not found
-GET {{baseUrl}}/posts/999
+### 200 - Percent is literal, not a SQL wildcard
+GET {{baseUrl}}/api/projects?q=%25
 
-### POST create a post for the CRUD flow
-# @name createPost
-POST {{baseUrl}}/posts
-Content-Type: application/json
+### 200 - Underscore is literal, not a SQL wildcard
+GET {{baseUrl}}/api/projects?q=_
 
-{
-  "title": "Scialatielli ai frutti di mare",
-  "content": "Gli scialatielli ai frutti di mare sono un primo piatto tipico della Costiera Amalfitana, preparato con pasta fresca e sapori del Mediterraneo.",
-  "image": "scialatielli_frutti_mare.avif",
-  "tags": ["primi piatti", "ricette di pesce", "cucina campana"]
-}
+### 200 - Project with students, Markdown, PDFs and resources
+GET {{baseUrl}}/api/projects/express-blog-sql
 
-### PUT the post created above
-PUT {{baseUrl}}/posts/{{createPost.response.body.$.id}}
-Content-Type: application/json
+### 200 - Slug lookup is case insensitive
+GET {{baseUrl}}/api/projects/REACT-HELLO-WORLD
 
-{
-  "title": "Spaghetti al limone di Amalfi",
-  "content": "Gli spaghetti al limone di Amalfi sono un primo piatto fresco e profumato, preparato con i celebri limoni della Costiera Amalfitana.",
-  "image": "spaghetti_limone_amalfi.avif",
-  "tags": ["primi piatti", "ricette vegetariane", "cucina campana"]
-}
+### 400 - Invalid slug
+GET {{baseUrl}}/api/projects/bad_slug
 
-### DELETE the post created above
-DELETE {{baseUrl}}/posts/{{createPost.response.body.$.id}}
+### 400 - Detail does not accept queries
+GET {{baseUrl}}/api/projects/react-api?q=react
 
-### 400 - Invalid post ID when deleting
-DELETE {{baseUrl}}/posts/abc
+### 400 - Unknown query parameter
+GET {{baseUrl}}/api/projects?limit=1
 
-### 404 - Post to delete not found
-DELETE {{baseUrl}}/posts/999
+### 400 - Repeated query parameter
+GET {{baseUrl}}/api/projects?q=react&q=mysql
 
-### 404
-GET {{baseUrl}}/non-existent
+### 400 - Structured query parameter
+GET {{baseUrl}}/api/projects?q[]=react
 
-### 415 - Unsupported charset (error handler middleware)
-POST {{baseUrl}}/posts
-Content-Type: application/json; charset=iso-8859-1
+### 400 - A single topic is required
+GET {{baseUrl}}/api/projects?topic=React,MySQL
 
-{}
+### 400 - Control character
+GET {{baseUrl}}/api/projects?q=%00
 
-### 500 - Internal Server Error (error handler middleware)
+### 400 - Malformed path encoding
+GET {{baseUrl}}/api/projects/%E0%A4%A
+
+### 404 - Project does not exist
+GET {{baseUrl}}/api/projects/nonexistent
+
+### 404 - Unknown API route
+GET {{baseUrl}}/api/missing
+
+### 500 - Error test route (no internal details in response)
 GET {{baseUrl}}/errors
-
-### 503 - Service Unavailable (error handler middleware)
-GET {{baseUrl}}/errors/unavailable
