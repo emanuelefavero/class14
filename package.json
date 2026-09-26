@@ -1,0 +1,32 @@
+{
+  "name": "class14",
+  "version": "1.0.0",
+  "description": "Class14 \u2014 WDPT14 learning hub and student showcase",
+  "scripts": {
+    "dev": "concurrently --kill-others --names server,client \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "start": "npm --prefix server start",
+    "build": "npm --prefix client run build",
+    "preview": "npm --prefix client run preview",
+    "lint": "npm --prefix client run lint",
+    "install:all": "npm ci && npm --prefix server ci && npm --prefix client ci",
+    "audit:all": "npm audit && npm --prefix server audit && npm --prefix client audit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emanuelefavero/webapp-express.git"
+  },
+  "keywords": [],
+  "author": "Emanuele Favero <emafaux89@gmail.com> (https://emanuelefavero.com/)",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/emanuelefavero/webapp-express/issues"
+  },
+  "homepage": "https://github.com/emanuelefavero/webapp-express#readme",
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

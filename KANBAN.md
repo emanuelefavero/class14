@@ -4,7 +4,7 @@ Procedere nell'ordine indicato, una fase alla volta. Spostare in **In corso** l'
 
 ## Base attuale e metodo di conversione
 
-- `server/` contiene già l'app `express-blog-sql`; `client/` contiene già `react-context-api`, con package e lockfile. Le dipendenze non sono ancora state installate.
+- `server/` contiene già l'app `express-blog-sql`; `client/` contiene già `react-context-api`, con package e lockfile. Le dipendenze sono installate; build, lint, audit e avvio congiunto sono verificati (vedi `docs/SETUP.md`).
 - Prima convertire il server a Class14, poi il client. Non ricreare i progetti da zero.
 - Conservare `posts`, `products` e le pagine di esempio come riferimento di stile finché le nuove feature non le sostituiscono. La rimozione comprende import, route, provider, contenuti e richieste di prova pertinenti.
 - Il router client usa Data Mode; l'utente accetta anche Declarative Mode. Mantenere la base attuale salvo motivo concreto per cambiarla. Conservare la validazione manuale del frontend; Zod nel frontend è una possibilità futura, non un'attività attuale.
@@ -17,7 +17,7 @@ Procedere nell'ordine indicato, una fase alla volta. Spostare in **In corso** l'
 - [ ] Adattare nome/descrizione del package e branding iniziale del server a Class14, preservando ESM, scripts e convenzioni esistenti.
 - [ ] Riallineare il README del server e i riferimenti alle linee guida copiati da `express-blog-sql`.
 - [ ] Rivedere `server/app.js` e `server/db/db.js`: il pool punta già a `class14`; completare la configurazione d'ambiente e adattare `server/.env.example` senza segreti.
-- [ ] Installare le dipendenze del server quando si avvia l'implementazione e verificare i comandi esistenti.
+- [x] Installare le dipendenze del server e verificare avvio e connessione MySQL.
 - [ ] Verificare che il server parta con il database disponibile e segnali chiaramente una connessione fallita.
 
 ### 2. Contratto API
@@ -60,7 +60,7 @@ Procedere nell'ordine indicato, una fase alla volta. Spostare in **In corso** l'
 
 - [ ] Definire pagine, navigazione, lingua dell'interfaccia e direzione visiva di Class14.
 - [ ] Adattare package, titolo HTML, metadati, header, footer e documentazione del client a Class14.
-- [ ] Installare le dipendenze del client e verificare Vite/React Compiler già configurati.
+- [x] Installare le dipendenze del client e verificare build Vite con React Compiler e lint.
 - [ ] Adattare router, `src/pages/` e `RootLayout` esistenti con `Header`, `Main`, `Outlet` e `Footer`; mantenere Data Mode salvo scelta motivata diversa.
 - [ ] Riutilizzare i componenti UI/shared già presenti e adattare CSS, layout responsive e tema automatico chiaro/scuro.
 - [ ] Collegare il client Axios alle API Class14 e adattare i validatori manuali alle nuove risposte, senza introdurre Zod nel frontend.
@@ -101,3 +101,5 @@ Nessuna attività aperta.
 - [x] Importare e verificare il database locale: 15 studenti, 15 progetti, 18 PDF e 124 repository.
 - [x] Associare 39 PDF ai progetti e verificare che ogni progetto e ogni PDF sia collegato.
 - [x] Importare 17 risorse esterne e collegarle ai progetti con 54 associazioni verificate.
+
+- [x] Configurare package root privato e script comuni, rimuovere tooling TypeScript diretto dal client e correggere audit (zero vulnerabilità nei tre package).

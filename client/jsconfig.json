@@ -1,11 +1,5 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": false,
-    "types": ["vite/client"],
-    "allowJs": true,
-    "checkJs": false,
-    "noEmit": true,
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",

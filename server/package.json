@@ -1,11 +1,11 @@
 {
-  "name": "express-blog-sql",
+  "name": "class14-server",
   "version": "1.0.0",
-  "description": "A simple Express blog API with mysql2",
+  "description": "Class14 Express API",
   "main": "app.js",
   "scripts": {
-    "start": "node .",
-    "dev": "node --watch ."
+    "start": "node --env-file-if-exists=.env .",
+    "dev": "node --env-file-if-exists=.env --watch ."
   },
   "keywords": [],
   "author": "Emanuele Favero <emafaux89@gmail.com> (https://emanuelefavero.com/)",
@@ -22,5 +22,6 @@
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "prettier": "^3.9.6"
-  }
+  },
+  "private": true
 }

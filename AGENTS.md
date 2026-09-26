@@ -60,12 +60,12 @@ Le decisioni esplicite dell'utente e questo riepilogo prevalgono sulle parti men
 
 ## Stato attuale: app di riferimento copiate, conversione da iniziare
 
-L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` dentro `client/`. Entrambi hanno struttura, `package.json` e lockfile; **npm install non è ancora stato eseguito** dall’utente. Non fare nuovo scaffolding e non considerare queste app già convertite o verificate per Class14.
+L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` dentro `client/`. Entrambi hanno struttura, `package.json` e lockfile; **le dipendenze dei tre package sono state installate e verificate**. Non fare nuovo scaffolding e non considerare queste app già convertite o verificate per Class14.
 
 - `server/app.js` registra ancora `posts`, `root` ed `errors`. `server/db/db.js` usa già il database `class14`, ma conserva host/utente della base e password da variabile d’ambiente. Le routes `posts` interrogano ancora il modello del blog e non sono feature di Class14.
-- `server/package.json`, `server/README.md`, dati root, logo e altri contenuti conservano riferimenti al blog. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
+- Il package server si chiama `class14-server`; `server/README.md`, dati root, logo e altri contenuti conservano riferimenti al blog. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
 - `server/test.http` contiene richieste per posts: sostituirle con richieste Class14 man mano che si implementano e verificano le nuove risorse.
-- `client/src/features/products/`, `client/src/pages/products/`, i provider in `App.jsx`, router, Header e contenuti Home/AboutUs appartengono ancora al negozio di esempio/Fake Store API. Il package si chiama ancora `react-router`; titoli e interfaccia mostrano React Context API.
+- `client/src/features/products/`, `client/src/pages/products/`, i provider in `App.jsx`, router, Header e contenuti Home/AboutUs appartengono ancora al negozio di esempio/Fake Store API. Il package si chiama `class14-client`; titoli e interfaccia mostrano ancora React Context API.
 - Non cancellare preventivamente posts/products: sono esempi di stile da consultare durante la conversione. Rimuovere la vecchia feature e i relativi import, route, provider, richieste e contenuti quando la nuova feature che la sostituisce è pronta. Non lasciare riferimenti pendenti.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. Rinominare progressivamente package, titoli, documentazione e contenuti al brand Class14 nel sottoprogetto su cui si sta lavorando; non rinominare la repository.
 - Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. Cita `.agents/CODE-STYLE-GUIDELINES.md`; le linee guida generali disponibili nella root del progetto sono ora `docs/CODE-STYLE-GUIDELINES.md`. Tenere presente questo riferimento da riallineare durante la conversione.
@@ -163,3 +163,11 @@ node scripts/sync-github-assets.mjs --refresh
 - Evitare letture massive di SQL generato, PDF e dati di checkpoint quando bastano sorgenti piccoli.
 - Verificare il lavoro con i controlli pertinenti e riportare separatamente ciò che è stato implementato e ciò che non è stato verificato.
 - Non trasformare automaticamente un suggerimento futuro in un requisito. Proseguire una fase alla volta, mantenendo la continuità con il codice dell'utente.
+
+## Setup npm verificato
+
+- Il package root privato `class14` coordina server e client con concurrently, senza workspaces. I tre package hanno lockfile separati.
+- Comandi e configurazione: [docs/SETUP.md](docs/SETUP.md). `npm run dev` avvia entrambi; `npm run install:all` reinstalla dai lockfile.
+- Rimossi script typecheck, dipendenza diretta TypeScript e tipi React; il client usa JavaScript e jsconfig per alias/editor. Nessuna richiesta di aggiungere JSDoc. Il formatter usa il plugin di ordinamento import già impiegato nel server.
+- Verificati build, lint, audit dei tre package (zero vulnerabilità), connessione MySQL e HTTP 200 delle root server/client. Le feature posts/products sono ancora esempi, non API Class14 convertite.
+- Gli script server caricano opzionalmente `server/.env`; la `.env` root non viene caricata dal server. Non richiedere il token GitHub per avviare l’app.
