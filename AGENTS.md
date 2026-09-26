@@ -13,7 +13,7 @@ Ultimo aggiornamento del contesto: 26 settembre 2026. Questo file raccoglie le d
 
 ## Organizzazione della documentazione
 
-- `AGENTS.md` e `KANBAN.md` restano nella root.
+- `AGENTS.md` e `KANBAN.md` restano nella root. L’utente ha aggiunto `PLAN.md` nella root come nuova direzione del progetto: conservarlo nella posizione attuale.
 - `docs/` contiene piano, inventario degli asset e `CODE-STYLE-GUIDELINES.md`; seguire anche le convenzioni raccolte qui.
 - `docs/brief/` conserva il prompt e la traccia originali.
 - I Markdown in `assets/` sono dati dell’app e restano accanto agli asset; il README SQL resta in `server/db/setup/`.
@@ -21,15 +21,66 @@ Ultimo aggiornamento del contesto: 26 settembre 2026. Questo file raccoglie le d
 
 ## Cosa leggere prima di lavorare
 
-1. Questo file, [docs/CODE-STYLE-GUIDELINES.md](docs/CODE-STYLE-GUIDELINES.md) e [KANBAN.md](KANBAN.md).
-2. [plan.md](docs/plan.md) per la visione e [assets-info.md](docs/assets-info.md) per i dati.
+1. Questo file, [docs/CODE-STYLE-GUIDELINES.md](docs/CODE-STYLE-GUIDELINES.md), [KANBAN.md](KANBAN.md) e [docs/API-CONTRACT.md](docs/API-CONTRACT.md) per le API da implementare.
+2. [PLAN.md](PLAN.md) per la nuova direzione Learning Hub + Student Showcase e [assets-info.md](docs/assets-info.md) per i dati. [docs/initial-plan.md](docs/initial-plan.md) conserva il piano precedente.
 3. I file pertinenti alla fase corrente. Per il database: [server/db/setup/README.md](server/db/setup/README.md), [schema.sql](server/db/setup/schema.sql) e [scripts/generate-seed.mjs](scripts/generate-seed.mjs).
 
 `docs/brief/PROMPT.md` contiene il brief iniziale; `docs/brief/EXERCISE.md` la traccia originale sui film. L'app è stata volutamente adattata a Class14: non reintrodurre film, recensioni o altre entità solo perché compaiono nella traccia.
 
 Se disponibile, usare la skill locale `.agents/skills/boolean-course-exercises/SKILL.md`; `assets/lessons.json` è il riferimento del calendario. `.agents/` è ignorata da Git e potrebbe mancare in altri ambienti: le istruzioni essenziali sono in questo file.
 
-Le decisioni esplicite dell'utente e questo riepilogo prevalgono sulle parti meno aggiornate di `docs/plan.md`. Il riferimento frontend principale è `react-context-api`. La precedente richiesta di usare esclusivamente Declarative Mode è superata: l’utente accetta Data Mode o Declarative Mode; la base copiata usa già Data Mode e può essere mantenuta.
+Le decisioni esplicite dell’utente e l’MVP confermato qui prevalgono sulle proposte più ampie di `PLAN.md` e sulle parti meno aggiornate di `docs/initial-plan.md`. Il riferimento frontend principale è `react-context-api`. La precedente richiesta di usare esclusivamente Declarative Mode è superata: l’utente accetta Data Mode o Declarative Mode; la base copiata usa già Data Mode e può essere mantenuta.
+
+## Nuova direzione e MVP confermato
+
+L’utente ha approvato la prima versione proposta dopo il confronto di `PLAN.md` con lo schema. Il brand resta **Class14**. L’identità principale è **Learning Hub**, con uno **Student Showcase** integrato: consultare materiali e mostrare il percorso della classe, senza classifiche competitive.
+
+**Per l’MVP mantenere le sette tabelle e lo schema attuale di `class14`, senza migrazioni né nuove tabelle.** Non occorre aggiungere colonne per implementare il perimetro seguente:
+
+| Sezione | Contenuti della prima versione | Fonte |
+| --- | --- | --- |
+| Projects | Lista e dettaglio: descrizione Markdown, topics, studenti/repository, PDF e risorse | `projects` e le tre tabelle ponte |
+| Students | Lista e profilo: nome, avatar, link GitHub, repository pubbliche del catalogo | `students`, `student_projects`, `projects` |
+| Cheat Sheets | Catalogo autonomo, apertura/download PDF e collegamenti ai progetti | `cheatsheets`, `project_cheatsheets` |
+| Resources | Catalogo autonomo di titoli/link e collegamenti ai progetti | `resources`, `project_resources` |
+| Topics | Elenco dei tag unici e pagina con i progetti associati | `projects.topics`, separato e normalizzato in lettura |
+| Home | Presentazione del Learning Hub e contatori di studenti, progetti, repository, PDF e risorse | Conteggi delle tabelle esistenti |
+| Ricerca e filtri essenziali | Ricerca su titoli/nomi/username e filtro per topic dove pertinente, dopo che le liste funzionano | Campi esistenti; modalità da definire nel contratto API |
+
+### Contratto API definito — fase 1 completata
+
+La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificata rispetto allo schema e ai percorsi del generatore. **È un contratto da implementare, non una descrizione di endpoint già funzionanti.**
+
+- GET sotto `/api`: projects e students con lista/dettaglio; cheatsheets e resources come cataloghi autonomi con progetti collegati; topics con lista/dettaglio; stats per i cinque contatori globali.
+- Dettagli progetto per slug, studente per github_username; topic per nome del tag URL-encoded (non un nuovo slug o ID). Lookup case insensitive con grafia salvata/canonica in risposta.
+- JSON diretto, array per liste e oggetto per dettagli, campi snake_case coerenti col DB; topics trasformato in array. Collezioni vuote `[]`, valori nullable `null`, niente created_at nell’MVP.
+- Riepiloghi condivisi e collezioni non ricorsive, deduplicate per ID. StudentDetail contiene repository_count e topics derivati; TopicDetail contiene related_cheatsheets/related_resources come collegamenti indiretti.
+- Nessuna paginazione o parametro sort. Ordinamento fisso e deterministico secondo il contratto. `q` e `topic` ammessi sulle quattro liste principali, con AND; ricerca letterale case insensitive e match topic intero. Query sconosciute/ripetute/strutturate sono 400.
+- Errori JSON `{ "message": "..." }` con 400/404/500, senza dettagli interni. Entità assente 404, lista/relazione vuota 200. Le vecchie routes/middleware vanno allineate durante la conversione.
+- URL GitHub derivato dallo username; repo_url letto dalla relazione verificata. Avatar/PDF con slash iniziale all’origine backend, conservando il percorso SQL. Scelta proxy/CORS ancora da effettuare nella fase integrazione.
+- Per PDF/risorse nessun dettaglio autonomo JSON richiesto: i cataloghi forniscono progetti collegati e link di apertura.
+
+### Semantica dei dati da rispettare
+
+- `student_projects` prova l’esistenza di una repository pubblica verificata, non il completamento dell’esercizio. Usare etichette come “Repository disponibili”; non mostrare percentuali di completamento o badge “completato” dedotti dalla presenza della repository.
+- `created_at` è la data di inserimento del record, non la data della lezione, del progetto, della pubblicazione del PDF o del completamento. Non riutilizzarla per questi significati.
+- Le tecnologie eventualmente mostrate sul profilo si ricavano dai topics dei progetti associati: indicano argomenti del percorso, non competenze certificate né linguaggi rilevati da GitHub.
+- Contatori e statistiche semplici devono riferirsi al catalogo presente, non a tutte le repository del profilo GitHub o a tutto il corso.
+
+### Topics e materiali senza normalizzare il database
+
+- Ricavare i topics dai tag separati da virgola in `projects.topics`: rimuovere spazi esterni, evitare duplicati e confrontare tag interi, non sottostringhe. Conservare il campo SQL attuale.
+- La pagina di un topic mostra i progetti che possiedono quel tag. PDF e risorse si possono ricavare attraverso quei progetti e deduplicare per ID.
+- Questi collegamenti sono indiretti: un PDF di un progetto non è necessariamente specifico di ciascun suo tag. Presentarli come **“Materiali dei progetti collegati”**, senza affermare un’associazione diretta al topic.
+- Descrizioni editoriali dei topic e associazioni precise ai materiali possono essere aggiunte in futuro in Markdown o con una piccola mappatura JavaScript esplicita. Non sono prerequisiti dell’MVP e non richiedono nuove tabelle adesso.
+- Il catalogo resta da React in poi. Gli esempi HTML/CSS o i numeri illustrativi di `PLAN.md` non ampliano automaticamente i dati o il perimetro.
+
+### Possibilità successive, escluse dalla prima versione
+
+- Immagini/periodi dei progetti, repository originali degli esercizi, bio, descrizioni PDF e categorie delle risorse richiedono contenuti verificati aggiuntivi. Se necessari, valutare file associati a slug/username/URL con una fonte unica per contenuto, prima di proporre migrazioni.
+- Commit, linguaggi e ultimo aggiornamento GitHub richiedono raccolta e cache aggiuntive; non sono presenti nel database. Non fare chiamate GitHub live per l’MVP.
+- Progetti finali degli studenti, completamento reale/date, progressi personali, achievements e Recruiter View avanzata restano futuri e richiedono di definire dati e significato.
+- Nessuna leaderboard, top 5, autenticazione o CRUD amministrativo nell’MVP.
 
 ## Decisioni tecniche confermate
 
@@ -136,25 +187,25 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 1. Backend Express: prossima fase concreta
 
-- Adattare il progetto già presente in `server/`: rivedere package, branding, configurazione e contenuti iniziali. Installare/verificare le dipendenze quando si avvia la fase di implementazione, non durante un semplice aggiornamento di contesto.
+- Contratto API completato in `docs/API-CONTRACT.md`. Prossimo passo: fase 2 del Kanban, completare configurazione e branding del server già presente. Package e dipendenze sono già adattati/installati.
 - Configurare variabili d'ambiente e pool MySQL; adattare `server/.env.example` già presente senza segreti e verificare il controllo della connessione all'avvio già implementato.
 - Preparare i file statici dai sorgenti in `assets/`, mantenendo funzionanti i percorsi già salvati nel database.
 - Implementare lista e dettaglio di progetti e studenti. Il dettaglio progetto deve poter fornire studenti/repository, PDF e risorse; il dettaglio studente i suoi progetti pubblici.
-- Definire e documentare endpoint e forma delle risposte prima di collegare React. Percorsi, filtri, paginazione e struttura JSON non sono ancora stati concordati: scegliere una soluzione minima coerente con i dati, senza presentarla come decisione già presa.
+- Implementare cataloghi autonomi PDF/risorse, topics derivati e contatori secondo `docs/API-CONTRACT.md`. Percorsi, identificatori, filtri, assenza di paginazione e forme JSON sono ora definiti: mantenere coerenti implementazione e documento.
 - Verificare validazione, 404, errori, studenti senza repository, relazioni e accesso ai file statici con richieste HTTP mirate.
 
 ### 2. Frontend React
 
 - Dopo il backend, adattare il client già copiato da `react-context-api`: branding e configurazione, poi nuove feature/pagine e sostituzione graduale di products. Conservare UI/layout e validazione corrente, mantenendo il router Data Mode esistente salvo scelta motivata diversa.
-- Costruire pagine per esplorare progetti, studenti e materiali, con liste e dettagli e stati di caricamento, errore e dati assenti.
-- La composizione visiva, la lingua definitiva dell'interfaccia e l'organizzazione di eventuali pagine dedicate agli argomenti non sono ancora definite: concordarle nella fase frontend.
+- Costruire Home, Projects, Students, Cheat Sheets, Resources e Topics secondo l’MVP, con liste/dettagli dove previsti e stati di caricamento, errore e dati assenti. Aggiungere ricerca e filtri essenziali dopo i flussi principali.
+- Le sezioni Topics e materiali autonomi sono confermate. Composizione visiva, lingua definitiva, percorsi frontend e posizione dei link nella navigazione restano da definire nella fase frontend.
 - Curare accessibilità, mobile, tema chiaro/scuro e rendering delle descrizioni Markdown.
 
 ### 3. Completamento e presentazione
 
 - Verificare i flussi completi, aggiornare documentazione di avvio e API, preparare README del progetto e configurazione senza segreti.
 - Deployment, hosting e passaggio della repository a pubblica non sono stati decisi. Non pubblicare o cambiare visibilità autonomamente.
-- Contatori di commit e una possibile top 5 sono idee future, non requisiti della prima versione. Non aggiungere autenticazione, CRUD amministrativo, recensioni o classifiche senza definirne prima lo scopo con l'utente.
+- Contatori di commit e Recruiter View avanzata sono futuri; la nuova direzione esclude classifiche competitive. Non aggiungere autenticazione, CRUD amministrativo o recensioni senza definirne prima lo scopo con l’utente.
 
 ## Regole operative per gli agenti
 

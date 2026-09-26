@@ -1,98 +1,136 @@
 # Class14 — Kanban
 
-Procedere nell'ordine indicato, una fase alla volta. Spostare in **In corso** l'attività avviata e in **Fatto** quella verificata; aggiornare le caselle dei sottopassi durante il lavoro. Backend e frontend hanno cartelle e `package.json` separati: `server/` e `client/`.
+Procedere nell’ordine indicato, una fase verificabile alla volta: **prima backend, poi frontend**. Spostare in **In corso** l’attività avviata e in **Fatto** quella verificata. Server e client conservano cartelle e package separati.
+
+## Direzione e perimetro confermati
+
+- [PLAN.md](PLAN.md) descrive la nuova direzione: **Learning Hub** come identità principale, con **Student Showcase** integrato e senza classifiche competitive. [AGENTS.md](AGENTS.md) precisa il perimetro approvato e i limiti dei dati.
+- **MVP senza modifiche allo schema `class14`**: Projects, Students, Cheat Sheets, Resources, Topics, Home con contatori, ricerca e filtri essenziali dopo le liste.
+- Mantenere i 15 progetti da React in poi. Non ampliare il catalogo con gli esempi o i numeri illustrativi del piano.
+- La presenza di una repository pubblica non certifica il completamento: usare “Repository disponibili”. `created_at` rappresenta l’inserimento, non una data didattica o di completamento.
+- Topics derivati da `projects.topics`; materiali associati indirettamente attraverso i progetti e deduplicati. Presentarli come “Materiali dei progetti collegati”.
 
 ## Base attuale e metodo di conversione
 
-- `server/` contiene già l'app `express-blog-sql`; `client/` contiene già `react-context-api`, con package e lockfile. Le dipendenze sono installate; build, lint, audit e avvio congiunto sono verificati (vedi `docs/SETUP.md`).
-- Prima convertire il server a Class14, poi il client. Non ricreare i progetti da zero.
-- Conservare `posts`, `products` e le pagine di esempio come riferimento di stile finché le nuove feature non le sostituiscono. La rimozione comprende import, route, provider, contenuti e richieste di prova pertinenti.
-- Il router client usa Data Mode; l'utente accetta anche Declarative Mode. Mantenere la base attuale salvo motivo concreto per cambiarla. Conservare la validazione manuale del frontend; Zod nel frontend è una possibilità futura, non un'attività attuale.
-- Ricordarsi che dentro `server/db/setup` si trovano gia' gli script per creare e popolare il database `class14`, che non vanno cancellati e non fanno parte del progetto `express-blog-sql`, il db e' gia' stato inizializzato, quindi questi files possono essere ignorati (a meno che l'utente non chieda di leggerli o toccarli), ma non eliminati.
+- `server/` deriva da `express-blog-sql`; `client/` da `react-context-api`. Non ricreare lo scaffolding.
+- Dipendenze, script comuni, build, lint, audit e avvio congiunto sono verificati: [docs/SETUP.md](docs/SETUP.md). I package sono già `class14`, `class14-server` e `class14-client`; i contenuti delle app restano da convertire.
+- Conservare posts/products come riferimento finché le nuove feature le sostituiscono; poi rimuovere import, route, provider, richieste e contenuti pertinenti.
+- Conservare React Router Data Mode salvo motivo concreto per cambiarlo; validazione manuale frontend, Zod backend. JavaScript, nessun typecheck TypeScript né nuovo JSDoc.
+- Il database è già inizializzato. Preservare `server/db/setup/`: non cancellare, ricreare o reimportare i dati per avviare l’MVP. Leggere solo i file pertinenti quando necessario.
 
 ## Da fare
 
-### 1. Adattamento e avvio backend — prossimo passo
+### 1. Contratto API MVP — completato
 
-- [ ] Adattare nome/descrizione del package e branding iniziale del server a Class14, preservando ESM, scripts e convenzioni esistenti.
-- [ ] Riallineare il README del server e i riferimenti alle linee guida copiati da `express-blog-sql`.
-- [ ] Rivedere `server/app.js` e `server/db/db.js`: il pool punta già a `class14`; completare la configurazione d'ambiente e adattare `server/.env.example` senza segreti.
-- [x] Installare le dipendenze del server e verificare avvio e connessione MySQL.
-- [ ] Verificare che il server parta con il database disponibile e segnali chiaramente una connessione fallita.
+- [x] Creare il documento del contratto API in `docs/`, confrontando ogni campo con lo schema corrente.
+- [x] Definire endpoint e identificatori per lista/dettaglio progetti e studenti.
+- [x] Definire accesso ai cataloghi autonomi Cheat Sheets e Resources, includendo i progetti collegati.
+- [x] Definire elenco/dettaglio dei topics derivati e deduplicazione dei materiali indiretti.
+- [x] Definire come fornire i contatori Home: studenti, progetti, repository del catalogo, PDF e risorse.
+- [x] Definire JSON, nomi dei campi, topics come array in risposta, URL GitHub/statici, collezioni vuote e risorse assenti.
+- [x] Definire errori 400/404/500, ordinamento e ricerca/filtri essenziali; decidere se occorre paginazione per il catalogo attuale.
+- [x] Documentare che repository, topics del profilo e date di inserimento non provano completamento o competenze certificate.
 
-### 2. Contratto API
+Specifica: [docs/API-CONTRACT.md](docs/API-CONTRACT.md). Contratto definito e verificato rispetto a schema/generatore; endpoint ancora da implementare.
 
-- [ ] Definire endpoint di lista e dettaglio per progetti e studenti, identificatori e forma delle risposte JSON.
-- [ ] Definire come restituire repository, PDF, risorse, collezioni vuote e risorse non trovate.
-- [ ] Documentare il contratto API in `docs/` e scegliere solo i filtri necessari alla prima interfaccia.
+### 2. Configurazione e adattamento backend — prossimo passo
 
-### 3. API progetti
+- [ ] Completare branding dei contenuti iniziali dell’API e documentazione server.
+- [ ] Riallineare README e riferimenti alle linee guida copiati dal blog.
+- [ ] Completare configurazione ambiente del pool MySQL e `server/.env.example`, senza credenziali fisse né segreti.
+- [ ] Verificare configurazione personalizzata e gestione del fallimento della connessione; l’avvio con MySQL disponibile è già verificato.
 
-- [ ] Creare routes, controller e repository della risorsa progetti.
-- [ ] Implementare la lista con titolo, slug e argomenti.
-- [ ] Implementare il dettaglio con descrizione Markdown, studenti/repository, cheatsheet e risorse esterne.
-- [ ] Dopo la verifica dei progetti, rimuovere `server/resources/posts/` e la sua registrazione; sostituire le richieste posts in `server/test.http` con quelle dei progetti.
-- [ ] Verificare lista, dettaglio, progetto inesistente e relazioni senza duplicati.
+### 3. API Projects
 
-### 4. API studenti
+- [ ] Creare routes, controller e repository secondo lo stile server esistente.
+- [ ] Implementare lista con titolo, slug e topics.
+- [ ] Implementare dettaglio con descrizione Markdown, studenti/repository, PDF e risorse.
+- [ ] Verificare lista, dettaglio inesistente, relazioni e assenza di duplicati.
+- [ ] Dopo la verifica, rimuovere `server/resources/posts/` e registrazione; sostituire le richieste posts in `server/test.http`.
 
-- [ ] Creare routes, controller e repository della risorsa studenti.
-- [ ] Implementare la lista con nome, username GitHub e percorso dell'avatar.
-- [ ] Implementare il dettaglio con i progetti pubblici verificati dello studente.
-- [ ] Aggiungere a `server/test.http` le richieste per studenti e aggiornare i contenuti root dell'API con le risorse Class14.
-- [ ] Verificare studente inesistente e studente senza repository nel catalogo.
+### 4. API Students
 
-### 5. File statici e gestione errori
+- [ ] Implementare lista con nome, username, link GitHub e avatar.
+- [ ] Implementare profilo con repository pubbliche dei progetti del catalogo.
+- [ ] Se previsto dal contratto, derivare numero di repository e topics dei progetti associati.
+- [ ] Verificare studente inesistente, studente senza repository e conteggi coerenti.
+- [ ] Aggiungere richieste ripetibili in `server/test.http`.
 
-- [ ] Preparare avatar e PDF in `server/public/` dagli asset sorgente, rispettando i percorsi salvati nel database.
-- [ ] Verificare gli URL `/avatars/...` e `/cheatsheets/...`.
-- [ ] Validare i parametri HTTP usando le convenzioni Zod già presenti nel server e adattare i middleware 404/errori esistenti dove necessario.
-- [ ] Verificare risposte `400`, `404` e `500` senza esporre dettagli interni.
+### 5. API Cheat Sheets e Resources
 
-### 6. Verifica backend e integrazione
+- [ ] Implementare i cataloghi autonomi: PDF con titolo/slug/percorso e risorse con titolo/URL.
+- [ ] Restituire i progetti collegati secondo il contratto, senza duplicati.
+- [ ] Verificare le relazioni in entrambe le direzioni e aggiungere richieste in `server/test.http`.
+- [ ] Non inventare descrizioni PDF, categorie risorse o date di pubblicazione dai campi disponibili.
 
-- [ ] Completare `server/test.http` con richieste ripetibili per i flussi principali e confrontare le risposte con il contratto documentato.
-- [ ] Verificare che il backend convertito non contenga più route, query o documentazione attiva legate al blog.
-- [ ] Verificare relazioni, percorsi statici e comportamento in caso di database non disponibile.
-- [ ] Definire la connessione del client all'API durante lo sviluppo (proxy Vite o CORS, secondo il setup scelto).
+### 6. Topics e contatori Home
 
-### 7. Adattamento frontend — dopo il backend
+- [ ] Estrarre i tag dai progetti, rimuovere spazi esterni e duplicati; confrontare tag interi.
+- [ ] Implementare elenco topics e accesso ai rispettivi progetti.
+- [ ] Se previsto dal contratto, aggregare PDF/risorse via progetti, deduplicati per ID e dichiarati come collegamenti indiretti.
+- [ ] Implementare conteggi delle cinque entità del catalogo, senza percentuali di completamento.
+- [ ] Verificare topic inesistente, deduplicazione e conteggi; aggiungere richieste in `server/test.http`.
 
-- [ ] Definire pagine, navigazione, lingua dell'interfaccia e direzione visiva di Class14.
-- [ ] Adattare package, titolo HTML, metadati, header, footer e documentazione del client a Class14.
-- [x] Installare le dipendenze del client e verificare build Vite con React Compiler e lint.
-- [ ] Adattare router, `src/pages/` e `RootLayout` esistenti con `Header`, `Main`, `Outlet` e `Footer`; mantenere Data Mode salvo scelta motivata diversa.
-- [ ] Riutilizzare i componenti UI/shared già presenti e adattare CSS, layout responsive e tema automatico chiaro/scuro.
-- [ ] Collegare il client Axios alle API Class14 e adattare i validatori manuali alle nuove risposte, senza introdurre Zod nel frontend.
+### 7. Statici, errori e verifica backend
 
-### 8. Pagine frontend — completare un flusso alla volta
+- [ ] Preparare avatar e PDF in `server/public/`, rispettando i percorsi salvati nel DB.
+- [ ] Verificare apertura avatar/PDF e comportamento di file inesistenti.
+- [ ] Validare input HTTP e verificare 400/404/500 senza dettagli interni.
+- [ ] Confrontare i flussi API con il contratto e completare `server/test.http`.
+- [ ] Verificare che non rimangano route/query/documentazione attiva del blog.
+- [ ] Definire proxy Vite o CORS per collegare React all’API.
 
-- [ ] Collegare lista e dettaglio dei progetti alle API, includendo Markdown, repository, PDF e risorse.
-- [ ] Quando il flusso progetti è pronto, sostituire `client/src/features/products/` e `client/src/pages/products/`, aggiornando provider, import, router e controlli specifici nell'Header.
-- [ ] Collegare lista e dettaglio degli studenti alle API.
-- [ ] Integrare l'esplorazione per argomento secondo le pagine e i filtri definiti.
-- [ ] Gestire caricamento, errori, liste vuote e pagine non trovate in ciascun flusso.
-- [ ] Sostituire progressivamente Home/AboutUs e le richieste di esempio con contenuti Class14; verificare che non restino dipendenze dalla Fake Store API.
+### 8. Adattamento frontend — dopo il backend
 
-### 9. Rifinitura e consegna
+- [ ] Definire lingua, direzione visiva e navigazione fra Home, Projects, Students, Topics, Resources e Cheat Sheets.
+- [ ] Adattare titolo HTML, metadati, Header, Footer e documentazione a Class14; nomi package già aggiornati.
+- [ ] Adattare router e pagine, conservando RootLayout con Header/Main/Outlet/Footer.
+- [ ] Riutilizzare UI/shared, CSS nativo e tema automatico; verificare layout responsive.
+- [ ] Configurare Axios e validatori manuali per le risposte Class14, senza Zod frontend.
 
-- [ ] Verificare navigazione, link esterni, avatar, PDF e aggiornamento diretto delle pagine di dettaglio.
-- [ ] Verificare mobile, tastiera, focus visibile, etichette e tema chiaro/scuro.
-- [ ] Eseguire lint/build e i controlli dei flussi principali previsti dal progetto.
-- [ ] Scrivere README di avvio/configurazione e aggiornare documentazione API e `AGENTS.md`.
-- [ ] Concordare con l'utente deployment e visibilità della repository prima della pubblicazione.
+### 9. Pagine MVP — un flusso alla volta
 
-Contatori di commit e classifiche sono idee successive alla prima versione e non fanno parte delle attività attuali.
+- [ ] Collegare lista/dettaglio Projects, Markdown sicuro, repository, PDF e risorse.
+- [ ] Quando il flusso Projects è pronto, sostituire products e rimuovere provider/import/route/controlli pertinenti.
+- [ ] Collegare lista/profilo Students con avatar, GitHub e repository disponibili.
+- [ ] Creare Cheat Sheets con apertura/download PDF e progetti collegati.
+- [ ] Creare Resources con link esterni e progetti collegati.
+- [ ] Creare elenco/dettaglio Topics con progetti e, dove previsti, “Materiali dei progetti collegati”.
+- [ ] Adattare Home alla presentazione Learning Hub + Showcase e ai contatori del catalogo.
+- [ ] Gestire caricamento, errori, dati assenti e 404 nei flussi pertinenti.
+- [ ] Sostituire contenuti Home/AboutUs di esempio e verificare assenza di dipendenze dalla Fake Store API.
+
+### 10. Ricerca e filtri essenziali — dopo le liste
+
+- [ ] Implementare la ricerca concordata su titoli, nomi e username e il filtro topic dove pertinente.
+- [ ] Usare i campi esistenti, mantenendo coerente il comportamento frontend/API.
+- [ ] Verificare combinazioni di filtri, reset e nessun risultato.
+
+### 11. Rifinitura e consegna
+
+- [ ] Verificare navigazione incrociata, link esterni, avatar, PDF e accesso diretto alle pagine di dettaglio.
+- [ ] Verificare mobile, tastiera, focus, etichette e tema chiaro/scuro.
+- [ ] Eseguire lint/build e controlli HTTP dei flussi principali.
+- [ ] Aggiornare README, setup, contratto API e AGENTS con lo stato verificato.
+- [ ] Concordare deployment e visibilità della repository prima di pubblicare.
+
+## Idee future — fuori dall’MVP
+
+- Immagini/periodi dei progetti, repository originali, bio, descrizioni PDF e categorie risorse: aggiungere solo contenuti verificati, valutando prima file per slug/username/URL.
+- Descrizioni dei topic e associazioni dirette curate ai materiali: eventuale mappatura editoriale, senza migrazione preventiva.
+- Statistiche GitHub (commit, linguaggi, aggiornamento), con raccolta e cache da progettare.
+- Progetti finali, completamento reale/date, progressi personali, achievements e Recruiter View avanzata richiedono definizioni e dati aggiuntivi.
+- Nessuna leaderboard competitiva, autenticazione o CRUD amministrativo nell’MVP.
 
 ## In corso
 
-Nessuna attività aperta.
+Nessuna attività di implementazione aperta. Prossima attività: fase 2, configurazione e adattamento backend.
 
 ## Fatto
 
 - [x] Definire brand `Class14` senza rinominare cartella o repository.
 - [x] Confermare la struttura con backend in `server/` e frontend in `client/`.
-- [x] Copiare le app di riferimento in `server/` e `client/`, conservando struttura e stile come base della conversione (installazione e avvio ancora da verificare).
+- [x] Copiare le app di riferimento in `server/` e `client/`, conservando struttura e stile come base della conversione.
 - [x] Organizzare la documentazione in `docs/`, mantenendo `AGENTS.md` e `KANBAN.md` nella root.
 - [x] Definire elenco dei 15 studenti e 15 progetti dal periodo React in poi.
 - [x] Raccogliere descrizioni dei progetti e PDF disponibili.
@@ -101,5 +139,8 @@ Nessuna attività aperta.
 - [x] Importare e verificare il database locale: 15 studenti, 15 progetti, 18 PDF e 124 repository.
 - [x] Associare 39 PDF ai progetti e verificare che ogni progetto e ogni PDF sia collegato.
 - [x] Importare 17 risorse esterne e collegarle ai progetti con 54 associazioni verificate.
-
 - [x] Configurare package root privato e script comuni, rimuovere tooling TypeScript diretto dal client e correggere audit (zero vulnerabilità nei tre package).
+
+- [x] Confermare la nuova direzione e pianificare l’MVP senza modifiche allo schema, con Topics derivati, cataloghi materiali autonomi e contatori Home.
+
+- [x] Definire e verificare il contratto API MVP: endpoint, identificatori, JSON, topics/materiali indiretti, contatori, ricerca/filtri, ordinamento ed errori; nessuna paginazione per il catalogo attuale.
