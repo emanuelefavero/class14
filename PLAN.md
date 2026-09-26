@@ -25,15 +25,15 @@ L'obiettivo è creare una piattaforma che possa essere utile:
 
 ---
 
-# 1. Learning Hub
+## 1. Learning Hub
 
 Questa deve essere l'identità principale dell'applicazione.
 
 La piattaforma raccoglie in un unico posto tutto ciò che è stato prodotto e studiato durante il corso.
 
-## Sezioni principali
+### Sezioni principali
 
-### Projects
+#### Projects
 
 Raccoglie tutti i progetti svolti durante il corso.
 
@@ -66,7 +66,7 @@ Repository / Details
 
 ---
 
-### Students
+#### Students
 
 Pagina che raccoglie gli studenti della classe.
 
@@ -89,7 +89,7 @@ La pagina dello studente deve funzionare anche come piccolo **developer profile*
 
 ---
 
-### Topics
+#### Topics
 
 Raccoglie gli argomenti affrontati durante il corso.
 
@@ -140,7 +140,7 @@ Questo permette di navigare la piattaforma anche per **argomento**, non solament
 
 ---
 
-# 2. Cheat Sheets
+## 2. Cheat Sheets
 
 Una parte importante dell'applicazione deve essere dedicata ai cheat sheet prodotti durante il corso.
 
@@ -179,7 +179,7 @@ React Hooks Cheat Sheet
 
 ---
 
-# 3. Resources
+## 3. Resources
 
 Creare una sezione dedicata alle risorse utili.
 
@@ -208,7 +208,7 @@ Ogni risorsa può essere associata a uno o più Topics.
 
 ---
 
-# 4. Student Showcase
+## 4. Student Showcase
 
 La seconda anima dell'applicazione deve essere quella dello **Student Showcase**.
 
@@ -222,7 +222,7 @@ Questo rende la piattaforma potenzialmente interessante anche per recruiter e az
 
 ---
 
-## Student Profile
+### Student Profile
 
 Il profilo dello studente potrebbe mostrare qualcosa come:
 
@@ -261,7 +261,7 @@ Un recruiter può quindi capire velocemente:
 
 ---
 
-# 5. GitHub Integration
+## 5. GitHub Integration
 
 Quando possibile utilizzare la GitHub API per recuperare automaticamente informazioni pubbliche.
 
@@ -296,7 +296,7 @@ Questi dati devono essere trattati come **statistiche del progetto**, non come m
 
 ---
 
-# 6. Evitare una leaderboard competitiva
+## 6. Evitare una leaderboard competitiva
 
 Evitare come feature principale una classifica globale del tipo:
 
@@ -320,7 +320,7 @@ Preferire invece statistiche individuali e aggregate.
 
 ---
 
-# 7. Class Statistics
+## 7. Class Statistics
 
 Creare eventualmente una dashboard con statistiche della **classe nel suo complesso**.
 
@@ -352,7 +352,7 @@ Questa parte può rendere la homepage più interessante senza mettere direttamen
 
 ---
 
-# 8. Project Completion
+## 8. Project Completion
 
 Una relazione importante dell'applicazione è:
 
@@ -388,7 +388,7 @@ Student → Projects completed
 
 ---
 
-# 9. Navigazione incrociata
+## 9. Navigazione incrociata
 
 Uno degli aspetti più interessanti della piattaforma dovrebbe essere la possibilità di navigare tra entità collegate.
 
@@ -424,7 +424,7 @@ Devono essere **collegate tra loro**.
 
 ---
 
-# 10. Possibile Recruiter View futura
+## 10. Possibile Recruiter View futura
 
 Dopo aver completato la versione principale dell'applicazione, si potrebbe aggiungere una modalità dedicata ai recruiter.
 
@@ -467,7 +467,7 @@ Questa funzionalità deve essere considerata **un'evoluzione futura**, non neces
 
 ---
 
-# 11. Possibile struttura della navigazione
+## 11. Possibile struttura della navigazione
 
 ```text
 Home
@@ -489,7 +489,7 @@ Explore Developers
 
 ---
 
-# 12. Priorità MVP
+## 12. Priorità MVP
 
 Per la prima versione concentrarsi su:
 
@@ -502,22 +502,22 @@ Per la prima versione concentrarsi su:
 
 Successivamente aggiungere:
 
-7. GitHub integration
-8. Class statistics
-9. Student statistics
-10. Search
-11. Filters
+1. GitHub integration
+2. Class statistics
+3. Student statistics
+4. Search
+5. Filters
 
 Solo successivamente valutare:
 
-12. Recruiter View
-13. Advanced GitHub statistics
-14. Dashboard avanzata
-15. ulteriori funzionalità social/community
+1. Recruiter View
+2. Advanced GitHub statistics
+3. Dashboard avanzata
+4. ulteriori funzionalità social/community
 
 ---
 
-# 13. Identità del progetto
+## 13. Identità del progetto
 
 Il progetto NON deve essere presentato principalmente come:
 
@@ -531,7 +531,7 @@ La piattaforma permette agli studenti di continuare a utilizzare il materiale pr
 
 ---
 
-# 14. Principio UX
+## 14. Principio UX
 
 Quando viene aggiunta una nuova feature, chiedersi:
 
@@ -562,7 +562,7 @@ rispetto a:
 
 ---
 
-# 15. Direzione finale
+## 15. Direzione finale
 
 Class14 dovrebbe quindi essere pensato come l'unione di:
 
