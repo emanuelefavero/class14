@@ -1,0 +1,23 @@
+.card {
+  --padding-block: 1.15rem;
+  --padding-inline: 1.1rem;
+
+  overflow: hidden;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow:
+    1px 1px 1px rgb(0 0 0 / 0.02),
+    1px 1px 1px rgb(0 0 0 / 0.05);
+
+  .card-header,
+  .card-content {
+    padding-block: var(--padding-block);
+    padding-inline: var(--padding-inline);
+  }
+
+  .card-header {
+    background-color: var(--background-muted);
+    border-bottom: 1px solid var(--border);
+  }
+}

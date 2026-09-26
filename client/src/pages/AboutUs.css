@@ -1,0 +1,36 @@
+.about-us {
+  display: grid;
+  gap: 3rem;
+  max-width: 60rem;
+  padding-block: clamp(2rem, 8vw, 5rem);
+
+  .intro {
+    display: grid;
+    gap: 1rem;
+    max-width: 48rem;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .lead,
+  .item p {
+    color: var(--foreground-muted);
+  }
+
+  .details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 2rem;
+  }
+
+  .item {
+    display: grid;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+}

@@ -1,0 +1,365 @@
+/* TOKENS */
+:root {
+  --foreground: #0a2540;
+  --foreground-muted: #717578;
+  --background: #fff;
+  --background-muted: #f7f9fd;
+  --background-secondary: #eef2f5;
+  --background-outline: #fbfdff;
+  --background-success: #e6f9f0;
+  --background-warning: #fff4e5;
+  --primary: #3948ec;
+  --primary-solid: #3948ec;
+  --primary-solid-foreground: #fff;
+  --success: #00a349;
+  --warning: #ffc109;
+  --danger: #c10007;
+  --border: #cdd0d8;
+  --selection: rgb(25 13 253 / 0.3);
+  --sans: system-ui, sans-serif;
+
+  @media (prefers-color-scheme: dark) {
+    --foreground: #fff;
+    --foreground-muted: #9296a0;
+    --background: #0d1016;
+    --background-muted: #13161d;
+    --background-secondary: #07080d;
+    --background-outline: #12151d;
+    --background-success: #003d1a;
+    --background-warning: #3b2e00;
+    --primary: #949dff;
+    --success: #00c851;
+    --warning: #bf9002;
+    --danger: #f3474d;
+    --border: #2f333d;
+    --selection: rgb(86 78 255 / 0.3);
+  }
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*::selection {
+  color: var(--foreground);
+  background-color: var(--selection);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  background: none;
+  box-shadow: none;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: 3px;
+  transition:
+    color 0.2s ease-in-out,
+    text-decoration 0.2s ease-in-out;
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* BASE */
+html {
+  font-size: 100%;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background-secondary);
+  min-height: 100svh;
+  min-width: 350px;
+  font-family: var(--sans);
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-synthesis: none;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+/* LAYOUT */
+.container {
+  --max-width: 1200px;
+  --inline-padding: 1rem;
+
+  width: min(100% - var(--inline-padding) * 2, var(--max-width));
+  margin-inline: auto;
+}
+
+/* COMPONENTS */
+.link {
+  color: var(--primary);
+  text-decoration: underline;
+  transition:
+    color 150ms ease,
+    text-decoration-thickness 150ms ease,
+    filter 150ms ease;
+
+  &:hover {
+    text-decoration-thickness: 2px;
+    filter: brightness(1.1);
+
+    @media (prefers-color-scheme: dark) {
+      filter: brightness(0.8);
+    }
+  }
+}
+
+/* UTILITIES */
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Padding */
+.p-0 {
+  padding: 0;
+}
+
+.p-px {
+  padding: 1px;
+}
+
+.px-0 {
+  padding-inline: 0;
+}
+
+.px-px {
+  padding-inline: 1px;
+}
+
+.py-0 {
+  padding-block: 0;
+}
+
+.py-px {
+  padding-block: 1px;
+}
+
+/* Margin */
+.m-0 {
+  margin: 0;
+}
+
+.m-px {
+  margin: 1px;
+}
+
+.mx-0 {
+  margin-inline: 0;
+}
+
+.mx-px {
+  margin-inline: 1px;
+}
+
+.my-0 {
+  margin-block: 0;
+}
+
+.my-px {
+  margin-block: 1px;
+}
+
+/* Typography: Font Size, Line Height, Letter Spacing */
+.text-xs {
+  font-size: 0.8rem;
+  line-height: calc(1 / 0.8);
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: calc(1.5 / 1);
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: calc(1.75 / 1.125);
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: calc(1.75 / 1.25);
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: calc(2 / 1.5);
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: calc(2.25 / 1.875);
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: calc(2.5 / 2.25);
+}
+
+/* Typography: Font Weight */
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.not-sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+}
+
+/* ANIMATIONS */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in-text {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ------------------------- */
+
+/* DEBUG */
+
+/*  TIP: Assign a 'debug' class to the root element to enable debug styles */
+.debug {
+  * {
+    outline: 1px solid rgb(255 0 0 / 0.35);
+  }
+
+  * * {
+    outline-color: rgb(0 130 249 / 0.45);
+  }
+
+  * * * {
+    outline-color: rgb(46 204 113 / 0.45);
+  }
+
+  * * * * {
+    outline-color: rgb(255 165 0 / 0.45);
+  }
+
+  * * * * * * {
+    outline-color: rgb(255 0 255 / 0.45);
+  }
+
+  * * * * * * * * {
+    outline-color: rgb(255 255 0 / 0.45);
+  }
+}

@@ -14,14 +14,14 @@ Ultimo aggiornamento del contesto: 26 settembre 2026. Questo file raccoglie le d
 ## Organizzazione della documentazione
 
 - `AGENTS.md` e `KANBAN.md` restano nella root.
-- `docs/` contiene piano e inventario degli asset; le convenzioni di codice sono raccolte qui.
+- `docs/` contiene piano, inventario degli asset e `CODE-STYLE-GUIDELINES.md`; seguire anche le convenzioni raccolte qui.
 - `docs/brief/` conserva il prompt e la traccia originali.
 - I Markdown in `assets/` sono dati dell’app e restano accanto agli asset; il README SQL resta in `server/db/setup/`.
 - I percorsi scritti nei documenti si riferiscono alla root del progetto, salvo i link Markdown relativi.
 
 ## Cosa leggere prima di lavorare
 
-1. Questo file, incluse le convenzioni di codice qui raccolte, e [KANBAN.md](KANBAN.md).
+1. Questo file, [docs/CODE-STYLE-GUIDELINES.md](docs/CODE-STYLE-GUIDELINES.md) e [KANBAN.md](KANBAN.md).
 2. [plan.md](docs/plan.md) per la visione e [assets-info.md](docs/assets-info.md) per i dati.
 3. I file pertinenti alla fase corrente. Per il database: [server/db/setup/README.md](server/db/setup/README.md), [schema.sql](server/db/setup/schema.sql) e [scripts/generate-seed.mjs](scripts/generate-seed.mjs).
 
@@ -29,7 +29,7 @@ Ultimo aggiornamento del contesto: 26 settembre 2026. Questo file raccoglie le d
 
 Se disponibile, usare la skill locale `.agents/skills/boolean-course-exercises/SKILL.md`; `assets/lessons.json` è il riferimento del calendario. `.agents/` è ignorata da Git e potrebbe mancare in altri ambienti: le istruzioni essenziali sono in questo file.
 
-Le decisioni esplicite dell'utente e questo riepilogo prevalgono sulle parti meno aggiornate di `docs/plan.md`. In particolare, React Router deve usare **Declarative Mode** e il riferimento frontend principale è `react-context-api`.
+Le decisioni esplicite dell'utente e questo riepilogo prevalgono sulle parti meno aggiornate di `docs/plan.md`. Il riferimento frontend principale è `react-context-api`. La precedente richiesta di usare esclusivamente Declarative Mode è superata: l’utente accetta Data Mode o Declarative Mode; la base copiata usa già Data Mode e può essere mantenuta.
 
 ## Decisioni tecniche confermate
 
@@ -43,9 +43,10 @@ Le decisioni esplicite dell'utente e questo riepilogo prevalgono sulle parti men
 
 ### Frontend
 
-- React con Vite, JavaScript senza TypeScript. React Compiler previsto in `docs/plan.md`; verificarne la configurazione al momento dello scaffolding.
-- **React Router Declarative Mode**: `BrowserRouter` in `main.jsx`, `Routes`/`Route` in `App.jsx`, pagine in `src/pages/`, `RootLayout` con `Outlet` dentro `Main`, oltre a `Header` e `Footer`.
-- Non trasferire `createBrowserRouter`, `RouterProvider`, loader o action dal progetto di riferimento, che usa Data Mode.
+- React con Vite, JavaScript senza TypeScript. React Compiler già configurato in `client/vite.config.js`; verificarne il funzionamento quando verranno installate le dipendenze.
+- La base usa **React Router Data Mode** con `createBrowserRouter` in `client/src/router/router.jsx` e `RouterProvider` in `App.jsx`. Mantenerla per continuità salvo una ragione concreta per scegliere Declarative Mode: entrambe sono autorizzate. Non aggiungere loader/action solo perché disponibili.
+- Conservare pagine in `src/pages/`, `RootLayout` con `Outlet` dentro `Main`, `Header` e `Footer`, e l’organizzazione del router già presente.
+- Il frontend usa Axios e la validazione manuale in `client/src/lib/validation.js`, con validatori per feature. **Non introdurre Zod nel frontend adesso**; un’eventuale migrazione è futura. Zod è già presente nel backend e può continuare a essere usato lì.
 - CSS nativo, CSS nesting, custom properties e tema automatico con `prefers-color-scheme`. Nessun Bootstrap o framework CSS. L'ispirazione shadcn/ui è visiva, non una richiesta di installarlo.
 - Componenti separati in `components/ui`, `components/shared`, `components/layout`; CSS vicino ai componenti. Stato locale e props, Context solo per esigenze concrete.
 - Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Per ora niente JSDoc. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
@@ -54,12 +55,21 @@ Le decisioni esplicite dell'utente e questo riepilogo prevalgono sulle parti men
 
 - `/Users/emanuelefavero/code/boolean/express-blog-sql`: stile Express, repository SQL, validazione, middleware e organizzazione per risorsa.
 - `/Users/emanuelefavero/code/boolean/react-context-api`: componenti, CSS e organizzazione React. In particolare `src/components/ui` e `src/components/shared` contengono componenti riutilizzabili dell'utente.
-- Portare solo i componenti necessari, adattando CSS, import, utility `cx` e icone. Button, Card, Badge, Input, Select e Spinner sono candidati; BackButton, Rating e IncrementalList solo se richiesti dalla funzionalità.
+- Queste app sono ora copiate in `server/` e `client/`: usare soprattutto il codice presente nel progetto come riferimento. I componenti UI/shared, `cx`, le icone e il CSS sono già in `client/`; riutilizzarli dove pertinenti.
 - Non leggere `node_modules`, build o cache dei riferimenti. Non copiare indiscriminatamente il router o l'intera applicazione.
 
-## Stato attuale: dati pronti, applicazione ancora da creare
+## Stato attuale: app di riferimento copiate, conversione da iniziare
 
-Non sono ancora stati creati il server Express, il client React o i relativi `package.json`. `server/` contiene attualmente solo il setup SQL. Nessuna API o interfaccia è implementata.
+L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` dentro `client/`. Entrambi hanno struttura, `package.json` e lockfile; **npm install non è ancora stato eseguito** dall’utente. Non fare nuovo scaffolding e non considerare queste app già convertite o verificate per Class14.
+
+- `server/app.js` registra ancora `posts`, `root` ed `errors`. `server/db/db.js` usa già il database `class14`, ma conserva host/utente della base e password da variabile d’ambiente. Le routes `posts` interrogano ancora il modello del blog e non sono feature di Class14.
+- `server/package.json`, `server/README.md`, dati root, logo e altri contenuti conservano riferimenti al blog. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
+- `server/test.http` contiene richieste per posts: sostituirle con richieste Class14 man mano che si implementano e verificano le nuove risorse.
+- `client/src/features/products/`, `client/src/pages/products/`, i provider in `App.jsx`, router, Header e contenuti Home/AboutUs appartengono ancora al negozio di esempio/Fake Store API. Il package si chiama ancora `react-router`; titoli e interfaccia mostrano React Context API.
+- Non cancellare preventivamente posts/products: sono esempi di stile da consultare durante la conversione. Rimuovere la vecchia feature e i relativi import, route, provider, richieste e contenuti quando la nuova feature che la sostituisce è pronta. Non lasciare riferimenti pendenti.
+- L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. Rinominare progressivamente package, titoli, documentazione e contenuti al brand Class14 nel sottoprogetto su cui si sta lavorando; non rinominare la repository.
+- Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. Cita `.agents/CODE-STYLE-GUIDELINES.md`; le linee guida generali disponibili nella root del progetto sono ora `docs/CODE-STYLE-GUIDELINES.md`. Tenere presente questo riferimento da riallineare durante la conversione.
+- È stata rilevata anche una cartella aggiuntiva `express-blog-sql/` nella root. Non è il backend attivo, che è `server/`; non rimuoverla o modificarla senza verificarne lo scopo con l’utente.
 
 Il database locale **class14** è stato creato e popolato dall'utente. Successivamente sono stati applicati e verificati anche i collegamenti ai PDF e le risorse esterne.
 
@@ -126,8 +136,8 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 1. Backend Express: prossima fase concreta
 
-- Creare il progetto in `server/` seguendo questo file e il riferimento Express locale.
-- Configurare variabili d'ambiente, pool MySQL e verifica della connessione all'avvio; aggiungere un `.env.example` senza segreti.
+- Adattare il progetto già presente in `server/`: rivedere package, branding, configurazione e contenuti iniziali. Installare/verificare le dipendenze quando si avvia la fase di implementazione, non durante un semplice aggiornamento di contesto.
+- Configurare variabili d'ambiente e pool MySQL; adattare `server/.env.example` già presente senza segreti e verificare il controllo della connessione all'avvio già implementato.
 - Preparare i file statici dai sorgenti in `assets/`, mantenendo funzionanti i percorsi già salvati nel database.
 - Implementare lista e dettaglio di progetti e studenti. Il dettaglio progetto deve poter fornire studenti/repository, PDF e risorse; il dettaglio studente i suoi progetti pubblici.
 - Definire e documentare endpoint e forma delle risposte prima di collegare React. Percorsi, filtri, paginazione e struttura JSON non sono ancora stati concordati: scegliere una soluzione minima coerente con i dati, senza presentarla come decisione già presa.
@@ -135,7 +145,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 2. Frontend React
 
-- Creare `client/` con Vite e routing Declarative Mode; riutilizzare selettivamente i componenti dell'utente.
+- Dopo il backend, adattare il client già copiato da `react-context-api`: branding e configurazione, poi nuove feature/pagine e sostituzione graduale di products. Conservare UI/layout e validazione corrente, mantenendo il router Data Mode esistente salvo scelta motivata diversa.
 - Costruire pagine per esplorare progetti, studenti e materiali, con liste e dettagli e stati di caricamento, errore e dati assenti.
 - La composizione visiva, la lingua definitiva dell'interfaccia e l'organizzazione di eventuali pagine dedicate agli argomenti non sono ancora definite: concordarle nella fase frontend.
 - Curare accessibilità, mobile, tema chiaro/scuro e rendering delle descrizioni Markdown.

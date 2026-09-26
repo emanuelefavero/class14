@@ -1,0 +1,32 @@
+.home {
+  display: grid;
+  align-content: center;
+  gap: 1.25rem;
+  max-width: 48rem;
+  min-height: min(60svh, 32rem);
+  padding-block: 2rem;
+
+  .title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .description {
+    max-width: 42rem;
+    color: var(--foreground-muted);
+  }
+
+  .cta {
+    justify-self: start;
+    padding: 0.75rem 1rem;
+    color: var(--primary-solid-foreground);
+    background-color: var(--primary-solid);
+    border-radius: 0.5rem;
+
+    &:hover {
+      text-decoration: none;
+      opacity: 0.8;
+    }
+  }
+}

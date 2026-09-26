@@ -1,0 +1,108 @@
+.button {
+  display: inline-flex;
+  inline-size: fit-content;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  line-height: 1;
+  transition:
+    background-color 150ms ease,
+    opacity 150ms ease,
+    transform 150ms ease,
+    filter 150ms ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    transform: translateY(1px) scale(0.98);
+    filter: brightness(0.9);
+
+    &:disabled {
+      transform: none;
+      filter: none;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &.full-width {
+    inline-size: 100%;
+  }
+
+  &.primary {
+    background-color: var(--primary-solid);
+    color: var(--primary-solid-foreground);
+    border: 1px solid transparent;
+  }
+
+  &.outline {
+    background-color: var(--background-outline);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
+  &.success {
+    background-color: var(--background-success);
+    color: var(--foreground);
+    border: 1px solid var(--success);
+
+    &:hover {
+      background-color: var(--success);
+      color: var(--background);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--success);
+      outline-offset: 2px;
+    }
+  }
+
+  &.danger {
+    background-color: var(--background);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+
+    &:hover {
+      background-color: var(--danger);
+      color: var(--background);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--danger);
+      outline-offset: 2px;
+    }
+  }
+
+  &.warning {
+    background-color: var(--background-warning);
+    color: var(--foreground);
+    border: 1px solid var(--warning);
+
+    &:hover {
+      background-color: var(--warning);
+      color: var(--background);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--warning);
+      outline-offset: 2px;
+    }
+  }
+
+  &.ghost {
+    background-color: transparent;
+    color: var(--foreground);
+    border: 1px solid transparent;
+  }
+}

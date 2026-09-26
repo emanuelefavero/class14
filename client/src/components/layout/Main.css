@@ -1,0 +1,9 @@
+.main {
+  flex: 1;
+  padding-block: 2rem;
+
+  > .container {
+    display: grid;
+    gap: 2rem;
+  }
+}

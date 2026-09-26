@@ -1,0 +1,29 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0.25rem 0.625rem;
+  overflow-wrap: anywhere;
+  border: 1px solid;
+  border-radius: 999px;
+
+  &.default {
+    color: var(--foreground-muted);
+    background-color: var(--background-secondary);
+    border-color: var(--border);
+  }
+
+  &.warning {
+    color: var(--foreground);
+    background-color: var(--background-warning);
+    border-color: var(--warning);
+  }
+
+  &.danger {
+    color: var(--background);
+    background-color: var(--danger);
+    border-color: var(--danger);
+  }
+}

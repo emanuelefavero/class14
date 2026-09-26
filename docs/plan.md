@@ -34,7 +34,7 @@ Class14 è un'applicazione web Full-Stack per la classe WDPT14 del corso Boolean
 - **Linguaggio:** JavaScript (No TypeScript)
 - **Styling:** CSS nativo con **CSS Nesting** e **CSS Custom Properties** (Variabili CSS). Design ispirato allo stile minimal/clean di **shadcn/ui**.
 - **Theme:** Supporto automatico Dark/Light Mode tramite `prefers-color-scheme` in CSS. No Bootstrap o Framework CSS pesanti.
-- **Architettura Codebase Frontend:** Vedere riferimento stile su [react-movie-filter](https://github.com/emanuelefavero/react-movie-filter)
+- **Architettura Codebase Frontend:** Vedere riferimento stile su [react-context-api](https://github.com/emanuelefavero/react-context-api)
 
 ---
 
