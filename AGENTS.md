@@ -97,7 +97,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - React con Vite, JavaScript senza TypeScript. React Compiler già configurato in `client/vite.config.js`; verificarne il funzionamento quando verranno installate le dipendenze.
 - La base usa **React Router Data Mode** con `createBrowserRouter` in `client/src/router/router.jsx` e `RouterProvider` in `App.jsx`. Mantenerla per continuità salvo una ragione concreta per scegliere Declarative Mode: entrambe sono autorizzate. Non aggiungere loader/action solo perché disponibili.
 - Conservare pagine in `src/pages/`, `RootLayout` con `Outlet` dentro `Main`, `Header` e `Footer`, e l’organizzazione del router già presente.
-- Il frontend usa Axios e la validazione manuale in `client/src/lib/validation.js`, con validatori per feature. **Non introdurre Zod nel frontend adesso**; un’eventuale migrazione è futura. Zod è già presente nel backend e può continuare a essere usato lì.
+- Il frontend usa Axios e Zod per validare input e risposte delle richieste HTTP quando necessario. Tenere gli schemi vicino alla feature, in `schemas.js`; non usare Zod per stato React, componenti o semplici controlli locali. La dipendenza è già installata in `client/`.
 - CSS nativo, CSS nesting, custom properties e tema automatico con `prefers-color-scheme`. Nessun Bootstrap o framework CSS. L'ispirazione shadcn/ui è visiva, non una richiesta di installarlo.
 - Componenti separati in `components/ui`, `components/shared`, `components/layout`; CSS vicino ai componenti. Stato locale e props, Context solo per esigenze concrete.
 - Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Evitare JSDoc per typing; usare JSDoc brevi e descrittivi sui metodi repository e commenti nei passaggi meno evidenti. Conservare l’esempio input/output di `normalizeProjectTopics`. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
@@ -196,7 +196,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 2. Frontend React
 
-- Dopo il backend, adattare il client già copiato da `react-context-api`: branding e configurazione, poi nuove feature/pagine e sostituzione graduale di products. Conservare UI/layout e validazione corrente, mantenendo il router Data Mode esistente salvo scelta motivata diversa.
+- Dopo il backend, adattare il client già copiato da `react-context-api`: branding e configurazione, poi nuove feature/pagine e sostituzione graduale di products. Conservare UI/layout e usare schemi Zod ai confini HTTP, mantenendo il router Data Mode esistente salvo scelta motivata diversa.
 - Costruire Home, Projects, Students, Cheat Sheets, Resources e Topics secondo l’MVP, con liste/dettagli dove previsti e stati di caricamento, errore e dati assenti. Aggiungere ricerca e filtri essenziali dopo i flussi principali.
 - Le sezioni Topics e materiali autonomi sono confermate. Composizione visiva, lingua definitiva, percorsi frontend e posizione dei link nella navigazione restano da definire nella fase frontend.
 - Curare accessibilità, mobile, tema chiaro/scuro e rendering delle descrizioni Markdown.
@@ -275,3 +275,9 @@ node scripts/sync-github-assets.mjs --refresh
 - client/vite.config.js inoltra /api, /avatars, /cheatsheets al backend localhost:3000, oppure alla porta PORT esportata nel terminale. Usare URL relativi dal client; nessuna dipendenza CORS. Se PORT è cambiata solo in server/.env, allineare il target Vite (vedere docs/SETUP.md).
 - Verificato un avatar e un PDF, stessi byte e Content-Type attraverso il proxy; file inesistenti 404. Errori 400/404/500 JSON senza dettagli interni, compreso JSON malformato. Nessuna route posts attiva. Le routes errors restano esempi temporanei di test.
 - Proxy locale verificato; hosting e frontend completo restano da realizzare. Prossimo passo: **fase 8, adattamento frontend**.
+
+### Preparazione frontend — Zod nel boilerplate Products
+
+- L'utente ha installato Zod in `client/`. `features/products/schemas.js` descrive le risposte singola/lista e `api.js` le valida dopo le fetch; il resto del flusso Products rimane un esempio temporaneo da sostituire durante le pagine Class14.
+- Rimossi il validatore manuale condiviso, quello Products e `features/products/types.js` non utilizzato. Lo schema Zod documenta la forma dei dati a runtime; non fornisce da solo tipi statici per lo stato React in questo progetto JavaScript.
+- Per le future feature, usare Zod soltanto per input/output delle richieste HTTP quando serve; niente schemi per lo stato della UI o infrastruttura generica di validazione. Prossimo lavoro resta la fase 8.

@@ -1,6 +1,6 @@
 import { fetchData } from '@/lib/api';
 import { delay } from '@/lib/utils';
-import { validateProduct, validateProducts } from './validation';
+import { productSchema, productsSchema } from './schemas';
 
 const PRODUCTS_URL = 'https://fakestoreapi.com/products';
 
@@ -11,7 +11,7 @@ export const fetchProducts = () => {
   if (productsCache) return productsCache;
 
   productsCache = Promise.all([
-    fetchData(PRODUCTS_URL).then(validateProducts),
+    fetchData(PRODUCTS_URL).then((data) => productsSchema.parse(data)),
     delay(300),
   ])
     .then(([data]) => data)
@@ -32,7 +32,7 @@ export const fetchProduct = (productId) => {
     .then((data) => {
       if (!data) return null;
 
-      return validateProduct(data);
+      return productSchema.parse(data);
     })
     .catch((error) => {
       productCache.delete(productId);

@@ -15,7 +15,7 @@ Procedere nell’ordine indicato, una fase verificabile alla volta: **prima back
 - `server/` deriva da `express-blog-sql`; `client/` da `react-context-api`. Non ricreare lo scaffolding.
 - Dipendenze, script comuni, build, lint, audit e avvio congiunto sono verificati: [docs/SETUP.md](docs/SETUP.md). I package sono già `class14`, `class14-server` e `class14-client`; i contenuti delle app restano da convertire.
 - Conservare posts/products come riferimento finché le nuove feature le sostituiscono; poi rimuovere import, route, provider, richieste e contenuti pertinenti.
-- Conservare React Router Data Mode salvo motivo concreto per cambiarlo; validazione manuale frontend, Zod backend. JavaScript, nessun typecheck TypeScript né nuovo JSDoc.
+- Conservare React Router Data Mode salvo motivo concreto per cambiarlo; Zod ai confini HTTP di frontend e backend. JavaScript, nessun typecheck TypeScript né nuovo JSDoc per typing.
 - Il database è già inizializzato. Preservare `server/db/setup/`: non cancellare, ricreare o reimportare i dati per avviare l’MVP. Leggere solo i file pertinenti quando necessario.
 
 ## Da fare
@@ -88,11 +88,12 @@ Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/or
 
 ### 8. Adattamento frontend — prossimo passo
 
+- [x] Preparare il boilerplate Products come esempio Zod: schemi di risposta in `schemas.js`, parsing dopo le fetch, rimozione del validatore manuale e del file JSDoc dei tipi non utilizzato.
 - [ ] Definire lingua, direzione visiva e navigazione fra Home, Projects, Students, Topics, Resources e Cheat Sheets.
 - [ ] Adattare titolo HTML, metadati, Header, Footer e documentazione a Class14; nomi package già aggiornati.
 - [ ] Adattare router e pagine, conservando RootLayout con Header/Main/Outlet/Footer.
 - [ ] Riutilizzare UI/shared, CSS nativo e tema automatico; verificare layout responsive.
-- [ ] Configurare Axios e validatori manuali per le risposte Class14, senza Zod frontend.
+- [ ] Usare Axios e schemi Zod vicini alle feature per gli input e le risposte HTTP Class14 che richiedono validazione; evitare validatori o tipi duplicati.
 
 ### 9. Pagine MVP — un flusso alla volta
 

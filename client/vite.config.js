@@ -1,3 +1,4 @@
+import process from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
 import babel from '@rolldown/plugin-babel';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
