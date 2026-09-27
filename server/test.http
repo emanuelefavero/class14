@@ -33,11 +33,20 @@ GET {{baseUrl}}/api/resources
 ### Resources - Ricerca e filtro topic
 GET {{baseUrl}}/api/resources?q=React&topic=React
 
+### Topics - Lista con conteggio progetti
+GET {{baseUrl}}/api/topics
+
+### Topics - Progetti e materiali collegati
+GET {{baseUrl}}/api/topics/React
+
+### Home - Contatori del catalogo
+GET {{baseUrl}}/api/stats
+
 ### 400 - Parametro non supportato
 GET {{baseUrl}}/api/projects?limit=1
 
-### 404 - Studente inesistente
-GET {{baseUrl}}/api/students/not-a-real-student
+### 404 - Topic inesistente
+GET {{baseUrl}}/api/topics/not-a-real-topic
 
 ### 500 - Errore di prova senza dettagli interni
 GET {{baseUrl}}/errors

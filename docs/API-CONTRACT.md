@@ -4,7 +4,7 @@
 
 Contratto definito il 26 settembre 2026 per implementare l’MVP concordato in
 [AGENTS.md](../AGENTS.md) e [KANBAN.md](../KANBAN.md), secondo la direzione
-[PLAN.md](../PLAN.md). **Questo documento è la specifica di riferimento: Projects, Students e i cataloghi Cheat Sheets/Resources sono implementati; Topics e Stats sono ancora da implementare.**
+[PLAN.md](../PLAN.md). **Questo documento è la specifica di riferimento: Projects, Students, Cheat Sheets/Resources, Topics e Stats sono implementati.**
 
 API pubblica di sola lettura, senza autenticazione, CRUD o chiamate GitHub live.
 Riutilizza le sette tabelle di [schema.sql](../server/db/setup/schema.sql), senza
@@ -36,9 +36,9 @@ Tutte le routes nella tabella usano GET.
 | `/api/students/:github_username` | StudentDetail | Ignorate |
 | `/api/cheatsheets` | Array CheatSheetCatalogItem | `q`, `topic` |
 | `/api/resources` | Array ResourceCatalogItem | `q`, `topic` |
-| `/api/topics` | Array TopicSummary | Nessuna |
-| `/api/topics/:name` | TopicDetail | Nessuna |
-| `/api/stats` | CatalogStats | Nessuna |
+| `/api/topics` | Array TopicSummary | Ignorate |
+| `/api/topics/:name` | TopicDetail | Ignorate |
+| `/api/stats` | CatalogStats | Ignorate |
 
 Non servono endpoint di dettaglio autonomi per PDF e risorse nella prima versione:
 i cataloghi contengono i progetti collegati; il PDF si apre dal file_path e la
@@ -63,7 +63,7 @@ risorsa dall’URL esterno. Nessun endpoint di dettaglio numerico alternativo.
 - Projects: include progetti con quel tag. Students: include studenti con almeno una repository del catalogo associata a un progetto con quel tag.
 - Cheat Sheets/Resources: include materiali collegati ad almeno un progetto con quel tag; il collegamento al topic è indiretto. I projects restituiti in ciascun elemento restano **tutti** i suoi progetti collegati, non soltanto quelli del filtro.
 - `q` e `topic` si combinano con AND. Topic valido ma non presente nel catalogo restituisce lista `[]` con 200, mentre `/api/topics/:name` restituisce 404.
-- Sulle liste, chiavi sconosciute, parametri ripetuti, array/oggetti query e caratteri di controllo in q restituiscono 400. I dettagli Projects e Students ignorano le query perché non le utilizzano; validano solo il parametro dinamico. Gli endpoint Topics e Stats restano senza query ammesse.
+- Sulle liste, chiavi sconosciute, parametri ripetuti, array/oggetti query e caratteri di controllo in q restituiscono 400. I dettagli Projects e Students ignorano le query perché non le utilizzano; validano solo il parametro dinamico. Gli endpoint Topics e Stats ignorano le query inutilizzate, senza schemi vuoti o controlli aggiuntivi.
 - Esempi: `/api/projects?q=react&topic=React`, `/api/students?topic=MySQL`, `/api/resources?topic=Node.js`.
 
 ## Forme JSON e provenienza dei campi

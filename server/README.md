@@ -6,7 +6,7 @@ Node.js, Express, JavaScript ESM, mysql2/promise e Zod per la validazione.
 ## Stato
 
 Configurazione e avvio sono adattati a Class14. `GET /` restituisce il brand e lo stato della conversione.
-Le API Projects, Students, Cheat Sheets e Resources sono implementate secondo il [contratto](../docs/API-CONTRACT.md):
+Le API Projects, Students, Cheat Sheets, Resources, Topics e Stats sono implementate secondo il [contratto](../docs/API-CONTRACT.md):
 
 - `GET /api/projects`: lista ordinata, ricerca `q` su titolo/slug e filtro `topic` sul tag intero.
 - `GET /api/projects/:slug`: descrizione Markdown, studenti con repository, PDF e risorse collegati.
@@ -16,7 +16,13 @@ Le API Projects, Students, Cheat Sheets e Resources sono implementate secondo il
 - `GET /api/cheatsheets`: catalogo PDF con tutti i progetti collegati; ricerca su titolo/slug e filtro topic indiretto.
 - `GET /api/resources`: catalogo link con tutti i progetti collegati; ricerca sul titolo e filtro topic indiretto.
 
-Topics e Stats restano da implementare. La feature posts è stata rimossa; le routes di prova errors restano per i controlli dei middleware.
+- `GET /api/topics`: tag unici con conteggio dei progetti.
+- `GET /api/topics/:name`: progetti e materiali indiretti, deduplicati.
+- `GET /api/stats`: cinque conteggi globali del catalogo.
+
+Topics riutilizza i repository esistenti; Stats esegue una query con cinque COUNT indipendenti. Nessun JSON duplicato o modifica al database. Verificati tutti i 7 topics e i conteggi 15 studenti, 15 progetti, 124 repository, 18 PDF e 17 risorse.
+
+ La feature posts è stata rimossa; le routes di prova errors restano per i controlli dei middleware.
 
 ## Organizzazione del codice
 
@@ -74,7 +80,7 @@ Un errore di ascolto (per esempio porta occupata) chiude il pool e segnala un co
 curl http://localhost:3000/
 ```
 
-`test.http` contiene richieste Projects, Students, Cheat Sheets e Resources ripetibili, inclusi filtri, risultati vuoti e casi 400/404/500. La verifica effettuata ha confrontato tutte le relazioni dei 15 dettagli con il database: 124 repository, 39 associazioni PDF e 54 risorse, senza duplicati. Verificati anche tutti i 15 profili (3 senza repository), i 18 PDF e le 17 risorse, i filtri combinati e le associazioni inverse. Il caso dei materiali senza collegamenti è stato verificato con fixture isolate, senza scritture nel database. Non implica che i file statici siano già preparati: avatar/PDF saranno serviti nella fase 7.
+`test.http` contiene richieste Projects, Students, Cheat Sheets e Resources ripetibili, con pochi esempi di filtri e casi 400/404/500. La verifica effettuata ha confrontato tutte le relazioni dei 15 dettagli con il database: 124 repository, 39 associazioni PDF e 54 risorse, senza duplicati. Verificati anche tutti i 15 profili (3 senza repository), i 18 PDF e le 17 risorse, i filtri combinati e le associazioni inverse. Il caso dei materiali senza collegamenti è stato verificato con fixture isolate, senza scritture nel database. Non implica che i file statici siano già preparati: avatar/PDF saranno serviti nella fase 7.
 
 ## Riferimenti
 

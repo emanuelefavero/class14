@@ -9,7 +9,9 @@ import {
   registerProjects,
   registerResources,
   registerRoot,
+  registerStats,
   registerStudents,
+  registerTopics,
 } from './resources/index.js';
 
 const app = express();
@@ -22,6 +24,8 @@ registerProjects(app);
 registerStudents(app);
 registerCheatsheets(app);
 registerResources(app);
+registerTopics(app);
+registerStats(app);
 registerRoot(app);
 registerErrors(app);
 

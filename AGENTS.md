@@ -49,7 +49,7 @@ L’utente ha approvato la prima versione proposta dopo il confronto di `PLAN.md
 
 ### Contratto API definito — fase 1 completata
 
-La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificata rispetto allo schema e ai percorsi del generatore. **Projects, Students e i cataloghi Cheat Sheets/Resources sono implementati; Topics e Stats restano da implementare.**
+La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificata rispetto allo schema e ai percorsi del generatore. **Projects, Students, Cheat Sheets/Resources, Topics e Stats sono implementati.**
 
 - GET sotto `/api`: projects e students con lista/dettaglio; cheatsheets e resources come cataloghi autonomi con progetti collegati; topics con lista/dettaglio; stats per i cinque contatori globali.
 - Dettagli progetto per slug, studente per github_username; topic per nome del tag URL-encoded (non un nuovo slug o ID). Lookup case insensitive con grafia salvata/canonica in risposta.
@@ -113,7 +113,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 
 L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` dentro `client/`. Entrambi hanno struttura, `package.json` e lockfile; **le dipendenze dei tre package sono state installate e verificate**. Non fare nuovo scaffolding e non considerare queste app già convertite o verificate per Class14.
 
-- `server/app.js` registra `projects`, `students`, `cheatsheets`, `resources`, `root` ed `errors`; posts è stato rimosso. `server/db/db.js` legge la configurazione validata da `server/config/env.js`: host, porta, utente, password, database, limite e timeout. `DB_USER` è obbligatoria; il database predefinito è `class14`. Le routes Projects leggono soltanto il database Class14.
+- `server/app.js` registra `projects`, `students`, `cheatsheets`, `resources`, `topics`, `stats`, `root` ed `errors`; posts è stato rimosso. `server/db/db.js` legge la configurazione validata da `server/config/env.js`: host, porta, utente, password, database, limite e timeout. `DB_USER` è obbligatoria; il database predefinito è `class14`. Le routes Projects leggono soltanto il database Class14.
 - Il package server si chiama `class14-server`; README e risposta root sono adattati a Class14; posts è stato rimosso; errors resta temporaneamente per le verifiche dei middleware. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
 - `server/test.http` contiene richieste Projects, Students, Cheat Sheets e Resources e casi di validazione/errori; aggiungere le nuove risorse nelle rispettive fasi.
 - `client/src/features/products/`, `client/src/pages/products/`, i provider in `App.jsx`, router, Header e contenuti Home/AboutUs appartengono ancora al negozio di esempio/Fake Store API. Il package si chiama `class14-client`; titoli e interfaccia mostrano ancora React Context API.
@@ -187,7 +187,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 1. Backend Express: prossima fase concreta
 
-- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Prossimo passo: fase 3 del Kanban, implementare Topics e contatori Home. Package e dipendenze sono già adattati/installati.
+- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Prossimo passo: fase 7 del Kanban, preparare statici e completare la verifica backend. Package e dipendenze sono già adattati/installati.
 - Configurazione ambiente, pool, template e controllo connessione sono completati; usare `server/README.md` per il setup.
 - Preparare i file statici dai sorgenti in `assets/`, mantenendo funzionanti i percorsi già salvati nel database.
 - Implementare lista e dettaglio di progetti e studenti. Il dettaglio progetto deve poter fornire studenti/repository, PDF e risorse; il dettaglio studente i suoi progetti pubblici.
@@ -260,3 +260,11 @@ node scripts/sync-github-assets.mjs --refresh
 - Students con topic: JOIN parametrizzato con DISTINCT, senza caricare tutti i collegamenti. Riutilizzati i riepiloghi Projects per topics canonici; nessuna transazione o migrazione introdotta.
 - JSDoc brevi in inglese su ogni metodo pubblico repository, senza typing. Comparatore progetti condiviso in utils/catalog.js.
 - Confrontate 91 risposte HTTP prima/dopo: equivalenti. Verificati tutti i dati/relazioni reali, i 3 studenti senza repository e fixture isolate di materiali senza progetti. Verificato il cambiamento intenzionale delle query nei dettagli. Prossima fase resta Topics e contatori Home.
+
+### Fase 6 completata — Topics e contatori Home
+
+- `/api/topics` e `/api/topics/:name`: tag ricavati da Projects, conteggi e materiali indiretti tramite i cataloghi esistenti. Nessun file JSON duplicato, nuova tabella o helper generico.
+- `/api/stats`: cinque COUNT indipendenti in una query; nessun numero codificato nel server.
+- Solo il parametro dinamico topic viene validato; query inutilizzate ignorate. Contratto aggiornato in coerenza con la scelta di semplicità.
+- Verifica HTTP sul DB locale: tutti i 7 topics, conteggi, progetti/materiali deduplicati, lookup case insensitive, un caso 400 e uno 404; stats 15/15/124/18/17. Nessuna scrittura nel DB. Processo temporaneo arrestato.
+- Prossima fase: **7. Statici, errori e verifica backend**. Test HTTP mantenuti concisi.

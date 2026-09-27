@@ -69,15 +69,15 @@ Verifica HTTP e confronto di tutte le relazioni con query DB di sola lettura: 15
 
 Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/ordinamento, relazioni inverse, filtri q/topic e 400/404. Tre studenti senza repository verificati sui dati reali; materiali senza progetti verificati con fixture isolate.
 
-### 6. Topics e contatori Home — prossimo passo
+### 6. Topics e contatori Home — completato
 
-- [ ] Estrarre i tag dai progetti, rimuovere spazi esterni e duplicati; confrontare tag interi.
-- [ ] Implementare elenco topics e accesso ai rispettivi progetti.
-- [ ] Se previsto dal contratto, aggregare PDF/risorse via progetti, deduplicati per ID e dichiarati come collegamenti indiretti.
-- [ ] Implementare conteggi delle cinque entità del catalogo, senza percentuali di completamento.
-- [ ] Verificare topic inesistente, deduplicazione e conteggi; aggiungere richieste in `server/test.http`.
+- [x] Estrarre i tag dai progetti, rimuovere spazi esterni e duplicati; confrontare tag interi.
+- [x] Implementare elenco topics e accesso ai rispettivi progetti.
+- [x] Se previsto dal contratto, aggregare PDF/risorse via progetti, deduplicati per ID e dichiarati come collegamenti indiretti.
+- [x] Implementare conteggi delle cinque entità del catalogo, senza percentuali di completamento.
+- [x] Verificare topic inesistente, deduplicazione e conteggi; aggiungere richieste in `server/test.http`.
 
-### 7. Statici, errori e verifica backend
+### 7. Statici, errori e verifica backend — prossimo passo
 
 - [ ] Preparare avatar e PDF in `server/public/`, rispettando i percorsi salvati nel DB.
 - [ ] Verificare apertura avatar/PDF e comportamento di file inesistenti.
@@ -130,7 +130,7 @@ Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/or
 
 ## In corso
 
-Nessuna attività di implementazione aperta. Prossima attività: fase 6, Topics e contatori Home.
+Nessuna attività di implementazione aperta. Prossima attività: fase 7, statici, errori e verifica backend.
 
 ## Fatto
 
@@ -158,3 +158,9 @@ Nessuna attività di implementazione aperta. Prossima attività: fase 6, Topics 
 - [x] Implementare e verificare le API Students e i cataloghi Cheat Sheets/Resources, con query condivise validate e associazioni inverse.
 
 - [x] Refactoring leggibilità: schema catalogo globale importato direttamente, query dettagli ignorate, JOIN per cataloghi/materiali e filtro Students, JSDoc descrittivi; confronto di 91 risposte invariato e casi limite verificati.
+
+### Fase 6 verificata — 27 settembre 2026
+
+- Topics derivati dai riepiloghi Projects, senza JSON duplicato o nuove tabelle; dettaglio con materiali indiretti già deduplicati dai cataloghi.
+- Stats: una query con cinque COUNT indipendenti. Verificati 7 topics, progetti/materiali di ogni topic, lookup case insensitive, 400/404 e conteggi 15/15/124/18/17. Nessuna scrittura nel DB.
+- Tre esempi validi aggiunti a test.http, riutilizzando un solo esempio 404.

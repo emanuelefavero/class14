@@ -1,7 +1,7 @@
 {
   "name": "Class14",
   "message": "Class14 — Learning Hub and Student Showcase for WDPT14",
-  "status": "Projects, Students, Cheat Sheets and Resources APIs available; Topics and Stats are being implemented",
+  "status": "All Class14 catalog APIs available; static assets are the next step",
   "documentation": "docs/API-CONTRACT.md (repository file)",
   "endpoints": [
     {
@@ -64,6 +64,33 @@
         {
           "method": "GET",
           "description": "Catalogo risorse con progetti collegati; ricerca q e filtro topic opzionali"
+        }
+      ]
+    },
+    {
+      "path": "/api/topics",
+      "methods": [
+        {
+          "method": "GET",
+          "description": "Tag unici con conteggio progetti"
+        }
+      ]
+    },
+    {
+      "path": "/api/topics/:name",
+      "methods": [
+        {
+          "method": "GET",
+          "description": "Progetti e materiali indiretti del topic"
+        }
+      ]
+    },
+    {
+      "path": "/api/stats",
+      "methods": [
+        {
+          "method": "GET",
+          "description": "Contatori globali del catalogo"
         }
       ]
     }
