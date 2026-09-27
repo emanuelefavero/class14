@@ -1,70 +1,43 @@
 @baseUrl = http://localhost:3000
 
-### 200 - Class14 overview
+### Root - Informazioni Class14
 GET {{baseUrl}}/
 
-### 200 - All projects, ordered by title then slug
+### Projects - Lista
 GET {{baseUrl}}/api/projects
 
-### 200 - Search and exact topic filter (AND)
+### Projects - Ricerca e filtro topic
 GET {{baseUrl}}/api/projects?q=react&topic=React
 
-### 200 - Case insensitive topic
-GET {{baseUrl}}/api/projects?topic=mysql
-
-### 200 - Whitespace trimmed
-GET {{baseUrl}}/api/projects?q=%20react%20&topic=%20React%20
-
-### 200 - Empty filter means no filter
-GET {{baseUrl}}/api/projects?q=%20&topic=%20
-
-### 200 - No results for an unknown topic
-GET {{baseUrl}}/api/projects?topic=missing
-
-### 200 - Topic matches the whole tag, not a substring
-GET {{baseUrl}}/api/projects?topic=Reac
-
-### 200 - Percent is literal, not a SQL wildcard
-GET {{baseUrl}}/api/projects?q=%25
-
-### 200 - Underscore is literal, not a SQL wildcard
-GET {{baseUrl}}/api/projects?q=_
-
-### 200 - Project with students, Markdown, PDFs and resources
+### Projects - Dettaglio con repository, PDF e risorse
 GET {{baseUrl}}/api/projects/express-blog-sql
 
-### 200 - Slug lookup is case insensitive
-GET {{baseUrl}}/api/projects/REACT-HELLO-WORLD
+### Students - Lista
+GET {{baseUrl}}/api/students
 
-### 400 - Invalid slug
-GET {{baseUrl}}/api/projects/bad_slug
+### Students - Ricerca e filtro topic
+GET {{baseUrl}}/api/students?q=emanuele&topic=React
 
-### 400 - Detail does not accept queries
-GET {{baseUrl}}/api/projects/react-api?q=react
+### Students - Profilo con repository e topics
+GET {{baseUrl}}/api/students/emanuelefavero
 
-### 400 - Unknown query parameter
+### Cheat Sheets - Catalogo con progetti collegati
+GET {{baseUrl}}/api/cheatsheets
+
+### Cheat Sheets - Filtro topic
+GET {{baseUrl}}/api/cheatsheets?topic=React
+
+### Resources - Catalogo con progetti collegati
+GET {{baseUrl}}/api/resources
+
+### Resources - Ricerca e filtro topic
+GET {{baseUrl}}/api/resources?q=React&topic=React
+
+### 400 - Parametro non supportato
 GET {{baseUrl}}/api/projects?limit=1
 
-### 400 - Repeated query parameter
-GET {{baseUrl}}/api/projects?q=react&q=mysql
+### 404 - Studente inesistente
+GET {{baseUrl}}/api/students/not-a-real-student
 
-### 400 - Structured query parameter
-GET {{baseUrl}}/api/projects?q[]=react
-
-### 400 - A single topic is required
-GET {{baseUrl}}/api/projects?topic=React,MySQL
-
-### 400 - Control character
-GET {{baseUrl}}/api/projects?q=%00
-
-### 400 - Malformed path encoding
-GET {{baseUrl}}/api/projects/%E0%A4%A
-
-### 404 - Project does not exist
-GET {{baseUrl}}/api/projects/nonexistent
-
-### 404 - Unknown API route
-GET {{baseUrl}}/api/missing
-
-### 500 - Error test route (no internal details in response)
+### 500 - Errore di prova senza dettagli interni
 GET {{baseUrl}}/errors

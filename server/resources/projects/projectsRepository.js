@@ -1,9 +1,16 @@
 import { db } from '#/db/db.js';
-import { compareText, normalizeProjectTopics } from '#/utils/catalog.js';
+import {
+  compareProjects,
+  compareText,
+  normalizeProjectTopics,
+} from '#/utils/catalog.js';
 
-const compareProjects = (left, right) =>
-  compareText(left.title, right.title) || compareText(left.slug, right.slug);
-
+/**
+ * Returns project summaries with canonical topics, sorted by title and slug.
+ * Optional search matches title/slug literally; topic matches a whole tag.
+ * @example
+ * await findAll({ search: 'react', topic: 'React' });
+ */
 export const findAll = async ({ search, topic } = {}) => {
   const [rows] = await db.query(`
     SELECT id, slug, title, topics
@@ -32,6 +39,10 @@ export const findAll = async ({ search, topic } = {}) => {
     .sort(compareProjects);
 };
 
+/**
+ * Returns a project with its students/repositories, PDFs and resources.
+ * Slug lookup ignores case; returns null when the project does not exist.
+ */
 export const findBySlug = async (slug) => {
   const [[row]] = await db.query(
     'SELECT id, description FROM projects WHERE LOWER(slug) = LOWER(?)',
@@ -44,6 +55,7 @@ export const findBySlug = async (slug) => {
   const project = projects.find(({ id }) => id === row.id);
   if (!project) return null;
 
+  // Separate joins avoid multiplying the three independent collections.
   const [[students], [cheatsheets], [resources]] = await Promise.all([
     db.query(
       `SELECT students.id, students.name, students.github_username,

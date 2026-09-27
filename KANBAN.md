@@ -52,22 +52,24 @@ Verificati configurazione personalizzata, root Class14, configurazione non valid
 
 Verifica HTTP e confronto di tutte le relazioni con query DB di sola lettura: 15 progetti, 124 repository, 39 PDF e 54 risorse associate. Verificati ordinamento, filtri, ricerca letterale, 400/404 e rimozione /posts.
 
-### 4. API Students — prossimo passo
+### 4. API Students — completato
 
-- [ ] Implementare lista con nome, username, link GitHub e avatar.
-- [ ] Implementare profilo con repository pubbliche dei progetti del catalogo.
-- [ ] Se previsto dal contratto, derivare numero di repository e topics dei progetti associati.
-- [ ] Verificare studente inesistente, studente senza repository e conteggi coerenti.
-- [ ] Aggiungere richieste ripetibili in `server/test.http`.
+- [x] Implementare lista con nome, username, link GitHub e avatar.
+- [x] Implementare profilo con repository pubbliche dei progetti del catalogo.
+- [x] Se previsto dal contratto, derivare numero di repository e topics dei progetti associati.
+- [x] Verificare studente inesistente, studente senza repository e conteggi coerenti.
+- [x] Aggiungere richieste ripetibili in `server/test.http`.
 
-### 5. API Cheat Sheets e Resources
+### 5. API Cheat Sheets e Resources — completato
 
-- [ ] Implementare i cataloghi autonomi: PDF con titolo/slug/percorso e risorse con titolo/URL.
-- [ ] Restituire i progetti collegati secondo il contratto, senza duplicati.
-- [ ] Verificare le relazioni in entrambe le direzioni e aggiungere richieste in `server/test.http`.
-- [ ] Non inventare descrizioni PDF, categorie risorse o date di pubblicazione dai campi disponibili.
+- [x] Implementare i cataloghi autonomi: PDF con titolo/slug/percorso e risorse con titolo/URL.
+- [x] Restituire i progetti collegati secondo il contratto, senza duplicati.
+- [x] Verificare le relazioni in entrambe le direzioni e aggiungere richieste in `server/test.http`.
+- [x] Non inventare descrizioni PDF, categorie risorse o date di pubblicazione dai campi disponibili.
 
-### 6. Topics e contatori Home
+Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/ordinamento, relazioni inverse, filtri q/topic e 400/404. Tre studenti senza repository verificati sui dati reali; materiali senza progetti verificati con fixture isolate.
+
+### 6. Topics e contatori Home — prossimo passo
 
 - [ ] Estrarre i tag dai progetti, rimuovere spazi esterni e duplicati; confrontare tag interi.
 - [ ] Implementare elenco topics e accesso ai rispettivi progetti.
@@ -128,7 +130,7 @@ Verifica HTTP e confronto di tutte le relazioni con query DB di sola lettura: 15
 
 ## In corso
 
-Nessuna attività di implementazione aperta. Prossima attività: fase 4, API Students.
+Nessuna attività di implementazione aperta. Prossima attività: fase 6, Topics e contatori Home.
 
 ## Fatto
 
@@ -152,3 +154,7 @@ Nessuna attività di implementazione aperta. Prossima attività: fase 4, API Stu
 - [x] Completare configurazione ambiente/pool, branding root e README backend; verificare avvio e fallimenti controllati.
 
 - [x] Implementare e verificare API Projects e sostituire posts e le richieste legacy con i flussi Class14.
+
+- [x] Implementare e verificare le API Students e i cataloghi Cheat Sheets/Resources, con query condivise validate e associazioni inverse.
+
+- [x] Refactoring leggibilità: schema catalogo globale importato direttamente, query dettagli ignorate, JOIN per cataloghi/materiali e filtro Students, JSDoc descrittivi; confronto di 91 risposte invariato e casi limite verificati.

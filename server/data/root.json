@@ -1,7 +1,7 @@
 {
   "name": "Class14",
   "message": "Class14 — Learning Hub and Student Showcase for WDPT14",
-  "status": "Projects API available; remaining MVP endpoints are being implemented",
+  "status": "Projects, Students, Cheat Sheets and Resources APIs available; Topics and Stats are being implemented",
   "documentation": "docs/API-CONTRACT.md (repository file)",
   "endpoints": [
     {
@@ -28,6 +28,42 @@
         {
           "method": "GET",
           "description": "Dettaglio con studenti/repository, PDF e risorse"
+        }
+      ]
+    },
+    {
+      "path": "/api/students",
+      "methods": [
+        {
+          "method": "GET",
+          "description": "Lista studenti; ricerca q e filtro topic opzionali"
+        }
+      ]
+    },
+    {
+      "path": "/api/students/:github_username",
+      "methods": [
+        {
+          "method": "GET",
+          "description": "Profilo con repository disponibili e topics derivati"
+        }
+      ]
+    },
+    {
+      "path": "/api/cheatsheets",
+      "methods": [
+        {
+          "method": "GET",
+          "description": "Catalogo PDF con progetti collegati; ricerca q e filtro topic opzionali"
+        }
+      ]
+    },
+    {
+      "path": "/api/resources",
+      "methods": [
+        {
+          "method": "GET",
+          "description": "Catalogo risorse con progetti collegati; ricerca q e filtro topic opzionali"
         }
       ]
     }

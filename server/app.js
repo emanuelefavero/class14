@@ -4,9 +4,12 @@ import { env } from './config/env.js';
 import { db } from './db/db.js';
 import * as middleware from './middleware/index.js';
 import {
+  registerCheatsheets,
   registerErrors,
   registerProjects,
+  registerResources,
   registerRoot,
+  registerStudents,
 } from './resources/index.js';
 
 const app = express();
@@ -16,6 +19,9 @@ app.use(express.json());
 app.use(express.static(path.join(import.meta.dirname, 'public')));
 
 registerProjects(app);
+registerStudents(app);
+registerCheatsheets(app);
+registerResources(app);
 registerRoot(app);
 registerErrors(app);
 
@@ -24,7 +30,7 @@ app.use(middleware.errorHandler); // Error handler
 
 const startServer = async () => {
   try {
-    await db.query('SELECT 1');
+    await db.query('SELECT 1'); // test query
     console.log('Database connection successful');
 
     const server = app.listen(env.PORT, (error) => {

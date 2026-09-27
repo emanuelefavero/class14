@@ -1,6 +1,9 @@
 export const compareText = (left, right) =>
   left.localeCompare(right, 'en', { sensitivity: 'base' });
 
+export const compareProjects = (left, right) =>
+  compareText(left.title, right.title) || compareText(left.slug, right.slug);
+
 export const compareTopics = (left, right) => {
   const comparison = compareText(left, right);
   if (comparison !== 0) return comparison;

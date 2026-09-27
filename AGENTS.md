@@ -1,6 +1,6 @@
 # Class14 — guida per continuare il progetto
 
-Ultimo aggiornamento del contesto: 26 settembre 2026. Questo file raccoglie le decisioni confermate e lo stato del lavoro per riprendere in una nuova chat. Verificare sempre i file e `git status` prima di intervenire: lo stato descritto può evolvere.
+Ultimo aggiornamento del contesto: 27 settembre 2026. Questo file raccoglie le decisioni confermate e lo stato del lavoro per riprendere in una nuova chat. Verificare sempre i file e `git status` prima di intervenire: lo stato descritto può evolvere.
 
 ## Obiettivo e contesto
 
@@ -49,13 +49,13 @@ L’utente ha approvato la prima versione proposta dopo il confronto di `PLAN.md
 
 ### Contratto API definito — fase 1 completata
 
-La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificata rispetto allo schema e ai percorsi del generatore. **Lista e dettaglio Projects sono implementati; gli altri endpoint restano da implementare.**
+La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificata rispetto allo schema e ai percorsi del generatore. **Projects, Students e i cataloghi Cheat Sheets/Resources sono implementati; Topics e Stats restano da implementare.**
 
 - GET sotto `/api`: projects e students con lista/dettaglio; cheatsheets e resources come cataloghi autonomi con progetti collegati; topics con lista/dettaglio; stats per i cinque contatori globali.
 - Dettagli progetto per slug, studente per github_username; topic per nome del tag URL-encoded (non un nuovo slug o ID). Lookup case insensitive con grafia salvata/canonica in risposta.
 - JSON diretto, array per liste e oggetto per dettagli, campi snake_case coerenti col DB; topics trasformato in array. Collezioni vuote `[]`, valori nullable `null`, niente created_at nell’MVP.
 - Riepiloghi condivisi e collezioni non ricorsive, deduplicate per ID. StudentDetail contiene repository_count e topics derivati; TopicDetail contiene related_cheatsheets/related_resources come collegamenti indiretti.
-- Nessuna paginazione o parametro sort. Ordinamento fisso e deterministico secondo il contratto. `q` e `topic` ammessi sulle quattro liste principali, con AND; ricerca letterale case insensitive e match topic intero. Query sconosciute/ripetute/strutturate sono 400.
+- Nessuna paginazione o parametro sort. Ordinamento fisso e deterministico secondo il contratto. `q` e `topic` ammessi sulle quattro liste principali, con AND; ricerca letterale case insensitive e match topic intero. Query di lista sconosciute/ripetute/strutturate sono 400; i dettagli Projects/Students ignorano le query inutilizzate.
 - Errori JSON `{ "message": "..." }` con 400/404/500, senza dettagli interni. Entità assente 404, lista/relazione vuota 200. Le vecchie routes/middleware vanno allineate durante la conversione.
 - URL GitHub derivato dallo username; repo_url letto dalla relazione verificata. Avatar/PDF con slash iniziale all’origine backend, conservando il percorso SQL. Scelta proxy/CORS ancora da effettuare nella fase integrazione.
 - Per PDF/risorse nessun dettaglio autonomo JSON richiesto: i cataloghi forniscono progetti collegati e link di apertura.
@@ -100,7 +100,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Il frontend usa Axios e la validazione manuale in `client/src/lib/validation.js`, con validatori per feature. **Non introdurre Zod nel frontend adesso**; un’eventuale migrazione è futura. Zod è già presente nel backend e può continuare a essere usato lì.
 - CSS nativo, CSS nesting, custom properties e tema automatico con `prefers-color-scheme`. Nessun Bootstrap o framework CSS. L'ispirazione shadcn/ui è visiva, non una richiesta di installarlo.
 - Componenti separati in `components/ui`, `components/shared`, `components/layout`; CSS vicino ai componenti. Stato locale e props, Context solo per esigenze concrete.
-- Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Evitare JSDoc per typing; l’utente ha richiesto un commento esplicativo con esempio input/output per `normalizeProjectTopics`, che va conservato. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
+- Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Evitare JSDoc per typing; usare JSDoc brevi e descrittivi sui metodi repository e commenti nei passaggi meno evidenti. Conservare l’esempio input/output di `normalizeProjectTopics`. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
 
 ### Riferimenti locali da consultare
 
@@ -109,13 +109,13 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Queste app sono ora copiate in `server/` e `client/`: usare soprattutto il codice presente nel progetto come riferimento. I componenti UI/shared, `cx`, le icone e il CSS sono già in `client/`; riutilizzarli dove pertinenti.
 - Non leggere `node_modules`, build o cache dei riferimenti. Non copiare indiscriminatamente il router o l'intera applicazione.
 
-## Stato attuale: conversione backend avviata, Projects implementato
+## Stato attuale: conversione backend avviata, Projects/Students/materiali implementati
 
 L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` dentro `client/`. Entrambi hanno struttura, `package.json` e lockfile; **le dipendenze dei tre package sono state installate e verificate**. Non fare nuovo scaffolding e non considerare queste app già convertite o verificate per Class14.
 
-- `server/app.js` registra `projects`, `root` ed `errors`; posts è stato rimosso. `server/db/db.js` legge la configurazione validata da `server/config/env.js`: host, porta, utente, password, database, limite e timeout. `DB_USER` è obbligatoria; il database predefinito è `class14`. Le routes Projects leggono soltanto il database Class14.
+- `server/app.js` registra `projects`, `students`, `cheatsheets`, `resources`, `root` ed `errors`; posts è stato rimosso. `server/db/db.js` legge la configurazione validata da `server/config/env.js`: host, porta, utente, password, database, limite e timeout. `DB_USER` è obbligatoria; il database predefinito è `class14`. Le routes Projects leggono soltanto il database Class14.
 - Il package server si chiama `class14-server`; README e risposta root sono adattati a Class14; posts è stato rimosso; errors resta temporaneamente per le verifiche dei middleware. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
-- `server/test.http` contiene richieste Projects e casi di validazione/errori; aggiungere le nuove risorse nelle rispettive fasi.
+- `server/test.http` contiene richieste Projects, Students, Cheat Sheets e Resources e casi di validazione/errori; aggiungere le nuove risorse nelle rispettive fasi.
 - `client/src/features/products/`, `client/src/pages/products/`, i provider in `App.jsx`, router, Header e contenuti Home/AboutUs appartengono ancora al negozio di esempio/Fake Store API. Il package si chiama `class14-client`; titoli e interfaccia mostrano ancora React Context API.
 - Non cancellare preventivamente posts/products: sono esempi di stile da consultare durante la conversione. Rimuovere la vecchia feature e i relativi import, route, provider, richieste e contenuti quando la nuova feature che la sostituisce è pronta. Non lasciare riferimenti pendenti.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. Rinominare progressivamente package, titoli, documentazione e contenuti al brand Class14 nel sottoprogetto su cui si sta lavorando; non rinominare la repository.
@@ -187,7 +187,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 1. Backend Express: prossima fase concreta
 
-- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Prossimo passo: fase 3 del Kanban, implementare API Students. Package e dipendenze sono già adattati/installati.
+- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Prossimo passo: fase 3 del Kanban, implementare Topics e contatori Home. Package e dipendenze sono già adattati/installati.
 - Configurazione ambiente, pool, template e controllo connessione sono completati; usare `server/README.md` per il setup.
 - Preparare i file statici dai sorgenti in `assets/`, mantenendo funzionanti i percorsi già salvati nel database.
 - Implementare lista e dettaglio di progetti e studenti. Il dettaglio progetto deve poter fornire studenti/repository, PDF e risorse; il dettaglio studente i suoi progetti pubblici.
@@ -230,7 +230,7 @@ node scripts/sync-github-assets.mjs --refresh
 - Configurazione ambiente con Zod in `server/config/env.js`; credenziali solo da ambiente. `server/.env.example` elenca tutte le opzioni; creato localmente `server/.env` dal template, ignorato da Git. Non stamparne i valori.
 - Risposta `GET /` e README server adattati a Class14, senza dichiarare attive le API ancora da implementare. Posts è stato sostituito nella fase 3; errors resta per i controlli middleware.
 - Verificati avvio con configurazione personalizzata (porta HTTP 3314, host TCP, pool/timeout), risposta root Class14, configurazione non valida, connessione rifiutata e porta HTTP occupata. I fallimenti terminano con codice non zero e senza log di credenziali.
-- Nessuna modifica allo schema/dati MySQL; processo di verifica arrestato. Prossima fase: API Students.
+- Nessuna modifica allo schema/dati MySQL; processo di verifica arrestato. Prossima fase: Topics e contatori Home.
 
 ## Fase 3 Projects verificata
 
@@ -239,6 +239,24 @@ node scripts/sync-github-assets.mjs --refresh
 - `server/utils/catalog.js` normalizza i topics usando la grafia della prima occorrenza nei progetti ordinati per ID e ordina i tag; è riutilizzabile nelle prossime risorse.
 - Rimosso `server/resources/posts/` e la registrazione. Root/README/test.http aggiornati; 404 comune `{ "message": "Not Found" }` e URIError nei percorsi API restituisce 400 generico.
 - Verificati tutti i 15 dettagli contro il DB: 124 collegamenti studenti, 39 PDF, 54 risorse, campi e ordinamento coerenti, nessun duplicato. Verificati slug case insensitive, AND, risultati vuoti, q letterale, query sconosciute/ripetute/strutturate, controllo lunghezze/caratteri, 400/404 e /posts rimosso.
-- Nessuna modifica ai dati. I percorsi dei file sono restituiti dal DB, ma la preparazione/verifica degli statici è ancora fase 7. Prossimo passo: fase 4 Students.
+- Nessuna modifica ai dati. I percorsi dei file sono restituiti dal DB, ma la preparazione/verifica degli statici è ancora fase 7. Prossimo passo: fase 6 Topics e contatori Home.
 
 - Preferenza di leggibilità confermata: nomi descrittivi nei repository (`search`, non `q`); `q` resta il parametro HTTP del contratto, tradotto nel controller. Separare trasformazioni e ordinamenti in variabili intermedie quando rendono più chiaro il flusso.
+
+## Fasi 4 e 5 verificate
+
+- GET `/api/students` e GET `/api/students/:github_username`: lista ordinata e profilo con repository_count/topics derivati. Identità per username, non nome; repository presenti non certificano completamento.
+- GET `/api/cheatsheets` e GET `/api/resources`: cataloghi autonomi con tutti i progetti collegati, anche nelle risposte filtrate per topic. Collegamenti indiretti ai topics, nessuna categoria/descrizione/data aggiunta.
+- Schema query condiviso in `server/schemas/querySchemas.js`, importato direttamente nei controller di lista, senza riesportazioni/alias: q è tradotto in search nel controller; filtri letterali, AND e validazione coerenti.
+- Verificati 15 profili, 124 associazioni repository, 18 PDF e 17 risorse, con confronto DB completo e relazioni inverse verso Projects. Tre studenti senza repository verificati sui dati reali; fixture isolate per materiali senza collegamenti, senza scritture DB.
+- Verificati ordinamento, campi, conteggi, username case insensitive, filtri, risultati vuoti e query invalide/404. Ripetuti i controlli Projects dopo l’estrazione dello schema query condiviso.
+- Root/README/contratto/test.http/Kanban aggiornati. Statici non ancora preparati (fase 7); prossimo passo fase 6 Topics e contatori Home.
+
+## Refactoring leggibilità del 27 settembre 2026
+
+- `catalogQuerySchema` vive in `server/schemas/querySchemas.js` con esempio HTTP/req.query. Rimosso emptyQuerySchema e i file schemas che contenevano soltanto riesportazioni; schemi params locali preservati.
+- Dettagli Projects/Students ignorano query aggiuntive: contratto e test.http aggiornati. La validazione delle query utilizzate dalle liste resta invariata.
+- Cataloghi materiali: LEFT JOIN con tabelle ponte, raggruppamento esplicito per ID e nessun Set ridondante per deduplicare le coppie garantite dalla PK. Il filtro topic seleziona materiali senza ridurre i loro progetti restituiti.
+- Students con topic: JOIN parametrizzato con DISTINCT, senza caricare tutti i collegamenti. Riutilizzati i riepiloghi Projects per topics canonici; nessuna transazione o migrazione introdotta.
+- JSDoc brevi in inglese su ogni metodo pubblico repository, senza typing. Comparatore progetti condiviso in utils/catalog.js.
+- Confrontate 91 risposte HTTP prima/dopo: equivalenti. Verificati tutti i dati/relazioni reali, i 3 studenti senza repository e fixture isolate di materiali senza progetti. Verificato il cambiamento intenzionale delle query nei dettagli. Prossima fase resta Topics e contatori Home.
