@@ -42,6 +42,12 @@ GET {{baseUrl}}/api/topics/React
 ### Home - Contatori del catalogo
 GET {{baseUrl}}/api/stats
 
+### Avatar - Esempio
+GET {{baseUrl}}/avatars/emanuelefavero.jpg
+
+### PDF - Esempio
+GET {{baseUrl}}/cheatsheets/react-props.pdf
+
 ### 400 - Parametro non supportato
 GET {{baseUrl}}/api/projects?limit=1
 

@@ -47,4 +47,4 @@ SELECT COUNT(*) FROM resources;          -- 17
 SELECT COUNT(*) FROM project_resources;  -- 54
 ```
 
-I percorsi `/avatars/...` e `/cheatsheets/...` nei dati sono URL da servire con Express quando verrà creato il backend. I file originali restano in `assets/`.
+I percorsi `/avatars/...` e `/cheatsheets/...` sono serviti da Express dai file in `server/public/avatars/` e `server/public/cheatsheets/`. Le mappature restano in `assets/`.

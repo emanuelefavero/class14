@@ -192,7 +192,7 @@ Catalogo vuoto: tutti zero. Nessuna percentuale di completamento, numero totale 
 
 - avatar_path e file_path sono percorsi relativi all’origine del backend con slash iniziale, ad esempio `/avatars/emanuelefavero.jpg` e `/cheatsheets/<nome-file-salvato>.pdf`.
 - Conservare basename, estensione e maiuscole del percorso SQL. Il generatore salva già lo slash iniziale: non duplicarlo. Non esporre percorsi filesystem assoluti o la directory `assets/`.
-- Il client risolve questi percorsi rispetto all’origine backend configurata; con proxy, occorre inoltrare anche `/avatars` e `/cheatsheets`, non solo `/api`. La scelta proxy/CORS resta alla fase integrazione.
+- Il client risolve questi percorsi rispetto all’origine backend configurata; con proxy, occorre inoltrare anche `/avatars` e `/cheatsheets`, non solo `/api`. In locale Vite inoltra tutti e tre i prefissi a Express: usare URL relativi, senza CORS aggiuntivo. La configurazione hosting resta da definire.
 - Un avatar assente è null e usa un fallback frontend. Un PDF mancante resta un errore del file statico: non restituire un file HTML come risposta riuscita.
 - Apertura/visualizzazione/download del PDF usa lo stesso file_path. Il comportamento download va verificato nella fase statici/frontend, senza un secondo endpoint JSON.
 - I file statici non restituiscono JSON: sono esterni al prefisso `/api`. PDF serviti come application/pdf, avatar con il tipo immagine pertinente.

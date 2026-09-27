@@ -1,7 +1,7 @@
 {
   "name": "Class14",
   "message": "Class14 — Learning Hub and Student Showcase for WDPT14",
-  "status": "All Class14 catalog APIs available; static assets are the next step",
+  "status": "Class14 catalog APIs and static assets available; frontend adaptation is the next step",
   "documentation": "docs/API-CONTRACT.md (repository file)",
   "endpoints": [
     {

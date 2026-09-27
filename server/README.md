@@ -80,7 +80,7 @@ Un errore di ascolto (per esempio porta occupata) chiude il pool e segnala un co
 curl http://localhost:3000/
 ```
 
-`test.http` contiene richieste Projects, Students, Cheat Sheets e Resources ripetibili, con pochi esempi di filtri e casi 400/404/500. La verifica effettuata ha confrontato tutte le relazioni dei 15 dettagli con il database: 124 repository, 39 associazioni PDF e 54 risorse, senza duplicati. Verificati anche tutti i 15 profili (3 senza repository), i 18 PDF e le 17 risorse, i filtri combinati e le associazioni inverse. Il caso dei materiali senza collegamenti è stato verificato con fixture isolate, senza scritture nel database. Non implica che i file statici siano già preparati: avatar/PDF saranno serviti nella fase 7.
+`test.http` contiene richieste Projects, Students, Cheat Sheets e Resources ripetibili, con pochi esempi di filtri e casi 400/404/500. La verifica effettuata ha confrontato tutte le relazioni dei 15 dettagli con il database: 124 repository, 39 associazioni PDF e 54 risorse, senza duplicati. Verificati anche tutti i 15 profili (3 senza repository), i 18 PDF e le 17 risorse, i filtri combinati e le associazioni inverse. Il caso dei materiali senza collegamenti è stato verificato con fixture isolate, senza scritture nel database. Avatar/PDF sono ora presenti in server/public; verificato un file per tipo e file assenti 404, anche attraverso il proxy Vite. Verificati errori 400/404/500 senza dettagli interni. Vedere [collegamento client–server](../docs/SETUP.md#collegamento-clientserver).
 
 ## Riferimenti
 

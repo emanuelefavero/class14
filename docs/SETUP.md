@@ -38,4 +38,14 @@ Il progetto usa JavaScript, senza script TypeScript/typecheck e senza richiedere
 
 ## Stato verificato
 
-Il 26 settembre 2026: installazione completata, build e lint riusciti, audit a zero vulnerabilità nei tre package, connessione MySQL riuscita e HTTP 200 dalle root server/client. Le feature blog e products restano come riferimento fino alla conversione a Class14.
+Il 26 settembre 2026: installazione completata, build e lint riusciti, audit a zero vulnerabilità nei tre package, connessione MySQL riuscita e HTTP 200 dalle root server/client. Il backend Class14 è convertito; products resta nel client fino alla conversione frontend.
+
+## Collegamento client–server
+
+Vite inoltra `/api`, `/avatars` e `/cheatsheets` a `http://localhost:3000`, conservando i percorsi. Dal client usare URL relativi: `fetchData('/api/projects')`, `src={student.avatar_path}` e `href={cheatsheet.file_path}`. Non serve aggiungere CORS a Express per questa configurazione locale.
+
+Se si cambia la porta backend, avviare entrambi con la stessa variabile esportata, per esempio `PORT=3001 npm run dev`. Il proxy legge `PORT` dal terminale, non da `server/.env`: se si modifica soltanto quel file, allineare anche il target Vite. Riavviare Vite dopo il cambio.
+
+Avatar e PDF sono in `server/public/avatars` e `server/public/cheatsheets`; gli script usano queste cartelle. `assets/` conserva dati e mappature.
+
+Il proxy è una configurazione locale Vite, non viene incorporato nella build. La configurazione dell’hosting verrà definita prima del deployment.

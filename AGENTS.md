@@ -57,7 +57,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Riepiloghi condivisi e collezioni non ricorsive, deduplicate per ID. StudentDetail contiene repository_count e topics derivati; TopicDetail contiene related_cheatsheets/related_resources come collegamenti indiretti.
 - Nessuna paginazione o parametro sort. Ordinamento fisso e deterministico secondo il contratto. `q` e `topic` ammessi sulle quattro liste principali, con AND; ricerca letterale case insensitive e match topic intero. Query di lista sconosciute/ripetute/strutturate sono 400; i dettagli Projects/Students ignorano le query inutilizzate.
 - Errori JSON `{ "message": "..." }` con 400/404/500, senza dettagli interni. Entità assente 404, lista/relazione vuota 200. Le vecchie routes/middleware vanno allineate durante la conversione.
-- URL GitHub derivato dallo username; repo_url letto dalla relazione verificata. Avatar/PDF con slash iniziale all’origine backend, conservando il percorso SQL. Scelta proxy/CORS ancora da effettuare nella fase integrazione.
+- URL GitHub derivato dallo username; repo_url letto dalla relazione verificata. Avatar/PDF con slash iniziale all’origine backend, conservando il percorso SQL. Proxy Vite configurato per /api, /avatars e /cheatsheets; usare URL relativi in locale.
 - Per PDF/risorse nessun dettaglio autonomo JSON richiesto: i cataloghi forniscono progetti collegati e link di apertura.
 
 ### Semantica dei dati da rispettare
@@ -90,7 +90,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Organizzazione per risorsa: routes, controller, repository e schemas dove necessari. Zod per la validazione dei confini HTTP quando utile.
 - Query parametrizzate; repository indipendenti da Express; middleware centralizzati per 404 ed errori.
 - Credenziali e configurazione del database tramite variabili d'ambiente. Non fissare nel codice le credenziali usate durante le verifiche locali.
-- Avatar e PDF verranno serviti da `server/public/` con percorsi `/avatars/...` e `/cheatsheets/...`.
+- Avatar e PDF sono serviti da `server/public/` con percorsi `/avatars/...` e `/cheatsheets/...`.
 
 ### Frontend
 
@@ -145,10 +145,10 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 - `assets/students.js`: 15 studenti, solo nome di battesimo e username GitHub. I nomi sono unici nella classe attuale, ma l'identità è lo username/ID, non il nome. I profili pubblici e gli avatar sono inclusi per scelta dell'utente.
 - `assets/projects.js`: 15 slug esatti delle repository previste e relativi tag. `react-hello-world` è incluso. Non ampliare il catalogo ai progetti precedenti senza richiesta.
 - `assets/project-descriptions/`: una descrizione Markdown per ciascun progetto, con un solo titolo principale. Gli allegati degli esercizi citati nelle descrizioni non sono inclusi; è una scelta intenzionale.
-- `assets/avatars/` e `assets/student-avatars.json`: 15 immagini locali e mappatura username/percorso. Non è necessario riscaricarle per iniziare il backend.
+- `server/public/avatars/` e `assets/student-avatars.json`: 15 immagini locali e mappatura username/percorso. Non è necessario riscaricarle per iniziare il backend.
 - `assets/student-projects.json`: 124 coppie studente/progetto con URL pubblico verificato su 225 candidati. Uno studente può avere poche o nessuna repository del catalogo.
 - `assets/github-sync-status.json`: checkpoint delle verifiche. Gli altri 101 candidati non hanno una corrispondenza pubblica esatta; ciò non dimostra che lo studente non abbia fatto l'esercizio.
-- `assets/cheatsheets/`: 18 PDF. `assets/project-cheatsheets.js` contiene 39 associazioni curate in base ai contenuti dei progetti; il solo tag React sarebbe troppo generico.
+- `server/public/cheatsheets/`: 18 PDF. `assets/project-cheatsheets.js` contiene 39 associazioni curate in base ai contenuti dei progetti; il solo tag React sarebbe troppo generico.
 - `assets/resources.md`: URL e titoli esterni per argomento. Il seed importa solo le sezioni con tag presenti nel catalogo: mysql2, MySQL, Database, Express, Node.js, NPM e React. Esclude HTML, CSS, JavaScript e Bootstrap. React Router è collegato solo a `react-router`; gli altri link seguono i tag.
 - I link esterni sono stati copiati senza visitarli, come richiesto. Non aggiornarli o sostituirli automaticamente.
 
@@ -187,9 +187,9 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 1. Backend Express: prossima fase concreta
 
-- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Prossimo passo: fase 7 del Kanban, preparare statici e completare la verifica backend. Package e dipendenze sono già adattati/installati.
+- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Backend verificato fino alla fase 7. Prossimo passo: fase 8, adattamento frontend. Package e dipendenze sono già adattati/installati.
 - Configurazione ambiente, pool, template e controllo connessione sono completati; usare `server/README.md` per il setup.
-- Preparare i file statici dai sorgenti in `assets/`, mantenendo funzionanti i percorsi già salvati nel database.
+- File statici già spostati dall’utente in server/public; mantenere i percorsi già salvati nel database.
 - Implementare lista e dettaglio di progetti e studenti. Il dettaglio progetto deve poter fornire studenti/repository, PDF e risorse; il dettaglio studente i suoi progetti pubblici.
 - Implementare cataloghi autonomi PDF/risorse, topics derivati e contatori secondo `docs/API-CONTRACT.md`. Percorsi, identificatori, filtri, assenza di paginazione e forme JSON sono ora definiti: mantenere coerenti implementazione e documento.
 - Verificare validazione, 404, errori, studenti senza repository, relazioni e accesso ai file statici con richieste HTTP mirate.
@@ -268,3 +268,10 @@ node scripts/sync-github-assets.mjs --refresh
 - Solo il parametro dinamico topic viene validato; query inutilizzate ignorate. Contratto aggiornato in coerenza con la scelta di semplicità.
 - Verifica HTTP sul DB locale: tutti i 7 topics, conteggi, progetti/materiali deduplicati, lookup case insensitive, un caso 400 e uno 404; stats 15/15/124/18/17. Nessuna scrittura nel DB. Processo temporaneo arrestato.
 - Prossima fase: **7. Statici, errori e verifica backend**. Test HTTP mantenuti concisi.
+
+### Fase 7 completata — statici e collegamento React
+
+- L’utente ha spostato i 15 avatar e 18 PDF da assets a server/public; preservare lo spostamento. Generatore seed e sincronizzazione avatar ora usano server/public; nessun reimport DB. Seed --check passa.
+- client/vite.config.js inoltra /api, /avatars, /cheatsheets al backend localhost:3000, oppure alla porta PORT esportata nel terminale. Usare URL relativi dal client; nessuna dipendenza CORS. Se PORT è cambiata solo in server/.env, allineare il target Vite (vedere docs/SETUP.md).
+- Verificato un avatar e un PDF, stessi byte e Content-Type attraverso il proxy; file inesistenti 404. Errori 400/404/500 JSON senza dettagli interni, compreso JSON malformato. Nessuna route posts attiva. Le routes errors restano esempi temporanei di test.
+- Proxy locale verificato; hosting e frontend completo restano da realizzare. Prossimo passo: **fase 8, adattamento frontend**.

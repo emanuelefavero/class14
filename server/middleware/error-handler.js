@@ -13,6 +13,10 @@ export const errorHandler = (err, req, res, next) => {
       ? errorStatus
       : 500;
 
+  if (status === 400) {
+    return res.status(400).json({ message: 'Invalid request parameters' });
+  }
+
   const message =
     status >= 500
       ? STATUS_CODES[status] || 'Internal Server Error'

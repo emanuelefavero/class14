@@ -8,7 +8,7 @@ import { students } from '../assets/students.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const assets = path.join(root, 'assets');
-const avatarDirectory = path.join(assets, 'avatars');
+const avatarDirectory = path.join(root, 'server/public/avatars');
 const statusPath = path.join(assets, 'github-sync-status.json');
 const avatarsPath = path.join(assets, 'student-avatars.json');
 const matchesPath = path.join(assets, 'student-projects.json');

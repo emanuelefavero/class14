@@ -7,6 +7,7 @@ import { students } from '../assets/students.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const assets = path.join(root, 'assets');
+const publicDirectory = path.join(root, 'server/public');
 const outputPath = path.join(root, 'server/db/setup/seed.sql');
 const linksPath = path.join(root, 'server/db/setup/project-cheatsheets.sql');
 const resourcesPath = path.join(root, 'server/db/setup/project-resources.sql');
@@ -36,7 +37,7 @@ const studentRows = [];
 for (const { name, github } of students) {
   const avatar = avatarByGithub.get(github);
   if (!avatar) throw new Error(`Missing avatar for ${github}`);
-  if (!avatar.startsWith('avatars/') || !(await stat(path.join(assets, avatar)).catch(() => null))) {
+  if (!avatar.startsWith('avatars/') || !(await stat(path.join(publicDirectory, avatar)).catch(() => null))) {
     throw new Error(`Avatar file not found for ${github}`);
   }
   studentRows.push([name, github, `/${avatar}`]);
@@ -53,7 +54,7 @@ for (const { name, tags } of projects) {
   projectRows.push([name, title, description.trim(), tags.join(', ')]);
 }
 
-const pdfFiles = (await readdir(path.join(assets, 'cheatsheets')))
+const pdfFiles = (await readdir(path.join(publicDirectory, 'cheatsheets')))
   .filter((filename) => filename.endsWith('.pdf'))
   .sort();
 const cheatsheetRows = pdfFiles.map((filename) => {

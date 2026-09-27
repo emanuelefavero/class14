@@ -77,16 +77,16 @@ Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/or
 - [x] Implementare conteggi delle cinque entità del catalogo, senza percentuali di completamento.
 - [x] Verificare topic inesistente, deduplicazione e conteggi; aggiungere richieste in `server/test.http`.
 
-### 7. Statici, errori e verifica backend — prossimo passo
+### 7. Statici, errori e verifica backend — completato
 
-- [ ] Preparare avatar e PDF in `server/public/`, rispettando i percorsi salvati nel DB.
-- [ ] Verificare apertura avatar/PDF e comportamento di file inesistenti.
-- [ ] Validare input HTTP e verificare 400/404/500 senza dettagli interni.
-- [ ] Confrontare i flussi API con il contratto e completare `server/test.http`.
-- [ ] Verificare che non rimangano route/query/documentazione attiva del blog.
-- [ ] Definire proxy Vite o CORS per collegare React all’API.
+- [x] Preparare avatar e PDF in `server/public/`, rispettando i percorsi salvati nel DB.
+- [x] Verificare apertura avatar/PDF e comportamento di file inesistenti.
+- [x] Validare input HTTP e verificare 400/404/500 senza dettagli interni.
+- [x] Confrontare i flussi API con il contratto e completare `server/test.http`.
+- [x] Verificare che non rimangano route/query/documentazione attiva del blog.
+- [x] Definire proxy Vite o CORS per collegare React all’API.
 
-### 8. Adattamento frontend — dopo il backend
+### 8. Adattamento frontend — prossimo passo
 
 - [ ] Definire lingua, direzione visiva e navigazione fra Home, Projects, Students, Topics, Resources e Cheat Sheets.
 - [ ] Adattare titolo HTML, metadati, Header, Footer e documentazione a Class14; nomi package già aggiornati.
@@ -130,7 +130,7 @@ Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/or
 
 ## In corso
 
-Nessuna attività di implementazione aperta. Prossima attività: fase 7, statici, errori e verifica backend.
+Nessuna attività di implementazione aperta. Prossima attività: fase 8, adattamento frontend.
 
 ## Fatto
 
@@ -164,3 +164,10 @@ Nessuna attività di implementazione aperta. Prossima attività: fase 7, statici
 - Topics derivati dai riepiloghi Projects, senza JSON duplicato o nuove tabelle; dettaglio con materiali indiretti già deduplicati dai cataloghi.
 - Stats: una query con cinque COUNT indipendenti. Verificati 7 topics, progetti/materiali di ogni topic, lookup case insensitive, 400/404 e conteggi 15/15/124/18/17. Nessuna scrittura nel DB.
 - Tre esempi validi aggiunti a test.http, riutilizzando un solo esempio 404.
+
+### Fase 7 verificata — 27 settembre 2026
+
+- Avatar/PDF preparati dall’utente in server/public; verificato un file per tipo, anche attraverso Vite, e file inesistenti 404.
+- Proxy Vite per /api, /avatars e /cheatsheets; nessuna dipendenza CORS necessaria in locale.
+- Confermati 400/404/500 senza dettagli interni; JSON malformato restituisce il messaggio 400 comune. Nessuna nuova validazione.
+- Nessuna route/query attiva posts; test.http resta conciso, con due esempi statici. Script aggiornati ai file spostati; seed --check passa senza modifiche SQL o DB.
