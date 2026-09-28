@@ -98,6 +98,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Il client usa **React Router Declarative Mode**: `BrowserRouter`, `Routes` e `Route` in `client/src/App.jsx`. `client/src/router/paths.js` definisce gli URL e i link del menu. Non aggiungere loader/action o configurazioni route a oggetti senza una necessità concreta.
 - Conservare pagine in `src/pages/` e `RootLayout` in `client/src/`, con `Outlet` dentro `Main`, `Header` e `Footer`. Eventuali altri layout vanno vicino alle pagine che li usano, solo quando servono davvero.
 - Il frontend usa Axios e Zod per validare input e risposte delle richieste HTTP quando necessario. Tenere gli schemi vicino alla feature, in `schemas.js`; non usare Zod per stato React, componenti o semplici controlli locali. La dipendenza è già installata in `client/`.
+- L'interfaccia frontend dell'MVP è in italiano: navigazione, pulsanti, filtri, stati e testi delle pagine. Codice, API, percorsi, slug e nomi originali di progetti e tecnologie restano in inglese. Valutare una versione inglese dopo la verifica; per ora non serve un sistema multilingua.
 - CSS nativo, CSS nesting, custom properties e tema automatico con `prefers-color-scheme`. Nessun Bootstrap o framework CSS. L'ispirazione shadcn/ui è visiva, non una richiesta di installarlo.
 - Componenti separati in `components/ui`, `components/shared`, `components/layout`; CSS vicino ai componenti. Stato locale e props, Context solo per esigenze concrete.
 - Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Evitare JSDoc per typing; usare JSDoc brevi e descrittivi sui metodi repository e commenti nei passaggi meno evidenti. Conservare l’esempio input/output di `normalizeProjectTopics`. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
@@ -198,7 +199,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 - Adattare il client copiato da `react-context-api`: branding e configurazione, poi nuove feature/pagine e sostituzione graduale di products. Conservare UI/layout, usare schemi Zod ai confini HTTP e mantenere il router Declarative Mode già configurato.
 - Costruire Home, Projects, Students, Cheat Sheets, Resources e Topics secondo l’MVP, con liste/dettagli dove previsti e stati di caricamento, errore e dati assenti. Aggiungere ricerca e filtri essenziali dopo i flussi principali.
-- Le sezioni Topics e materiali autonomi sono confermate. Composizione visiva, lingua definitiva, percorsi frontend e posizione dei link nella navigazione restano da definire nella fase frontend.
+- Le sezioni Topics e materiali autonomi sono confermate. La lingua dell'interfaccia è l'italiano; composizione visiva, percorsi frontend e posizione dei link nella navigazione restano da definire nella fase frontend.
 - Curare accessibilità, mobile, tema chiaro/scuro e rendering delle descrizioni Markdown.
 
 ### 3. Completamento e presentazione

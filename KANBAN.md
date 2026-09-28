@@ -90,7 +90,8 @@ Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/or
 
 - [x] Preparare il boilerplate Products come esempio Zod: schemi di risposta in `schemas.js`, parsing dopo le fetch, rimozione del validatore manuale e del file JSDoc dei tipi non utilizzato.
 - [x] Passare a React Router Declarative Mode e collocare `RootLayout` in `client/src/`, mantenendo `Outlet` e le route esistenti.
-- [ ] Definire lingua, direzione visiva e navigazione fra Home, Projects, Students, Topics, Resources e Cheat Sheets.
+- [x] Definire la lingua: interfaccia frontend in italiano; codice, API, percorsi, slug e nomi originali di progetti e tecnologie in inglese. Valutare una versione inglese dopo la verifica dell'MVP, senza introdurre ora un sistema multilingua.
+- [ ] Definire direzione visiva e navigazione fra Home, Projects, Students, Topics, Resources e Cheat Sheets.
 - [ ] Adattare titolo HTML, metadati, Header, Footer e documentazione a Class14; nomi package già aggiornati.
 - [ ] Adattare le pagine alla navigazione Class14, conservando RootLayout con Header/Main/Outlet/Footer.
 - [ ] Riutilizzare UI/shared, CSS nativo e tema automatico; verificare layout responsive.
