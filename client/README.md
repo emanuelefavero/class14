@@ -9,12 +9,11 @@ A React Context API exercise that extends the [previous React Router exercise](h
 ```text
 src/
 ├── main.jsx
+├── App.jsx
+├── RootLayout.jsx
+├── RootLayout.css
 ├── router/
-│   ├── router.jsx
-│   ├── routes.jsx
 │   └── paths.js
-├── layouts/
-│   └── RootLayout.jsx
 ├── pages/
 │   └── products/
 │       ├── Product.jsx
@@ -24,7 +23,7 @@ src/
 │       ├── catalog/
 │       ├── details/
 │       ├── api.js
-│       └── validation.js
+│       └── schemas.js
 └── components/
     └── ui/
 ```

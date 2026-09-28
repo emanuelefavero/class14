@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router';
 import './RootLayout.css';
+import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { Main } from '@/components/layout/Main';
-import { Footer } from '@/components/layout/Footer';
-import { navLinks } from '@/router/routes';
+import { navLinks } from '@/router/paths';
 
 export const RootLayout = () => {
   return (

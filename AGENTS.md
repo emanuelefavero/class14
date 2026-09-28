@@ -29,7 +29,7 @@ Ultimo aggiornamento del contesto: 27 settembre 2026. Questo file raccoglie le d
 
 Se disponibile, usare la skill locale `.agents/skills/boolean-course-exercises/SKILL.md`; `assets/lessons.json` è il riferimento del calendario. `.agents/` è ignorata da Git e potrebbe mancare in altri ambienti: le istruzioni essenziali sono in questo file.
 
-Le decisioni esplicite dell’utente e l’MVP confermato qui prevalgono sulle proposte più ampie di `PLAN.md` e sulle parti meno aggiornate di `docs/initial-plan.md`. Il riferimento frontend principale è `react-context-api`. La precedente richiesta di usare esclusivamente Declarative Mode è superata: l’utente accetta Data Mode o Declarative Mode; la base copiata usa già Data Mode e può essere mantenuta.
+Le decisioni esplicite dell’utente e l’MVP confermato qui prevalgono sulle proposte più ampie di `PLAN.md` e sulle parti meno aggiornate di `docs/initial-plan.md`. Il riferimento frontend principale è `react-context-api`. Il client usa React Router Declarative Mode per scelta dell’utente.
 
 ## Nuova direzione e MVP confermato
 
@@ -95,8 +95,8 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 ### Frontend
 
 - React con Vite, JavaScript senza TypeScript. React Compiler già configurato in `client/vite.config.js`; verificarne il funzionamento quando verranno installate le dipendenze.
-- La base usa **React Router Data Mode** con `createBrowserRouter` in `client/src/router/router.jsx` e `RouterProvider` in `App.jsx`. Mantenerla per continuità salvo una ragione concreta per scegliere Declarative Mode: entrambe sono autorizzate. Non aggiungere loader/action solo perché disponibili.
-- Conservare pagine in `src/pages/`, `RootLayout` con `Outlet` dentro `Main`, `Header` e `Footer`, e l’organizzazione del router già presente.
+- Il client usa **React Router Declarative Mode**: `BrowserRouter`, `Routes` e `Route` in `client/src/App.jsx`. `client/src/router/paths.js` definisce gli URL e i link del menu. Non aggiungere loader/action o configurazioni route a oggetti senza una necessità concreta.
+- Conservare pagine in `src/pages/` e `RootLayout` in `client/src/`, con `Outlet` dentro `Main`, `Header` e `Footer`. Eventuali altri layout vanno vicino alle pagine che li usano, solo quando servono davvero.
 - Il frontend usa Axios e Zod per validare input e risposte delle richieste HTTP quando necessario. Tenere gli schemi vicino alla feature, in `schemas.js`; non usare Zod per stato React, componenti o semplici controlli locali. La dipendenza è già installata in `client/`.
 - CSS nativo, CSS nesting, custom properties e tema automatico con `prefers-color-scheme`. Nessun Bootstrap o framework CSS. L'ispirazione shadcn/ui è visiva, non una richiesta di installarlo.
 - Componenti separati in `components/ui`, `components/shared`, `components/layout`; CSS vicino ai componenti. Stato locale e props, Context solo per esigenze concrete.
@@ -196,7 +196,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 2. Frontend React
 
-- Dopo il backend, adattare il client già copiato da `react-context-api`: branding e configurazione, poi nuove feature/pagine e sostituzione graduale di products. Conservare UI/layout e usare schemi Zod ai confini HTTP, mantenendo il router Data Mode esistente salvo scelta motivata diversa.
+- Adattare il client copiato da `react-context-api`: branding e configurazione, poi nuove feature/pagine e sostituzione graduale di products. Conservare UI/layout, usare schemi Zod ai confini HTTP e mantenere il router Declarative Mode già configurato.
 - Costruire Home, Projects, Students, Cheat Sheets, Resources e Topics secondo l’MVP, con liste/dettagli dove previsti e stati di caricamento, errore e dati assenti. Aggiungere ricerca e filtri essenziali dopo i flussi principali.
 - Le sezioni Topics e materiali autonomi sono confermate. Composizione visiva, lingua definitiva, percorsi frontend e posizione dei link nella navigazione restano da definire nella fase frontend.
 - Curare accessibilità, mobile, tema chiaro/scuro e rendering delle descrizioni Markdown.
