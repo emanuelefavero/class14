@@ -1,8 +1,8 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router';
-import { paths } from '@/router/paths';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { getPath } from '@/router/paths';
 
 export const ProductNavigation = ({ prevProduct, nextProduct }) => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export const ProductNavigation = ({ prevProduct, nextProduct }) => {
         <Button
           variant={Button.variant.ghost}
           aria-label='Previous product'
-          onClick={() => navigate(paths.product(prevProduct.id))}
+          onClick={() => navigate(getPath.product(prevProduct.id))}
         >
           <ArrowLeft className='icon' aria-hidden='true' />
           <span className='label'>Previous</span>
@@ -31,7 +31,7 @@ export const ProductNavigation = ({ prevProduct, nextProduct }) => {
           variant={Button.variant.ghost}
           className='next'
           aria-label='Next product'
-          onClick={() => navigate(paths.product(nextProduct.id))}
+          onClick={() => navigate(getPath.product(nextProduct.id))}
         >
           <span className='label'>Next</span>
           <ArrowRight className='icon' aria-hidden='true' />

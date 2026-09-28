@@ -1,18 +1,20 @@
 import { generatePath } from 'react-router';
 
-const productPattern = '/products/:productId';
-
-/** Canonical absolute paths used for links and programmatic navigation. */
+/** Canonical route patterns and paths. */
 export const paths = Object.freeze({
   home: '/',
   products: '/products',
-  productPattern,
-  product: (productId) =>
-    generatePath(productPattern, {
-      productId: String(productId),
-    }),
+  product: '/products/:productId',
   aboutUs: '/about-us',
 });
+
+/** Build concrete paths for routes with dynamic segments. */
+export const getPath = {
+  product: (productId) =>
+    generatePath(paths.product, {
+      productId: String(productId),
+    }),
+};
 
 export const navLinks = [
   { to: paths.home, label: 'Home' },

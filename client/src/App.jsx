@@ -25,7 +25,7 @@ export const App = () => (
     <Route path={paths.home} element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path={paths.products} element={<Products />} />
-      <Route path={paths.productPattern} element={<Product />} />
+      <Route path={paths.product} element={<Product />} />
       <Route path={paths.aboutUs} element={<AboutUs />} />
       <Route path='*' element={<NotFound />} />
     </Route>
