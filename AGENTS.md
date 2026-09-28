@@ -13,7 +13,7 @@ Ultimo aggiornamento del contesto: 27 settembre 2026. Questo file raccoglie le d
 
 ## Organizzazione della documentazione
 
-- `AGENTS.md` e `KANBAN.md` restano nella root. L’utente ha aggiunto `PLAN.md` nella root come nuova direzione del progetto: conservarlo nella posizione attuale.
+- `AGENTS.md`, `KANBAN.md`, `PLAN.md` e `DESIGN.md` restano nella root. `PLAN.md` descrive la direzione del progetto; `DESIGN.md` guida design e UX frontend.
 - `docs/` contiene piano, inventario degli asset e `CODE-STYLE-GUIDELINES.md`; seguire anche le convenzioni raccolte qui.
 - `docs/brief/` conserva il prompt e la traccia originali.
 - I Markdown in `assets/` sono dati dell’app e restano accanto agli asset; il README SQL resta in `server/db/setup/`.
@@ -21,7 +21,7 @@ Ultimo aggiornamento del contesto: 27 settembre 2026. Questo file raccoglie le d
 
 ## Cosa leggere prima di lavorare
 
-1. Questo file, [docs/CODE-STYLE-GUIDELINES.md](docs/CODE-STYLE-GUIDELINES.md), [KANBAN.md](KANBAN.md) e [docs/API-CONTRACT.md](docs/API-CONTRACT.md) per le API da implementare.
+1. Questo file, [docs/CODE-STYLE-GUIDELINES.md](docs/CODE-STYLE-GUIDELINES.md), [KANBAN.md](KANBAN.md), [DESIGN.md](DESIGN.md) per il frontend e [docs/API-CONTRACT.md](docs/API-CONTRACT.md) per le API.
 2. [PLAN.md](PLAN.md) per la nuova direzione Learning Hub + Student Showcase e [assets-info.md](docs/assets-info.md) per i dati. [docs/initial-plan.md](docs/initial-plan.md) conserva il piano precedente.
 3. I file pertinenti alla fase corrente. Per il database: [server/db/setup/README.md](server/db/setup/README.md), [schema.sql](server/db/setup/schema.sql) e [scripts/generate-seed.mjs](scripts/generate-seed.mjs).
 
@@ -99,6 +99,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Conservare pagine in `src/pages/` e `RootLayout` in `client/src/`, con `Outlet` dentro `Main`, `Header` e `Footer`. Eventuali altri layout vanno vicino alle pagine che li usano, solo quando servono davvero.
 - Il frontend usa Axios e Zod per validare input e risposte delle richieste HTTP quando necessario. Tenere gli schemi vicino alla feature, in `schemas.js`; non usare Zod per stato React, componenti o semplici controlli locali. La dipendenza è già installata in `client/`.
 - L'interfaccia frontend dell'MVP è in italiano: navigazione, pulsanti, filtri, stati e testi delle pagine. Codice, API, percorsi, slug e nomi originali di progetti e tecnologie restano in inglese. Valutare una versione inglese dopo la verifica; per ora non serve un sistema multilingua.
+- La direzione visiva e i flussi UX sono definiti in [DESIGN.md](DESIGN.md): Home come hub editoriale, navigazione diretta, Argomenti → Progetti come percorso principale, dettagli come schede visuali sobrie e un solo accento blu indaco. Consultarlo prima di progettare pagine e componenti.
 - CSS nativo, CSS nesting, custom properties e tema automatico con `prefers-color-scheme`. Nessun Bootstrap o framework CSS. L'ispirazione shadcn/ui è visiva, non una richiesta di installarlo.
 - Componenti separati in `components/ui`, `components/shared`, `components/layout`; CSS vicino ai componenti. Stato locale e props, Context solo per esigenze concrete.
 - Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Evitare JSDoc per typing; usare JSDoc brevi e descrittivi sui metodi repository e commenti nei passaggi meno evidenti. Conservare l’esempio input/output di `normalizeProjectTopics`. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
@@ -199,7 +200,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 - Adattare il client copiato da `react-context-api`: branding e configurazione, poi nuove feature/pagine e sostituzione graduale di products. Conservare UI/layout, usare schemi Zod ai confini HTTP e mantenere il router Declarative Mode già configurato.
 - Costruire Home, Projects, Students, Cheat Sheets, Resources e Topics secondo l’MVP, con liste/dettagli dove previsti e stati di caricamento, errore e dati assenti. Aggiungere ricerca e filtri essenziali dopo i flussi principali.
-- Le sezioni Topics e materiali autonomi sono confermate. La lingua dell'interfaccia è l'italiano; composizione visiva, percorsi frontend e posizione dei link nella navigazione restano da definire nella fase frontend.
+- Le sezioni Topics e materiali autonomi sono confermate. Lingua, composizione visiva e navigazione sono definite in `DESIGN.md`; i percorsi frontend concreti saranno scelti durante l'implementazione delle pagine.
 - Curare accessibilità, mobile, tema chiaro/scuro e rendering delle descrizioni Markdown.
 
 ### 3. Completamento e presentazione

@@ -4,7 +4,7 @@ Procedere nell’ordine indicato, una fase verificabile alla volta: **prima back
 
 ## Direzione e perimetro confermati
 
-- [PLAN.md](PLAN.md) descrive la nuova direzione: **Learning Hub** come identità principale, con **Student Showcase** integrato e senza classifiche competitive. [AGENTS.md](AGENTS.md) precisa il perimetro approvato e i limiti dei dati.
+- [PLAN.md](PLAN.md) descrive la nuova direzione: **Learning Hub** come identità principale, con **Student Showcase** integrato e senza classifiche competitive. [AGENTS.md](AGENTS.md) precisa il perimetro approvato e i limiti dei dati; [DESIGN.md](DESIGN.md) guida design e UX frontend.
 - **MVP senza modifiche allo schema `class14`**: Projects, Students, Cheat Sheets, Resources, Topics, Home con contatori, ricerca e filtri essenziali dopo le liste.
 - Mantenere i 15 progetti da React in poi. Non ampliare il catalogo con gli esempi o i numeri illustrativi del piano.
 - La presenza di una repository pubblica non certifica il completamento: usare “Repository disponibili”. `created_at` rappresenta l’inserimento, non una data didattica o di completamento.
@@ -91,7 +91,7 @@ Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/or
 - [x] Preparare il boilerplate Products come esempio Zod: schemi di risposta in `schemas.js`, parsing dopo le fetch, rimozione del validatore manuale e del file JSDoc dei tipi non utilizzato.
 - [x] Passare a React Router Declarative Mode e collocare `RootLayout` in `client/src/`, mantenendo `Outlet` e le route esistenti.
 - [x] Definire la lingua: interfaccia frontend in italiano; codice, API, percorsi, slug e nomi originali di progetti e tecnologie in inglese. Valutare una versione inglese dopo la verifica dell'MVP, senza introdurre ora un sistema multilingua.
-- [ ] Definire direzione visiva e navigazione fra Home, Projects, Students, Topics, Resources e Cheat Sheets.
+- [x] Definire in `DESIGN.md` direzione visiva, navigazione e flussi fra Home, Topics, Projects, Students, Cheat Sheets e Resources.
 - [ ] Adattare titolo HTML, metadati, Header, Footer e documentazione a Class14; nomi package già aggiornati.
 - [ ] Adattare le pagine alla navigazione Class14, conservando RootLayout con Header/Main/Outlet/Footer.
 - [ ] Riutilizzare UI/shared, CSS nativo e tema automatico; verificare layout responsive.
