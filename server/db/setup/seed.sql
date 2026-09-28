@@ -1,37 +1,90 @@
 -- Generated from assets/ by node scripts/generate-seed.mjs. Do not edit by hand.
-
 -- Run schema.sql first. Re-running this file updates rows with the same natural key.
+use class14;
 
-USE class14;
+set names utf8mb4;
 
-SET NAMES utf8mb4;
+set
+  @OLD_SQL_MODE = @@SQL_MODE;
 
-SET @OLD_SQL_MODE = @@SQL_MODE;
+set
+  sql_mode = 'NO_BACKSLASH_ESCAPES';
 
-SET SQL_MODE = 'NO_BACKSLASH_ESCAPES';
+start transaction;
 
-START TRANSACTION;
-
-INSERT INTO students (name, github_username, avatar_path) VALUES
-  ('Emanuele', 'emanuelefavero', '/avatars/emanuelefavero.jpg'),
-  ('Francesco', 'francescoguttuso', '/avatars/francescoguttuso.png'),
-  ('Filippo', 'FilippoGraziano', '/avatars/FilippoGraziano.png'),
-  ('Eleonora', 'EleonoraLosciuto', '/avatars/EleonoraLosciuto.jpg'),
+insert into
+  students (name, github_username, avatar_path)
+values
+  (
+    'Emanuele',
+    'emanuelefavero',
+    '/avatars/emanuelefavero.jpg'
+  ),
+  (
+    'Francesco',
+    'francescoguttuso',
+    '/avatars/francescoguttuso.png'
+  ),
+  (
+    'Filippo',
+    'FilippoGraziano',
+    '/avatars/FilippoGraziano.png'
+  ),
+  (
+    'Eleonora',
+    'EleonoraLosciuto',
+    '/avatars/EleonoraLosciuto.jpg'
+  ),
   ('Dario', 'DarioM1992', '/avatars/DarioM1992.png'),
-  ('Davide', 'daviderocco85', '/avatars/daviderocco85.png'),
-  ('Thomas', 'thomaslazzeri', '/avatars/thomaslazzeri.png'),
+  (
+    'Davide',
+    'daviderocco85',
+    '/avatars/daviderocco85.png'
+  ),
+  (
+    'Thomas',
+    'thomaslazzeri',
+    '/avatars/thomaslazzeri.png'
+  ),
   ('Chris', 'chrisxwave', '/avatars/chrisxwave.png'),
   ('Guido', 'guidogig', '/avatars/guidogig.jpg'),
-  ('Jacopo', 'JacopoAugelli-13', '/avatars/JacopoAugelli-13.png'),
-  ('Francesca', 'francesca-yui', '/avatars/francesca-yui.png'),
-  ('Oumou', 'oumouniaonedabre-dot', '/avatars/oumouniaonedabre-dot.png'),
+  (
+    'Jacopo',
+    'JacopoAugelli-13',
+    '/avatars/JacopoAugelli-13.png'
+  ),
+  (
+    'Francesca',
+    'francesca-yui',
+    '/avatars/francesca-yui.png'
+  ),
+  (
+    'Oumou',
+    'oumouniaonedabre-dot',
+    '/avatars/oumouniaonedabre-dot.png'
+  ),
   ('Matteo', 'rrope01', '/avatars/rrope01.png'),
-  ('Vitantonio', 'VitantonioPasqualicchio', '/avatars/VitantonioPasqualicchio.jpg'),
-  ('Noemi', 'noemi-tartaglino', '/avatars/noemi-tartaglino.png')
-ON DUPLICATE KEY UPDATE name = VALUES(name), avatar_path = VALUES(avatar_path);
+  (
+    'Vitantonio',
+    'VitantonioPasqualicchio',
+    '/avatars/VitantonioPasqualicchio.jpg'
+  ),
+  (
+    'Noemi',
+    'noemi-tartaglino',
+    '/avatars/noemi-tartaglino.png'
+  )
+on duplicate key update
+  name = values(name),
+  avatar_path = values(avatar_path);
 
-INSERT INTO projects (slug, title, description, topics) VALUES
-  ('express-blog-sql', 'Express Blog SQL', '# Esercizio: Express Blog SQL
+insert into
+  projects (slug, title, description, topics)
+values
+  (
+    'express-blog-sql',
+    'Express Blog SQL',
+    '# Esercizio: Express Blog SQL
 
 Nome repo: `express-blog-sql`
 
@@ -66,8 +119,13 @@ Verifichiamo su Postman che la risposta sia corretta
 
 ## Bonus
 
-Far sì che la SHOW restituisca il post comprensivo di tag, recuperandoli grazie alla relazione tra post e tags, esistente sul database', 'mysql2, MySQL, Express'),
-  ('db-university', 'DB University', '# Exercise: DB University
+Far sì che la SHOW restituisca il post comprensivo di tag, recuperandoli grazie alla relazione tra post e tags, esistente sul database',
+    'mysql2, MySQL, Express'
+  ),
+  (
+    'db-university',
+    'DB University',
+    '# Esercizio: DB University
 
 Nome repo: `db-university`
 
@@ -127,16 +185,26 @@ Dopo aver testato le vostre query con MySQL Workbench, riportatele in un file tx
 4. Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e nome
 5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
 6. Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)
-7. BONUS: Selezionare per ogni studente il numero di tentativi sostenuti per ogni esame, stampando anche il voto massimo. Successivamente, filtrare i tentativi con voto minimo 18', 'MySQL, Database'),
-  ('db-first', 'DB First', '# Exercise: DB First
+7. BONUS: Selezionare per ogni studente il numero di tentativi sostenuti per ogni esame, stampando anche il voto massimo. Successivamente, filtrare i tentativi con voto minimo 18',
+    'MySQL, Database'
+  ),
+  (
+    'db-first',
+    'DB First',
+    '# Esercizio: DB First
 
 Nome repo: `db-first`
 
 Modellizzare la struttura di una tabella per memorizzare tutti i dati riguardanti delle auto usate messe in vendita da un concessionario.
 
 Se usate DrawSQL, mettete il link o il file esportato nella repo.
-Vi allego il lavoro fatto a lezione; sentitevi liberi di provare anche tutti gli altri esempi di tabelle.', 'Database'),
-  ('express-blog-api-crud', 'Express Blog API CRUD (parte 1)', '# Esercizio: Express Blog API CRUD (parte 1)
+Vi allego il lavoro fatto a lezione; sentitevi liberi di provare anche tutti gli altri esempi di tabelle.',
+    'Database'
+  ),
+  (
+    'express-blog-api-crud',
+    'Express Blog API CRUD (parte 1)',
+    '# Esercizio: Express Blog API CRUD (parte 1)
 
 Nome repo: `express-blog-api-crud`
 
@@ -211,8 +279,13 @@ In Update, controllare se il parametro si riferisce ad un post esistente, in cas
 Dopo aver completato tutte le operazioni CRUD, completiamo le nostre API inserendo un middleware per la gestione delle rotte non registrate e uno per la gestione degli errori.
 
 - Se viene chiamato un endpoint inesistente, un middleware dovrà rispondere un messaggio e uno status appropriato.
-- Se viene generato un errore, un middleware si occuperà di rispondere con un messaggio e uno status appropriato.', 'Node.js, Express'),
-  ('express-blog-routing', 'Express Blog Routing', '# Esercizio: Express Blog Routing
+- Se viene generato un errore, un middleware si occuperà di rispondere con un messaggio e uno status appropriato.',
+    'Node.js, Express'
+  ),
+  (
+    'express-blog-routing',
+    'Express Blog Routing',
+    '# Esercizio: Express Blog Routing
 
 Nome repo: `express-blog-routing`
 
@@ -243,8 +316,13 @@ Per oggi vi può servire in caso vogliate provare i bonus.
 ## Bonus
 
 Provare a restituire la lista dei post dalla rotta index, in formato json
-Provare a restituire un singolo post dalla rotta show, sempre in formato json', 'Node.js, Express'),
-  ('express-blog-intro', 'Express Blog Intro', '# Esercizio: Express Blog Intro
+Provare a restituire un singolo post dalla rotta show, sempre in formato json',
+    'Node.js, Express'
+  ),
+  (
+    'express-blog-intro',
+    'Express Blog Intro',
+    '# Esercizio: Express Blog Intro
 
 Nome repo: `express-blog-intro`
 
@@ -256,8 +334,13 @@ Creiamo il nostro blog personale e giorno dopo giorno lo potremo arricchire con 
 - Creiamo un array dove inserire una lista di almeno 5 post, per ognuno indicare titolo, contenuto, immagine e tags (tags è un array di stringhe)
 - Creiamo poi una rotta /bacheca che restituisca un oggetto json con la lista dei post.
 - Configuriamo gli asset statici sull’applicazione in modo che si possano visualizzare le immagini associate ad ogni post.
-- Testare su postman', 'Node.js, Express'),
-  ('node-hello-world', 'Node Hello World', '# Esercizio: Node Hello World
+- Testare su postman',
+    'Node.js, Express'
+  ),
+  (
+    'node-hello-world',
+    'Node Hello World',
+    '# Esercizio: Node Hello World
 
 Node repo: `node-hello-world`
 
@@ -267,8 +350,13 @@ Node repo: `node-hello-world`
 2. Scriviamo un file index.js che dovrà stampare nel terminale “Hello World”. Proviamo ad eseguirlo dal terminale stesso usando i comandi di node base.
 3. Impostiamo ora uno script “start” in package.json e facciamo in modo di lanciare il nostro script con npm run start
 4. Impostiamo un nuovo script “watch” in package.json che possa essere lanciato con npm run watch e che aggiorni in tempo reale le modifiche ai nostri file. Lanciamolo e proviamo a cambiare il nostro codice in modo che stampi nel terminale “Hello Boolean”.
-   Dovremmo vedere il terminale senza fermare e rilanciare il server.', 'Node.js, NPM'),
-  ('react-context-api', 'React Context API', '# Esercizio: React Context API
+   Dovremmo vedere il terminale senza fermare e rilanciare il server.',
+    'Node.js, NPM'
+  ),
+  (
+    'react-context-api',
+    'React Context API',
+    '# Esercizio: React Context API
 
 Repo: `react-context-api`
 
@@ -306,8 +394,13 @@ Trasformare la modalità budget in un vero e proprio filtro:
 Trasformate il booleano budgetMode in un valore numerico maxPrice (es.30, 50ecc). Il valore di partenza deve essere null .
 Nel componente navbar al posto del bottone inserite un campo input di tipo number. Questo campo deve essere legato al valore maxPrice del context
 Nella pagina prodotti, verranno mostrati soltanto i prodotti con price <= maxPrice
-‼️Se max price è null o comunque non è settato, devono essere visualizzati tutti i prodotti', 'React'),
-  ('react-router', 'React Router Store', '# Esercizio: React Router Store
+‼️Se max price è null o comunque non è settato, devono essere visualizzati tutti i prodotti',
+    'React'
+  ),
+  (
+    'react-router',
+    'React Router Store',
+    '# Esercizio: React Router Store
 
 Repo: `react-router`
 
@@ -356,8 +449,13 @@ Aggiungiamo un loading per caricamento del dettaglio prodotto.
 
 ### Super Bonus (fase 2)
 
-Aggiungiamo nella pagina di dettaglio dei pulsanti per navigare al prodotto precedente o successivo (usando useNavigate() programmaticamente)', 'React'),
-  ('react-api', 'React API', '# Esercizio: React API
+Aggiungiamo nella pagina di dettaglio dei pulsanti per navigare al prodotto precedente o successivo (usando useNavigate() programmaticamente)',
+    'React'
+  ),
+  (
+    'react-api',
+    'React API',
+    '# Esercizio: React API
 
 Repo: `react-api`
 
@@ -406,8 +504,13 @@ Aggiungere nella card dell’attore/attrice i film più famosi
 
 Se questa task è troppo difficile, prova ad aiutarti con l’AI!
 
-Cerca però sempre di comprendere quello che ti viene suggerito', 'React'),
-  ('react-movie-filter', 'React Movie Filter', '# Esercizio: React Movie Filter
+Cerca però sempre di comprendere quello che ti viene suggerito',
+    'React'
+  ),
+  (
+    'react-movie-filter',
+    'React Movie Filter',
+    '# Esercizio: React Movie Filter
 
 Repo: `react-movie-filter`
 
@@ -440,8 +543,13 @@ Se non viene selezionato alcun genere, devono essere mostrati tutti i film.
 ## BONUS
 
 Aggiungere un campo di ricerca per filtrare i film anche per titolo.
-Creare un sistema per aggiungere nuovi film alla lista tramite un form.', 'React'),
-  ('react-form', 'React Blog Form', '# Esercizio: React Blog Form
+Creare un sistema per aggiungere nuovi film alla lista tramite un form.',
+    'React'
+  ),
+  (
+    'react-form',
+    'React Blog Form',
+    '# Esercizio: React Blog Form
 
 Repo: `react-form`
 
@@ -481,8 +589,13 @@ public (boolean) - Se il post deve essere pubblico (true) o una bozza (false)
 
 ### BONUS 2
 
-Per gestire il campo "public" proviamo a usare una checkbox, invece di un input in cui scrivere "true" o "false". possiamo distinguere il campo public verificando il suo .name (o il suo .type) con un if.', 'React'),
-  ('react-use-state', 'React useState', '# Esercizio: React useState
+Per gestire il campo "public" proviamo a usare una checkbox, invece di un input in cui scrivere "true" o "false". possiamo distinguere il campo public verificando il suo .name (o il suo .type) con un if.',
+    'React'
+  ),
+  (
+    'react-use-state',
+    'React useState',
+    '# Esercizio: React useState
 
 Nome repo: `react-use-state`
 
@@ -504,8 +617,13 @@ Fare in modo che, cliccando uno dei bottoni, la card cambi contenuto e visualizz
 ## Super Bonus
 
 Scomporre la card dei dettagli in un componente a parte che mantenga le sue funzionalità
-Scomporre i buttons in componenti a parte che mantengono tutte le funzionalità', 'React'),
-  ('react-dc-comics', 'React DC Comics', '# Esercizio: React DC Comics
+Scomporre i buttons in componenti a parte che mantengono tutte le funzionalità',
+    'React'
+  ),
+  (
+    'react-dc-comics',
+    'React DC Comics',
+    '# Esercizio: React DC Comics
 
 Questo progetto e'' suddiviso in piu'' fasi, ognuna delle quali ha una descrizione e un bonus opzionale. Mano a mano che andremo avanti con le lezioni react del corso, saranno aggiunte nuove fasi.
 
@@ -557,8 +675,13 @@ Le immagini potrebbero variare leggermente rispetto a quelle nello screenshot.
 
 ### Bonus 3
 
-Provare a centralizzare i dati facendoli partire tutti da App.jsx e passandoli via prop ai vari componenti che li necessitano', 'React'),
-  ('react-hello-world', 'React Hello World', '# Esercizio: React Hello World
+Provare a centralizzare i dati facendoli partire tutti da App.jsx e passandoli via prop ai vari componenti che li necessitano',
+    'React'
+  ),
+  (
+    'react-hello-world',
+    'React Hello World',
+    '# Esercizio: React Hello World
 
 Nome repo: `react-hello-world`
 
@@ -568,1266 +691,3156 @@ Create un nuovo progetto React utilizzando Vite: aiutatevi con le slide per ripe
 
 Create una nuova app React e assicuratevi che funzioni avviandola da terminale.
 
-Poi pushate tutto.', 'React')
-ON DUPLICATE KEY UPDATE title = VALUES(title), description = VALUES(description), topics = VALUES(topics);
+Poi pushate tutto.',
+    'React'
+  )
+on duplicate key update
+  title = values(title),
+  description = values(description),
+  topics = values(topics);
 
-INSERT INTO cheatsheets (slug, title, file_path) VALUES
-  ('database-eleonora', 'Database Eleonora', '/cheatsheets/database-eleonora.pdf'),
-  ('express-crud', 'Express CRUD', '/cheatsheets/express-crud.pdf'),
-  ('express-eleonora', 'Express Eleonora', '/cheatsheets/express-eleonora.pdf'),
-  ('express-rest-api', 'Express Rest API', '/cheatsheets/express-rest-api.pdf'),
-  ('fetch-axios', 'Fetch Axios', '/cheatsheets/fetch-axios.pdf'),
-  ('mysql-comandi-base', 'MySQL Comandi Base', '/cheatsheets/mysql-comandi-base.pdf'),
-  ('mysql-queries', 'MySQL Queries', '/cheatsheets/mysql-queries.pdf'),
-  ('node-express-sintesi', 'Node Express Sintesi', '/cheatsheets/node-express-sintesi.pdf'),
-  ('node-npm-eleonora', 'Node NPM Eleonora', '/cheatsheets/node-npm-eleonora.pdf'),
-  ('node-npm-vite', 'Node NPM Vite', '/cheatsheets/node-npm-vite.pdf'),
-  ('node-npm', 'Node NPM', '/cheatsheets/node-npm.pdf'),
-  ('node-vite', 'Node Vite', '/cheatsheets/node-vite.pdf'),
-  ('react-classname', 'React Classname', '/cheatsheets/react-classname.pdf'),
-  ('react-fetch', 'React Fetch', '/cheatsheets/react-fetch.pdf'),
-  ('react-props', 'React Props', '/cheatsheets/react-props.pdf'),
-  ('react-router', 'React Router', '/cheatsheets/react-router.pdf'),
-  ('react-use-effect', 'React Use Effect', '/cheatsheets/react-use-effect.pdf'),
-  ('react-use-state', 'React Use State', '/cheatsheets/react-use-state.pdf')
-ON DUPLICATE KEY UPDATE title = VALUES(title), file_path = VALUES(file_path);
+insert into
+  cheatsheets (slug, title, file_path)
+values
+  (
+    'database-eleonora',
+    'Database Eleonora',
+    '/cheatsheets/database-eleonora.pdf'
+  ),
+  (
+    'express-crud',
+    'Express CRUD',
+    '/cheatsheets/express-crud.pdf'
+  ),
+  (
+    'express-eleonora',
+    'Express Eleonora',
+    '/cheatsheets/express-eleonora.pdf'
+  ),
+  (
+    'express-rest-api',
+    'Express Rest API',
+    '/cheatsheets/express-rest-api.pdf'
+  ),
+  (
+    'fetch-axios',
+    'Fetch Axios',
+    '/cheatsheets/fetch-axios.pdf'
+  ),
+  (
+    'mysql-comandi-base',
+    'MySQL Comandi Base',
+    '/cheatsheets/mysql-comandi-base.pdf'
+  ),
+  (
+    'mysql-queries',
+    'MySQL Queries',
+    '/cheatsheets/mysql-queries.pdf'
+  ),
+  (
+    'node-express-sintesi',
+    'Node Express Sintesi',
+    '/cheatsheets/node-express-sintesi.pdf'
+  ),
+  (
+    'node-npm-eleonora',
+    'Node NPM Eleonora',
+    '/cheatsheets/node-npm-eleonora.pdf'
+  ),
+  (
+    'node-npm-vite',
+    'Node NPM Vite',
+    '/cheatsheets/node-npm-vite.pdf'
+  ),
+  (
+    'node-npm',
+    'Node NPM',
+    '/cheatsheets/node-npm.pdf'
+  ),
+  (
+    'node-vite',
+    'Node Vite',
+    '/cheatsheets/node-vite.pdf'
+  ),
+  (
+    'react-classname',
+    'React Classname',
+    '/cheatsheets/react-classname.pdf'
+  ),
+  (
+    'react-fetch',
+    'React Fetch',
+    '/cheatsheets/react-fetch.pdf'
+  ),
+  (
+    'react-props',
+    'React Props',
+    '/cheatsheets/react-props.pdf'
+  ),
+  (
+    'react-router',
+    'React Router',
+    '/cheatsheets/react-router.pdf'
+  ),
+  (
+    'react-use-effect',
+    'React Use Effect',
+    '/cheatsheets/react-use-effect.pdf'
+  ),
+  (
+    'react-use-state',
+    'React Use State',
+    '/cheatsheets/react-use-state.pdf'
+  )
+on duplicate key update
+  title = values(title),
+  file_path = values(file_path);
 
-INSERT INTO resources (title, url) VALUES
-  ('mysql2 Documentation', 'https://sidorares.github.io/node-mysql2/docs'),
-  ('MySQL Documentation', 'https://dev.mysql.com/doc/'),
-  ('MySQL Tutorial', 'https://www.w3schools.com/MYSQL/default.asp'),
-  ('MySQL Workbench download', 'https://dev.mysql.com/downloads/workbench/'),
-  ('MySQL Community server download', 'https://dev.mysql.com/downloads/mysql/'),
+insert into
+  resources (title, url)
+values
+  (
+    'mysql2 Documentation',
+    'https://sidorares.github.io/node-mysql2/docs'
+  ),
+  (
+    'MySQL Documentation',
+    'https://dev.mysql.com/doc/'
+  ),
+  (
+    'MySQL Tutorial',
+    'https://www.w3schools.com/MYSQL/default.asp'
+  ),
+  (
+    'MySQL Workbench download',
+    'https://dev.mysql.com/downloads/workbench/'
+  ),
+  (
+    'MySQL Community server download',
+    'https://dev.mysql.com/downloads/mysql/'
+  ),
   ('Database DrawSQL', 'https://drawsql.app/'),
-  ('Express Documentation', 'https://expressjs.com/en/5x/starter/installing/'),
-  ('Express Tutorial', 'https://www.w3schools.com/nodejs/nodejs_express.asp'),
+  (
+    'Express Documentation',
+    'https://expressjs.com/en/5x/starter/installing/'
+  ),
+  (
+    'Express Tutorial',
+    'https://www.w3schools.com/nodejs/nodejs_express.asp'
+  ),
   ('Express REST', 'https://restfulapi.net/'),
-  ('Express HTTP', 'https://developer.mozilla.org/en-US/docs/Web/HTTP'),
-  ('Node.js Documentation', 'https://nodejs.org/en/docs/'),
-  ('Node.js Tutorial', 'https://www.w3schools.com/nodejs/default.asp'),
-  ('NPM Documentation', 'https://docs.npmjs.com/about-npm'),
-  ('NPM Tutorial', 'https://www.w3schools.com/nodejs/nodejs_npm.asp'),
-  ('React Documentation', 'https://reactjs.org/docs/getting-started.html'),
-  ('React Tutorial', 'https://www.w3schools.com/react/'),
+  (
+    'Express HTTP',
+    'https://developer.mozilla.org/en-US/docs/Web/HTTP'
+  ),
+  (
+    'Node.js Documentation',
+    'https://nodejs.org/en/docs/'
+  ),
+  (
+    'Node.js Tutorial',
+    'https://www.w3schools.com/nodejs/default.asp'
+  ),
+  (
+    'NPM Documentation',
+    'https://docs.npmjs.com/about-npm'
+  ),
+  (
+    'NPM Tutorial',
+    'https://www.w3schools.com/nodejs/nodejs_npm.asp'
+  ),
+  (
+    'React Documentation',
+    'https://reactjs.org/docs/getting-started.html'
+  ),
+  (
+    'React Tutorial',
+    'https://www.w3schools.com/react/'
+  ),
   ('React Router', 'https://reactrouter.com/')
-ON DUPLICATE KEY UPDATE title = VALUES(title);
+on duplicate key update
+  title = values(title);
 
 -- Only verified, exact public repository URLs are included.
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/express-blog-sql'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'express-blog-sql'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/db-university'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'db-university'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/db-first'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'db-first'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/express-blog-api-crud'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'express-blog-api-crud'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/express-blog-routing'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'express-blog-routing'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/express-blog-intro'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'express-blog-intro'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/node-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'node-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/react-context-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'react-context-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/react-router'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'react-router'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/react-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'react-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/react-movie-filter'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'react-movie-filter'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/react-form'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'react-form'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/emanuelefavero/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'emanuelefavero' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/express-blog-sql'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'express-blog-sql'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/db-university'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'db-university'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/db-first'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'db-first'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/express-blog-api-crud'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'express-blog-api-crud'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/express-blog-routing'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'express-blog-routing'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/express-blog-intro'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'express-blog-intro'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/react-context-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'react-context-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/react-router'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'react-router'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/react-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'react-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/react-movie-filter'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'react-movie-filter'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/react-form'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'react-form'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francescoguttuso/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francescoguttuso' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/express-blog-sql'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'express-blog-sql'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/db-university'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'db-university'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/db-first'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'db-first'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/express-blog-api-crud'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'express-blog-api-crud'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/express-blog-routing'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'express-blog-routing'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/express-blog-intro'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'express-blog-intro'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/node-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'node-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/react-context-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'react-context-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/react-router'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'react-router'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/react-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'react-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/react-movie-filter'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'react-movie-filter'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/react-form'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'react-form'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/FilippoGraziano/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'FilippoGraziano' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/db-university'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'db-university'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/express-blog-api-crud'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'express-blog-api-crud'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/express-blog-routing'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'express-blog-routing'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/express-blog-intro'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'express-blog-intro'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/node-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'node-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/react-router'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'react-router'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/react-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'react-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/react-movie-filter'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'react-movie-filter'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/react-form'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'react-form'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/EleonoraLosciuto/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'EleonoraLosciuto' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/DarioM1992/db-first'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'DarioM1992' AND projects.slug = 'db-first'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/DarioM1992/express-blog-intro'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'DarioM1992' AND projects.slug = 'express-blog-intro'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/DarioM1992/react-router'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'DarioM1992' AND projects.slug = 'react-router'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/DarioM1992/react-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'DarioM1992' AND projects.slug = 'react-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/DarioM1992/react-form'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'DarioM1992' AND projects.slug = 'react-form'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/DarioM1992/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'DarioM1992' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/DarioM1992/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'DarioM1992' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/DarioM1992/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'DarioM1992' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/express-blog-sql'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'express-blog-sql'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/db-university'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'db-university'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/db-first'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'db-first'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/express-blog-api-crud'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'express-blog-api-crud'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/express-blog-routing'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'express-blog-routing'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/express-blog-intro'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'express-blog-intro'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/node-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'node-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/react-context-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'react-context-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/react-router'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'react-router'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/react-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'react-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/react-movie-filter'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'react-movie-filter'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/react-form'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'react-form'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/daviderocco85/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'daviderocco85' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/db-university'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'db-university'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/db-first'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'db-first'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/express-blog-api-crud'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'express-blog-api-crud'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/express-blog-routing'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'express-blog-routing'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/express-blog-intro'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'express-blog-intro'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/node-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'node-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/react-context-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'react-context-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/react-router'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'react-router'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/react-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'react-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/react-movie-filter'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'react-movie-filter'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/react-form'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'react-form'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/thomaslazzeri/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'thomaslazzeri' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/chrisxwave/react-form'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'chrisxwave' AND projects.slug = 'react-form'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/chrisxwave/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'chrisxwave' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/chrisxwave/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'chrisxwave' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/guidogig/db-university'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'guidogig' AND projects.slug = 'db-university'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/guidogig/db-first'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'guidogig' AND projects.slug = 'db-first'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/guidogig/express-blog-routing'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'guidogig' AND projects.slug = 'express-blog-routing'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/guidogig/express-blog-intro'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'guidogig' AND projects.slug = 'express-blog-intro'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/guidogig/node-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'guidogig' AND projects.slug = 'node-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/guidogig/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'guidogig' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/guidogig/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'guidogig' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/guidogig/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'guidogig' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/db-university'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'db-university'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/db-first'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'db-first'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/express-blog-api-crud'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'express-blog-api-crud'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/node-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'node-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/react-context-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'react-context-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/react-router'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'react-router'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/react-api'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'react-api'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/react-movie-filter'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'react-movie-filter'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/react-form'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'react-form'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/JacopoAugelli-13/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'JacopoAugelli-13' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francesca-yui/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francesca-yui' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/francesca-yui/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'francesca-yui' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/oumouniaonedabre-dot/express-blog-routing'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'oumouniaonedabre-dot' AND projects.slug = 'express-blog-routing'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/oumouniaonedabre-dot/express-blog-intro'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'oumouniaonedabre-dot' AND projects.slug = 'express-blog-intro'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/oumouniaonedabre-dot/node-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'oumouniaonedabre-dot' AND projects.slug = 'node-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/oumouniaonedabre-dot/react-use-state'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'oumouniaonedabre-dot' AND projects.slug = 'react-use-state'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/oumouniaonedabre-dot/react-dc-comics'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'oumouniaonedabre-dot' AND projects.slug = 'react-dc-comics'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
-
-INSERT INTO student_projects (student_id, project_id, repo_url)
-SELECT students.id, projects.id, 'https://github.com/oumouniaonedabre-dot/react-hello-world'
-FROM students CROSS JOIN projects
-WHERE students.github_username = 'oumouniaonedabre-dot' AND projects.slug = 'react-hello-world'
-ON DUPLICATE KEY UPDATE repo_url = VALUES(repo_url);
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/express-blog-sql'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'express-blog-sql'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/db-university'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'db-university'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/db-first'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'db-first'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/express-blog-api-crud'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'express-blog-api-crud'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/express-blog-routing'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'express-blog-routing'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/express-blog-intro'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'express-blog-intro'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/node-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'node-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/react-context-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'react-context-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/react-router'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'react-router'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/react-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'react-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/react-movie-filter'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'react-movie-filter'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/react-form'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'react-form'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/emanuelefavero/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'emanuelefavero'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/express-blog-sql'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'express-blog-sql'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/db-university'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'db-university'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/db-first'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'db-first'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/express-blog-api-crud'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'express-blog-api-crud'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/express-blog-routing'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'express-blog-routing'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/express-blog-intro'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'express-blog-intro'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/react-context-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'react-context-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/react-router'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'react-router'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/react-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'react-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/react-movie-filter'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'react-movie-filter'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/react-form'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'react-form'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francescoguttuso/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francescoguttuso'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/express-blog-sql'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'express-blog-sql'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/db-university'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'db-university'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/db-first'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'db-first'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/express-blog-api-crud'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'express-blog-api-crud'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/express-blog-routing'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'express-blog-routing'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/express-blog-intro'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'express-blog-intro'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/node-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'node-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/react-context-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'react-context-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/react-router'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'react-router'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/react-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'react-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/react-movie-filter'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'react-movie-filter'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/react-form'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'react-form'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/FilippoGraziano/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'FilippoGraziano'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/db-university'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'db-university'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/express-blog-api-crud'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'express-blog-api-crud'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/express-blog-routing'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'express-blog-routing'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/express-blog-intro'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'express-blog-intro'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/node-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'node-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/react-router'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'react-router'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/react-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'react-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/react-movie-filter'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'react-movie-filter'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/react-form'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'react-form'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/EleonoraLosciuto/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'EleonoraLosciuto'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/DarioM1992/db-first'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'DarioM1992'
+  and projects.slug = 'db-first'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/DarioM1992/express-blog-intro'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'DarioM1992'
+  and projects.slug = 'express-blog-intro'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/DarioM1992/react-router'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'DarioM1992'
+  and projects.slug = 'react-router'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/DarioM1992/react-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'DarioM1992'
+  and projects.slug = 'react-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/DarioM1992/react-form'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'DarioM1992'
+  and projects.slug = 'react-form'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/DarioM1992/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'DarioM1992'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/DarioM1992/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'DarioM1992'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/DarioM1992/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'DarioM1992'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/express-blog-sql'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'express-blog-sql'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/db-university'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'db-university'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/db-first'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'db-first'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/express-blog-api-crud'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'express-blog-api-crud'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/express-blog-routing'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'express-blog-routing'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/express-blog-intro'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'express-blog-intro'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/node-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'node-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/react-context-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'react-context-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/react-router'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'react-router'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/react-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'react-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/react-movie-filter'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'react-movie-filter'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/react-form'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'react-form'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/daviderocco85/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'daviderocco85'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/db-university'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'db-university'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/db-first'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'db-first'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/express-blog-api-crud'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'express-blog-api-crud'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/express-blog-routing'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'express-blog-routing'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/express-blog-intro'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'express-blog-intro'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/node-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'node-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/react-context-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'react-context-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/react-router'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'react-router'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/react-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'react-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/react-movie-filter'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'react-movie-filter'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/react-form'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'react-form'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/thomaslazzeri/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'thomaslazzeri'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/chrisxwave/react-form'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'chrisxwave'
+  and projects.slug = 'react-form'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/chrisxwave/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'chrisxwave'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/chrisxwave/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'chrisxwave'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/guidogig/db-university'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'guidogig'
+  and projects.slug = 'db-university'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/guidogig/db-first'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'guidogig'
+  and projects.slug = 'db-first'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/guidogig/express-blog-routing'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'guidogig'
+  and projects.slug = 'express-blog-routing'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/guidogig/express-blog-intro'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'guidogig'
+  and projects.slug = 'express-blog-intro'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/guidogig/node-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'guidogig'
+  and projects.slug = 'node-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/guidogig/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'guidogig'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/guidogig/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'guidogig'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/guidogig/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'guidogig'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/db-university'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'db-university'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/db-first'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'db-first'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/express-blog-api-crud'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'express-blog-api-crud'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/node-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'node-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/react-context-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'react-context-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/react-router'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'react-router'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/react-api'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'react-api'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/react-movie-filter'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'react-movie-filter'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/react-form'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'react-form'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/JacopoAugelli-13/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'JacopoAugelli-13'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francesca-yui/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francesca-yui'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/francesca-yui/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'francesca-yui'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/oumouniaonedabre-dot/express-blog-routing'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'oumouniaonedabre-dot'
+  and projects.slug = 'express-blog-routing'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/oumouniaonedabre-dot/express-blog-intro'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'oumouniaonedabre-dot'
+  and projects.slug = 'express-blog-intro'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/oumouniaonedabre-dot/node-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'oumouniaonedabre-dot'
+  and projects.slug = 'node-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/oumouniaonedabre-dot/react-use-state'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'oumouniaonedabre-dot'
+  and projects.slug = 'react-use-state'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/oumouniaonedabre-dot/react-dc-comics'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'oumouniaonedabre-dot'
+  and projects.slug = 'react-dc-comics'
+on duplicate key update
+  repo_url = values(repo_url);
+
+insert into
+  student_projects (student_id, project_id, repo_url)
+select
+  students.id,
+  projects.id,
+  'https://github.com/oumouniaonedabre-dot/react-hello-world'
+from
+  students
+  cross join projects
+where
+  students.github_username = 'oumouniaonedabre-dot'
+  and projects.slug = 'react-hello-world'
+on duplicate key update
+  repo_url = values(repo_url);
 
 -- Curated project-to-PDF links; also available separately in project-cheatsheets.sql.
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-sql'
+  and cheatsheets.slug = 'database-eleonora';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'database-eleonora';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-sql'
+  and cheatsheets.slug = 'mysql-comandi-base';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'mysql-comandi-base';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-sql'
+  and cheatsheets.slug = 'mysql-queries';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'mysql-queries';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-sql'
+  and cheatsheets.slug = 'node-express-sintesi';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'node-express-sintesi';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-sql'
+  and cheatsheets.slug = 'express-eleonora';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'express-eleonora';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-sql'
+  and cheatsheets.slug = 'express-crud';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'express-crud';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'db-university'
+  and cheatsheets.slug = 'database-eleonora';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'db-university' AND cheatsheets.slug = 'database-eleonora';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'db-university'
+  and cheatsheets.slug = 'mysql-comandi-base';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'db-university' AND cheatsheets.slug = 'mysql-comandi-base';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'db-university'
+  and cheatsheets.slug = 'mysql-queries';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'db-university' AND cheatsheets.slug = 'mysql-queries';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'db-first'
+  and cheatsheets.slug = 'database-eleonora';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'db-first' AND cheatsheets.slug = 'database-eleonora';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-api-crud'
+  and cheatsheets.slug = 'express-crud';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-api-crud' AND cheatsheets.slug = 'express-crud';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-api-crud'
+  and cheatsheets.slug = 'express-rest-api';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-api-crud' AND cheatsheets.slug = 'express-rest-api';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-api-crud'
+  and cheatsheets.slug = 'express-eleonora';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-api-crud' AND cheatsheets.slug = 'express-eleonora';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-routing'
+  and cheatsheets.slug = 'express-rest-api';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-routing' AND cheatsheets.slug = 'express-rest-api';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-routing'
+  and cheatsheets.slug = 'express-eleonora';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-routing' AND cheatsheets.slug = 'express-eleonora';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-intro'
+  and cheatsheets.slug = 'node-express-sintesi';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-intro' AND cheatsheets.slug = 'node-express-sintesi';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'express-blog-intro'
+  and cheatsheets.slug = 'express-eleonora';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-intro' AND cheatsheets.slug = 'express-eleonora';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'node-hello-world'
+  and cheatsheets.slug = 'node-npm';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'node-hello-world' AND cheatsheets.slug = 'node-npm';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'node-hello-world'
+  and cheatsheets.slug = 'node-npm-eleonora';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'node-hello-world' AND cheatsheets.slug = 'node-npm-eleonora';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-context-api'
+  and cheatsheets.slug = 'react-props';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-context-api' AND cheatsheets.slug = 'react-props';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-context-api'
+  and cheatsheets.slug = 'react-use-state';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-context-api' AND cheatsheets.slug = 'react-use-state';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-context-api'
+  and cheatsheets.slug = 'react-use-effect';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-context-api' AND cheatsheets.slug = 'react-use-effect';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-context-api'
+  and cheatsheets.slug = 'react-fetch';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-context-api' AND cheatsheets.slug = 'react-fetch';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-router'
+  and cheatsheets.slug = 'react-router';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-router' AND cheatsheets.slug = 'react-router';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-router'
+  and cheatsheets.slug = 'react-fetch';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-router' AND cheatsheets.slug = 'react-fetch';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-router'
+  and cheatsheets.slug = 'fetch-axios';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-router' AND cheatsheets.slug = 'fetch-axios';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-api'
+  and cheatsheets.slug = 'react-fetch';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-api' AND cheatsheets.slug = 'react-fetch';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-api'
+  and cheatsheets.slug = 'fetch-axios';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-api' AND cheatsheets.slug = 'fetch-axios';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-api'
+  and cheatsheets.slug = 'react-use-effect';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-api' AND cheatsheets.slug = 'react-use-effect';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-movie-filter'
+  and cheatsheets.slug = 'react-use-state';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-movie-filter' AND cheatsheets.slug = 'react-use-state';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-movie-filter'
+  and cheatsheets.slug = 'react-use-effect';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-movie-filter' AND cheatsheets.slug = 'react-use-effect';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-form'
+  and cheatsheets.slug = 'react-use-state';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-form' AND cheatsheets.slug = 'react-use-state';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-form'
+  and cheatsheets.slug = 'react-props';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-form' AND cheatsheets.slug = 'react-props';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-use-state'
+  and cheatsheets.slug = 'react-use-state';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-use-state' AND cheatsheets.slug = 'react-use-state';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-dc-comics'
+  and cheatsheets.slug = 'react-props';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-dc-comics' AND cheatsheets.slug = 'react-props';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-dc-comics'
+  and cheatsheets.slug = 'react-classname';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-dc-comics' AND cheatsheets.slug = 'react-classname';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-hello-world'
+  and cheatsheets.slug = 'node-vite';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-hello-world' AND cheatsheets.slug = 'node-vite';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-hello-world'
+  and cheatsheets.slug = 'node-npm-vite';
 
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-hello-world' AND cheatsheets.slug = 'node-npm-vite';
-
-INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
-SELECT projects.id, cheatsheets.id
-FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'react-hello-world' AND cheatsheets.slug = 'react-classname';
+insert ignore into
+  project_cheatsheets (project_id, cheatsheet_id)
+select
+  projects.id,
+  cheatsheets.id
+from
+  projects
+  cross join cheatsheets
+where
+  projects.slug = 'react-hello-world'
+  and cheatsheets.slug = 'react-classname';
 
 -- Topic-based project-to-resource links; also available separately in project-resources.sql.
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-sql'
+  and resources.url = 'https://sidorares.github.io/node-mysql2/docs';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-sql' AND resources.url = 'https://sidorares.github.io/node-mysql2/docs';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-sql'
+  and resources.url = 'https://dev.mysql.com/doc/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-sql' AND resources.url = 'https://dev.mysql.com/doc/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-sql'
+  and resources.url = 'https://www.w3schools.com/MYSQL/default.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-sql' AND resources.url = 'https://www.w3schools.com/MYSQL/default.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-sql'
+  and resources.url = 'https://dev.mysql.com/downloads/workbench/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-sql' AND resources.url = 'https://dev.mysql.com/downloads/workbench/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-sql'
+  and resources.url = 'https://dev.mysql.com/downloads/mysql/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-sql' AND resources.url = 'https://dev.mysql.com/downloads/mysql/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-sql'
+  and resources.url = 'https://expressjs.com/en/5x/starter/installing/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-sql' AND resources.url = 'https://expressjs.com/en/5x/starter/installing/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-sql'
+  and resources.url = 'https://www.w3schools.com/nodejs/nodejs_express.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-sql' AND resources.url = 'https://www.w3schools.com/nodejs/nodejs_express.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-sql'
+  and resources.url = 'https://restfulapi.net/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-sql' AND resources.url = 'https://restfulapi.net/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-sql'
+  and resources.url = 'https://developer.mozilla.org/en-US/docs/Web/HTTP';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-sql' AND resources.url = 'https://developer.mozilla.org/en-US/docs/Web/HTTP';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'db-university'
+  and resources.url = 'https://dev.mysql.com/doc/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'db-university' AND resources.url = 'https://dev.mysql.com/doc/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'db-university'
+  and resources.url = 'https://www.w3schools.com/MYSQL/default.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'db-university' AND resources.url = 'https://www.w3schools.com/MYSQL/default.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'db-university'
+  and resources.url = 'https://dev.mysql.com/downloads/workbench/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'db-university' AND resources.url = 'https://dev.mysql.com/downloads/workbench/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'db-university'
+  and resources.url = 'https://dev.mysql.com/downloads/mysql/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'db-university' AND resources.url = 'https://dev.mysql.com/downloads/mysql/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'db-university'
+  and resources.url = 'https://drawsql.app/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'db-university' AND resources.url = 'https://drawsql.app/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'db-first'
+  and resources.url = 'https://drawsql.app/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'db-first' AND resources.url = 'https://drawsql.app/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-api-crud'
+  and resources.url = 'https://expressjs.com/en/5x/starter/installing/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-api-crud' AND resources.url = 'https://expressjs.com/en/5x/starter/installing/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-api-crud'
+  and resources.url = 'https://www.w3schools.com/nodejs/nodejs_express.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-api-crud' AND resources.url = 'https://www.w3schools.com/nodejs/nodejs_express.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-api-crud'
+  and resources.url = 'https://restfulapi.net/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-api-crud' AND resources.url = 'https://restfulapi.net/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-api-crud'
+  and resources.url = 'https://developer.mozilla.org/en-US/docs/Web/HTTP';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-api-crud' AND resources.url = 'https://developer.mozilla.org/en-US/docs/Web/HTTP';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-api-crud'
+  and resources.url = 'https://nodejs.org/en/docs/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-api-crud' AND resources.url = 'https://nodejs.org/en/docs/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-api-crud'
+  and resources.url = 'https://www.w3schools.com/nodejs/default.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-api-crud' AND resources.url = 'https://www.w3schools.com/nodejs/default.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-routing'
+  and resources.url = 'https://expressjs.com/en/5x/starter/installing/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-routing' AND resources.url = 'https://expressjs.com/en/5x/starter/installing/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-routing'
+  and resources.url = 'https://www.w3schools.com/nodejs/nodejs_express.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-routing' AND resources.url = 'https://www.w3schools.com/nodejs/nodejs_express.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-routing'
+  and resources.url = 'https://restfulapi.net/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-routing' AND resources.url = 'https://restfulapi.net/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-routing'
+  and resources.url = 'https://developer.mozilla.org/en-US/docs/Web/HTTP';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-routing' AND resources.url = 'https://developer.mozilla.org/en-US/docs/Web/HTTP';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-routing'
+  and resources.url = 'https://nodejs.org/en/docs/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-routing' AND resources.url = 'https://nodejs.org/en/docs/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-routing'
+  and resources.url = 'https://www.w3schools.com/nodejs/default.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-routing' AND resources.url = 'https://www.w3schools.com/nodejs/default.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-intro'
+  and resources.url = 'https://expressjs.com/en/5x/starter/installing/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-intro' AND resources.url = 'https://expressjs.com/en/5x/starter/installing/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-intro'
+  and resources.url = 'https://www.w3schools.com/nodejs/nodejs_express.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-intro' AND resources.url = 'https://www.w3schools.com/nodejs/nodejs_express.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-intro'
+  and resources.url = 'https://restfulapi.net/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-intro' AND resources.url = 'https://restfulapi.net/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-intro'
+  and resources.url = 'https://developer.mozilla.org/en-US/docs/Web/HTTP';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-intro' AND resources.url = 'https://developer.mozilla.org/en-US/docs/Web/HTTP';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-intro'
+  and resources.url = 'https://nodejs.org/en/docs/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-intro' AND resources.url = 'https://nodejs.org/en/docs/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'express-blog-intro'
+  and resources.url = 'https://www.w3schools.com/nodejs/default.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'express-blog-intro' AND resources.url = 'https://www.w3schools.com/nodejs/default.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'node-hello-world'
+  and resources.url = 'https://nodejs.org/en/docs/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'node-hello-world' AND resources.url = 'https://nodejs.org/en/docs/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'node-hello-world'
+  and resources.url = 'https://www.w3schools.com/nodejs/default.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'node-hello-world' AND resources.url = 'https://www.w3schools.com/nodejs/default.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'node-hello-world'
+  and resources.url = 'https://docs.npmjs.com/about-npm';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'node-hello-world' AND resources.url = 'https://docs.npmjs.com/about-npm';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'node-hello-world'
+  and resources.url = 'https://www.w3schools.com/nodejs/nodejs_npm.asp';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'node-hello-world' AND resources.url = 'https://www.w3schools.com/nodejs/nodejs_npm.asp';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-context-api'
+  and resources.url = 'https://reactjs.org/docs/getting-started.html';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-context-api' AND resources.url = 'https://reactjs.org/docs/getting-started.html';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-context-api'
+  and resources.url = 'https://www.w3schools.com/react/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-context-api' AND resources.url = 'https://www.w3schools.com/react/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-router'
+  and resources.url = 'https://reactjs.org/docs/getting-started.html';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-router' AND resources.url = 'https://reactjs.org/docs/getting-started.html';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-router'
+  and resources.url = 'https://www.w3schools.com/react/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-router' AND resources.url = 'https://www.w3schools.com/react/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-router'
+  and resources.url = 'https://reactrouter.com/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-router' AND resources.url = 'https://reactrouter.com/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-api'
+  and resources.url = 'https://reactjs.org/docs/getting-started.html';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-api' AND resources.url = 'https://reactjs.org/docs/getting-started.html';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-api'
+  and resources.url = 'https://www.w3schools.com/react/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-api' AND resources.url = 'https://www.w3schools.com/react/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-movie-filter'
+  and resources.url = 'https://reactjs.org/docs/getting-started.html';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-movie-filter' AND resources.url = 'https://reactjs.org/docs/getting-started.html';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-movie-filter'
+  and resources.url = 'https://www.w3schools.com/react/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-movie-filter' AND resources.url = 'https://www.w3schools.com/react/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-form'
+  and resources.url = 'https://reactjs.org/docs/getting-started.html';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-form' AND resources.url = 'https://reactjs.org/docs/getting-started.html';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-form'
+  and resources.url = 'https://www.w3schools.com/react/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-form' AND resources.url = 'https://www.w3schools.com/react/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-use-state'
+  and resources.url = 'https://reactjs.org/docs/getting-started.html';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-use-state' AND resources.url = 'https://reactjs.org/docs/getting-started.html';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-use-state'
+  and resources.url = 'https://www.w3schools.com/react/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-use-state' AND resources.url = 'https://www.w3schools.com/react/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-dc-comics'
+  and resources.url = 'https://reactjs.org/docs/getting-started.html';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-dc-comics' AND resources.url = 'https://reactjs.org/docs/getting-started.html';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-dc-comics'
+  and resources.url = 'https://www.w3schools.com/react/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-dc-comics' AND resources.url = 'https://www.w3schools.com/react/';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-hello-world'
+  and resources.url = 'https://reactjs.org/docs/getting-started.html';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-hello-world' AND resources.url = 'https://reactjs.org/docs/getting-started.html';
+insert ignore into
+  project_resources (project_id, resource_id)
+select
+  projects.id,
+  resources.id
+from
+  projects
+  cross join resources
+where
+  projects.slug = 'react-hello-world'
+  and resources.url = 'https://www.w3schools.com/react/';
 
-INSERT IGNORE INTO project_resources (project_id, resource_id)
-SELECT projects.id, resources.id
-FROM projects CROSS JOIN resources
-WHERE projects.slug = 'react-hello-world' AND resources.url = 'https://www.w3schools.com/react/';
+commit;
 
-COMMIT;
-
-SET SQL_MODE = @OLD_SQL_MODE;
-
+set
+  sql_mode = @OLD_SQL_MODE;
