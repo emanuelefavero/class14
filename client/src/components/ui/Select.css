@@ -9,11 +9,20 @@
   min-width: 0;
   appearance: none;
   color: var(--foreground);
-  background-color: var(--background);
+  background-color: var(--surface-muted);
   border: 1px solid var(--border);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
   padding: 0.75rem 2.75rem 0.75rem 1rem;
   cursor: pointer;
+
+  &:hover {
+    border-color: var(--border-strong);
+  }
+
+  &:focus {
+    border-color: var(--primary-border);
+    background-color: var(--surface);
+  }
 
   &:disabled {
     opacity: 0.6;

@@ -33,9 +33,9 @@ export const Students = () => {
         }
 
         return (
-          <ul className='catalog-list'>
+          <ul className='catalog-list catalog-grid catalog-student-grid'>
             {catalog.data.map((student) => (
-              <li className='catalog-row' key={student.id}>
+              <li className='catalog-card' key={student.id}>
                 <div className='catalog-person'>
                   <StudentAvatar student={student} />
                   <div>
@@ -48,6 +48,9 @@ export const Students = () => {
                     <p className='catalog-meta'>@{student.github_username}</p>
                   </div>
                 </div>
+                <span className='catalog-card-arrow' aria-hidden='true'>
+                  ↗
+                </span>
               </li>
             ))}
           </ul>

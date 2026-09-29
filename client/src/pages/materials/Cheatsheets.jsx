@@ -1,3 +1,4 @@
+import { FileText } from 'lucide-react';
 import { ProjectTitleLink } from '@/components/shared/CatalogContent';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
@@ -33,28 +34,33 @@ export const Cheatsheets = () => {
         return (
           <ul className='catalog-list'>
             {catalog.data.map((sheet) => (
-              <li className='catalog-row' key={sheet.id}>
-                <div>
-                  <h2 className='catalog-row-title'>{sheet.title}</h2>
-                  <p className='catalog-meta'>
-                    {sheet.projects.length ? (
-                      <>
-                        Progetti:{' '}
-                        {sheet.projects.map((project, index) => (
-                          <span key={project.id}>
-                            {index > 0 && ', '}
-                            <ProjectTitleLink
-                              className='link'
-                              iconSize='inline'
-                              project={project}
-                            />
-                          </span>
-                        ))}
-                      </>
-                    ) : (
-                      'Nessun progetto collegato'
-                    )}
-                  </p>
+              <li className='catalog-row catalog-material-row' key={sheet.id}>
+                <div className='catalog-row-main'>
+                  <span className='catalog-material-icon' aria-hidden='true'>
+                    <FileText />
+                  </span>
+                  <div>
+                    <h2 className='catalog-row-title'>{sheet.title}</h2>
+                    <p className='catalog-meta'>
+                      {sheet.projects.length ? (
+                        <>
+                          Progetti:{' '}
+                          {sheet.projects.map((project, index) => (
+                            <span key={project.id}>
+                              {index > 0 && ', '}
+                              <ProjectTitleLink
+                                className='link'
+                                iconSize='inline'
+                                project={project}
+                              />
+                            </span>
+                          ))}
+                        </>
+                      ) : (
+                        'Nessun progetto collegato'
+                      )}
+                    </p>
+                  </div>
                 </div>
                 <div className='catalog-actions'>
                   <a

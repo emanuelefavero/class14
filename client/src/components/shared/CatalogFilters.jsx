@@ -1,3 +1,4 @@
+import { RotateCcw, Search, SlidersHorizontal } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -41,19 +42,33 @@ export const CatalogFilters = ({
 
   return (
     <div className='catalog-filters'>
+      <div className='catalog-filter-heading'>
+        <span aria-hidden='true'>
+          <SlidersHorizontal />
+        </span>
+        <div>
+          <strong>Filtra il catalogo</strong>
+          <small>Ricerca e argomento</small>
+        </div>
+      </div>
       <div className='catalog-filter-controls'>
         <form className='catalog-search' role='search' onSubmit={handleSearch}>
           <label htmlFor='catalog-search-input'>{searchLabel}</label>
           <div className='catalog-search-row'>
-            <Input
-              id='catalog-search-input'
-              name='q'
-              value={draft}
-              onChange={(event) => setDraft(event.target.value)}
-              maxLength={150}
-              placeholder='Cerca nel catalogo'
-            />
-            <Button type='submit'>Cerca</Button>
+            <div className='catalog-search-field'>
+              <Search aria-hidden='true' />
+              <Input
+                id='catalog-search-input'
+                name='q'
+                value={draft}
+                onChange={(event) => setDraft(event.target.value)}
+                maxLength={150}
+                placeholder='Cerca nel catalogo'
+              />
+            </div>
+            <Button type='submit'>
+              <Search aria-hidden='true' /> Cerca
+            </Button>
           </div>
         </form>
         <div className='catalog-topic-filter'>
@@ -78,14 +93,14 @@ export const CatalogFilters = ({
       </div>
       <div className='catalog-filter-status'>
         {resultCount !== null && (
-          <p role='status'>
+          <p className='catalog-result-count' role='status'>
             {resultCount} {resultCount === 1 ? 'risultato' : 'risultati'}
           </p>
         )}
         {topicError && <p>Filtro argomenti non disponibile.</p>}
         {hasFilters && (
           <button className='link' type='button' onClick={handleReset}>
-            Azzera filtri
+            <RotateCcw aria-hidden='true' /> Azzera filtri
           </button>
         )}
       </div>

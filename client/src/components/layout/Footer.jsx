@@ -6,14 +6,17 @@ export const Footer = () => {
   return (
     <footer className='footer'>
       <div className='container footer-inner'>
-        <p className='font-semibold'>
-          Class14 <span>· WDPT14</span>
-        </p>
+        <div className='footer-brand'>
+          <span aria-hidden='true'>14</span>
+          <p className='font-semibold'>
+            Class14 <small>Learning hub · WDPT14</small>
+          </p>
+        </div>
         <nav aria-label='Materiali'>
           <Link to={paths.cheatsheets}>Cheat sheet</Link>
           <Link to={paths.resources}>Risorse</Link>
         </nav>
-        <p>Un progetto di Emanuele Favero</p>
+        <p className='footer-credit'>Un progetto di Emanuele Favero</p>
       </div>
     </footer>
   );

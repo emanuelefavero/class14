@@ -1,3 +1,4 @@
+import { Library } from 'lucide-react';
 import { ProjectTitleLink } from '@/components/shared/CatalogContent';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
@@ -33,28 +34,36 @@ export const Resources = () => {
         return (
           <ul className='catalog-list'>
             {catalog.data.map((resource) => (
-              <li className='catalog-row' key={resource.id}>
-                <div>
-                  <h2 className='catalog-row-title'>{resource.title}</h2>
-                  <p className='catalog-meta'>
-                    {resource.projects.length ? (
-                      <>
-                        Progetti:{' '}
-                        {resource.projects.map((project, index) => (
-                          <span key={project.id}>
-                            {index > 0 && ', '}
-                            <ProjectTitleLink
-                              className='link'
-                              iconSize='inline'
-                              project={project}
-                            />
-                          </span>
-                        ))}
-                      </>
-                    ) : (
-                      'Nessun progetto collegato'
-                    )}
-                  </p>
+              <li
+                className='catalog-row catalog-material-row'
+                key={resource.id}
+              >
+                <div className='catalog-row-main'>
+                  <span className='catalog-material-icon' aria-hidden='true'>
+                    <Library />
+                  </span>
+                  <div>
+                    <h2 className='catalog-row-title'>{resource.title}</h2>
+                    <p className='catalog-meta'>
+                      {resource.projects.length ? (
+                        <>
+                          Progetti:{' '}
+                          {resource.projects.map((project, index) => (
+                            <span key={project.id}>
+                              {index > 0 && ', '}
+                              <ProjectTitleLink
+                                className='link'
+                                iconSize='inline'
+                                project={project}
+                              />
+                            </span>
+                          ))}
+                        </>
+                      ) : (
+                        'Nessun progetto collegato'
+                      )}
+                    </p>
+                  </div>
                 </div>
                 <a
                   className='link'

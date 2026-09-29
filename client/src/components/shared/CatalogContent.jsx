@@ -1,3 +1,4 @@
+import { ExternalLink, FileText, Library } from 'lucide-react';
 import { Link } from 'react-router';
 import { getProjectIcon } from '@/features/catalog/catalogIcons';
 import { getPath } from '@/router/paths';
@@ -42,13 +43,18 @@ export const ProjectList = ({ projects }) => (
 export const MaterialLinks = ({ cheatsheets, resources }) => (
   <div className='catalog-columns'>
     <section>
-      <h3>Cheat sheet</h3>
+      <h3>
+        <span className='catalog-material-title'>
+          <FileText aria-hidden='true' /> Cheat sheet
+        </span>
+        <small>{cheatsheets.length}</small>
+      </h3>
       {cheatsheets.length ? (
         <ul className='catalog-link-list'>
           {cheatsheets.map((sheet) => (
             <li key={sheet.id}>
               <a href={sheet.file_path} target='_blank' rel='noreferrer'>
-                {sheet.title} <span aria-hidden='true'>↗</span>
+                {sheet.title} <ExternalLink aria-hidden='true' />
               </a>
             </li>
           ))}
@@ -58,13 +64,18 @@ export const MaterialLinks = ({ cheatsheets, resources }) => (
       )}
     </section>
     <section>
-      <h3>Risorse</h3>
+      <h3>
+        <span className='catalog-material-title'>
+          <Library aria-hidden='true' /> Risorse
+        </span>
+        <small>{resources.length}</small>
+      </h3>
       {resources.length ? (
         <ul className='catalog-link-list'>
           {resources.map((resource) => (
             <li key={resource.id}>
               <a href={resource.url} target='_blank' rel='noreferrer'>
-                {resource.title} <span aria-hidden='true'>↗</span>
+                {resource.title} <ExternalLink aria-hidden='true' />
               </a>
             </li>
           ))}

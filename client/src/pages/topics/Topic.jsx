@@ -23,7 +23,7 @@ export const Topic = () => {
 
   return (
     <article className='catalog-page'>
-      <header className='catalog-heading'>
+      <header className='catalog-heading catalog-detail-heading'>
         <Link className='catalog-back' to={paths.topics}>
           ← Tutti gli argomenti
         </Link>
@@ -36,25 +36,46 @@ export const Topic = () => {
             {data.name}
           </CatalogTitle>
         </h1>
+        <dl className='catalog-detail-metrics'>
+          <div>
+            <dt>Progetti</dt>
+            <dd>{data.project_count}</dd>
+          </div>
+          <div>
+            <dt>Cheat sheet</dt>
+            <dd>{data.related_cheatsheets.length}</dd>
+          </div>
+          <div>
+            <dt>Risorse</dt>
+            <dd>{data.related_resources.length}</dd>
+          </div>
+        </dl>
       </header>
-      <section className='catalog-section'>
-        <h2>Progetti collegati</h2>
-        {data.projects.length ? (
-          <ProjectList projects={data.projects} />
-        ) : (
-          <p className='catalog-muted'>Nessun progetto collegato.</p>
-        )}
-      </section>
-      <section className='catalog-section'>
-        <h2>Materiali dei progetti collegati</h2>
-        <p className='catalog-muted'>
-          Questi materiali sono associati ai progetti dell'argomento.
-        </p>
-        <MaterialLinks
-          cheatsheets={data.related_cheatsheets}
-          resources={data.related_resources}
-        />
-      </section>
+      <div className='catalog-detail-layout'>
+        <section className='catalog-section'>
+          <div className='catalog-section-heading'>
+            <h2>Progetti collegati</h2>
+            <span>{data.projects.length} risultati</span>
+          </div>
+          {data.projects.length ? (
+            <ProjectList projects={data.projects} />
+          ) : (
+            <p className='catalog-muted'>Nessun progetto collegato.</p>
+          )}
+        </section>
+        <aside className='catalog-detail-aside'>
+          <section className='catalog-section'>
+            <h2>Materiali dei progetti collegati</h2>
+            <p className='catalog-muted'>
+              Questi materiali sono associati ai progetti dell'argomento.
+            </p>
+            <MaterialLinks
+              cheatsheets={data.related_cheatsheets}
+              resources={data.related_resources}
+            />
+          </section>
+        </aside>
+      </div>
     </article>
   );
 };

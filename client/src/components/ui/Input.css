@@ -2,14 +2,23 @@
   width: 100%;
   block-size: 2.625rem;
   min-width: 0;
-  background-color: var(--background);
+  background-color: var(--surface-muted);
   color: var(--foreground);
   border: 1px solid var(--border);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
   padding: 0.75rem 1rem;
   line-height: 1;
 
   &::placeholder {
     color: var(--foreground-muted);
+  }
+
+  &:hover {
+    border-color: var(--border-strong);
+  }
+
+  &:focus {
+    border-color: var(--primary-border);
+    background: var(--surface);
   }
 }

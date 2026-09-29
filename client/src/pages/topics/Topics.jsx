@@ -24,9 +24,9 @@ export const Topics = () => {
         }
 
         return (
-          <ul className='catalog-list'>
+          <ul className='catalog-list catalog-grid catalog-topic-grid'>
             {state.data.map((topic) => (
-              <li className='catalog-row' key={topic.name}>
+              <li className='catalog-card' key={topic.name}>
                 <Link
                   className='catalog-row-title'
                   to={getPath.topic(topic.name)}
@@ -38,6 +38,9 @@ export const Topics = () => {
                 <span className='catalog-meta'>
                   {topic.project_count}{' '}
                   {topic.project_count === 1 ? 'progetto' : 'progetti'}
+                </span>
+                <span className='catalog-card-arrow' aria-hidden='true'>
+                  ↗
                 </span>
               </li>
             ))}

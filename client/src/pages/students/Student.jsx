@@ -25,34 +25,48 @@ export const Student = () => {
 
   return (
     <article className='catalog-page'>
-      <header className='catalog-heading'>
+      <header className='catalog-heading catalog-detail-heading'>
         <Link className='catalog-back' to={paths.students}>
           ← Tutti gli studenti
         </Link>
         <p className='catalog-eyebrow'>Studente · WDPT14</p>
-        <div className='catalog-person'>
-          <StudentAvatar key={data.github_username} student={data} />
+        <div className='catalog-person catalog-profile-heading'>
+          <StudentAvatar
+            key={data.github_username}
+            student={data}
+            size='profile'
+          />
           <h1>{data.name}</h1>
         </div>
-        <p>
-          @{data.github_username} · {data.repository_count}{' '}
-          {data.repository_count === 1
-            ? 'repository disponibile'
-            : 'repository disponibili'}
-        </p>
-        <a
-          className='link'
-          href={data.github_url}
-          target='_blank'
-          rel='noreferrer'
-        >
-          Profilo GitHub ↗
-        </a>
+        <p className='catalog-meta'>@{data.github_username}</p>
+        <dl className='catalog-detail-metrics'>
+          <div>
+            <dt>Repository disponibili</dt>
+            <dd>{data.repository_count}</dd>
+          </div>
+          <div>
+            <dt>Argomenti</dt>
+            <dd>{data.topics.length}</dd>
+          </div>
+        </dl>
+        <div className='catalog-actions'>
+          <a
+            className='link'
+            href={data.github_url}
+            target='_blank'
+            rel='noreferrer'
+          >
+            Profilo GitHub ↗
+          </a>
+        </div>
         {data.topics.length > 0 && <TopicLinks topics={data.topics} />}
       </header>
 
       <section className='catalog-section'>
-        <h2>Progetti con repository disponibili</h2>
+        <div className='catalog-section-heading'>
+          <h2>Progetti con repository disponibili</h2>
+          <span>{data.projects.length} nel catalogo</span>
+        </div>
         {data.projects.length ? (
           <ul className='catalog-list'>
             {data.projects.map((project) => (
