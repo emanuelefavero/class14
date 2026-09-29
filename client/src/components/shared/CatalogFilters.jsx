@@ -4,6 +4,10 @@ import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import './CatalogFilters.css';
 
+/**
+ * Renders the shared catalog controls and updates the URL-backed filters.
+ * It also shows the topics state and the current number of results.
+ */
 export const CatalogFilters = ({
   filters,
   topicsState,
@@ -15,9 +19,12 @@ export const CatalogFilters = ({
   const topicError = topicsState.step === 'error';
   const topicLoading =
     topicsState.step === 'idle' || topicsState.step === 'loading';
+
+  // Keeps typed text local until the user submits the search.
   const [draft, setDraft] = useState(search);
   const hasFilters = Boolean(search || topic);
 
+  // Keeps the input in sync when the search changes through the URL.
   useEffect(() => {
     setDraft(search);
   }, [search]);

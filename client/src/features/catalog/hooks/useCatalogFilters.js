@@ -8,6 +8,7 @@ export const useCatalogFilters = () => {
   const search = searchParams.get('q')?.trim() ?? '';
   const topic = searchParams.get('topic') ?? '';
 
+  // Updates the URL search parameters with the new filter values.
   const updateFilters = (nextSearch, nextTopic) => {
     const nextParams = new URLSearchParams();
     if (nextSearch.trim()) nextParams.set('q', nextSearch.trim());
