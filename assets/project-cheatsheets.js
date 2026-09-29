@@ -2,27 +2,27 @@
 // current project tags (for example, "React") are too broad for every PDF.
 export const projectCheatsheets = {
   'express-blog-sql': [
-    'database-eleonora',
+    'database-appunti',
     'mysql-comandi-base',
     'mysql-queries',
     'node-express-sintesi',
-    'express-eleonora',
+    'express-appunti',
     'express-crud',
   ],
   'db-university': [
-    'database-eleonora',
+    'database-appunti',
     'mysql-comandi-base',
     'mysql-queries',
   ],
-  'db-first': ['database-eleonora'],
+  'db-first': ['database-appunti'],
   'express-blog-api-crud': [
     'express-crud',
     'express-rest-api',
-    'express-eleonora',
+    'express-appunti',
   ],
-  'express-blog-routing': ['express-rest-api', 'express-eleonora'],
-  'express-blog-intro': ['node-express-sintesi', 'express-eleonora'],
-  'node-hello-world': ['node-npm', 'node-npm-eleonora'],
+  'express-blog-routing': ['express-rest-api', 'express-appunti'],
+  'express-blog-intro': ['node-express-sintesi', 'express-appunti'],
+  'node-hello-world': ['node-npm', 'node-npm-appunti'],
   'react-context-api': [
     'react-props',
     'react-use-state',

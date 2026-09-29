@@ -703,9 +703,9 @@ insert into
   cheatsheets (slug, title, file_path)
 values
   (
-    'database-eleonora',
-    'Database Eleonora',
-    '/cheatsheets/database-eleonora.pdf'
+    'database-appunti',
+    'Database Appunti',
+    '/cheatsheets/database-appunti.pdf'
   ),
   (
     'express-crud',
@@ -713,9 +713,9 @@ values
     '/cheatsheets/express-crud.pdf'
   ),
   (
-    'express-eleonora',
-    'Express Eleonora',
-    '/cheatsheets/express-eleonora.pdf'
+    'express-appunti',
+    'Express Appunti',
+    '/cheatsheets/express-appunti.pdf'
   ),
   (
     'express-rest-api',
@@ -743,9 +743,9 @@ values
     '/cheatsheets/node-express-sintesi.pdf'
   ),
   (
-    'node-npm-eleonora',
-    'Node NPM Eleonora',
-    '/cheatsheets/node-npm-eleonora.pdf'
+    'node-npm-appunti',
+    'Node NPM Appunti',
+    '/cheatsheets/node-npm-appunti.pdf'
   ),
   (
     'node-npm-vite',
@@ -2733,7 +2733,7 @@ from
   cross join cheatsheets
 where
   projects.slug = 'express-blog-sql'
-  and cheatsheets.slug = 'database-eleonora';
+  and cheatsheets.slug = 'database-appunti';
 
 insert ignore into
   project_cheatsheets (project_id, cheatsheet_id)
@@ -2781,7 +2781,7 @@ from
   cross join cheatsheets
 where
   projects.slug = 'express-blog-sql'
-  and cheatsheets.slug = 'express-eleonora';
+  and cheatsheets.slug = 'express-appunti';
 
 insert ignore into
   project_cheatsheets (project_id, cheatsheet_id)
@@ -2805,7 +2805,7 @@ from
   cross join cheatsheets
 where
   projects.slug = 'db-university'
-  and cheatsheets.slug = 'database-eleonora';
+  and cheatsheets.slug = 'database-appunti';
 
 insert ignore into
   project_cheatsheets (project_id, cheatsheet_id)
@@ -2841,7 +2841,7 @@ from
   cross join cheatsheets
 where
   projects.slug = 'db-first'
-  and cheatsheets.slug = 'database-eleonora';
+  and cheatsheets.slug = 'database-appunti';
 
 insert ignore into
   project_cheatsheets (project_id, cheatsheet_id)
@@ -2877,7 +2877,7 @@ from
   cross join cheatsheets
 where
   projects.slug = 'express-blog-api-crud'
-  and cheatsheets.slug = 'express-eleonora';
+  and cheatsheets.slug = 'express-appunti';
 
 insert ignore into
   project_cheatsheets (project_id, cheatsheet_id)
@@ -2901,7 +2901,7 @@ from
   cross join cheatsheets
 where
   projects.slug = 'express-blog-routing'
-  and cheatsheets.slug = 'express-eleonora';
+  and cheatsheets.slug = 'express-appunti';
 
 insert ignore into
   project_cheatsheets (project_id, cheatsheet_id)
@@ -2925,7 +2925,7 @@ from
   cross join cheatsheets
 where
   projects.slug = 'express-blog-intro'
-  and cheatsheets.slug = 'express-eleonora';
+  and cheatsheets.slug = 'express-appunti';
 
 insert ignore into
   project_cheatsheets (project_id, cheatsheet_id)
@@ -2949,7 +2949,7 @@ from
   cross join cheatsheets
 where
   projects.slug = 'node-hello-world'
-  and cheatsheets.slug = 'node-npm-eleonora';
+  and cheatsheets.slug = 'node-npm-appunti';
 
 insert ignore into
   project_cheatsheets (project_id, cheatsheet_id)

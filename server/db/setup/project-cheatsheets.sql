@@ -9,7 +9,7 @@ START TRANSACTION;
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
 FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'database-eleonora';
+WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'database-appunti';
 
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
@@ -29,7 +29,7 @@ WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'node-express-si
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
 FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'express-eleonora';
+WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'express-appunti';
 
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
@@ -39,7 +39,7 @@ WHERE projects.slug = 'express-blog-sql' AND cheatsheets.slug = 'express-crud';
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
 FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'db-university' AND cheatsheets.slug = 'database-eleonora';
+WHERE projects.slug = 'db-university' AND cheatsheets.slug = 'database-appunti';
 
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
@@ -54,7 +54,7 @@ WHERE projects.slug = 'db-university' AND cheatsheets.slug = 'mysql-queries';
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
 FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'db-first' AND cheatsheets.slug = 'database-eleonora';
+WHERE projects.slug = 'db-first' AND cheatsheets.slug = 'database-appunti';
 
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
@@ -69,7 +69,7 @@ WHERE projects.slug = 'express-blog-api-crud' AND cheatsheets.slug = 'express-re
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
 FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-api-crud' AND cheatsheets.slug = 'express-eleonora';
+WHERE projects.slug = 'express-blog-api-crud' AND cheatsheets.slug = 'express-appunti';
 
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
@@ -79,7 +79,7 @@ WHERE projects.slug = 'express-blog-routing' AND cheatsheets.slug = 'express-res
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
 FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-routing' AND cheatsheets.slug = 'express-eleonora';
+WHERE projects.slug = 'express-blog-routing' AND cheatsheets.slug = 'express-appunti';
 
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
@@ -89,7 +89,7 @@ WHERE projects.slug = 'express-blog-intro' AND cheatsheets.slug = 'node-express-
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
 FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'express-blog-intro' AND cheatsheets.slug = 'express-eleonora';
+WHERE projects.slug = 'express-blog-intro' AND cheatsheets.slug = 'express-appunti';
 
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
@@ -99,7 +99,7 @@ WHERE projects.slug = 'node-hello-world' AND cheatsheets.slug = 'node-npm';
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
 FROM projects CROSS JOIN cheatsheets
-WHERE projects.slug = 'node-hello-world' AND cheatsheets.slug = 'node-npm-eleonora';
+WHERE projects.slug = 'node-hello-world' AND cheatsheets.slug = 'node-npm-appunti';
 
 INSERT IGNORE INTO project_cheatsheets (project_id, cheatsheet_id)
 SELECT projects.id, cheatsheets.id
