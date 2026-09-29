@@ -8,19 +8,17 @@ import '../Catalog.css';
 
 export const Topic = () => {
   const { name } = useParams();
-  const { data, error, loading } = useCatalogData(fetchTopic, name);
+  const state = useCatalogData(fetchTopic, name);
 
-  if (loading || error) {
+  if (state.step !== 'success') {
     return (
       <div className='catalog-page'>
-        <CatalogState
-          loading={loading}
-          error={error}
-          subject="dell'argomento"
-        />
+        <CatalogState state={state} subject="dell'argomento" />
       </div>
     );
   }
+
+  const { data } = state;
 
   return (
     <article className='catalog-page'>

@@ -9,22 +9,17 @@ import '../Catalog.css';
 
 export const Student = () => {
   const { github_username } = useParams();
-  const { data, error, loading } = useCatalogData(
-    fetchStudent,
-    github_username,
-  );
+  const state = useCatalogData(fetchStudent, github_username);
 
-  if (loading || error) {
+  if (state.step !== 'success') {
     return (
       <div className='catalog-page'>
-        <CatalogState
-          loading={loading}
-          error={error}
-          subject='dello studente'
-        />
+        <CatalogState state={state} subject='dello studente' />
       </div>
     );
   }
+
+  const { data } = state;
 
   return (
     <article className='catalog-page'>

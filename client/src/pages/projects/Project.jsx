@@ -9,15 +9,17 @@ import '../Catalog.css';
 
 export const Project = () => {
   const { slug } = useParams();
-  const { data, error, loading } = useCatalogData(fetchProject, slug);
+  const state = useCatalogData(fetchProject, slug);
 
-  if (loading || error) {
+  if (state.step !== 'success') {
     return (
       <div className='catalog-page'>
-        <CatalogState loading={loading} error={error} subject='del progetto' />
+        <CatalogState state={state} subject='del progetto' />
       </div>
     );
   }
+
+  const { data } = state;
 
   return (
     <article className='catalog-page'>

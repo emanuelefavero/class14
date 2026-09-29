@@ -8,7 +8,31 @@ import '../Catalog.css';
 export const Projects = () => {
   const { catalog, topics, search, topic, updateFilters } =
     useCatalogFilters(fetchProjects);
-  const { data, error, loading } = catalog;
+
+  const render = () => {
+    switch (catalog.step) {
+      case 'idle':
+      case 'loading':
+      case 'error':
+        return <CatalogState state={catalog} subject='dei progetti' />;
+
+      case 'success':
+        if (catalog.data.length === 0) {
+          return (
+            <p className='catalog-muted'>
+              {search || topic
+                ? 'Nessun progetto corrisponde ai filtri selezionati.'
+                : 'Nessun progetto nel catalogo.'}
+            </p>
+          );
+        }
+
+        return <ProjectList projects={catalog.data} />;
+
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className='catalog-page'>
@@ -24,28 +48,14 @@ export const Projects = () => {
         <CatalogFilters
           search={search}
           topic={topic}
-          topics={topics.data ?? []}
-          topicError={topics.error}
-          topicLoading={topics.loading}
+          topics={topics.step === 'success' ? topics.data : []}
+          topicError={topics.step === 'error'}
+          topicLoading={topics.step === 'idle' || topics.step === 'loading'}
           searchLabel='Cerca per titolo o slug'
-          resultCount={loading || error ? null : data.length}
+          resultCount={catalog.step === 'success' ? catalog.data.length : null}
           onChange={updateFilters}
         />
-        {loading || error ? (
-          <CatalogState
-            loading={loading}
-            error={error}
-            subject='dei progetti'
-          />
-        ) : data.length ? (
-          <ProjectList projects={data} />
-        ) : (
-          <p className='catalog-muted'>
-            {search || topic
-              ? 'Nessun progetto corrisponde ai filtri selezionati.'
-              : 'Nessun progetto nel catalogo.'}
-          </p>
-        )}
+        {render()}
       </section>
     </div>
   );

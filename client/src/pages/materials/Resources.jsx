@@ -9,37 +9,28 @@ import '../Catalog.css';
 export const Resources = () => {
   const { catalog, topics, search, topic, updateFilters } =
     useCatalogFilters(fetchResources);
-  const { data, error, loading } = catalog;
 
-  return (
-    <div className='catalog-page'>
-      <header className='catalog-heading'>
-        <p className='catalog-eyebrow'>Materiali · WDPT14</p>
-        <h1>Risorse</h1>
-        <p>
-          Documentazione e tutorial esterni utili per i progetti del percorso.
-        </p>
-      </header>
-      <section className='catalog-results' aria-label='Catalogo risorse'>
-        <CatalogFilters
-          search={search}
-          topic={topic}
-          topics={topics.data ?? []}
-          topicError={topics.error}
-          topicLoading={topics.loading}
-          searchLabel='Cerca per titolo'
-          resultCount={loading || error ? null : data.length}
-          onChange={updateFilters}
-        />
-        {loading || error ? (
-          <CatalogState
-            loading={loading}
-            error={error}
-            subject='delle risorse'
-          />
-        ) : data.length ? (
+  const render = () => {
+    switch (catalog.step) {
+      case 'idle':
+      case 'loading':
+      case 'error':
+        return <CatalogState state={catalog} subject='delle risorse' />;
+
+      case 'success':
+        if (catalog.data.length === 0) {
+          return (
+            <p className='catalog-muted'>
+              {search || topic
+                ? 'Nessuna risorsa corrisponde ai filtri selezionati.'
+                : 'Nessuna risorsa nel catalogo.'}
+            </p>
+          );
+        }
+
+        return (
           <ul className='catalog-list'>
-            {data.map((resource) => (
+            {catalog.data.map((resource) => (
               <li className='catalog-row' key={resource.id}>
                 <div>
                   <h2 className='catalog-row-title'>{resource.title}</h2>
@@ -75,13 +66,34 @@ export const Resources = () => {
               </li>
             ))}
           </ul>
-        ) : (
-          <p className='catalog-muted'>
-            {search || topic
-              ? 'Nessuna risorsa corrisponde ai filtri selezionati.'
-              : 'Nessuna risorsa nel catalogo.'}
-          </p>
-        )}
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className='catalog-page'>
+      <header className='catalog-heading'>
+        <p className='catalog-eyebrow'>Materiali · WDPT14</p>
+        <h1>Risorse</h1>
+        <p>
+          Documentazione e tutorial esterni utili per i progetti del percorso.
+        </p>
+      </header>
+      <section className='catalog-results' aria-label='Catalogo risorse'>
+        <CatalogFilters
+          search={search}
+          topic={topic}
+          topics={topics.step === 'success' ? topics.data : []}
+          topicError={topics.step === 'error'}
+          topicLoading={topics.step === 'idle' || topics.step === 'loading'}
+          searchLabel='Cerca per titolo'
+          resultCount={catalog.step === 'success' ? catalog.data.length : null}
+          onChange={updateFilters}
+        />
+        {render()}
       </section>
     </div>
   );

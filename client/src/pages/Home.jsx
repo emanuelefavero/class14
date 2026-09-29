@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import { useCatalogData } from '@/features/catalog/useCatalogData';
 import { fetchStats } from '@/features/stats/api';
 import { paths } from '@/router/paths';
 import './Home.css';
@@ -35,24 +35,7 @@ const counters = [
 ];
 
 export const Home = () => {
-  const [stats, setStats] = useState(null);
-  const [statsError, setStatsError] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-
-    fetchStats()
-      .then((data) => {
-        if (active) setStats(data);
-      })
-      .catch(() => {
-        if (active) setStatsError(true);
-      });
-
-    return () => {
-      active = false;
-    };
-  }, []);
+  const stats = useCatalogData(fetchStats);
 
   return (
     <div className='home'>
@@ -123,20 +106,20 @@ export const Home = () => {
           <p className='home-eyebrow'>Il catalogo Class14</p>
           <h2 id='stats-title'>Il percorso in numeri</h2>
         </div>
-        {stats && (
+        {stats.step === 'success' && (
           <dl className='home-stat-list'>
             {counters.map(({ key, label }) => (
               <div key={key}>
                 <dt>{label}</dt>
-                <dd>{stats[key]}</dd>
+                <dd>{stats.data[key]}</dd>
               </div>
             ))}
           </dl>
         )}
-        {!stats && !statsError && (
+        {(stats.step === 'idle' || stats.step === 'loading') && (
           <p role='status'>Caricamento dei contatori…</p>
         )}
-        {statsError && (
+        {stats.step === 'error' && (
           <p role='status'>Contatori non disponibili al momento.</p>
         )}
       </section>

@@ -10,38 +10,28 @@ import '../Catalog.css';
 export const Students = () => {
   const { catalog, topics, search, topic, updateFilters } =
     useCatalogFilters(fetchStudents);
-  const { data, error, loading } = catalog;
 
-  return (
-    <div className='catalog-page'>
-      <header className='catalog-heading'>
-        <p className='catalog-eyebrow'>Le persone · WDPT14</p>
-        <h1>Studenti</h1>
-        <p>
-          Scopri i profili della classe e le repository pubbliche collegate ai
-          progetti.
-        </p>
-      </header>
-      <section className='catalog-results' aria-label='Catalogo studenti'>
-        <CatalogFilters
-          search={search}
-          topic={topic}
-          topics={topics.data ?? []}
-          topicError={topics.error}
-          topicLoading={topics.loading}
-          searchLabel='Cerca per nome o username'
-          resultCount={loading || error ? null : data.length}
-          onChange={updateFilters}
-        />
-        {loading || error ? (
-          <CatalogState
-            loading={loading}
-            error={error}
-            subject='degli studenti'
-          />
-        ) : data.length ? (
+  const render = () => {
+    switch (catalog.step) {
+      case 'idle':
+      case 'loading':
+      case 'error':
+        return <CatalogState state={catalog} subject='degli studenti' />;
+
+      case 'success':
+        if (catalog.data.length === 0) {
+          return (
+            <p className='catalog-muted'>
+              {search || topic
+                ? 'Nessuno studente corrisponde ai filtri selezionati.'
+                : 'Nessuno studente nel catalogo.'}
+            </p>
+          );
+        }
+
+        return (
           <ul className='catalog-list'>
-            {data.map((student) => (
+            {catalog.data.map((student) => (
               <li className='catalog-row' key={student.id}>
                 <div className='catalog-person'>
                   <StudentAvatar student={student} />
@@ -58,13 +48,35 @@ export const Students = () => {
               </li>
             ))}
           </ul>
-        ) : (
-          <p className='catalog-muted'>
-            {search || topic
-              ? 'Nessuno studente corrisponde ai filtri selezionati.'
-              : 'Nessuno studente nel catalogo.'}
-          </p>
-        )}
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className='catalog-page'>
+      <header className='catalog-heading'>
+        <p className='catalog-eyebrow'>Le persone · WDPT14</p>
+        <h1>Studenti</h1>
+        <p>
+          Scopri i profili della classe e le repository pubbliche collegate ai
+          progetti.
+        </p>
+      </header>
+      <section className='catalog-results' aria-label='Catalogo studenti'>
+        <CatalogFilters
+          search={search}
+          topic={topic}
+          topics={topics.step === 'success' ? topics.data : []}
+          topicError={topics.step === 'error'}
+          topicLoading={topics.step === 'idle' || topics.step === 'loading'}
+          searchLabel='Cerca per nome o username'
+          resultCount={catalog.step === 'success' ? catalog.data.length : null}
+          onChange={updateFilters}
+        />
+        {render()}
       </section>
     </div>
   );

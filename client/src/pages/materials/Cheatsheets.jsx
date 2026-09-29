@@ -9,35 +9,28 @@ import '../Catalog.css';
 export const Cheatsheets = () => {
   const { catalog, topics, search, topic, updateFilters } =
     useCatalogFilters(fetchCheatsheets);
-  const { data, error, loading } = catalog;
 
-  return (
-    <div className='catalog-page'>
-      <header className='catalog-heading'>
-        <p className='catalog-eyebrow'>Materiali · WDPT14</p>
-        <h1>Cheat sheet</h1>
-        <p>PDF di ripasso e progetti a cui sono collegati.</p>
-      </header>
-      <section className='catalog-results' aria-label='Catalogo cheat sheet'>
-        <CatalogFilters
-          search={search}
-          topic={topic}
-          topics={topics.data ?? []}
-          topicError={topics.error}
-          topicLoading={topics.loading}
-          searchLabel='Cerca per titolo o slug'
-          resultCount={loading || error ? null : data.length}
-          onChange={updateFilters}
-        />
-        {loading || error ? (
-          <CatalogState
-            loading={loading}
-            error={error}
-            subject='dei cheat sheet'
-          />
-        ) : data.length ? (
+  const render = () => {
+    switch (catalog.step) {
+      case 'idle':
+      case 'loading':
+      case 'error':
+        return <CatalogState state={catalog} subject='dei cheat sheet' />;
+
+      case 'success':
+        if (catalog.data.length === 0) {
+          return (
+            <p className='catalog-muted'>
+              {search || topic
+                ? 'Nessun cheat sheet corrisponde ai filtri selezionati.'
+                : 'Nessun cheat sheet nel catalogo.'}
+            </p>
+          );
+        }
+
+        return (
           <ul className='catalog-list'>
-            {data.map((sheet) => (
+            {catalog.data.map((sheet) => (
               <li className='catalog-row' key={sheet.id}>
                 <div>
                   <h2 className='catalog-row-title'>{sheet.title}</h2>
@@ -78,13 +71,32 @@ export const Cheatsheets = () => {
               </li>
             ))}
           </ul>
-        ) : (
-          <p className='catalog-muted'>
-            {search || topic
-              ? 'Nessun cheat sheet corrisponde ai filtri selezionati.'
-              : 'Nessun cheat sheet nel catalogo.'}
-          </p>
-        )}
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className='catalog-page'>
+      <header className='catalog-heading'>
+        <p className='catalog-eyebrow'>Materiali · WDPT14</p>
+        <h1>Cheat sheet</h1>
+        <p>PDF di ripasso e progetti a cui sono collegati.</p>
+      </header>
+      <section className='catalog-results' aria-label='Catalogo cheat sheet'>
+        <CatalogFilters
+          search={search}
+          topic={topic}
+          topics={topics.step === 'success' ? topics.data : []}
+          topicError={topics.step === 'error'}
+          topicLoading={topics.step === 'idle' || topics.step === 'loading'}
+          searchLabel='Cerca per titolo o slug'
+          resultCount={catalog.step === 'success' ? catalog.data.length : null}
+          onChange={updateFilters}
+        />
+        {render()}
       </section>
     </div>
   );

@@ -2,10 +2,12 @@ import { isAxiosError } from 'axios';
 import { Link } from 'react-router';
 import { paths } from '@/router/paths';
 
-export const CatalogState = ({ loading, error, subject }) => {
-  if (loading) return <p role='status'>Caricamento {subject}…</p>;
+export const CatalogState = ({ state, subject }) => {
+  if (state.step === 'idle' || state.step === 'loading') {
+    return <p role='status'>Caricamento {subject}…</p>;
+  }
 
-  if (isAxiosError(error) && error.response?.status === 404) {
+  if (isAxiosError(state.error) && state.error.response?.status === 404) {
     return (
       <div className='catalog-message'>
         <h1>Contenuto non trovato</h1>

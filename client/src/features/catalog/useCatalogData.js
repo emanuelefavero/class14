@@ -1,22 +1,18 @@
 import { useEffect, useState } from 'react';
 
 export const useCatalogData = (fetcher, parameter) => {
-  const [state, setState] = useState({
-    parameter,
-    data: null,
-    error: null,
-    loading: true,
-  });
+  const [state, setState] = useState({ step: 'idle', parameter });
 
   useEffect(() => {
     let active = true;
+    setState({ step: 'loading', parameter });
 
     fetcher(parameter)
       .then((data) => {
-        if (active) setState({ parameter, data, error: null, loading: false });
+        if (active) setState({ step: 'success', parameter, data });
       })
       .catch((error) => {
-        if (active) setState({ parameter, data: null, error, loading: false });
+        if (active) setState({ step: 'error', parameter, error });
       });
 
     return () => {
@@ -24,8 +20,9 @@ export const useCatalogData = (fetcher, parameter) => {
     };
   }, [fetcher, parameter]);
 
+  // Hide the previous response while the next request starts.
   if (state.parameter !== parameter) {
-    return { data: null, error: null, loading: true };
+    return { step: 'loading', parameter };
   }
 
   return state;
