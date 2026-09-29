@@ -5,15 +5,16 @@ import { Select } from '@/components/ui/Select';
 import './CatalogFilters.css';
 
 export const CatalogFilters = ({
-  search,
-  topic,
-  topics,
-  topicError,
-  topicLoading,
+  filters,
+  topicsState,
   searchLabel,
   resultCount,
-  onChange,
 }) => {
+  const { search, topic, updateFilters } = filters;
+  const topics = topicsState.step === 'success' ? topicsState.data : [];
+  const topicError = topicsState.step === 'error';
+  const topicLoading =
+    topicsState.step === 'idle' || topicsState.step === 'loading';
   const [draft, setDraft] = useState(search);
   const hasFilters = Boolean(search || topic);
 
@@ -23,12 +24,12 @@ export const CatalogFilters = ({
 
   const handleSearch = (event) => {
     event.preventDefault();
-    onChange(draft, topic);
+    updateFilters(draft, topic);
   };
 
   const handleReset = () => {
     setDraft('');
-    onChange('', '');
+    updateFilters('', '');
   };
 
   return (
@@ -53,7 +54,7 @@ export const CatalogFilters = ({
           <Select
             id='catalog-topic-select'
             value={topic}
-            onChange={(event) => onChange(draft, event.target.value)}
+            onChange={(event) => updateFilters(draft, event.target.value)}
             disabled={topicLoading || Boolean(topicError)}
           >
             <option value=''>Tutti gli argomenti</option>

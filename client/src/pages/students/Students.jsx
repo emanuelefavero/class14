@@ -9,7 +9,8 @@ import { getPath } from '@/router/paths';
 import '../Catalog.css';
 
 export const Students = () => {
-  const { search, topic, updateFilters } = useCatalogFilters();
+  const filters = useCatalogFilters();
+  const { search, topic } = filters;
   const catalog = useStudents(search, topic);
   const topics = useTopics();
 
@@ -69,14 +70,10 @@ export const Students = () => {
       </header>
       <section className='catalog-results' aria-label='Catalogo studenti'>
         <CatalogFilters
-          search={search}
-          topic={topic}
-          topics={topics.step === 'success' ? topics.data : []}
-          topicError={topics.step === 'error'}
-          topicLoading={topics.step === 'idle' || topics.step === 'loading'}
+          filters={filters}
+          topicsState={topics}
           searchLabel='Cerca per nome o username'
           resultCount={catalog.step === 'success' ? catalog.data.length : null}
-          onChange={updateFilters}
         />
         {render()}
       </section>

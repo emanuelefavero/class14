@@ -8,7 +8,8 @@ import { getPath } from '@/router/paths';
 import '../Catalog.css';
 
 export const Resources = () => {
-  const { search, topic, updateFilters } = useCatalogFilters();
+  const filters = useCatalogFilters();
+  const { search, topic } = filters;
   const catalog = useResources(search, topic);
   const topics = useTopics();
 
@@ -86,14 +87,10 @@ export const Resources = () => {
       </header>
       <section className='catalog-results' aria-label='Catalogo risorse'>
         <CatalogFilters
-          search={search}
-          topic={topic}
-          topics={topics.step === 'success' ? topics.data : []}
-          topicError={topics.step === 'error'}
-          topicLoading={topics.step === 'idle' || topics.step === 'loading'}
+          filters={filters}
+          topicsState={topics}
           searchLabel='Cerca per titolo'
           resultCount={catalog.step === 'success' ? catalog.data.length : null}
-          onChange={updateFilters}
         />
         {render()}
       </section>
