@@ -13,6 +13,8 @@ Seguire [docs/SETUP.md](../docs/SETUP.md) dalla root del repository. Durante lo 
 - L'header mostra Argomenti, Progetti e Studenti; il logo porta alla Home. Cheat sheet e Risorse sono raggiungibili dalla Home e dal footer.
 - Liste e dettagli di Argomenti, Progetti e Studenti sono collegati tra loro; i cataloghi Cheat sheet e Risorse riportano ai progetti. Le risposte dell'API sono validate con Zod in `src/features/catalog/`.
 - Le descrizioni dei progetti sono renderizzate come Markdown senza HTML non attendibile. La feature Products del boilerplate e le chiamate Fake Store API sono state rimosse.
-- Ricerca e filtri restano nella fase 10 del [KANBAN](../KANBAN.md).
+- Le quattro liste Progetti, Studenti, Cheat sheet e Risorse hanno ricerca e filtro per argomento, con parametri `q` e `topic` nell'URL e reset dei filtri.
 
 Il CSS è nativo, con token in `src/index.css`, tema automatico chiaro/scuro e componenti riutilizzabili in `src/components/`.
+
+L'MVP locale è completo. Deployment e pubblicazione della repository saranno decisi dopo il confronto con l'insegnante.

@@ -1,4 +1,4 @@
-# Exercise: DB First
+# Esercizio: DB First
 
 Nome repo: `db-first`
 

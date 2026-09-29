@@ -119,13 +119,13 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Queste app sono ora copiate in `server/` e `client/`: usare soprattutto il codice presente nel progetto come riferimento. I componenti UI/shared, `cx`, le icone e il CSS sono già in `client/`; riutilizzarli dove pertinenti.
 - Non leggere `node_modules`, build o cache dei riferimenti. Non copiare indiscriminatamente il router o l'intera applicazione.
 
-## Stato attuale: backend e pagine MVP implementati
+## Stato attuale: MVP locale completato
 
 L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` dentro `client/` come punti di partenza. I tre package hanno dipendenze e lockfile. Server, Home e pagine MVP ora usano Class14; non fare nuovo scaffolding.
 
 - `server/app.js` registra `projects`, `students`, `cheatsheets`, `resources`, `topics`, `stats`, `root` ed `errors`; posts è stato rimosso. `server/db/db.js` legge la configurazione validata da `server/config/env.js`: host, porta, utente, password, database, limite e timeout. `DB_USER` è obbligatoria; il database predefinito è `class14`. Le routes Projects leggono soltanto il database Class14.
 - Il package server si chiama `class14-server`; README e risposta root sono adattati a Class14; posts è stato rimosso; errors resta temporaneamente per le verifiche dei middleware. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
-- `server/test.http` contiene richieste Projects, Students, Cheat Sheets e Resources e casi di validazione/errori; aggiungere le nuove risorse nelle rispettive fasi.
+- `server/test.http` contiene richieste delle API Class14 e pochi casi di validazione/errori.
 - Il package client si chiama `class14-client`. Home, tre sezioni principali, cataloghi materiali, dettagli e footer sono adattati a Class14. I vecchi componenti Products, provider, route e chiamate Fake Store API sono stati rimossi dopo l'implementazione di Projects.
 - Le risposte del catalogo sono validate con Zod in `client/src/features/catalog/`; `react-markdown` rende le descrizioni senza HTML non attendibile. Vite inoltra `/cheatsheets/` per i PDF, lasciando `/cheatsheets` alla route React.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. Rinominare progressivamente package, titoli, documentazione e contenuti al brand Class14 nel sottoprogetto su cui si sta lavorando; non rinominare la repository.
@@ -193,7 +193,7 @@ node scripts/sync-github-assets.mjs --refresh
 - Regola confermata: costruire esclusivamente `https://github.com/{username}/{projectSlug}`. Non cercare nomi simili o altre repository nei profili. Un redirect verso un nome diverso non è una corrispondenza valida.
 - Una precedente scansione autenticata con il token ampio di `gh` è stata respinta dalla revisione automatica perché poteva leggere dati privati. Il lavoro è stato completato con controlli pubblici anonimi. Non usare questo episodio come motivo per richiedere nuovi token per il catalogo attuale.
 
-## Prossimi passi, in ordine
+## Stato della consegna e prossime decisioni
 
 ### 1. Backend Express — completato per l'MVP
 
@@ -207,12 +207,12 @@ node scripts/sync-github-assets.mjs --refresh
 
 - Home, Projects, Students, Cheat Sheets, Resources e Topics hanno liste/dettagli dove previsti, con stati di caricamento, errore e assenza dati. Le descrizioni Markdown sono renderizzate senza HTML non attendibile.
 - Le route di lista e dettaglio sono in `client/src/router/paths.js`; i link tra argomenti, progetti, studenti, repository e materiali sono attivi. Products e Fake Store API sono stati rimossi.
-- Progetti, Studenti, Cheat sheet e Risorse usano `q` e `topic` dell'API. Il client conserva i filtri nell'URL e offre reset e stato senza risultati. **Prossimo passo: fase 11**, accessibilità, temi e verifica complessiva.
+- Progetti, Studenti, Cheat sheet e Risorse usano `q` e `topic` dell'API. Il client conserva i filtri nell'URL e offre reset e stato senza risultati.
 
-### 3. Completamento e presentazione
+### 3. Rifinitura locale completata; pubblicazione da decidere
 
-- Verificare i flussi completi, aggiornare documentazione di avvio e API, preparare README del progetto e configurazione senza segreti.
-- Deployment, hosting e passaggio della repository a pubblica non sono stati decisi. Non pubblicare o cambiare visibilità autonomamente.
+- L'utente ha verificato navigazione incrociata, link esterni, avatar, PDF, accessi diretti, mobile, tastiera, focus, etichette e temi chiaro/scuro. Ha eseguito Lighthouse e riferito un buon punteggio. Lint, build e controlli HTTP essenziali sono riusciti il 29 settembre 2026. README root, setup e contratto API sono aggiornati. La build mostra un avviso Vite per un bundle JavaScript oltre 500 kB.
+- Deployment e hosting restano decisioni future, da affrontare dopo il confronto con l'insegnante. La repository rimane privata; l'utente deciderà i prossimi passi prima di renderla pubblica. Non fare commit, push, deployment o cambi di visibilità senza richiesta.
 - Contatori di commit e Recruiter View avanzata sono futuri; la nuova direzione esclude classifiche competitive. Non aggiungere autenticazione, CRUD amministrativo o recensioni senza definirne prima lo scopo con l’utente.
 
 ## Regole operative per gli agenti
@@ -309,4 +309,11 @@ node scripts/sync-github-assets.mjs --refresh
 
 - `client/src/features/catalog/useCatalogFilters.js` legge e aggiorna `q` e `topic` nell'URL. Le quattro funzioni di lista in `features/catalog/api.js` passano i parametri agli endpoint esistenti; i dettagli e la lista Argomenti restano invariati.
 - `client/src/components/shared/CatalogFilters.jsx` riusa Input, Select e Button: ricerca su invio, filtro per argomento, conteggio risultati e reset. Le pagine distinguono catalogo vuoto da nessun risultato filtrato.
-- Verificati via HTTP attraverso Vite: liste complete 15/15/18/17, combinazioni `q` + `topic` e nessun risultato per tutte e quattro le risorse. Build, lint e formattazione client passati. Il controllo visivo nel browser dei nuovi controlli resta per la fase 11.
+- Verificati via HTTP attraverso Vite: liste complete 15/15/18/17, combinazioni `q` + `topic` e nessun risultato per tutte e quattro le risorse. Build, lint e formattazione client passati.
+
+### Fase 11 completata — rifinitura e consegna dell'MVP locale
+
+- Verifiche visive e di accessibilità riferite dall'utente: navigazione incrociata, link esterni, avatar, PDF, accessi diretti, mobile, tastiera, focus, etichette, temi e buon punteggio Lighthouse. Non sono stati ripetuti test visivi automatizzati in questa fase.
+- `npm run lint` e `npm run build` passano. La build emette un avviso sul bundle JavaScript da 516,62 kB; non impedisce la build.
+- HTTP locali verificati per root API, stats, lista/dettaglio topics, liste filtrate di Projects/Students/Cheat Sheets/Resources, dettagli progetto/studente e 404 di un progetto inesistente. Server di verifica arrestato; nessun processo Vite avviato in questa fase.
+- `README.md`, `client/README.md`, `docs/SETUP.md`, `docs/API-CONTRACT.md` e `KANBAN.md` aggiornati. Deployment e pubblicazione della repository rimangono fuori dal ticket, in attesa della decisione dell'utente dopo il confronto con l'insegnante.

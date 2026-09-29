@@ -4,7 +4,7 @@
 
 Contratto definito il 26 settembre 2026 per implementare l’MVP concordato in
 [AGENTS.md](../AGENTS.md) e [KANBAN.md](../KANBAN.md), secondo la direzione
-[PLAN.md](../PLAN.md). **Questo documento è la specifica di riferimento: Projects, Students, Cheat Sheets/Resources, Topics e Stats sono implementati.**
+[PLAN.md](../PLAN.md). **Questo documento è la specifica di riferimento: Projects, Students, Cheat Sheets/Resources, Topics e Stats sono implementati e usati dal client.**
 
 API pubblica di sola lettura, senza autenticazione, CRUD o chiamate GitHub live.
 Riutilizza le sette tabelle di [schema.sql](../server/db/setup/schema.sql), senza
@@ -228,9 +228,9 @@ Il messaggio è descrittivo: il frontend sceglie il comportamento usando lo stat
 - Non esporre created_at come completed_at o data della lezione; non esistono completamento reale, bio, immagine progetto, progetto finale o statistiche commit nello schema attuale.
 - Nessun materiale diventa direttamente associato a un topic soltanto perché è collegato a uno dei suoi progetti.
 
-## Verifiche da eseguire durante l’implementazione
+## Criteri di verifica dell'implementazione
 
-Questa checklist definisce i criteri di accettazione; non dichiara test runtime già eseguiti.
+I criteri seguenti hanno guidato le verifiche delle fasi backend e frontend. Il 29 settembre 2026 sono stati ripetuti pochi controlli HTTP dei flussi principali: liste filtrate, dettagli, contatori e 404. Le verifiche più estese dei dati e delle relazioni sono documentate in [KANBAN.md](../KANBAN.md). Il deployment resta da definire.
 
 - Liste/dettagli rispettano esattamente i campi, nullabilità e ordinamenti descritti; gli ID derivano dal DB, non dai numeri di esempio.
 - Progetto con più studenti/PDF/risorse non moltiplica gli oggetti per effetto dei join.

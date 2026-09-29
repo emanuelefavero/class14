@@ -1,4 +1,4 @@
-# Exercise: DB University
+# Esercizio: DB University
 
 Nome repo: `db-university`
 

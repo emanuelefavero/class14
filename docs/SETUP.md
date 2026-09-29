@@ -38,7 +38,7 @@ Il progetto usa JavaScript, senza script TypeScript/typecheck e senza richiedere
 
 ## Stato verificato
 
-Il 26 settembre 2026: installazione completata, build e lint riusciti, audit a zero vulnerabilità nei tre package, connessione MySQL riuscita e HTTP 200 dalle root server/client. Il 29 settembre sono state verificate con dati reali anche le pagine MVP del client; Products è stato rimosso. L'installazione di `react-markdown` ha riportato zero vulnerabilità nell'audit npm del client.
+Il 29 settembre 2026: MVP locale implementato, build e lint riusciti. I controlli HTTP essenziali hanno restituito 200 per Home API, contatori, liste filtrate e dettagli di Argomenti, Progetti e Studenti; un progetto inesistente ha restituito 404. L'utente ha verificato navigazione, collegamenti, file statici, accessi diretti, mobile, tastiera, focus, etichette, temi e un buon risultato Lighthouse. Il controllo precedente delle dipendenze dei tre package aveva riportato zero vulnerabilità. La build segnala un bundle JavaScript sopra la soglia di avviso di Vite, pur completandosi correttamente.
 
 ## Collegamento client–server
 
@@ -48,4 +48,4 @@ Se si cambia la porta backend, avviare entrambi con la stessa variabile esportat
 
 Avatar e PDF sono in `server/public/avatars` e `server/public/cheatsheets`; gli script usano queste cartelle. `assets/` conserva dati e mappature.
 
-Il proxy è una configurazione locale Vite, non viene incorporato nella build. La configurazione dell’hosting verrà definita prima del deployment.
+Il proxy è una configurazione locale Vite, non viene incorporato nella build. Deployment e hosting restano una decisione futura dopo il confronto con l'insegnante; nessun URL pubblico è attualmente configurato.

@@ -125,18 +125,20 @@ Verificati nel browser Home con contatori reali, le tre liste principali, il per
 - [x] Usare `q` e `topic` nei parametri URL e nelle richieste API, senza nuovi campi o endpoint.
 - [x] Verificare combinazioni di filtri, reset e nessun risultato.
 
-Controllate via HTTP attraverso Vite le quattro liste senza parametri, con `q` e `topic` combinati e senza risultati. Build, lint e formattazione client passati. Il controllo visivo dei nuovi filtri nel browser resta nella verifica complessiva della fase 11.
+Controllate via HTTP attraverso Vite le quattro liste senza parametri, con `q` e `topic` combinati e senza risultati. Build, lint e formattazione client passati.
 
-### 11. Rifinitura e consegna
+### 11. Rifinitura e consegna — completato per l'MVP locale
 
-- [ ] Verificare navigazione incrociata, link esterni, avatar, PDF e accesso diretto alle pagine di dettaglio.
-- [ ] Verificare mobile, tastiera, focus, etichette e tema chiaro/scuro.
-- [ ] Eseguire lint/build e controlli HTTP dei flussi principali.
-- [ ] Aggiornare README, setup, contratto API e AGENTS con lo stato verificato.
-- [ ] Concordare deployment e visibilità della repository prima di pubblicare.
+- [x] Verificare navigazione incrociata, link esterni, avatar, PDF e accesso diretto alle pagine di dettaglio.
+- [x] Verificare mobile, tastiera, focus, etichette e tema chiaro/scuro.
+- [x] Eseguire lint/build e controlli HTTP dei flussi principali.
+- [x] Aggiornare README, setup, contratto API e AGENTS con lo stato verificato.
+
+L'utente ha verificato navigazione, link, avatar, PDF, accesso diretto, mobile, tastiera, focus, etichette e temi; ha inoltre ottenuto un buon risultato Lighthouse. Lint e build passano; controllati via HTTP contatori, argomenti, progetti, studenti, cataloghi materiali e 404. La build segnala un bundle JavaScript oltre la soglia di avviso Vite. Il deployment resta da decidere dopo il confronto con l'insegnante.
 
 ## Idee future — fuori dall’MVP
 
+- Concordare deployment e visibilità della repository prima della pubblicazione. La repository resta privata finché l'utente non decide il passaggio a pubblica.
 - Immagini/periodi dei progetti, repository originali, bio, descrizioni PDF e categorie risorse: aggiungere solo contenuti verificati, valutando prima file per slug/username/URL.
 - Descrizioni dei topic e associazioni dirette curate ai materiali: eventuale mappatura editoriale, senza migrazione preventiva.
 - Statistiche GitHub (commit, linguaggi, aggiornamento), con raccolta e cache da progettare.
@@ -145,7 +147,7 @@ Controllate via HTTP attraverso Vite le quattro liste senza parametri, con `q` e
 
 ## In corso
 
-Nessuna attività di implementazione aperta nella fase 10. Prossima attività: fase 11, rifinitura e consegna.
+MVP locale completato. L'utente deciderà i prossimi passi prima della pubblicazione della repository; il deployment rimane una decisione futura.
 
 ## Fatto
 
