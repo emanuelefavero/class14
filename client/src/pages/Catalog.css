@@ -39,6 +39,11 @@
   font-size: 1.0625rem;
 }
 
+.catalog-results {
+  display: grid;
+  gap: 1.25rem;
+}
+
 .catalog-back {
   color: var(--primary);
   font-size: 0.875rem;

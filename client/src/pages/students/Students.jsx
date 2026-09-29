@@ -1,13 +1,16 @@
 import { Link } from 'react-router';
+import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
 import { StudentAvatar } from '@/components/shared/StudentAvatar';
 import { fetchStudents } from '@/features/catalog/api';
-import { useCatalogData } from '@/features/catalog/useCatalogData';
+import { useCatalogFilters } from '@/features/catalog/useCatalogFilters';
 import { getPath } from '@/router/paths';
 import '../Catalog.css';
 
 export const Students = () => {
-  const { data, error, loading } = useCatalogData(fetchStudents);
+  const { catalog, topics, search, topic, updateFilters } =
+    useCatalogFilters(fetchStudents);
+  const { data, error, loading } = catalog;
 
   return (
     <div className='catalog-page'>
@@ -19,34 +22,50 @@ export const Students = () => {
           progetti.
         </p>
       </header>
-      {loading || error ? (
-        <CatalogState
-          loading={loading}
-          error={error}
-          subject='degli studenti'
+      <section className='catalog-results' aria-label='Catalogo studenti'>
+        <CatalogFilters
+          search={search}
+          topic={topic}
+          topics={topics.data ?? []}
+          topicError={topics.error}
+          topicLoading={topics.loading}
+          searchLabel='Cerca per nome o username'
+          resultCount={loading || error ? null : data.length}
+          onChange={updateFilters}
         />
-      ) : data.length ? (
-        <ul className='catalog-list'>
-          {data.map((student) => (
-            <li className='catalog-row' key={student.id}>
-              <div className='catalog-person'>
-                <StudentAvatar student={student} />
-                <div>
-                  <Link
-                    className='catalog-row-title'
-                    to={getPath.student(student.github_username)}
-                  >
-                    {student.name}
-                  </Link>
-                  <p className='catalog-meta'>@{student.github_username}</p>
+        {loading || error ? (
+          <CatalogState
+            loading={loading}
+            error={error}
+            subject='degli studenti'
+          />
+        ) : data.length ? (
+          <ul className='catalog-list'>
+            {data.map((student) => (
+              <li className='catalog-row' key={student.id}>
+                <div className='catalog-person'>
+                  <StudentAvatar student={student} />
+                  <div>
+                    <Link
+                      className='catalog-row-title'
+                      to={getPath.student(student.github_username)}
+                    >
+                      {student.name}
+                    </Link>
+                    <p className='catalog-meta'>@{student.github_username}</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className='catalog-muted'>Nessuno studente nel catalogo.</p>
-      )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className='catalog-muted'>
+            {search || topic
+              ? 'Nessuno studente corrisponde ai filtri selezionati.'
+              : 'Nessuno studente nel catalogo.'}
+          </p>
+        )}
+      </section>
     </div>
   );
 };

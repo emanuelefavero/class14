@@ -45,7 +45,7 @@ L’utente ha approvato la prima versione proposta dopo il confronto di `PLAN.md
 | Resources | Catalogo autonomo di titoli/link e collegamenti ai progetti | `resources`, `project_resources` |
 | Topics | Elenco dei tag unici e dettaglio con progetti, PDF e risorse collegati attraverso quei progetti | `projects.topics`, separato e normalizzato in lettura; tabelle ponte dei materiali |
 | Home | Presentazione del Learning Hub e contatori di studenti, progetti, repository, PDF e risorse | Conteggi delle tabelle esistenti |
-| Ricerca e filtri essenziali | Ricerca su titoli/nomi/username e filtro per topic dove pertinente, dopo che le liste funzionano | Campi esistenti; modalità da definire nel contratto API |
+| Ricerca e filtri essenziali | Ricerca su titoli/nomi/username e filtro per topic nelle quattro liste supportate | `q` e `topic` definiti nel contratto API |
 
 ### Gerarchia delle pagine e navigazione confermata
 
@@ -53,7 +53,7 @@ L’utente ha approvato la prima versione proposta dopo il confronto di `PLAN.md
 - Le liste sono punti di ingresso ai dettagli, non pagine isolate. Dal dettaglio argomento si aprono progetti e materiali dei progetti collegati; dal dettaglio progetto si aprono profili degli studenti, repository verificate, PDF, risorse e topic; dal profilo studente si torna ai progetti. I cataloghi materiali riportano ai progetti collegati.
 - Il contratto API già fornisce questi dati: `TopicDetail.projects` e `related_*`, `ProjectDetail.students` con `repo_url` più `cheatsheets` e `resources`, `StudentDetail.projects` con `repo_url`, e `projects` nei cataloghi materiali. Non serve cambiare schema o aggiungere endpoint per questo flusso.
 - La relazione topic–materiale è indiretta e si presenta come “Materiali dei progetti collegati”. `student_projects` attesta una repository pubblica verificata, non il completamento dell'esercizio: usare “Repository disponibili”.
-- L'header del client mostra le tre sezioni principali; liste, dettagli, cataloghi materiali e collegamenti incrociati della fase 9 sono presenti. Ricerca e filtri sono la fase 10. [DESIGN.md](DESIGN.md) contiene la struttura UX da seguire.
+- L'header del client mostra le tre sezioni principali; liste, dettagli, cataloghi materiali e collegamenti incrociati sono presenti. Ricerca e filtri delle quattro liste supportate sono implementati con parametri URL. [DESIGN.md](DESIGN.md) contiene la struttura UX da seguire.
 
 ### Contratto API definito — fase 1 completata
 
@@ -203,11 +203,11 @@ node scripts/sync-github-assets.mjs --refresh
 - Liste e dettagli di Projects/Students, cataloghi PDF/risorse, Topics e contatori sono implementati secondo `docs/API-CONTRACT.md` e verificati con dati reali.
 - L'alias degli import Node usa `#app/*` in `server/package.json` e nel codice server; `#/…` impediva l'avvio con Node locale.
 
-### 2. Frontend React — pagine MVP completate
+### 2. Frontend React — pagine MVP e filtri completati
 
 - Home, Projects, Students, Cheat Sheets, Resources e Topics hanno liste/dettagli dove previsti, con stati di caricamento, errore e assenza dati. Le descrizioni Markdown sono renderizzate senza HTML non attendibile.
 - Le route di lista e dettaglio sono in `client/src/router/paths.js`; i link tra argomenti, progetti, studenti, repository e materiali sono attivi. Products e Fake Store API sono stati rimossi.
-- **Prossimo passo: fase 10**, ricerca e filtri essenziali. Accessibilità, temi e verifica complessiva restano anche nella fase 11.
+- Progetti, Studenti, Cheat sheet e Risorse usano `q` e `topic` dell'API. Il client conserva i filtri nell'URL e offre reset e stato senza risultati. **Prossimo passo: fase 11**, accessibilità, temi e verifica complessiva.
 
 ### 3. Completamento e presentazione
 
@@ -303,4 +303,10 @@ node scripts/sync-github-assets.mjs --refresh
 - Cheat sheet e Risorse hanno cataloghi autonomi che riportano ai progetti; i PDF hanno apertura e download. Footer e Home aprono i cataloghi. L'header mostra solo Argomenti, Progetti e Studenti.
 - Le risposte sono validate ai confini HTTP in `client/src/features/catalog/schemas.js`. Products, provider, route e chiamate Fake Store API sono rimossi. `client/vite.config.js` distingue la pagina `/cheatsheets` dai file `/cheatsheets/…`.
 - Verificati con API e MySQL locali: contatori 15/15/124/18/17; percorso React → React Hello World → Emanuele con repository; liste principali; accesso diretto ai cataloghi; studente con zero repository; 404 progetto; PDF e avatar tramite Vite; dettaglio progetto a 390 px. Console browser senza errori o avvisi. Build, lint e formattazione client passati.
-- Prossimo lavoro: **fase 10, ricerca e filtri essenziali**. La fase 11 raccoglie le verifiche e la rifinitura finali.
+- La fase 10 aggiunge ricerca e filtri alle quattro liste; la fase 11 raccoglie le verifiche e la rifinitura finali.
+
+### Fase 10 completata — ricerca e filtri essenziali
+
+- `client/src/features/catalog/useCatalogFilters.js` legge e aggiorna `q` e `topic` nell'URL. Le quattro funzioni di lista in `features/catalog/api.js` passano i parametri agli endpoint esistenti; i dettagli e la lista Argomenti restano invariati.
+- `client/src/components/shared/CatalogFilters.jsx` riusa Input, Select e Button: ricerca su invio, filtro per argomento, conteggio risultati e reset. Le pagine distinguono catalogo vuoto da nessun risultato filtrato.
+- Verificati via HTTP attraverso Vite: liste complete 15/15/18/17, combinazioni `q` + `topic` e nessun risultato per tutte e quattro le risorse. Build, lint e formattazione client passati. Il controllo visivo nel browser dei nuovi controlli resta per la fase 11.

@@ -55,7 +55,7 @@ Ogni catalogo resta comunque raggiungibile direttamente. Le relazioni devono fun
 
 Nelle pagine di dettaglio, l'intestazione mostra titolo e metadati essenziali. Il contenuto principale occupa la colonna di lettura; su desktop le azioni e le relazioni più brevi possono stare in una colonna secondaria, solo se questo aiuta la consultazione. Su schermi stretti tutto segue un ordine verticale naturale. Non aggiungere indici laterali, tab o pannelli persistenti prima che la quantità reale di contenuti lo richieda.
 
-Il client mostra le tre voci principali nell'header e le liste, i dettagli e i cataloghi dell'MVP. Cheat sheet e Risorse sono raggiungibili dalla Home, dal footer e dai progetti; i loro percorsi diretti sono `/cheatsheets` e `/resources`. Ricerca e filtri restano nella fase 10.
+Il client mostra le tre voci principali nell'header e le liste, i dettagli e i cataloghi dell'MVP. Cheat sheet e Risorse sono raggiungibili dalla Home, dal footer e dai progetti; i loro percorsi diretti sono `/cheatsheets` e `/resources`. Le quattro liste supportate dall'API hanno ricerca per testo e filtro per argomento, con stato nell'URL.
 
 ## Interazioni e stati
 

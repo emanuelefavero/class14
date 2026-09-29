@@ -1,11 +1,14 @@
 import { ProjectList } from '@/components/shared/CatalogContent';
+import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
 import { fetchProjects } from '@/features/catalog/api';
-import { useCatalogData } from '@/features/catalog/useCatalogData';
+import { useCatalogFilters } from '@/features/catalog/useCatalogFilters';
 import '../Catalog.css';
 
 export const Projects = () => {
-  const { data, error, loading } = useCatalogData(fetchProjects);
+  const { catalog, topics, search, topic, updateFilters } =
+    useCatalogFilters(fetchProjects);
+  const { data, error, loading } = catalog;
 
   return (
     <div className='catalog-page'>
@@ -17,13 +20,33 @@ export const Projects = () => {
           materiali della classe.
         </p>
       </header>
-      {loading || error ? (
-        <CatalogState loading={loading} error={error} subject='dei progetti' />
-      ) : data.length ? (
-        <ProjectList projects={data} />
-      ) : (
-        <p className='catalog-muted'>Nessun progetto nel catalogo.</p>
-      )}
+      <section className='catalog-results' aria-label='Catalogo progetti'>
+        <CatalogFilters
+          search={search}
+          topic={topic}
+          topics={topics.data ?? []}
+          topicError={topics.error}
+          topicLoading={topics.loading}
+          searchLabel='Cerca per titolo o slug'
+          resultCount={loading || error ? null : data.length}
+          onChange={updateFilters}
+        />
+        {loading || error ? (
+          <CatalogState
+            loading={loading}
+            error={error}
+            subject='dei progetti'
+          />
+        ) : data.length ? (
+          <ProjectList projects={data} />
+        ) : (
+          <p className='catalog-muted'>
+            {search || topic
+              ? 'Nessun progetto corrisponde ai filtri selezionati.'
+              : 'Nessun progetto nel catalogo.'}
+          </p>
+        )}
+      </section>
     </div>
   );
 };

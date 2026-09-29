@@ -10,17 +10,23 @@ import {
   topicsSchema,
 } from './schemas';
 
-const get = (url, schema) => fetchData(url).then((data) => schema.parse(data));
+const get = (url, schema, query = '') => {
+  const requestUrl = query ? `${url}?${query}` : url;
+  return fetchData(requestUrl).then((data) => schema.parse(data));
+};
 
-export const fetchProjects = () => get('/api/projects', projectsSchema);
+export const fetchProjects = (query) =>
+  get('/api/projects', projectsSchema, query);
 export const fetchProject = (slug) =>
   get(`/api/projects/${encodeURIComponent(slug)}`, projectSchema);
 export const fetchTopics = () => get('/api/topics', topicsSchema);
 export const fetchTopic = (name) =>
   get(`/api/topics/${encodeURIComponent(name)}`, topicSchema);
-export const fetchStudents = () => get('/api/students', studentsSchema);
+export const fetchStudents = (query) =>
+  get('/api/students', studentsSchema, query);
 export const fetchStudent = (username) =>
   get(`/api/students/${encodeURIComponent(username)}`, studentSchema);
-export const fetchCheatsheets = () =>
-  get('/api/cheatsheets', cheatsheetsSchema);
-export const fetchResources = () => get('/api/resources', resourcesSchema);
+export const fetchCheatsheets = (query) =>
+  get('/api/cheatsheets', cheatsheetsSchema, query);
+export const fetchResources = (query) =>
+  get('/api/resources', resourcesSchema, query);

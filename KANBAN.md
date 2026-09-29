@@ -119,11 +119,13 @@ La fase 8 aveva introdotto l'header a tre voci e pagine introduttive. Le pagine 
 
 Verificati nel browser Home con contatori reali, le tre liste principali, il percorso React → React Hello World → Emanuele con repository, uno studente senza repository, 404 progetto e accessi diretti ai cataloghi materiali. PDF e avatar restituiscono i Content-Type corretti attraverso Vite. Build, lint e formattazione client verificati; ricerca e filtri restano nella fase 10.
 
-### 10. Ricerca e filtri essenziali — dopo le liste
+### 10. Ricerca e filtri essenziali — completato
 
-- [ ] Implementare la ricerca concordata su titoli, nomi e username e il filtro topic dove pertinente.
-- [ ] Usare i campi esistenti, mantenendo coerente il comportamento frontend/API.
-- [ ] Verificare combinazioni di filtri, reset e nessun risultato.
+- [x] Implementare la ricerca concordata su titoli, nomi e username e il filtro topic nelle quattro liste supportate dall'API.
+- [x] Usare `q` e `topic` nei parametri URL e nelle richieste API, senza nuovi campi o endpoint.
+- [x] Verificare combinazioni di filtri, reset e nessun risultato.
+
+Controllate via HTTP attraverso Vite le quattro liste senza parametri, con `q` e `topic` combinati e senza risultati. Build, lint e formattazione client passati. Il controllo visivo dei nuovi filtri nel browser resta nella verifica complessiva della fase 11.
 
 ### 11. Rifinitura e consegna
 
@@ -143,7 +145,7 @@ Verificati nel browser Home con contatori reali, le tre liste principali, il per
 
 ## In corso
 
-Nessuna attività di implementazione aperta nella fase 9. Prossima attività: fase 10, ricerca e filtri essenziali.
+Nessuna attività di implementazione aperta nella fase 10. Prossima attività: fase 11, rifinitura e consegna.
 
 ## Fatto
 
