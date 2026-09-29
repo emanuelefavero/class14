@@ -2,9 +2,9 @@ import { Link } from 'react-router';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
 import { StudentAvatar } from '@/components/shared/StudentAvatar';
-import { useStudents } from '@/features/catalog/students';
-import { useTopics } from '@/features/catalog/topics';
-import { useCatalogFilters } from '@/features/catalog/useCatalogFilters';
+import { useCatalogFilters } from '@/features/catalog/hooks/useCatalogFilters';
+import { useStudents } from '@/features/catalog/hooks/useStudents';
+import { useTopics } from '@/features/catalog/hooks/useTopics';
 import { getPath } from '@/router/paths';
 import '../Catalog.css';
 

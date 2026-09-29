@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { useStats } from '@/features/stats/useStats';
+import { useStats } from '@/features/stats/hooks/useStats';
 import { paths } from '@/router/paths';
 import './Home.css';
 

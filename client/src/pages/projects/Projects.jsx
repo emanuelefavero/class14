@@ -1,9 +1,9 @@
 import { ProjectList } from '@/components/shared/CatalogContent';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
-import { useProjects } from '@/features/catalog/projects';
-import { useTopics } from '@/features/catalog/topics';
-import { useCatalogFilters } from '@/features/catalog/useCatalogFilters';
+import { useCatalogFilters } from '@/features/catalog/hooks/useCatalogFilters';
+import { useProjects } from '@/features/catalog/hooks/useProjects';
+import { useTopics } from '@/features/catalog/hooks/useTopics';
 import '../Catalog.css';
 
 export const Projects = () => {

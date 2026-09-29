@@ -1,5 +1,8 @@
 import { useSearchParams } from 'react-router';
 
+/**
+ * Custom hook to manage catalog filters using URL search parameters.
+ */
 export const useCatalogFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('q')?.trim() ?? '';

@@ -2,7 +2,7 @@ import Markdown from 'react-markdown';
 import { Link, useParams } from 'react-router';
 import { MaterialLinks, TopicLinks } from '@/components/shared/CatalogContent';
 import { CatalogState } from '@/components/shared/CatalogState';
-import { useProject } from '@/features/catalog/projects';
+import { useProject } from '@/features/catalog/hooks/useProject';
 import { getPath, paths } from '@/router/paths';
 import '../Catalog.css';
 

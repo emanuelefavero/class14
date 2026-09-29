@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { fetchData } from '@/lib/api';
-import { statsSchema } from './schemas';
+import { topicsSchema } from '../schemas';
 
-export const useStats = () => {
+export const useTopics = () => {
   const [state, setState] = useState({ step: 'idle' });
 
   useEffect(() => {
     let active = true;
     setState({ step: 'loading' });
 
-    fetchData('/api/stats')
-      .then((data) => statsSchema.parse(data))
+    fetchData('/api/topics')
+      .then((data) => topicsSchema.parse(data))
       .then((data) => {
         if (active) setState({ step: 'success', data });
       })

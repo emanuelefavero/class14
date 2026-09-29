@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { CatalogState } from '@/components/shared/CatalogState';
-import { useTopics } from '@/features/catalog/topics';
+import { useTopics } from '@/features/catalog/hooks/useTopics';
 import { getPath } from '@/router/paths';
 import '../Catalog.css';
 

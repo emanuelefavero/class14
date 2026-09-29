@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router';
 import { TopicLinks } from '@/components/shared/CatalogContent';
 import { CatalogState } from '@/components/shared/CatalogState';
 import { StudentAvatar } from '@/components/shared/StudentAvatar';
-import { useStudent } from '@/features/catalog/students';
+import { useStudent } from '@/features/catalog/hooks/useStudent';
 import { getPath, paths } from '@/router/paths';
 import '../Catalog.css';
 

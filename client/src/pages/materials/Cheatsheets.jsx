@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
-import { useCheatsheets } from '@/features/catalog/materials';
-import { useTopics } from '@/features/catalog/topics';
-import { useCatalogFilters } from '@/features/catalog/useCatalogFilters';
+import { useCatalogFilters } from '@/features/catalog/hooks/useCatalogFilters';
+import { useCheatsheets } from '@/features/catalog/hooks/useCheatsheets';
+import { useTopics } from '@/features/catalog/hooks/useTopics';
 import { getPath } from '@/router/paths';
 import '../Catalog.css';
 
