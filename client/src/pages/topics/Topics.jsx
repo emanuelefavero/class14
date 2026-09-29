@@ -1,12 +1,11 @@
 import { Link } from 'react-router';
 import { CatalogState } from '@/components/shared/CatalogState';
-import { fetchTopics } from '@/features/catalog/api';
-import { useCatalogData } from '@/features/catalog/useCatalogData';
+import { useTopics } from '@/features/catalog/topics';
 import { getPath } from '@/router/paths';
 import '../Catalog.css';
 
 export const Topics = () => {
-  const state = useCatalogData(fetchTopics);
+  const state = useTopics();
 
   const render = () => {
     switch (state.step) {
@@ -17,7 +16,9 @@ export const Topics = () => {
 
       case 'success':
         if (state.data.length === 0) {
-          return <p className='catalog-muted'>Nessun argomento nel catalogo.</p>;
+          return (
+            <p className='catalog-muted'>Nessun argomento nel catalogo.</p>
+          );
         }
 
         return (

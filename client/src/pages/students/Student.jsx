@@ -2,14 +2,13 @@ import { Link, useParams } from 'react-router';
 import { TopicLinks } from '@/components/shared/CatalogContent';
 import { CatalogState } from '@/components/shared/CatalogState';
 import { StudentAvatar } from '@/components/shared/StudentAvatar';
-import { fetchStudent } from '@/features/catalog/api';
-import { useCatalogData } from '@/features/catalog/useCatalogData';
+import { useStudent } from '@/features/catalog/students';
 import { getPath, paths } from '@/router/paths';
 import '../Catalog.css';
 
 export const Student = () => {
   const { github_username } = useParams();
-  const state = useCatalogData(fetchStudent, github_username);
+  const state = useStudent(github_username);
 
   if (state.step !== 'success') {
     return (

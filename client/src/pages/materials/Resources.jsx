@@ -1,14 +1,16 @@
 import { Link } from 'react-router';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
-import { fetchResources } from '@/features/catalog/api';
+import { useResources } from '@/features/catalog/materials';
+import { useTopics } from '@/features/catalog/topics';
 import { useCatalogFilters } from '@/features/catalog/useCatalogFilters';
 import { getPath } from '@/router/paths';
 import '../Catalog.css';
 
 export const Resources = () => {
-  const { catalog, topics, search, topic, updateFilters } =
-    useCatalogFilters(fetchResources);
+  const { search, topic, updateFilters } = useCatalogFilters();
+  const catalog = useResources(search, topic);
+  const topics = useTopics();
 
   const render = () => {
     switch (catalog.step) {

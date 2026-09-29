@@ -1,14 +1,13 @@
 import { Link, useParams } from 'react-router';
 import { MaterialLinks, ProjectList } from '@/components/shared/CatalogContent';
 import { CatalogState } from '@/components/shared/CatalogState';
-import { fetchTopic } from '@/features/catalog/api';
-import { useCatalogData } from '@/features/catalog/useCatalogData';
+import { useTopic } from '@/features/catalog/topics';
 import { paths } from '@/router/paths';
 import '../Catalog.css';
 
 export const Topic = () => {
   const { name } = useParams();
-  const state = useCatalogData(fetchTopic, name);
+  const state = useTopic(name);
 
   if (state.step !== 'success') {
     return (

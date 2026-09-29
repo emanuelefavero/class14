@@ -2,14 +2,16 @@ import { Link } from 'react-router';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
 import { StudentAvatar } from '@/components/shared/StudentAvatar';
-import { fetchStudents } from '@/features/catalog/api';
+import { useStudents } from '@/features/catalog/students';
+import { useTopics } from '@/features/catalog/topics';
 import { useCatalogFilters } from '@/features/catalog/useCatalogFilters';
 import { getPath } from '@/router/paths';
 import '../Catalog.css';
 
 export const Students = () => {
-  const { catalog, topics, search, topic, updateFilters } =
-    useCatalogFilters(fetchStudents);
+  const { search, topic, updateFilters } = useCatalogFilters();
+  const catalog = useStudents(search, topic);
+  const topics = useTopics();
 
   const render = () => {
     switch (catalog.step) {

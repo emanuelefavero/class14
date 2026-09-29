@@ -149,6 +149,13 @@ L'utente ha verificato navigazione, link, avatar, PDF, accesso diretto, mobile, 
 
 MVP locale completato. L'utente deciderà i prossimi passi prima della pubblicazione della repository; il deployment rimane una decisione futura.
 
+### Refactoring fetching frontend — 29 settembre 2026
+
+- Rimossi l'hook generico `useCatalogData` e il raggruppamento `features/catalog/api.js`: nessuna funzione `fetch*` viene più passata come dipendenza agli hook.
+- Aggiunti hook espliciti per progetti, studenti, argomenti, materiali e contatori; ogni hook possiede endpoint, parametri, parsing Zod e stato asincrono.
+- `useCatalogFilters` ora gestisce soltanto `q` e `topic` nell'URL. `fetchData` resta il confine Axios condiviso e gli schemi Zod restano separati.
+- Verificati lint, build e un percorso browser essenziale: Home con contatori, Progetti filtrati con `q=React` e dettaglio progetto. Resta il precedente avviso Vite sul bundle oltre 500 kB.
+
 ## Fatto
 
 - [x] Definire brand `Class14` senza rinominare cartella o repository.

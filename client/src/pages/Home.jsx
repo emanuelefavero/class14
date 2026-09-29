@@ -1,6 +1,5 @@
 import { Link } from 'react-router';
-import { useCatalogData } from '@/features/catalog/useCatalogData';
-import { fetchStats } from '@/features/stats/api';
+import { useStats } from '@/features/stats/useStats';
 import { paths } from '@/router/paths';
 import './Home.css';
 
@@ -35,7 +34,7 @@ const counters = [
 ];
 
 export const Home = () => {
-  const stats = useCatalogData(fetchStats);
+  const stats = useStats();
 
   return (
     <div className='home'>

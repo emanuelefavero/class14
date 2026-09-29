@@ -1,13 +1,15 @@
 import { ProjectList } from '@/components/shared/CatalogContent';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
-import { fetchProjects } from '@/features/catalog/api';
+import { useProjects } from '@/features/catalog/projects';
+import { useTopics } from '@/features/catalog/topics';
 import { useCatalogFilters } from '@/features/catalog/useCatalogFilters';
 import '../Catalog.css';
 
 export const Projects = () => {
-  const { catalog, topics, search, topic, updateFilters } =
-    useCatalogFilters(fetchProjects);
+  const { search, topic, updateFilters } = useCatalogFilters();
+  const catalog = useProjects(search, topic);
+  const topics = useTopics();
 
   const render = () => {
     switch (catalog.step) {

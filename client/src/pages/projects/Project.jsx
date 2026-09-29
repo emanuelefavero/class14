@@ -2,14 +2,13 @@ import Markdown from 'react-markdown';
 import { Link, useParams } from 'react-router';
 import { MaterialLinks, TopicLinks } from '@/components/shared/CatalogContent';
 import { CatalogState } from '@/components/shared/CatalogState';
-import { fetchProject } from '@/features/catalog/api';
-import { useCatalogData } from '@/features/catalog/useCatalogData';
+import { useProject } from '@/features/catalog/projects';
 import { getPath, paths } from '@/router/paths';
 import '../Catalog.css';
 
 export const Project = () => {
   const { slug } = useParams();
-  const state = useCatalogData(fetchProject, slug);
+  const state = useProject(slug);
 
   if (state.step !== 'success') {
     return (

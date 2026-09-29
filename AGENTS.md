@@ -125,6 +125,7 @@ L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` 
 - `server/test.http` contiene richieste delle API Class14 e pochi casi di validazione/errori.
 - Il package client si chiama `class14-client`. Home, tre sezioni principali, cataloghi materiali, dettagli e footer sono adattati a Class14. I vecchi componenti Products, provider, route e chiamate Fake Store API sono stati rimossi dopo l'implementazione di Projects.
 - Le risposte del catalogo sono validate con Zod in `client/src/features/catalog/`; `react-markdown` rende le descrizioni senza HTML non attendibile. Vite inoltra `/cheatsheets/` per i PDF, lasciando `/cheatsheets` alla route React.
+- Il fetching client usa hook espliciti per risorsa in `client/src/features/catalog/` e `client/src/features/stats/`. `useCatalogFilters` gestisce soltanto i parametri URL; non passare funzioni `fetch*` a hook generici né reintrodurre dependency injection senza una necessità concreta.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. Rinominare progressivamente package, titoli, documentazione e contenuti al brand Class14 nel sottoprogetto su cui si sta lavorando; non rinominare la repository.
 - Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. I riferimenti sono riallineati a `../AGENTS.md`, `../docs/CODE-STYLE-GUIDELINES.md` e `../docs/API-CONTRACT.md`.
 - È stata rilevata anche una cartella aggiuntiva `express-blog-sql/` nella root. Non è il backend attivo, che è `server/`; non rimuoverla o modificarla senza verificarne lo scopo con l’utente.
@@ -286,7 +287,7 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 
 ### Fase 10 completata — ricerca e filtri essenziali
 
-- `client/src/features/catalog/useCatalogFilters.js` legge e aggiorna `q` e `topic` nell'URL. Le quattro funzioni di lista in `features/catalog/api.js` passano i parametri agli endpoint esistenti; i dettagli e la lista Argomenti restano invariati.
+- `client/src/features/catalog/useCatalogFilters.js` legge e aggiorna soltanto `q` e `topic` nell'URL. Gli hook espliciti per risorsa passano i parametri agli endpoint esistenti e validano le risposte con gli schemi condivisi.
 - `client/src/components/shared/CatalogFilters.jsx` riusa Input, Select e Button: ricerca su invio, filtro per argomento, conteggio risultati e reset. Le pagine distinguono catalogo vuoto da nessun risultato filtrato.
 - Verificati via HTTP attraverso Vite: liste complete 15/15/18/17, combinazioni `q` + `topic` e nessun risultato per tutte e quattro le risorse. Build, lint e formattazione client passati.
 
