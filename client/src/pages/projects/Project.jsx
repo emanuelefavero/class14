@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router';
 import { MaterialLinks, TopicLinks } from '@/components/shared/CatalogContent';
 import { CatalogTitle } from '@/components/shared/CatalogIcon';
 import { CatalogState } from '@/components/shared/CatalogState';
+import { StudentAvatar } from '@/components/shared/StudentAvatar';
 import { getProjectIcon } from '@/features/catalog/catalogIcons';
 import { useProject } from '@/features/catalog/hooks/useProject';
 import { getPath, paths } from '@/router/paths';
@@ -63,14 +64,17 @@ export const Project = () => {
           <ul className='catalog-list'>
             {data.students.map((student) => (
               <li className='catalog-row' key={student.id}>
-                <div>
-                  <Link
-                    className='catalog-row-title'
-                    to={getPath.student(student.github_username)}
-                  >
-                    {student.name}
-                  </Link>
-                  <p className='catalog-meta'>@{student.github_username}</p>
+                <div className='catalog-person'>
+                  <StudentAvatar student={student} />
+                  <div>
+                    <Link
+                      className='catalog-row-title'
+                      to={getPath.student(student.github_username)}
+                    >
+                      {student.name}
+                    </Link>
+                    <p className='catalog-meta'>@{student.github_username}</p>
+                  </div>
                 </div>
                 <a
                   className='link'
