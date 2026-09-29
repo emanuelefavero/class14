@@ -1,7 +1,9 @@
 import Markdown from 'react-markdown';
 import { Link, useParams } from 'react-router';
 import { MaterialLinks, TopicLinks } from '@/components/shared/CatalogContent';
+import { CatalogTitle } from '@/components/shared/CatalogIcon';
 import { CatalogState } from '@/components/shared/CatalogState';
+import { getProjectIcon } from '@/features/catalog/catalogIcons';
 import { useProject } from '@/features/catalog/hooks/useProject';
 import { getPath, paths } from '@/router/paths';
 import '../Catalog.css';
@@ -27,7 +29,11 @@ export const Project = () => {
           ← Tutti i progetti
         </Link>
         <p className='catalog-eyebrow'>Progetto · {data.slug}</p>
-        <h1>{data.title}</h1>
+        <h1>
+          <CatalogTitle icon={getProjectIcon(data.slug)} size='heading'>
+            {data.title}
+          </CatalogTitle>
+        </h1>
         <TopicLinks topics={data.topics} />
       </header>
 

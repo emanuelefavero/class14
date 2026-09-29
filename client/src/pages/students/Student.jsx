@@ -1,9 +1,12 @@
 import { Link, useParams } from 'react-router';
-import { TopicLinks } from '@/components/shared/CatalogContent';
+import {
+  ProjectTitleLink,
+  TopicLinks,
+} from '@/components/shared/CatalogContent';
 import { CatalogState } from '@/components/shared/CatalogState';
 import { StudentAvatar } from '@/components/shared/StudentAvatar';
 import { useStudent } from '@/features/catalog/hooks/useStudent';
-import { getPath, paths } from '@/router/paths';
+import { paths } from '@/router/paths';
 import '../Catalog.css';
 
 export const Student = () => {
@@ -55,12 +58,7 @@ export const Student = () => {
             {data.projects.map((project) => (
               <li className='catalog-row' key={project.id}>
                 <div>
-                  <Link
-                    className='catalog-row-title'
-                    to={getPath.project(project.slug)}
-                  >
-                    {project.title}
-                  </Link>
+                  <ProjectTitleLink project={project} />
                   <p className='catalog-meta'>{project.slug}</p>
                 </div>
                 <a

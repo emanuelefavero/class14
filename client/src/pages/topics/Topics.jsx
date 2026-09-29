@@ -1,5 +1,7 @@
 import { Link } from 'react-router';
+import { CatalogTitle } from '@/components/shared/CatalogIcon';
 import { CatalogState } from '@/components/shared/CatalogState';
+import { getTopicIcon } from '@/features/catalog/catalogIcons';
 import { useTopics } from '@/features/catalog/hooks/useTopics';
 import { getPath } from '@/router/paths';
 import '../Catalog.css';
@@ -29,7 +31,9 @@ export const Topics = () => {
                   className='catalog-row-title'
                   to={getPath.topic(topic.name)}
                 >
-                  {topic.name}
+                  <CatalogTitle icon={getTopicIcon(topic.name)}>
+                    {topic.name}
+                  </CatalogTitle>
                 </Link>
                 <span className='catalog-meta'>
                   {topic.project_count}{' '}

@@ -1,6 +1,8 @@
 import { Link, useParams } from 'react-router';
 import { MaterialLinks, ProjectList } from '@/components/shared/CatalogContent';
+import { CatalogTitle } from '@/components/shared/CatalogIcon';
 import { CatalogState } from '@/components/shared/CatalogState';
+import { getTopicIcon } from '@/features/catalog/catalogIcons';
 import { useTopic } from '@/features/catalog/hooks/useTopic';
 import { paths } from '@/router/paths';
 import '../Catalog.css';
@@ -29,7 +31,11 @@ export const Topic = () => {
           Argomento · {data.project_count}{' '}
           {data.project_count === 1 ? 'progetto' : 'progetti'}
         </p>
-        <h1>{data.name}</h1>
+        <h1>
+          <CatalogTitle icon={getTopicIcon(data.name)} size='heading'>
+            {data.name}
+          </CatalogTitle>
+        </h1>
       </header>
       <section className='catalog-section'>
         <h2>Progetti collegati</h2>

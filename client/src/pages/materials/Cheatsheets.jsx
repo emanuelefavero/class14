@@ -1,10 +1,9 @@
-import { Link } from 'react-router';
+import { ProjectTitleLink } from '@/components/shared/CatalogContent';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
 import { useCatalogFilters } from '@/features/catalog/hooks/useCatalogFilters';
 import { useCheatsheets } from '@/features/catalog/hooks/useCheatsheets';
 import { useTopics } from '@/features/catalog/hooks/useTopics';
-import { getPath } from '@/router/paths';
 import '../Catalog.css';
 
 export const Cheatsheets = () => {
@@ -44,12 +43,11 @@ export const Cheatsheets = () => {
                         {sheet.projects.map((project, index) => (
                           <span key={project.id}>
                             {index > 0 && ', '}
-                            <Link
+                            <ProjectTitleLink
                               className='link'
-                              to={getPath.project(project.slug)}
-                            >
-                              {project.title}
-                            </Link>
+                              iconSize='inline'
+                              project={project}
+                            />
                           </span>
                         ))}
                       </>

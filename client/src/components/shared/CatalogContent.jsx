@@ -1,5 +1,7 @@
 import { Link } from 'react-router';
+import { getProjectIcon } from '@/features/catalog/catalogIcons';
 import { getPath } from '@/router/paths';
+import { CatalogTitle } from './CatalogIcon';
 
 export const TopicLinks = ({ topics }) => (
   <ul className='catalog-tags' aria-label='Argomenti'>
@@ -11,17 +13,24 @@ export const TopicLinks = ({ topics }) => (
   </ul>
 );
 
+export const ProjectTitleLink = ({
+  project,
+  className = 'catalog-row-title',
+  iconSize = 'row',
+}) => (
+  <Link className={className} to={getPath.project(project.slug)}>
+    <CatalogTitle icon={getProjectIcon(project.slug)} size={iconSize}>
+      {project.title}
+    </CatalogTitle>
+  </Link>
+);
+
 export const ProjectList = ({ projects }) => (
   <ul className='catalog-list'>
     {projects.map((project) => (
       <li className='catalog-row' key={project.id}>
         <div>
-          <Link
-            className='catalog-row-title'
-            to={getPath.project(project.slug)}
-          >
-            {project.title}
-          </Link>
+          <ProjectTitleLink project={project} />
           <p className='catalog-meta'>{project.slug}</p>
         </div>
         <TopicLinks topics={project.topics} />

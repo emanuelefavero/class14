@@ -131,6 +131,7 @@ Controllate via HTTP attraverso Vite le quattro liste senza parametri, con `q` e
 
 - [x] Verificare navigazione incrociata, link esterni, avatar, PDF e accesso diretto alle pagine di dettaglio.
 - [x] Verificare mobile, tastiera, focus, etichette e tema chiaro/scuro.
+- [x] Integrare le icone SVG delle tecnologie nei titoli di progetti e argomenti, con associazioni frontend esplicite e senza modificare database o API.
 - [x] Eseguire lint/build e controlli HTTP dei flussi principali.
 - [x] Aggiornare README, setup, contratto API e AGENTS con lo stato verificato.
 

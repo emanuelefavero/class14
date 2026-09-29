@@ -188,6 +188,7 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 - Home, Projects, Students, Cheat Sheets, Resources e Topics hanno liste/dettagli dove previsti, con stati di caricamento, errore e assenza dati. Le descrizioni Markdown sono renderizzate senza HTML non attendibile.
 - Le route di lista e dettaglio sono in `client/src/router/paths.js`; i link tra argomenti, progetti, studenti, repository e materiali sono attivi. Products e Fake Store API sono stati rimossi.
 - Progetti, Studenti, Cheat sheet e Risorse usano `q` e `topic` dell'API. Il client conserva i filtri nell'URL e offre reset e stato senza risultati.
+- Le icone SVG delle tecnologie sono asset frontend in `client/src/assets/icons/`. `client/src/features/catalog/catalogIcons.js` associa topic e slug progetto alle icone, senza campi SQL o modifiche al contratto API; il componente condiviso `CatalogIcon` le mostra come elementi decorativi nei titoli delle liste e dei dettagli.
 
 ### 3. Rifinitura locale completata; pubblicazione da decidere
 
