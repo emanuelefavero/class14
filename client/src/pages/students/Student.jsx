@@ -68,7 +68,7 @@ export const Student = () => {
           <span>{data.projects.length} nel catalogo</span>
         </div>
         {data.projects.length ? (
-          <ul className='catalog-list'>
+          <ul className='catalog-list catalog-repository-list'>
             {data.projects.map((project) => (
               <li className='catalog-row' key={project.id}>
                 <div>

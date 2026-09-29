@@ -712,3 +712,14 @@
     min-height: 9rem;
   }
 }
+
+@media (width <= 400px) {
+  .catalog-repository-list .catalog-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .catalog-repository-list .catalog-row > .link {
+    width: 100%;
+  }
+}

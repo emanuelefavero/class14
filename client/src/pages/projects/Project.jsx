@@ -81,7 +81,7 @@ export const Project = () => {
               <span>{data.students.length} verificate</span>
             </div>
             {data.students.length ? (
-              <ul className='catalog-list'>
+              <ul className='catalog-list catalog-repository-list'>
                 {data.students.map((student) => (
                   <li className='catalog-row' key={student.id}>
                     <div className='catalog-person'>
