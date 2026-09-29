@@ -1,4 +1,4 @@
-import { db } from '#/db/db.js';
+import { db } from '#app/db/db.js';
 
 /** Counts catalog entries independently, without multiplying rows through joins. */
 export const getCounts = async () => {

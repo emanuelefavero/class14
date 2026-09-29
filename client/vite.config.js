@@ -13,7 +13,7 @@ export default defineConfig({
     proxy: {
       '/api': backendUrl,
       '/avatars': backendUrl,
-      '/cheatsheets': backendUrl,
+      '/cheatsheets/': backendUrl,
     },
   },
   resolve: {

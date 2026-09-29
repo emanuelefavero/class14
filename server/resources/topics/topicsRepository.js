@@ -1,7 +1,7 @@
-import * as cheatsheetsRepository from '#/resources/cheatsheets/cheatsheetsRepository.js';
-import * as projectsRepository from '#/resources/projects/projectsRepository.js';
-import * as resourcesRepository from '#/resources/resources/resourcesRepository.js';
-import { compareTopics } from '#/utils/catalog.js';
+import * as cheatsheetsRepository from '#app/resources/cheatsheets/cheatsheetsRepository.js';
+import * as projectsRepository from '#app/resources/projects/projectsRepository.js';
+import * as resourcesRepository from '#app/resources/resources/resourcesRepository.js';
+import { compareTopics } from '#app/utils/catalog.js';
 
 /** Returns unique project topics and the number of projects for each tag. */
 export const findAll = async () => {

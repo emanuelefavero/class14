@@ -1,4 +1,4 @@
-import { catalogQuerySchema } from '#/schemas/querySchemas.js';
+import { catalogQuerySchema } from '#app/schemas/querySchemas.js';
 import * as studentsRepository from './studentsRepository.js';
 import { studentParamsSchema } from './studentsSchemas.js';
 

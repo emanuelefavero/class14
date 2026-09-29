@@ -1,4 +1,4 @@
-import { catalogQuerySchema } from '#/schemas/querySchemas.js';
+import { catalogQuerySchema } from '#app/schemas/querySchemas.js';
 import * as cheatsheetsRepository from './cheatsheetsRepository.js';
 
 export const index = async (req, res) => {

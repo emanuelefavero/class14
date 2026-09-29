@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { readJsonFile } from '#/utils/json.js';
+import { readJsonFile } from '#app/utils/json.js';
 
 const rootFilePath = path.join(import.meta.dirname, '../../data/root.json');
 

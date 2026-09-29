@@ -19,3 +19,14 @@
 .footer span {
   color: var(--foreground-muted);
 }
+
+.footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.footer nav a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}

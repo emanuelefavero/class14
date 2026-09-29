@@ -5,20 +5,20 @@ export const paths = Object.freeze({
   home: '/',
   topics: '/topics',
   projects: '/projects',
+  project: '/projects/:slug',
   students: '/students',
+  student: '/students/:github_username',
+  topic: '/topics/:name',
   cheatsheets: '/cheatsheets',
   resources: '/resources',
-  // Temporary reference feature, removed when the Projects flow replaces it.
-  products: '/products',
-  product: '/products/:productId',
 });
 
 /** Build concrete paths for routes with dynamic segments. */
 export const getPath = {
-  product: (productId) =>
-    generatePath(paths.product, {
-      productId: String(productId),
-    }),
+  project: (slug) => generatePath(paths.project, { slug }),
+  student: (github_username) =>
+    generatePath(paths.student, { github_username }),
+  topic: (name) => generatePath(paths.topic, { name }),
 };
 
 export const navLinks = [

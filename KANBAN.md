@@ -14,8 +14,8 @@ Procedere nell’ordine indicato, una fase verificabile alla volta: **prima back
 ## Base attuale e metodo di conversione
 
 - `server/` deriva da `express-blog-sql`; `client/` da `react-context-api`. Non ricreare lo scaffolding.
-- Dipendenze, script comuni, build, lint, audit e avvio congiunto sono verificati: [docs/SETUP.md](docs/SETUP.md). I package sono già `class14`, `class14-server` e `class14-client`; i contenuti delle app restano da convertire.
-- Conservare posts/products come riferimento finché le nuove feature le sostituiscono; poi rimuovere import, route, provider, richieste e contenuti pertinenti.
+- Dipendenze, script comuni e avvio sono documentati in [docs/SETUP.md](docs/SETUP.md). I package `class14`, `class14-server` e `class14-client` e i contenuti principali delle app sono adattati a Class14.
+- Posts e Products sono stati sostituiti dalle feature Class14. I loro import, route, provider e richieste non fanno più parte dell'app.
 - Usare React Router Declarative Mode; Zod ai confini HTTP di frontend e backend. JavaScript, nessun typecheck TypeScript né nuovo JSDoc per typing.
 - Il database è già inizializzato. Preservare `server/db/setup/`: non cancellare, ricreare o reimportare i dati per avviare l’MVP. Leggere solo i file pertinenti quando necessario.
 
@@ -98,24 +98,26 @@ Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/or
 - [x] Riutilizzare CSS nativo, token e tema automatico; verificare Home desktop e menu/navigazione su viewport iPhone 16.
 - [x] Usare Axios e uno schema Zod vicino alla feature per la richiesta Class14 `/api/stats`, senza validatori o tipi duplicati.
 
-Build e lint client riusciti. La Home mostra lo stato di indisponibilità dei contatori quando l'API non è raggiungibile; la risposta riuscita di `/api/stats` va verificata con MySQL accessibile. I cataloghi e i dettagli restano nella fase 9.
+Al termine della fase 8, build e lint client riusciti; la Home mostrava lo stato di indisponibilità dei contatori quando l'API non era raggiungibile. La risposta riuscita e i cataloghi sono stati verificati nella fase 9.
 
-L'header ora mostra solo Argomenti, Progetti e Studenti; il logo porta alla Home. Le pagine introduttive della fase 8 sono temporanee. Cheat sheet e Risorse restano raggiungibili dalla Home e tramite URL diretto.
+La fase 8 aveva introdotto l'header a tre voci e pagine introduttive. Le pagine introduttive sono state sostituite nella fase 9; Cheat sheet e Risorse sono raggiungibili dalla Home, dal footer e tramite URL diretto.
 
-### 9. Pagine MVP — un flusso alla volta
+### 9. Pagine MVP — completato un flusso alla volta
 
-- [ ] Collegare lista/dettaglio Projects: Markdown sicuro, tag verso Argomenti, studenti con repository disponibili e link ai profili, PDF e risorse. Il dettaglio è il nodo principale delle relazioni.
-- [ ] Quando il flusso Projects è pronto, sostituire products e rimuovere provider/import/route/controlli pertinenti.
-- [ ] Creare elenco/dettaglio Topics: da ciascun argomento aprire i progetti associati e i PDF/risorse ricavati da quei progetti, deduplicati e presentati come “Materiali dei progetti collegati”.
+- [x] Collegare lista/dettaglio Projects: Markdown sicuro, tag verso Argomenti, studenti con repository disponibili e link ai profili, PDF e risorse. Il dettaglio è il nodo principale delle relazioni.
+- [x] Sostituire Products dopo il flusso Projects e rimuovere provider/import/route/controlli pertinenti.
+- [x] Creare elenco/dettaglio Topics: da ciascun argomento aprire i progetti associati e i PDF/risorse ricavati da quei progetti, deduplicati e presentati come “Materiali dei progetti collegati”.
 - [x] Portare l'header a tre voci principali (Argomenti, Progetti, Studenti), mantenendo Home dal logo e i link a Cheat sheet e Risorse dalla Home.
-- [ ] Aggiungere link a Cheat sheet e Risorse nel footer e i collegamenti contestuali nelle pagine di dettaglio.
-- [ ] Collegare lista/profilo Students con avatar, GitHub, progetti e repository disponibili; dai progetti aprire i profili e viceversa.
-- [ ] Creare il catalogo Cheat sheet con apertura/download PDF e link ai progetti collegati; mantenere `/cheatsheets` raggiungibile direttamente.
-- [ ] Creare il catalogo Risorse con link esterni e link ai progetti collegati; mantenere `/resources` raggiungibile direttamente.
-- [ ] Completare e verificare la Home con contatori reali e contenuti collegati alle pagine MVP; struttura e richiesta `/api/stats` sono già presenti.
-- [ ] Gestire caricamento, errori, dati assenti e 404 nei flussi pertinenti.
-- [ ] Verificare almeno il percorso Argomento → Progetto → Studente → Repository e il ritorno ai materiali/progetti; nessuna lista deve restare isolata.
-- [ ] Quando Projects sostituisce Products, rimuovere gli ultimi contenuti e le dipendenze dalla Fake Store API.
+- [x] Aggiungere link a Cheat sheet e Risorse nel footer e i collegamenti contestuali nelle pagine di dettaglio.
+- [x] Collegare lista/profilo Students con avatar, GitHub, progetti e repository disponibili; dai progetti aprire i profili e viceversa.
+- [x] Creare il catalogo Cheat sheet con apertura/download PDF e link ai progetti collegati; mantenere `/cheatsheets` raggiungibile direttamente.
+- [x] Creare il catalogo Risorse con link esterni e link ai progetti collegati; mantenere `/resources` raggiungibile direttamente.
+- [x] Completare e verificare la Home con contatori reali e contenuti collegati alle pagine MVP; struttura e richiesta `/api/stats` sono già presenti.
+- [x] Gestire caricamento, errori, dati assenti e 404 nei flussi pertinenti.
+- [x] Verificare almeno il percorso Argomento → Progetto → Studente → Repository e il ritorno ai materiali/progetti; nessuna lista deve restare isolata.
+- [x] Rimuovere gli ultimi contenuti Products e le dipendenze dalla Fake Store API.
+
+Verificati nel browser Home con contatori reali, le tre liste principali, il percorso React → React Hello World → Emanuele con repository, uno studente senza repository, 404 progetto e accessi diretti ai cataloghi materiali. PDF e avatar restituiscono i Content-Type corretti attraverso Vite. Build, lint e formattazione client verificati; ricerca e filtri restano nella fase 10.
 
 ### 10. Ricerca e filtri essenziali — dopo le liste
 
@@ -141,7 +143,7 @@ L'header ora mostra solo Argomenti, Progetti e Studenti; il logo porta alla Home
 
 ## In corso
 
-Nessuna attività di implementazione aperta. Prossima attività: fase 9, pagine MVP un flusso alla volta, iniziando da Projects.
+Nessuna attività di implementazione aperta nella fase 9. Prossima attività: fase 10, ricerca e filtri essenziali.
 
 ## Fatto
 

@@ -1,9 +1,9 @@
-import { db } from '#/db/db.js';
+import { db } from '#app/db/db.js';
 import {
   compareProjects,
   compareText,
   normalizeProjectTopics,
-} from '#/utils/catalog.js';
+} from '#app/utils/catalog.js';
 
 /**
  * Returns project summaries with canonical topics, sorted by title and slug.

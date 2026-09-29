@@ -12,7 +12,7 @@
   "license": "MIT",
   "type": "module",
   "imports": {
-    "#/*": "./*"
+    "#app/*": "./*"
   },
   "dependencies": {
     "express": "^5.2.1",

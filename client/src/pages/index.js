@@ -1,5 +1,10 @@
 export { Home } from './Home';
-export { SectionPreview } from './SectionPreview';
-export { Products } from './products/Products';
-export { Product } from './products/Product';
+export { Projects } from './projects/Projects';
+export { Project } from './projects/Project';
+export { Topics } from './topics/Topics';
+export { Topic } from './topics/Topic';
+export { Students } from './students/Students';
+export { Student } from './students/Student';
+export { Cheatsheets } from './materials/Cheatsheets';
+export { Resources } from './materials/Resources';
 export { NotFound } from './NotFound';

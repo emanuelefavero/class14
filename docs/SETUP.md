@@ -38,11 +38,11 @@ Il progetto usa JavaScript, senza script TypeScript/typecheck e senza richiedere
 
 ## Stato verificato
 
-Il 26 settembre 2026: installazione completata, build e lint riusciti, audit a zero vulnerabilità nei tre package, connessione MySQL riuscita e HTTP 200 dalle root server/client. Il backend Class14 è convertito; products resta nel client fino alla conversione frontend.
+Il 26 settembre 2026: installazione completata, build e lint riusciti, audit a zero vulnerabilità nei tre package, connessione MySQL riuscita e HTTP 200 dalle root server/client. Il 29 settembre sono state verificate con dati reali anche le pagine MVP del client; Products è stato rimosso. L'installazione di `react-markdown` ha riportato zero vulnerabilità nell'audit npm del client.
 
 ## Collegamento client–server
 
-Vite inoltra `/api`, `/avatars` e `/cheatsheets` a `http://localhost:3000`, conservando i percorsi. Dal client usare URL relativi: `fetchData('/api/projects')`, `src={student.avatar_path}` e `href={cheatsheet.file_path}`. Non serve aggiungere CORS a Express per questa configurazione locale.
+Vite inoltra `/api`, `/avatars` e i file sotto `/cheatsheets/` a `http://localhost:3000`, conservando i percorsi. La pagina `/cheatsheets` è gestita da React. Dal client usare URL relativi: `fetchData('/api/projects')`, `src={student.avatar_path}` e `href={cheatsheet.file_path}`. Non serve aggiungere CORS a Express per questa configurazione locale.
 
 Se si cambia la porta backend, avviare entrambi con la stessa variabile esportata, per esempio `PORT=3001 npm run dev`. Il proxy legge `PORT` dal terminale, non da `server/.env`: se si modifica soltanto quel file, allineare anche il target Vite. Riavviare Vite dopo il cambio.
 

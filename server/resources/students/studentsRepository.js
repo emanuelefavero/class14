@@ -1,6 +1,6 @@
-import { db } from '#/db/db.js';
-import * as projectsRepository from '#/resources/projects/projectsRepository.js';
-import { compareText, compareTopics } from '#/utils/catalog.js';
+import { db } from '#app/db/db.js';
+import * as projectsRepository from '#app/resources/projects/projectsRepository.js';
+import { compareText, compareTopics } from '#app/utils/catalog.js';
 
 // Adds a GitHub URL to a student summary.
 const toSummary = (student) => ({

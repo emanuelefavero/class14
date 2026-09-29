@@ -1,6 +1,6 @@
-import { db } from '#/db/db.js';
-import * as projectsRepository from '#/resources/projects/projectsRepository.js';
-import { compareProjects, compareText } from '#/utils/catalog.js';
+import { db } from '#app/db/db.js';
+import * as projectsRepository from '#app/resources/projects/projectsRepository.js';
+import { compareProjects, compareText } from '#app/utils/catalog.js';
 
 /**
  * Returns the resources catalog with all linked project summaries.
