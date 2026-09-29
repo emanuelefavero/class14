@@ -1,6 +1,6 @@
 .main {
   flex: 1;
-  padding-block: 2rem;
+  padding-block: clamp(2rem, 5vw, 4rem);
 
   > .container {
     display: grid;

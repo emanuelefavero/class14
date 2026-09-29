@@ -1,3 +1,9 @@
 import { ProductCatalog } from '@/features/products';
+import { ProductsFiltersForm } from '@/features/products/filters/ProductsFiltersForm';
 
-export const Products = () => <ProductCatalog />;
+export const Products = () => (
+  <>
+    <ProductsFiltersForm />
+    <ProductCatalog />
+  </>
+);

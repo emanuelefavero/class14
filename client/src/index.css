@@ -16,7 +16,8 @@
   --danger: #c10007;
   --border: #cdd0d8;
   --selection: rgb(25 13 253 / 0.3);
-  --sans: system-ui, sans-serif;
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
 
   @media (prefers-color-scheme: dark) {
     --foreground: #fff;
@@ -125,9 +126,9 @@ html {
 
 body {
   color: var(--foreground);
-  background: var(--background-secondary);
+  background: var(--background);
   min-height: 100svh;
-  min-width: 350px;
+  min-width: 320px;
   font-family: var(--sans);
   line-height: 1.5;
   letter-spacing: 0;

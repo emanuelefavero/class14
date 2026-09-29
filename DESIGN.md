@@ -25,31 +25,37 @@ L'interfaccia è in italiano; codice, percorsi, API, slug e nomi originali di pr
 
 La Home è un **hub editoriale**, non una dashboard amministrativa. Il primo schermo mostra Class14, una breve spiegazione del percorso della classe e un invito a esplorare gli **Argomenti**. Seguono accessi a Progetti e materiali, un richiamo agli Studenti e i cinque contatori del catalogo in forma discreta. I contatori descrivono il catalogo attuale; non rappresentano completamenti o l'intero profilo GitHub degli studenti.
 
-Il menu principale è diretto e nell'ordine: **Home, Argomenti, Progetti, Studenti, Cheat sheet, Risorse**. Su desktop le sei destinazioni sono visibili nell'header. Su mobile un menu compatto, azionabile da tastiera e con stato aperto/chiuso comprensibile, mantiene le stesse destinazioni. Il logo Class14 porta alla Home. La navigazione delle pagine interne deve rendere chiaro dove ci si trova e offrire un ritorno sensato alla lista o all'argomento di partenza; i link tra risorse sono più importanti di un pulsante Indietro globale.
+**La navigazione principale ha tre sezioni: Argomenti, Progetti e Studenti.** Il logo Class14 porta alla Home. Cheat sheet e Risorse sono cataloghi autonomi di consultazione, raggiungibili dalla Home, dal footer e dai collegamenti nelle pagine pertinenti; non occupano una voce primaria nell'header. Su mobile il menu compatto mostra le stesse tre sezioni, con apertura e chiusura accessibili da tastiera. Le pagine interne devono rendere chiaro dove ci si trova e offrire collegamenti sensati verso la lista o le entità correlate.
 
-Il percorso principale è:
+Le liste sono **punti di ingresso**, non destinazioni isolate: selezionare un argomento, un progetto o uno studente apre una pagina di dettaglio che usa le relazioni dell'API. I cataloghi completi di PDF e risorse servono anche a chi cerca un materiale per titolo, senza passare prima da un progetto. Non aggiungere nuove tabelle o endpoint per ottenere questi percorsi.
+
+I percorsi principali sono:
 
 ```text
-Argomento → Progetti collegati → Dettaglio progetto
-                                     ├→ PDF e risorse
-                                     └→ Studenti → Profilo → Repository GitHub
+Argomenti → Dettaglio argomento → Progetti collegati → Dettaglio progetto
+                              ↘ Materiali dei progetti collegati
+Progetti → Dettaglio progetto → PDF e risorse
+                             ↘ Studenti → Profilo studente → Repository GitHub
+Studenti → Profilo studente → Progetti con repository disponibili
 ```
 
-Ogni catalogo resta comunque raggiungibile direttamente. Le relazioni devono funzionare nei due sensi quando l'API fornisce i dati: il progetto porta ai profili degli studenti e ai materiali; il profilo torna ai progetti; PDF e risorse mostrano i progetti collegati. Un topic raggruppa progetti e mostra i **“Materiali dei progetti collegati”**: il legame con PDF e risorse è indiretto, non una categorizzazione editoriale del materiale.
+Ogni catalogo resta comunque raggiungibile direttamente. Le relazioni devono funzionare nei due sensi quando l'API fornisce i dati: il progetto porta ai profili degli studenti e ai materiali; il profilo torna ai progetti; PDF e risorse mostrano i progetti collegati. Un topic raggruppa progetti e mostra i **“Materiali dei progetti collegati”**: il legame con PDF e risorse è indiretto, non una categorizzazione editoriale del materiale. Gli studenti mostrati in un progetto hanno una repository pubblica verificata per quello slug; questo non certifica che abbiano concluso l'esercizio.
 
 | Vista | Contenuto principale | Azioni e collegamenti |
 | --- | --- | --- |
 | Home | Introduzione breve, accessi alle sezioni, contatori | Iniziare dagli Argomenti; aprire Progetti o Studenti |
 | Argomenti | Elenco dei tag con numero di progetti | Aprire il dettaglio dell'argomento |
-| Dettaglio argomento | Nome, progetti e materiali dei progetti collegati | Aprire un progetto, un PDF o una risorsa |
+| Dettaglio argomento | Progetti associati, PDF e risorse ricavati dai progetti | Aprire un progetto o un materiale; distinguere il legame indiretto dei materiali |
 | Progetti | Titolo e tag in un catalogo leggibile | Cercare per titolo/slug, filtrare per topic, aprire il dettaglio |
 | Dettaglio progetto | Descrizione Markdown, tag, studenti con repository, PDF e risorse | Aprire profili, repository, PDF, risorse e argomenti |
 | Studenti | Avatar, nome e username GitHub | Cercare per nome/username, filtrare per topic, aprire il profilo |
 | Profilo studente | Identità, argomenti dei progetti associati e repository disponibili | Aprire GitHub, progetto o repository verificata |
-| Cheat sheet | Titolo del PDF e progetti collegati | Aprire o scaricare il PDF; aprire un progetto |
-| Risorse | Titolo, link esterno e progetti collegati | Aprire la risorsa; aprire un progetto |
+| Catalogo Cheat sheet | Tutti i PDF e i rispettivi progetti collegati | Aprire o scaricare il PDF; aprire un progetto |
+| Catalogo Risorse | Tutti i link esterni e i rispettivi progetti collegati | Aprire la risorsa; aprire un progetto |
 
 Nelle pagine di dettaglio, l'intestazione mostra titolo e metadati essenziali. Il contenuto principale occupa la colonna di lettura; su desktop le azioni e le relazioni più brevi possono stare in una colonna secondaria, solo se questo aiuta la consultazione. Su schermi stretti tutto segue un ordine verticale naturale. Non aggiungere indici laterali, tab o pannelli persistenti prima che la quantità reale di contenuti lo richieda.
+
+Il client mostra già le tre voci principali nell'header, mentre le cinque sezioni hanno ancora pagine introduttive. La fase 9 le sostituirà con liste e dettagli reali e aggiungerà i collegamenti contestuali e dal footer. Conservare i percorsi diretti `/cheatsheets` e `/resources`.
 
 ## Interazioni e stati
 

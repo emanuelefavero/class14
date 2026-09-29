@@ -1,6 +1,6 @@
 # Class14 — guida per continuare il progetto
 
-Ultimo aggiornamento del contesto: 27 settembre 2026. Questo file raccoglie le decisioni confermate e lo stato del lavoro per riprendere in una nuova chat. Verificare sempre i file e `git status` prima di intervenire: lo stato descritto può evolvere.
+Ultimo aggiornamento del contesto: 29 settembre 2026. Questo file raccoglie le decisioni confermate e lo stato del lavoro per riprendere in una nuova chat. Verificare sempre i file e `git status` prima di intervenire: lo stato descritto può evolvere.
 
 ## Obiettivo e contesto
 
@@ -43,9 +43,17 @@ L’utente ha approvato la prima versione proposta dopo il confronto di `PLAN.md
 | Students | Lista e profilo: nome, avatar, link GitHub, repository pubbliche del catalogo | `students`, `student_projects`, `projects` |
 | Cheat Sheets | Catalogo autonomo, apertura/download PDF e collegamenti ai progetti | `cheatsheets`, `project_cheatsheets` |
 | Resources | Catalogo autonomo di titoli/link e collegamenti ai progetti | `resources`, `project_resources` |
-| Topics | Elenco dei tag unici e pagina con i progetti associati | `projects.topics`, separato e normalizzato in lettura |
+| Topics | Elenco dei tag unici e dettaglio con progetti, PDF e risorse collegati attraverso quei progetti | `projects.topics`, separato e normalizzato in lettura; tabelle ponte dei materiali |
 | Home | Presentazione del Learning Hub e contatori di studenti, progetti, repository, PDF e risorse | Conteggi delle tabelle esistenti |
 | Ricerca e filtri essenziali | Ricerca su titoli/nomi/username e filtro per topic dove pertinente, dopo che le liste funzionano | Campi esistenti; modalità da definire nel contratto API |
+
+### Gerarchia delle pagine e navigazione confermata
+
+- **Tre sezioni principali nell'header:** Argomenti, Progetti e Studenti. Il logo Class14 porta alla Home. Cheat sheet e Risorse mantengono i propri cataloghi completi, raggiungibili da Home, footer e collegamenti nelle pagine pertinenti; i loro URL diretti restano validi.
+- Le liste sono punti di ingresso ai dettagli, non pagine isolate. Dal dettaglio argomento si aprono progetti e materiali dei progetti collegati; dal dettaglio progetto si aprono profili degli studenti, repository verificate, PDF, risorse e topic; dal profilo studente si torna ai progetti. I cataloghi materiali riportano ai progetti collegati.
+- Il contratto API già fornisce questi dati: `TopicDetail.projects` e `related_*`, `ProjectDetail.students` con `repo_url` più `cheatsheets` e `resources`, `StudentDetail.projects` con `repo_url`, e `projects` nei cataloghi materiali. Non serve cambiare schema o aggiungere endpoint per questo flusso.
+- La relazione topic–materiale è indiretta e si presenta come “Materiali dei progetti collegati”. `student_projects` attesta una repository pubblica verificata, non il completamento dell'esercizio: usare “Repository disponibili”.
+- L'header del client mostra già le tre sezioni principali; le cinque sezioni hanno ancora pagine introduttive. Sostituirle durante la fase 9 e aggiungere i collegamenti contestuali e dal footer, mantenendo accessibili `/cheatsheets` e `/resources`. [DESIGN.md](DESIGN.md) contiene la struttura UX da seguire.
 
 ### Contratto API definito — fase 1 completata
 
@@ -99,7 +107,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Conservare pagine in `src/pages/` e `RootLayout` in `client/src/`, con `Outlet` dentro `Main`, `Header` e `Footer`. Eventuali altri layout vanno vicino alle pagine che li usano, solo quando servono davvero.
 - Il frontend usa Axios e Zod per validare input e risposte delle richieste HTTP quando necessario. Tenere gli schemi vicino alla feature, in `schemas.js`; non usare Zod per stato React, componenti o semplici controlli locali. La dipendenza è già installata in `client/`.
 - L'interfaccia frontend dell'MVP è in italiano: navigazione, pulsanti, filtri, stati e testi delle pagine. Codice, API, percorsi, slug e nomi originali di progetti e tecnologie restano in inglese. Valutare una versione inglese dopo la verifica; per ora non serve un sistema multilingua.
-- La direzione visiva e i flussi UX sono definiti in [DESIGN.md](DESIGN.md): Home come hub editoriale, navigazione diretta, Argomenti → Progetti come percorso principale, dettagli come schede visuali sobrie e un solo accento blu indaco. Consultarlo prima di progettare pagine e componenti.
+- La direzione visiva e i flussi UX sono definiti in [DESIGN.md](DESIGN.md): Home come hub editoriale, tre sezioni primarie, percorso Argomenti → Progetti → Studenti e materiali collegati, dettagli come schede visuali sobrie e un solo accento blu indaco. Consultarlo prima di progettare pagine e componenti.
 - CSS nativo, CSS nesting, custom properties e tema automatico con `prefers-color-scheme`. Nessun Bootstrap o framework CSS. L'ispirazione shadcn/ui è visiva, non una richiesta di installarlo.
 - Componenti separati in `components/ui`, `components/shared`, `components/layout`; CSS vicino ai componenti. Stato locale e props, Context solo per esigenze concrete.
 - Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Evitare JSDoc per typing; usare JSDoc brevi e descrittivi sui metodi repository e commenti nei passaggi meno evidenti. Conservare l’esempio input/output di `normalizeProjectTopics`. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
@@ -111,14 +119,14 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Queste app sono ora copiate in `server/` e `client/`: usare soprattutto il codice presente nel progetto come riferimento. I componenti UI/shared, `cx`, le icone e il CSS sono già in `client/`; riutilizzarli dove pertinenti.
 - Non leggere `node_modules`, build o cache dei riferimenti. Non copiare indiscriminatamente il router o l'intera applicazione.
 
-## Stato attuale: conversione backend avviata, Projects/Students/materiali implementati
+## Stato attuale: backend implementato, adattamento frontend completato
 
 L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` dentro `client/`. Entrambi hanno struttura, `package.json` e lockfile; **le dipendenze dei tre package sono state installate e verificate**. Non fare nuovo scaffolding e non considerare queste app già convertite o verificate per Class14.
 
 - `server/app.js` registra `projects`, `students`, `cheatsheets`, `resources`, `topics`, `stats`, `root` ed `errors`; posts è stato rimosso. `server/db/db.js` legge la configurazione validata da `server/config/env.js`: host, porta, utente, password, database, limite e timeout. `DB_USER` è obbligatoria; il database predefinito è `class14`. Le routes Projects leggono soltanto il database Class14.
 - Il package server si chiama `class14-server`; README e risposta root sono adattati a Class14; posts è stato rimosso; errors resta temporaneamente per le verifiche dei middleware. Il README copiato non è la fonte per il setup del database: seguire `server/db/setup/README.md`.
 - `server/test.http` contiene richieste Projects, Students, Cheat Sheets e Resources e casi di validazione/errori; aggiungere le nuove risorse nelle rispettive fasi.
-- `client/src/features/products/`, `client/src/pages/products/`, i provider in `App.jsx`, router, Header e contenuti Home/AboutUs appartengono ancora al negozio di esempio/Fake Store API. Il package si chiama `class14-client`; titoli e interfaccia mostrano ancora React Context API.
+- Il package client si chiama `class14-client`. Branding, metadati, favicon, Header, Footer, Home e navigazione sono adattati a Class14. Le cinque sezioni oltre Home hanno pagine introduttive, da sostituire con i cataloghi della fase 9. `client/src/features/products/`, `client/src/pages/products/` e i provider in `App.jsx` restano come riferimento temporaneo; `/products` è raggiungibile solo tramite URL diretto e usa ancora Fake Store API.
 - Non cancellare preventivamente posts/products: sono esempi di stile da consultare durante la conversione. Rimuovere la vecchia feature e i relativi import, route, provider, richieste e contenuti quando la nuova feature che la sostituisce è pronta. Non lasciare riferimenti pendenti.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. Rinominare progressivamente package, titoli, documentazione e contenuti al brand Class14 nel sottoprogetto su cui si sta lavorando; non rinominare la repository.
 - Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. I riferimenti sono riallineati a `../AGENTS.md`, `../docs/CODE-STYLE-GUIDELINES.md` e `../docs/API-CONTRACT.md`.
@@ -189,7 +197,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 ### 1. Backend Express: prossima fase concreta
 
-- Contratto API completato in `docs/API-CONTRACT.md`. Fase 2 completata e verificata. Backend verificato fino alla fase 7. Prossimo passo: fase 8, adattamento frontend. Package e dipendenze sono già adattati/installati.
+- Contratto API completato in `docs/API-CONTRACT.md`. Backend verificato fino alla fase 7 e adattamento frontend completato nella fase 8. Prossimo passo: fase 9, pagine MVP. Package e dipendenze sono già adattati/installati.
 - Configurazione ambiente, pool, template e controllo connessione sono completati; usare `server/README.md` per il setup.
 - File statici già spostati dall’utente in server/public; mantenere i percorsi già salvati nel database.
 - Implementare lista e dettaglio di progetti e studenti. Il dettaglio progetto deve poter fornire studenti/repository, PDF e risorse; il dettaglio studente i suoi progetti pubblici.
@@ -200,7 +208,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 - Adattare il client copiato da `react-context-api`: branding e configurazione, poi nuove feature/pagine e sostituzione graduale di products. Conservare UI/layout, usare schemi Zod ai confini HTTP e mantenere il router Declarative Mode già configurato.
 - Costruire Home, Projects, Students, Cheat Sheets, Resources e Topics secondo l’MVP, con liste/dettagli dove previsti e stati di caricamento, errore e dati assenti. Aggiungere ricerca e filtri essenziali dopo i flussi principali.
-- Le sezioni Topics e materiali autonomi sono confermate. Lingua, composizione visiva e navigazione sono definite in `DESIGN.md`; i percorsi frontend concreti saranno scelti durante l'implementazione delle pagine.
+- Le sezioni Topics e materiali autonomi sono confermate. Lingua, composizione visiva e navigazione sono definite in `DESIGN.md`; le route di lista Class14 sono in `client/src/router/paths.js`. Aggiungere i percorsi di dettaglio man mano che le relative pagine diventano disponibili.
 - Curare accessibilità, mobile, tema chiaro/scuro e rendering delle descrizioni Markdown.
 
 ### 3. Completamento e presentazione
@@ -276,10 +284,17 @@ node scripts/sync-github-assets.mjs --refresh
 - L’utente ha spostato i 15 avatar e 18 PDF da assets a server/public; preservare lo spostamento. Generatore seed e sincronizzazione avatar ora usano server/public; nessun reimport DB. Seed --check passa.
 - client/vite.config.js inoltra /api, /avatars, /cheatsheets al backend localhost:3000, oppure alla porta PORT esportata nel terminale. Usare URL relativi dal client; nessuna dipendenza CORS. Se PORT è cambiata solo in server/.env, allineare il target Vite (vedere docs/SETUP.md).
 - Verificato un avatar e un PDF, stessi byte e Content-Type attraverso il proxy; file inesistenti 404. Errori 400/404/500 JSON senza dettagli interni, compreso JSON malformato. Nessuna route posts attiva. Le routes errors restano esempi temporanei di test.
-- Proxy locale verificato; hosting e frontend completo restano da realizzare. Prossimo passo: **fase 8, adattamento frontend**.
+- Proxy locale verificato; hosting e frontend completo restano da realizzare. L'adattamento frontend della fase 8 è completato; proseguire con la fase 9.
 
 ### Preparazione frontend — Zod nel boilerplate Products
 
 - L'utente ha installato Zod in `client/`. `features/products/schemas.js` descrive le risposte singola/lista e `api.js` le valida dopo le fetch; il resto del flusso Products rimane un esempio temporaneo da sostituire durante le pagine Class14.
 - Rimossi il validatore manuale condiviso, quello Products e `features/products/types.js` non utilizzato. Lo schema Zod documenta la forma dei dati a runtime; non fornisce da solo tipi statici per lo stato React in questo progetto JavaScript.
-- Per le future feature, usare Zod soltanto per input/output delle richieste HTTP quando serve; niente schemi per lo stato della UI o infrastruttura generica di validazione. Prossimo lavoro resta la fase 8.
+- Per le future feature, usare Zod soltanto per input/output delle richieste HTTP quando serve; niente schemi per lo stato della UI o infrastruttura generica di validazione. `client/src/features/stats/` è il primo esempio Class14: Axios su `/api/stats`, parsing Zod e stato di errore nella Home.
+
+### Fase 8 completata — adattamento frontend
+
+- `client/index.html`, favicon, `client/README.md`, Header, Footer e Home usano il brand Class14 e copy italiano. Header responsive con menu diretto Home, Argomenti, Progetti, Studenti, Cheat sheet e Risorse; pagine introduttive dichiarano che i cataloghi sono in preparazione.
+- Home presenta il Learning Hub e richiede i cinque contatori a `/api/stats`. La risposta è validata in `features/stats/schemas.js`; nessun dato numerico è fissato nel client. Il vecchio Products non compare nel menu, ma resta funzionante al suo URL finché Projects non lo sostituisce.
+- Verificati build e lint client, Home desktop e navigazione/menu in una viewport iPhone 16. Il server DB non era accessibile nella sandbox: verificato lo stato di errore dei contatori, non ancora la risposta HTTP riuscita in questa fase.
+- Prossimo lavoro: **fase 9, pagine MVP**, iniziando da Projects; sostituire gradualmente le pagine introduttive e poi rimuovere Products con i suoi provider/import.

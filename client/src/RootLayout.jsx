@@ -8,7 +8,7 @@ import { navLinks } from '@/router/paths';
 export const RootLayout = () => {
   return (
     <div className='root-layout'>
-      <Header navLinks={navLinks} logo='React Context API' />
+      <Header navLinks={navLinks} />
 
       <Main>
         <Outlet />

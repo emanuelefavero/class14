@@ -9,6 +9,7 @@ Procedere nell’ordine indicato, una fase verificabile alla volta: **prima back
 - Mantenere i 15 progetti da React in poi. Non ampliare il catalogo con gli esempi o i numeri illustrativi del piano.
 - La presenza di una repository pubblica non certifica il completamento: usare “Repository disponibili”. `created_at` rappresenta l’inserimento, non una data didattica o di completamento.
 - Topics derivati da `projects.topics`; materiali associati indirettamente attraverso i progetti e deduplicati. Presentarli come “Materiali dei progetti collegati”.
+- La navigazione MVP privilegia **Argomenti, Progetti e Studenti** nell'header. Home è raggiungibile dal brand; Cheat sheet e Risorse mantengono cataloghi completi, con accessi da Home, footer e pagine correlate. Liste e dettagli devono collegare le entità, secondo [DESIGN.md](DESIGN.md).
 
 ## Base attuale e metodo di conversione
 
@@ -31,7 +32,7 @@ Procedere nell’ordine indicato, una fase verificabile alla volta: **prima back
 - [x] Definire errori 400/404/500, ordinamento e ricerca/filtri essenziali; decidere se occorre paginazione per il catalogo attuale.
 - [x] Documentare che repository, topics del profilo e date di inserimento non provano completamento o competenze certificate.
 
-Specifica: [docs/API-CONTRACT.md](docs/API-CONTRACT.md). Contratto definito e verificato rispetto a schema/generatore; endpoint ancora da implementare.
+Specifica: [docs/API-CONTRACT.md](docs/API-CONTRACT.md). Contratto definito rispetto a schema/generatore; gli endpoint sono stati implementati nelle fasi 3–6.
 
 ### 2. Configurazione e adattamento backend — completato
 
@@ -86,28 +87,35 @@ Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/or
 - [x] Verificare che non rimangano route/query/documentazione attiva del blog.
 - [x] Definire proxy Vite o CORS per collegare React all’API.
 
-### 8. Adattamento frontend — prossimo passo
+### 8. Adattamento frontend — completato
 
 - [x] Preparare il boilerplate Products come esempio Zod: schemi di risposta in `schemas.js`, parsing dopo le fetch, rimozione del validatore manuale e del file JSDoc dei tipi non utilizzato.
 - [x] Passare a React Router Declarative Mode e collocare `RootLayout` in `client/src/`, mantenendo `Outlet` e le route esistenti.
 - [x] Definire la lingua: interfaccia frontend in italiano; codice, API, percorsi, slug e nomi originali di progetti e tecnologie in inglese. Valutare una versione inglese dopo la verifica dell'MVP, senza introdurre ora un sistema multilingua.
 - [x] Definire in `DESIGN.md` direzione visiva, navigazione e flussi fra Home, Topics, Projects, Students, Cheat Sheets e Resources.
-- [ ] Adattare titolo HTML, metadati, Header, Footer e documentazione a Class14; nomi package già aggiornati.
-- [ ] Adattare le pagine alla navigazione Class14, conservando RootLayout con Header/Main/Outlet/Footer.
-- [ ] Riutilizzare UI/shared, CSS nativo e tema automatico; verificare layout responsive.
-- [ ] Usare Axios e schemi Zod vicini alle feature per gli input e le risposte HTTP Class14 che richiedono validazione; evitare validatori o tipi duplicati.
+- [x] Adattare titolo HTML, metadati, favicon, Header, Footer e documentazione client a Class14; nomi package già aggiornati.
+- [x] Preparare le sei destinazioni Class14 con pagine introduttive, conservando RootLayout con Header/Main/Outlet/Footer. Products resta temporaneamente accessibile solo tramite URL diretto.
+- [x] Riutilizzare CSS nativo, token e tema automatico; verificare Home desktop e menu/navigazione su viewport iPhone 16.
+- [x] Usare Axios e uno schema Zod vicino alla feature per la richiesta Class14 `/api/stats`, senza validatori o tipi duplicati.
+
+Build e lint client riusciti. La Home mostra lo stato di indisponibilità dei contatori quando l'API non è raggiungibile; la risposta riuscita di `/api/stats` va verificata con MySQL accessibile. I cataloghi e i dettagli restano nella fase 9.
+
+L'header ora mostra solo Argomenti, Progetti e Studenti; il logo porta alla Home. Le pagine introduttive della fase 8 sono temporanee. Cheat sheet e Risorse restano raggiungibili dalla Home e tramite URL diretto.
 
 ### 9. Pagine MVP — un flusso alla volta
 
-- [ ] Collegare lista/dettaglio Projects, Markdown sicuro, repository, PDF e risorse.
+- [ ] Collegare lista/dettaglio Projects: Markdown sicuro, tag verso Argomenti, studenti con repository disponibili e link ai profili, PDF e risorse. Il dettaglio è il nodo principale delle relazioni.
 - [ ] Quando il flusso Projects è pronto, sostituire products e rimuovere provider/import/route/controlli pertinenti.
-- [ ] Collegare lista/profilo Students con avatar, GitHub e repository disponibili.
-- [ ] Creare Cheat Sheets con apertura/download PDF e progetti collegati.
-- [ ] Creare Resources con link esterni e progetti collegati.
-- [ ] Creare elenco/dettaglio Topics con progetti e, dove previsti, “Materiali dei progetti collegati”.
-- [ ] Adattare Home alla presentazione Learning Hub + Showcase e ai contatori del catalogo.
+- [ ] Creare elenco/dettaglio Topics: da ciascun argomento aprire i progetti associati e i PDF/risorse ricavati da quei progetti, deduplicati e presentati come “Materiali dei progetti collegati”.
+- [x] Portare l'header a tre voci principali (Argomenti, Progetti, Studenti), mantenendo Home dal logo e i link a Cheat sheet e Risorse dalla Home.
+- [ ] Aggiungere link a Cheat sheet e Risorse nel footer e i collegamenti contestuali nelle pagine di dettaglio.
+- [ ] Collegare lista/profilo Students con avatar, GitHub, progetti e repository disponibili; dai progetti aprire i profili e viceversa.
+- [ ] Creare il catalogo Cheat sheet con apertura/download PDF e link ai progetti collegati; mantenere `/cheatsheets` raggiungibile direttamente.
+- [ ] Creare il catalogo Risorse con link esterni e link ai progetti collegati; mantenere `/resources` raggiungibile direttamente.
+- [ ] Completare e verificare la Home con contatori reali e contenuti collegati alle pagine MVP; struttura e richiesta `/api/stats` sono già presenti.
 - [ ] Gestire caricamento, errori, dati assenti e 404 nei flussi pertinenti.
-- [ ] Sostituire contenuti Home/AboutUs di esempio e verificare assenza di dipendenze dalla Fake Store API.
+- [ ] Verificare almeno il percorso Argomento → Progetto → Studente → Repository e il ritorno ai materiali/progetti; nessuna lista deve restare isolata.
+- [ ] Quando Projects sostituisce Products, rimuovere gli ultimi contenuti e le dipendenze dalla Fake Store API.
 
 ### 10. Ricerca e filtri essenziali — dopo le liste
 
@@ -133,7 +141,7 @@ Verificati tutti i profili e cataloghi con query DB di sola lettura, conteggi/or
 
 ## In corso
 
-Nessuna attività di implementazione aperta. Prossima attività: fase 8, adattamento frontend.
+Nessuna attività di implementazione aperta. Prossima attività: fase 9, pagine MVP un flusso alla volta, iniziando da Projects.
 
 ## Fatto
 

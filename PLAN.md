@@ -13,6 +13,8 @@ La direzione principale deve essere quella del **Learning Hub**.
 
 La parte Showcase deve integrarsi naturalmente nella piattaforma senza trasformarla in una competizione o in una classifica degli studenti.
 
+**Decisione per l'MVP:** il percorso di consultazione è Argomenti → Progetti → Studenti, con materiali disponibili nei dettagli e in cataloghi completi separati. L'header dà priorità ad Argomenti, Progetti e Studenti; Home si apre dal brand, mentre Cheat sheet e Risorse restano accessibili da Home, footer e pagine collegate. I dettagli e i limiti dei dati sono in [DESIGN.md](DESIGN.md) e [AGENTS.md](AGENTS.md). Gli esempi di completamento, commit e attività GitHub nelle sezioni seguenti descrivono possibili evoluzioni, non dati o etichette dell'MVP.
+
 L'obiettivo è creare una piattaforma che possa essere utile:
 
 - durante il corso;
@@ -467,21 +469,17 @@ Questa funzionalità deve essere considerata **un'evoluzione futura**, non neces
 
 ---
 
-## 11. Possibile struttura della navigazione
+## 11. Navigazione MVP confermata
 
 ```text
-Home
-
-Projects
-Students
-Topics
-Resources
-Cheat Sheets
-
-About
+Class14 (logo) → Home
+Header → Argomenti · Progetti · Studenti
+Home, footer e pagine collegate → Cheat sheet · Risorse
 ```
 
-In futuro:
+Argomenti, Progetti e Studenti hanno lista e dettaglio. Il dettaglio argomento collega progetti e materiali ricavati dai progetti; il dettaglio progetto mostra descrizione, studenti con repository verificata, PDF e risorse. I cataloghi Cheat sheet e Risorse rimangono consultabili direttamente e rimandano ai progetti collegati. Non presentare i materiali come associati direttamente al topic né la presenza di una repository come prova di completamento.
+
+Possibile evoluzione futura:
 
 ```text
 Explore Developers
