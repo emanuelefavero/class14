@@ -4,6 +4,8 @@ Class14 è una piattaforma di studio per la classe WDPT14 del corso Web Developm
 
 Ogni progetto raccoglie la sua descrizione, i materiali collegati e le repository pubbliche degli studenti. Si può partire da un argomento, esplorare i progetti della classe e trovare gli appunti o i link utili per studiarlo.
 
+![mockup](./mockup.png 'mockup')
+
 ## Sviluppo locale
 
 Servono Node.js 24.14 o successivo e MySQL avviato. Dopo aver clonato la repository, esegui questi passaggi dalla sua cartella principale:
