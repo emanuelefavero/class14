@@ -13,39 +13,36 @@ Ultimo aggiornamento del contesto: 29 settembre 2026. Questo file raccoglie le d
 
 ## Organizzazione della documentazione
 
-- `AGENTS.md`, `KANBAN.md`, `PLAN.md` e `DESIGN.md` restano nella root. `PLAN.md` descrive la direzione del progetto; `DESIGN.md` guida design e UX frontend.
-- `docs/` contiene piano, inventario degli asset e `CODE-STYLE-GUIDELINES.md`; seguire anche le convenzioni raccolte qui.
-- `docs/brief/` conserva il prompt e la traccia originali.
-- I Markdown in `assets/` sono dati dell’app e restano accanto agli asset; il README SQL resta in `server/db/setup/`.
+- Nella root restano `README.md` e `AGENTS.md`.
+- `docs/` contiene `PLAN.md`, `KANBAN.md`, `DESIGN.md`, il contratto API, le istruzioni di setup e le linee guida di stile.
+- I documenti e i dati usati per preparare il database sono stati spostati in `.local/`, ignorata da Git. Non sono necessari per eseguire l'app o importare gli SQL; il README SQL resta in `server/db/setup/`.
 - I percorsi scritti nei documenti si riferiscono alla root del progetto, salvo i link Markdown relativi.
 
 ## Cosa leggere prima di lavorare
 
-1. Questo file, [docs/CODE-STYLE-GUIDELINES.md](docs/CODE-STYLE-GUIDELINES.md), [KANBAN.md](KANBAN.md), [DESIGN.md](DESIGN.md) per il frontend e [docs/API-CONTRACT.md](docs/API-CONTRACT.md) per le API.
-2. [PLAN.md](PLAN.md) per la nuova direzione Learning Hub + Student Showcase e [assets-info.md](docs/assets-info.md) per i dati. [docs/initial-plan.md](docs/initial-plan.md) conserva il piano precedente.
-3. I file pertinenti alla fase corrente. Per il database: [server/db/setup/README.md](server/db/setup/README.md), [schema.sql](server/db/setup/schema.sql) e [scripts/generate-seed.mjs](scripts/generate-seed.mjs).
+1. Questo file, [docs/CODE-STYLE-GUIDELINES.md](docs/CODE-STYLE-GUIDELINES.md), [docs/KANBAN.md](docs/KANBAN.md), [docs/DESIGN.md](docs/DESIGN.md) per il frontend e [docs/API-CONTRACT.md](docs/API-CONTRACT.md) per le API.
+2. [docs/PLAN.md](docs/PLAN.md) per la nuova direzione Learning Hub + Student Showcase.
+3. I file pertinenti alla fase corrente. Per il database: [server/db/setup/README.md](server/db/setup/README.md), [schema.sql](server/db/setup/schema.sql).
 
-`docs/brief/PROMPT.md` contiene il brief iniziale; `docs/brief/EXERCISE.md` la traccia originale sui film. L'app è stata volutamente adattata a Class14: non reintrodurre film, recensioni o altre entità solo perché compaiono nella traccia.
+Se disponibile, usare la skill locale `.agents/skills/boolean-course-exercises/SKILL.md`. `.agents/` è ignorata da Git e potrebbe mancare in altri ambienti: le istruzioni essenziali sono in questo file.
 
-Se disponibile, usare la skill locale `.agents/skills/boolean-course-exercises/SKILL.md`; `assets/lessons.json` è il riferimento del calendario. `.agents/` è ignorata da Git e potrebbe mancare in altri ambienti: le istruzioni essenziali sono in questo file.
-
-Le decisioni esplicite dell’utente e l’MVP confermato qui prevalgono sulle proposte più ampie di `PLAN.md` e sulle parti meno aggiornate di `docs/initial-plan.md`. Il riferimento frontend principale è `react-context-api`. Il client usa React Router Declarative Mode per scelta dell’utente.
+Le decisioni esplicite dell’utente e l’MVP confermato qui prevalgono sulle proposte più ampie di `docs/PLAN.md`. Il client usa React Router Declarative Mode per scelta dell’utente.
 
 ## Nuova direzione e MVP confermato
 
-L’utente ha approvato la prima versione proposta dopo il confronto di `PLAN.md` con lo schema. Il brand resta **Class14**. L’identità principale è **Learning Hub**, con uno **Student Showcase** integrato: consultare materiali e mostrare il percorso della classe, senza classifiche competitive.
+L’utente ha approvato la prima versione proposta dopo il confronto di `docs/PLAN.md` con lo schema. Il brand resta **Class14**. L’identità principale è **Learning Hub**, con uno **Student Showcase** integrato: consultare materiali e mostrare il percorso della classe, senza classifiche competitive.
 
 **Per l’MVP mantenere le sette tabelle e lo schema attuale di `class14`, senza migrazioni né nuove tabelle.** Non occorre aggiungere colonne per implementare il perimetro seguente:
 
-| Sezione | Contenuti della prima versione | Fonte |
-| --- | --- | --- |
-| Projects | Lista e dettaglio: descrizione Markdown, topics, studenti/repository, PDF e risorse | `projects` e le tre tabelle ponte |
-| Students | Lista e profilo: nome, avatar, link GitHub, repository pubbliche del catalogo | `students`, `student_projects`, `projects` |
-| Cheat Sheets | Catalogo autonomo, apertura/download PDF e collegamenti ai progetti | `cheatsheets`, `project_cheatsheets` |
-| Resources | Catalogo autonomo di titoli/link e collegamenti ai progetti | `resources`, `project_resources` |
-| Topics | Elenco dei tag unici e dettaglio con progetti, PDF e risorse collegati attraverso quei progetti | `projects.topics`, separato e normalizzato in lettura; tabelle ponte dei materiali |
-| Home | Presentazione del Learning Hub e contatori di studenti, progetti, repository, PDF e risorse | Conteggi delle tabelle esistenti |
-| Ricerca e filtri essenziali | Ricerca su titoli/nomi/username e filtro per topic nelle quattro liste supportate | `q` e `topic` definiti nel contratto API |
+| Sezione                     | Contenuti della prima versione                                                                  | Fonte                                                                              |
+| --------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Projects                    | Lista e dettaglio: descrizione Markdown, topics, studenti/repository, PDF e risorse             | `projects` e le tre tabelle ponte                                                  |
+| Students                    | Lista e profilo: nome, avatar, link GitHub, repository pubbliche del catalogo                   | `students`, `student_projects`, `projects`                                         |
+| Cheat Sheets                | Catalogo autonomo, apertura/download PDF e collegamenti ai progetti                             | `cheatsheets`, `project_cheatsheets`                                               |
+| Resources                   | Catalogo autonomo di titoli/link e collegamenti ai progetti                                     | `resources`, `project_resources`                                                   |
+| Topics                      | Elenco dei tag unici e dettaglio con progetti, PDF e risorse collegati attraverso quei progetti | `projects.topics`, separato e normalizzato in lettura; tabelle ponte dei materiali |
+| Home                        | Presentazione del Learning Hub e contatori di studenti, progetti, repository, PDF e risorse     | Conteggi delle tabelle esistenti                                                   |
+| Ricerca e filtri essenziali | Ricerca su titoli/nomi/username e filtro per topic nelle quattro liste supportate               | `q` e `topic` definiti nel contratto API                                           |
 
 ### Gerarchia delle pagine e navigazione confermata
 
@@ -53,7 +50,7 @@ L’utente ha approvato la prima versione proposta dopo il confronto di `PLAN.md
 - Le liste sono punti di ingresso ai dettagli, non pagine isolate. Dal dettaglio argomento si aprono progetti e materiali dei progetti collegati; dal dettaglio progetto si aprono profili degli studenti, repository verificate, PDF, risorse e topic; dal profilo studente si torna ai progetti. I cataloghi materiali riportano ai progetti collegati.
 - Il contratto API già fornisce questi dati: `TopicDetail.projects` e `related_*`, `ProjectDetail.students` con `repo_url` più `cheatsheets` e `resources`, `StudentDetail.projects` con `repo_url`, e `projects` nei cataloghi materiali. Non serve cambiare schema o aggiungere endpoint per questo flusso.
 - La relazione topic–materiale è indiretta e si presenta come “Materiali dei progetti collegati”. `student_projects` attesta una repository pubblica verificata, non il completamento dell'esercizio: usare “Repository disponibili”.
-- L'header del client mostra le tre sezioni principali; liste, dettagli, cataloghi materiali e collegamenti incrociati sono presenti. Ricerca e filtri delle quattro liste supportate sono implementati con parametri URL. [DESIGN.md](DESIGN.md) contiene la struttura UX da seguire.
+- L'header del client mostra le tre sezioni principali; liste, dettagli, cataloghi materiali e collegamenti incrociati sono presenti. Ricerca e filtri delle quattro liste supportate sono implementati con parametri URL. [docs/DESIGN.md](docs/DESIGN.md) contiene la struttura UX da seguire.
 
 ### Contratto API definito — fase 1 completata
 
@@ -81,7 +78,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - La pagina di un topic mostra i progetti che possiedono quel tag. PDF e risorse si possono ricavare attraverso quei progetti e deduplicare per ID.
 - Questi collegamenti sono indiretti: un PDF di un progetto non è necessariamente specifico di ciascun suo tag. Presentarli come **“Materiali dei progetti collegati”**, senza affermare un’associazione diretta al topic.
 - Descrizioni editoriali dei topic e associazioni precise ai materiali possono essere aggiunte in futuro in Markdown o con una piccola mappatura JavaScript esplicita. Non sono prerequisiti dell’MVP e non richiedono nuove tabelle adesso.
-- Il catalogo resta da React in poi. Gli esempi HTML/CSS o i numeri illustrativi di `PLAN.md` non ampliano automaticamente i dati o il perimetro.
+- Il catalogo resta da React in poi. Gli esempi HTML/CSS o i numeri illustrativi di `docs/PLAN.md` non ampliano automaticamente i dati o il perimetro.
 
 ### Possibilità successive, escluse dalla prima versione
 
@@ -107,7 +104,7 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
 - Conservare pagine in `src/pages/` e `RootLayout` in `client/src/`, con `Outlet` dentro `Main`, `Header` e `Footer`. Eventuali altri layout vanno vicino alle pagine che li usano, solo quando servono davvero.
 - Il frontend usa Axios e Zod per validare input e risposte delle richieste HTTP quando necessario. Tenere gli schemi vicino alla feature, in `schemas.js`; non usare Zod per stato React, componenti o semplici controlli locali. La dipendenza è già installata in `client/`.
 - L'interfaccia frontend dell'MVP è in italiano: navigazione, pulsanti, filtri, stati e testi delle pagine. Codice, API, percorsi, slug e nomi originali di progetti e tecnologie restano in inglese. Valutare una versione inglese dopo la verifica; per ora non serve un sistema multilingua.
-- La direzione visiva e i flussi UX sono definiti in [DESIGN.md](DESIGN.md): Home come hub editoriale, tre sezioni primarie, percorso Argomenti → Progetti → Studenti e materiali collegati, dettagli come schede visuali sobrie e un solo accento blu indaco. Consultarlo prima di progettare pagine e componenti.
+- La direzione visiva e i flussi UX sono definiti in [docs/DESIGN.md](docs/DESIGN.md): Home come hub editoriale, tre sezioni primarie, percorso Argomenti → Progetti → Studenti e materiali collegati, dettagli come schede visuali sobrie e un solo accento blu indaco. Consultarlo prima di progettare pagine e componenti.
 - CSS nativo, CSS nesting, custom properties e tema automatico con `prefers-color-scheme`. Nessun Bootstrap o framework CSS. L'ispirazione shadcn/ui è visiva, non una richiesta di installarlo.
 - Componenti separati in `components/ui`, `components/shared`, `components/layout`; CSS vicino ai componenti. Stato locale e props, Context solo per esigenze concrete.
 - Export nominati, apici singoli, indentazione di 2 spazi, punto e virgola. Evitare JSDoc per typing; usare JSDoc brevi e descrittivi sui metodi repository e commenti nei passaggi meno evidenti. Conservare l’esempio input/output di `normalizeProjectTopics`. Seguire le convenzioni qui raccolte e lo stile dei riferimenti locali.
@@ -134,15 +131,15 @@ L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` 
 
 Il database locale **class14** è stato creato e popolato dall'utente. Successivamente sono stati applicati e verificati anche i collegamenti ai PDF e le risorse esterne.
 
-| Tabella | Righe verificate |
-| --- | ---: |
-| `students` | 15 |
-| `projects` | 15 |
-| `cheatsheets` | 18 |
-| `resources` | 17 |
-| `student_projects` | 124 |
-| `project_cheatsheets` | 39 |
-| `project_resources` | 54 |
+| Tabella               | Righe verificate |
+| --------------------- | ---------------: |
+| `students`            |               15 |
+| `projects`            |               15 |
+| `cheatsheets`         |               18 |
+| `resources`           |               17 |
+| `student_projects`    |              124 |
+| `project_cheatsheets` |               39 |
+| `project_resources`   |               54 |
 
 - Tutti i 15 progetti hanno almeno un PDF e una risorsa; tutti i 18 PDF e le 17 risorse sono collegati.
 - Le tre tabelle ponte hanno chiavi primarie composte e foreign key con `ON DELETE CASCADE`.
@@ -152,36 +149,18 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 
 ## Asset e loro significato
 
-- `assets/students.js`: 15 studenti, solo nome di battesimo e username GitHub. I nomi sono unici nella classe attuale, ma l'identità è lo username/ID, non il nome. I profili pubblici e gli avatar sono inclusi per scelta dell'utente.
-- `assets/projects.js`: 15 slug esatti delle repository previste e relativi tag. `react-hello-world` è incluso. Non ampliare il catalogo ai progetti precedenti senza richiesta.
-- `assets/project-descriptions/`: una descrizione Markdown per ciascun progetto, con un solo titolo principale. Gli allegati degli esercizi citati nelle descrizioni non sono inclusi; è una scelta intenzionale.
-- `server/public/avatars/` e `assets/student-avatars.json`: 15 immagini locali e mappatura username/percorso. Non è necessario riscaricarle per iniziare il backend.
-- `assets/student-projects.json`: 124 coppie studente/progetto con URL pubblico verificato su 225 candidati. Uno studente può avere poche o nessuna repository del catalogo.
-- `assets/github-sync-status.json`: checkpoint delle verifiche. Gli altri 101 candidati non hanno una corrispondenza pubblica esatta; ciò non dimostra che lo studente non abbia fatto l'esercizio.
-- `server/public/cheatsheets/`: 18 PDF. `assets/project-cheatsheets.js` contiene 39 associazioni curate in base ai contenuti dei progetti; il solo tag React sarebbe troppo generico.
-- `assets/resources.md`: URL e titoli esterni per argomento. Il seed importa solo le sezioni con tag presenti nel catalogo: mysql2, MySQL, Database, Express, Node.js, NPM e React. Esclude HTML, CSS, JavaScript e Bootstrap. React Router è collegato solo a `react-router`; gli altri link seguono i tag.
-- I link esterni sono stati copiati senza visitarli, come richiesto. Non aggiornarli o sostituirli automaticamente.
+- `server/public/avatars/` contiene i 15 avatar serviti dall'app; `server/public/cheatsheets/` contiene i 18 PDF. I percorsi sono già salvati nel database e nel seed.
+- Le sorgenti usate per preparare studenti, progetti, descrizioni, associazioni e risorse sono ora in `.local/assets/`, fuori da Git. Per una nuova installazione usare gli SQL versionati, senza richiedere questi file locali.
+- Il catalogo include solo i 15 progetti da React in poi, con 124 URL di repository pubbliche verificate. Una repository non trovata non dimostra che lo studente non abbia fatto l'esercizio.
+- Le associazioni fra progetti e PDF sono curate; i tag dei progetti non bastano per ricostruirle. I link esterni delle risorse non sono stati verificati online e non vanno sostituiti automaticamente.
 
-## Script e database: come continuare senza perdere dati
+## Database: come continuare senza perdere dati
 
-```bash
-# Genera il seed completo e i due SQL incrementali dagli asset
-node scripts/generate-seed.mjs
-
-# Verifica che gli SQL generati siano aggiornati
-node scripts/generate-seed.mjs --check
-
-# Riprende solo le verifiche GitHub incomplete o fallite
-node scripts/sync-github-assets.mjs
-
-# Ricontrolla tutti i profili e URL (solo se serve aggiornare il catalogo)
-node scripts/sync-github-assets.mjs --refresh
-```
-
-- Modificare i dati sorgente o il generatore, poi rigenerare: non modificare a mano `seed.sql`, `project-cheatsheets.sql` o `project-resources.sql`.
-- Il seed completo contiene già PDF, risorse e associazioni. Gli SQL incrementali servono per aggiornare una vecchia installazione senza reimportare tutto.
+- `server/db/setup/schema.sql` crea il database e le sette tabelle se non esistono. `server/db/setup/seed.sql` contiene tutti i dati e i collegamenti necessari per una nuova installazione; vedere `server/db/setup/README.md`.
+- `schema.sql` e `seed.sql` sono i soli file SQL di setup versionati. Il seed comprende anche tutte le associazioni; non servono gli asset in `.local/` per importarlo.
+- Gli script di preparazione sono in `.local/scripts/`, ignorata da Git; dopo lo spostamento i loro percorsi interni non sono stati aggiornati. Non considerarli parte del setup versionato e non eseguirli senza prima adattarli.
 - Il seed aggiorna righe con la stessa chiave naturale e aggiunge associazioni senza duplicarle. **Non rimuove** record o associazioni diventati obsoleti: una futura sincronizzazione con cancellazioni richiede una decisione esplicita.
-- Non rileggere tutto `seed.sql` per capire il progetto: è un file generato lungo. Leggere prima il generatore, lo schema e gli asset pertinenti.
+- Non rileggere tutto `seed.sql` per capire il progetto: è un file lungo. Leggere prima lo schema e la documentazione del setup.
 - Il database è già popolato: non ricrearlo, svuotarlo o rieseguire import senza una ragione concreta. Le istruzioni per una nuova installazione sono nel README del setup SQL.
 - In questa sessione MySQL era raggiungibile con il client locale e accesso fuori dalla sandbox; nella sandbox i messaggi di connessione fallivano. Verificare il contesto prima di diagnosticare il database come spento. Una vecchia prova con un server temporaneo era andata in crash, ma il database reale è poi stato verificato con successo.
 
@@ -189,7 +168,7 @@ node scripts/sync-github-assets.mjs --refresh
 
 - `.env` contiene un `GITHUB_TOKEN` locale, verificato valido durante la sessione. Non leggerne o stamparne il valore. È ignorato da Git e non serve all'app per mostrare i dati già raccolti.
 - Il token fine-grained è stato rimosso da `.env` dall'utente; esiste ancora sul suo account per un altro progetto. Ignorarlo: non revocarlo, cercarlo o riutilizzarlo.
-- Lo script attuale usa richieste anonime: API GitHub per gli avatar e controlli HTTP sugli URL pubblici esatti delle repository. Non usa il token né `gh` per enumerare repository.
+- Lo script di sincronizzazione spostato in `.local/scripts/` usa richieste anonime: API GitHub per gli avatar e controlli HTTP sugli URL pubblici esatti delle repository. Non usa il token né `gh` per enumerare repository.
 - Regola confermata: costruire esclusivamente `https://github.com/{username}/{projectSlug}`. Non cercare nomi simili o altre repository nei profili. Un redirect verso un nome diverso non è una corrispondenza valida.
 - Una precedente scansione autenticata con il token ampio di `gh` è stata respinta dalla revisione automatica perché poteva leggere dati privati. Il lavoro è stato completato con controlli pubblici anonimi. Non usare questo episodio come motivo per richiedere nuovi token per il catalogo attuale.
 
@@ -220,7 +199,7 @@ node scripts/sync-github-assets.mjs --refresh
 - La leggibilità ha precedenza sulla compattezza, sia nel backend sia nel frontend. Usare liberamente `&&`, `||`, `??`, ternari e spread quando il significato si comprende al primo sguardo; evitare condizioni annidate e catene di trasformazioni concentrate in una sola espressione. Quando una riga richiede di essere decifrata, separare i passaggi con variabili dai nomi descrittivi o condizioni esplicite. Cercare una via di mezzo: non espandere inutilmente le espressioni semplici.
 
 - Rispondere normalmente in italiano. Preservare modifiche dell'utente e controllare il diff prima e dopo ogni fase.
-- Aggiornare `KANBAN.md` e i documenti pertinenti quando una fase è verificata; aggiornare questo file quando cambia una decisione importante.
+- Aggiornare `docs/KANBAN.md` e i documenti pertinenti quando una fase è verificata; aggiornare questo file quando cambia una decisione importante.
 - Evitare letture massive di SQL generato, PDF e dati di checkpoint quando bastano sorgenti piccoli.
 - Verificare il lavoro con i controlli pertinenti e riportare separatamente ciò che è stato implementato e ciò che non è stato verificato.
 - Non trasformare automaticamente un suggerimento futuro in un requisito. Proseguire una fase alla volta, mantenendo la continuità con il codice dell'utente.
@@ -316,4 +295,4 @@ node scripts/sync-github-assets.mjs --refresh
 - Verifiche visive e di accessibilità riferite dall'utente: navigazione incrociata, link esterni, avatar, PDF, accessi diretti, mobile, tastiera, focus, etichette, temi e buon punteggio Lighthouse. Non sono stati ripetuti test visivi automatizzati in questa fase.
 - `npm run lint` e `npm run build` passano. La build emette un avviso sul bundle JavaScript da 516,62 kB; non impedisce la build.
 - HTTP locali verificati per root API, stats, lista/dettaglio topics, liste filtrate di Projects/Students/Cheat Sheets/Resources, dettagli progetto/studente e 404 di un progetto inesistente. Server di verifica arrestato; nessun processo Vite avviato in questa fase.
-- `README.md`, `client/README.md`, `docs/SETUP.md`, `docs/API-CONTRACT.md` e `KANBAN.md` aggiornati. Deployment e pubblicazione della repository rimangono fuori dal ticket, in attesa della decisione dell'utente dopo il confronto con l'insegnante.
+- `README.md`, `client/README.md`, `docs/SETUP.md`, `docs/API-CONTRACT.md` e `docs/KANBAN.md` aggiornati. Deployment e pubblicazione della repository rimangono fuori dal ticket, in attesa della decisione dell'utente dopo il confronto con l'insegnante.

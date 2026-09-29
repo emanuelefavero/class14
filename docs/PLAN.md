@@ -13,7 +13,7 @@ La direzione principale deve essere quella del **Learning Hub**.
 
 La parte Showcase deve integrarsi naturalmente nella piattaforma senza trasformarla in una competizione o in una classifica degli studenti.
 
-**Decisione per l'MVP:** il percorso di consultazione è Argomenti → Progetti → Studenti, con materiali disponibili nei dettagli e in cataloghi completi separati. L'header dà priorità ad Argomenti, Progetti e Studenti; Home si apre dal brand, mentre Cheat sheet e Risorse restano accessibili da Home, footer e pagine collegate. I dettagli e i limiti dei dati sono in [DESIGN.md](DESIGN.md) e [AGENTS.md](AGENTS.md). Gli esempi di completamento, commit e attività GitHub nelle sezioni seguenti descrivono possibili evoluzioni, non dati o etichette dell'MVP.
+**Decisione per l'MVP:** il percorso di consultazione è Argomenti → Progetti → Studenti, con materiali disponibili nei dettagli e in cataloghi completi separati. L'header dà priorità ad Argomenti, Progetti e Studenti; Home si apre dal brand, mentre Cheat sheet e Risorse restano accessibili da Home, footer e pagine collegate. I dettagli e i limiti dei dati sono in [DESIGN.md](DESIGN.md) e [AGENTS.md](../AGENTS.md). Gli esempi di completamento, commit e attività GitHub nelle sezioni seguenti descrivono possibili evoluzioni, non dati o etichette dell'MVP.
 
 L'obiettivo è creare una piattaforma che possa essere utile:
 

@@ -18,13 +18,20 @@ Il backend in `server/` usa Node.js, Express, MySQL e Zod. Il frontend in `clien
 
 - [Avvio locale e comandi](docs/SETUP.md)
 - [Contratto API](docs/API-CONTRACT.md)
-- [Direzione del progetto](PLAN.md) e [design frontend](DESIGN.md)
-- [Stato del lavoro](KANBAN.md)
+- [Direzione del progetto](docs/PLAN.md) e [design frontend](docs/DESIGN.md)
+- [Stato del lavoro](docs/KANBAN.md)
 - [Setup del database](server/db/setup/README.md)
 
 ## Avvio rapido
 
-Richiede Node.js 24.14 o successivo e MySQL con il database `class14` popolato. Dopo aver configurato `server/.env` seguendo [le istruzioni di setup](docs/SETUP.md):
+Richiede Node.js 24.14 o successivo e MySQL. Dalla root del progetto, creare e popolare `class14` con i due SQL inclusi nella repository:
+
+```bash
+mysql -u root -p < server/db/setup/schema.sql
+mysql -u root -p < server/db/setup/seed.sql
+```
+
+Il seed include già tutti i dati e le associazioni: non servono gli asset locali per importarlo. Avatar e PDF devono restare in `server/public/`. Dopo aver configurato `server/.env` seguendo [le istruzioni di setup](docs/SETUP.md):
 
 ```bash
 npm run install:all

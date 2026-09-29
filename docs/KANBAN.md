@@ -4,7 +4,7 @@ Procedere nell’ordine indicato, una fase verificabile alla volta: **prima back
 
 ## Direzione e perimetro confermati
 
-- [PLAN.md](PLAN.md) descrive la nuova direzione: **Learning Hub** come identità principale, con **Student Showcase** integrato e senza classifiche competitive. [AGENTS.md](AGENTS.md) precisa il perimetro approvato e i limiti dei dati; [DESIGN.md](DESIGN.md) guida design e UX frontend.
+- [PLAN.md](PLAN.md) descrive la nuova direzione: **Learning Hub** come identità principale, con **Student Showcase** integrato e senza classifiche competitive. [AGENTS.md](../AGENTS.md) precisa il perimetro approvato e i limiti dei dati; [DESIGN.md](DESIGN.md) guida design e UX frontend.
 - **MVP senza modifiche allo schema `class14`**: Projects, Students, Cheat Sheets, Resources, Topics, Home con contatori, ricerca e filtri essenziali dopo le liste.
 - Mantenere i 15 progetti da React in poi. Non ampliare il catalogo con gli esempi o i numeri illustrativi del piano.
 - La presenza di una repository pubblica non certifica il completamento: usare “Repository disponibili”. `created_at` rappresenta l’inserimento, non una data didattica o di completamento.
@@ -14,7 +14,7 @@ Procedere nell’ordine indicato, una fase verificabile alla volta: **prima back
 ## Base attuale e metodo di conversione
 
 - `server/` deriva da `express-blog-sql`; `client/` da `react-context-api`. Non ricreare lo scaffolding.
-- Dipendenze, script comuni e avvio sono documentati in [docs/SETUP.md](docs/SETUP.md). I package `class14`, `class14-server` e `class14-client` e i contenuti principali delle app sono adattati a Class14.
+- Dipendenze, script comuni e avvio sono documentati in [docs/SETUP.md](../docs/SETUP.md). I package `class14`, `class14-server` e `class14-client` e i contenuti principali delle app sono adattati a Class14.
 - Posts e Products sono stati sostituiti dalle feature Class14. I loro import, route, provider e richieste non fanno più parte dell'app.
 - Usare React Router Declarative Mode; Zod ai confini HTTP di frontend e backend. JavaScript, nessun typecheck TypeScript né nuovo JSDoc per typing.
 - Il database è già inizializzato. Preservare `server/db/setup/`: non cancellare, ricreare o reimportare i dati per avviare l’MVP. Leggere solo i file pertinenti quando necessario.
@@ -32,7 +32,7 @@ Procedere nell’ordine indicato, una fase verificabile alla volta: **prima back
 - [x] Definire errori 400/404/500, ordinamento e ricerca/filtri essenziali; decidere se occorre paginazione per il catalogo attuale.
 - [x] Documentare che repository, topics del profilo e date di inserimento non provano completamento o competenze certificate.
 
-Specifica: [docs/API-CONTRACT.md](docs/API-CONTRACT.md). Contratto definito rispetto a schema/generatore; gli endpoint sono stati implementati nelle fasi 3–6.
+Specifica: [docs/API-CONTRACT.md](../docs/API-CONTRACT.md). Contratto definito rispetto a schema/generatore; gli endpoint sono stati implementati nelle fasi 3–6.
 
 ### 2. Configurazione e adattamento backend — completato
 

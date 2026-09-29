@@ -3,8 +3,8 @@
 ## Stato e perimetro
 
 Contratto definito il 26 settembre 2026 per implementare l’MVP concordato in
-[AGENTS.md](../AGENTS.md) e [KANBAN.md](../KANBAN.md), secondo la direzione
-[PLAN.md](../PLAN.md). **Questo documento è la specifica di riferimento: Projects, Students, Cheat Sheets/Resources, Topics e Stats sono implementati e usati dal client.**
+[AGENTS.md](../AGENTS.md) e [KANBAN.md](KANBAN.md), secondo la direzione
+[PLAN.md](PLAN.md). **Questo documento è la specifica di riferimento: Projects, Students, Cheat Sheets/Resources, Topics e Stats sono implementati e usati dal client.**
 
 API pubblica di sola lettura, senza autenticazione, CRUD o chiamate GitHub live.
 Riutilizza le sette tabelle di [schema.sql](../server/db/setup/schema.sql), senza
@@ -28,17 +28,17 @@ migrazioni. Le vecchie routes posts non fanno parte del contratto.
 
 Tutte le routes nella tabella usano GET.
 
-| Percorso | Risposta | Query ammesse |
-| --- | --- | --- |
-| `/api/projects` | Array ProjectSummary | `q`, `topic` |
-| `/api/projects/:slug` | ProjectDetail | Ignorate |
-| `/api/students` | Array StudentSummary | `q`, `topic` |
-| `/api/students/:github_username` | StudentDetail | Ignorate |
-| `/api/cheatsheets` | Array CheatSheetCatalogItem | `q`, `topic` |
-| `/api/resources` | Array ResourceCatalogItem | `q`, `topic` |
-| `/api/topics` | Array TopicSummary | Ignorate |
-| `/api/topics/:name` | TopicDetail | Ignorate |
-| `/api/stats` | CatalogStats | Ignorate |
+| Percorso                         | Risposta                    | Query ammesse |
+| -------------------------------- | --------------------------- | ------------- |
+| `/api/projects`                  | Array ProjectSummary        | `q`, `topic`  |
+| `/api/projects/:slug`            | ProjectDetail               | Ignorate      |
+| `/api/students`                  | Array StudentSummary        | `q`, `topic`  |
+| `/api/students/:github_username` | StudentDetail               | Ignorate      |
+| `/api/cheatsheets`               | Array CheatSheetCatalogItem | `q`, `topic`  |
+| `/api/resources`                 | Array ResourceCatalogItem   | `q`, `topic`  |
+| `/api/topics`                    | Array TopicSummary          | Ignorate      |
+| `/api/topics/:name`              | TopicDetail                 | Ignorate      |
+| `/api/stats`                     | CatalogStats                | Ignorate      |
 
 Non servono endpoint di dettaglio autonomi per PDF e risorse nella prima versione:
 i cataloghi contengono i progetti collegati; il PDF si apre dal file_path e la
@@ -72,45 +72,45 @@ I nomi seguenti descrivono forme di oggetti; non richiedono TypeScript o JSDoc.
 
 ### ProjectSummary
 
-| Campo | Forma | Fonte |
-| --- | --- | --- |
-| id | numero | projects.id |
-| slug | stringa | projects.slug |
-| title | stringa | projects.title |
+| Campo  | Forma          | Fonte                       |
+| ------ | -------------- | --------------------------- |
+| id     | numero         | projects.id                 |
+| slug   | stringa        | projects.slug               |
+| title  | stringa        | projects.title              |
 | topics | array stringhe | projects.topics trasformato |
 
 Ordine lista progetti: title, poi slug. Questo riepilogo si usa anche nei cataloghi materiali e nelle relazioni.
 
 ### StudentSummary
 
-| Campo | Forma | Fonte |
-| --- | --- | --- |
-| id | numero | students.id |
-| name | stringa | students.name |
-| github_username | stringa | students.github_username |
-| github_url | URL assoluto | `https://github.com/` + github_username |
-| avatar_path | percorso o null | students.avatar_path |
+| Campo           | Forma           | Fonte                                   |
+| --------------- | --------------- | --------------------------------------- |
+| id              | numero          | students.id                             |
+| name            | stringa         | students.name                           |
+| github_username | stringa         | students.github_username                |
+| github_url      | URL assoluto    | `https://github.com/` + github_username |
+| avatar_path     | percorso o null | students.avatar_path                    |
 
 Ordine studenti: name, poi github_username. Gli URL GitHub conservano la grafia dello username.
 
 ### CheatSheetSummary
 
-| Campo | Forma | Fonte |
-| --- | --- | --- |
-| id | numero | cheatsheets.id |
-| slug | stringa | cheatsheets.slug |
-| title | stringa | cheatsheets.title |
+| Campo     | Forma    | Fonte                 |
+| --------- | -------- | --------------------- |
+| id        | numero   | cheatsheets.id        |
+| slug      | stringa  | cheatsheets.slug      |
+| title     | stringa  | cheatsheets.title     |
 | file_path | percorso | cheatsheets.file_path |
 
 Ordine PDF: title, poi slug. Nessuna descrizione, categoria o data di pubblicazione inventata.
 
 ### ResourceSummary
 
-| Campo | Forma | Fonte |
-| --- | --- | --- |
-| id | numero | resources.id |
-| title | stringa | resources.title |
-| url | URL assoluto | resources.url |
+| Campo | Forma        | Fonte           |
+| ----- | ------------ | --------------- |
+| id    | numero       | resources.id    |
+| title | stringa      | resources.title |
+| url   | URL assoluto | resources.url   |
 
 Ordine risorse: title, poi id. Conservare gli URL salvati; nessun aggiornamento automatico.
 
@@ -118,12 +118,12 @@ Ordine risorse: title, poi id. Conservare gli URL salvati; nessun aggiornamento 
 
 Tutti i campi ProjectSummary, più:
 
-| Campo | Forma | Fonte |
-| --- | --- | --- |
-| description | Markdown o null | projects.description |
-| students | array StudentSummary con campo aggiuntivo repo_url | student_projects JOIN students |
-| cheatsheets | array CheatSheetSummary | project_cheatsheets JOIN cheatsheets |
-| resources | array ResourceSummary | project_resources JOIN resources |
+| Campo       | Forma                                              | Fonte                                |
+| ----------- | -------------------------------------------------- | ------------------------------------ |
+| description | Markdown o null                                    | projects.description                 |
+| students    | array StudentSummary con campo aggiuntivo repo_url | student_projects JOIN students       |
+| cheatsheets | array CheatSheetSummary                            | project_cheatsheets JOIN cheatsheets |
+| resources   | array ResourceSummary                              | project_resources JOIN resources     |
 
 repo_url è il valore verificato di student_projects.repo_url, non una repository simile cercata live.
 Le collezioni sono deduplicate per ID e ordinate con le regole dei rispettivi riepiloghi.
@@ -132,11 +132,11 @@ Le collezioni sono deduplicate per ID e ordinate con le regole dei rispettivi ri
 
 Tutti i campi StudentSummary, più:
 
-| Campo | Forma | Fonte |
-| --- | --- | --- |
-| projects | array ProjectSummary con campo aggiuntivo repo_url | student_projects JOIN projects |
-| repository_count | numero | lunghezza projects |
-| topics | array stringhe | unione dei topics di quei projects |
+| Campo            | Forma                                              | Fonte                              |
+| ---------------- | -------------------------------------------------- | ---------------------------------- |
+| projects         | array ProjectSummary con campo aggiuntivo repo_url | student_projects JOIN projects     |
+| repository_count | numero                                             | lunghezza projects                 |
+| topics           | array stringhe                                     | unione dei topics di quei projects |
 
 I projects sono ordinati come ProjectSummary. Studente senza repository: projects `[]`, repository_count `0`, topics `[]`, sempre 200.
 La lista `/api/students` restituisce solo StudentSummary: i campi aggregati appartengono al dettaglio.
@@ -155,21 +155,21 @@ Per eventuali grafie equivalenti, scegliere quella del primo progetto in ordine 
 
 TopicSummary contiene soltanto:
 
-| Campo | Forma | Fonte |
-| --- | --- | --- |
-| name | stringa canonica | tag derivato |
-| project_count | numero | progetti distinti con il tag |
+| Campo         | Forma            | Fonte                        |
+| ------------- | ---------------- | ---------------------------- |
+| name          | stringa canonica | tag derivato                 |
+| project_count | numero           | progetti distinti con il tag |
 
 TopicDetail contiene name e project_count, più:
 
-| Campo | Forma | Fonte |
-| --- | --- | --- |
-| projects | array ProjectSummary | progetti con il tag |
-| related_cheatsheets | array CheatSheetSummary | PDF dei progetti con il tag |
-| related_resources | array ResourceSummary | risorse dei progetti con il tag |
+| Campo               | Forma                   | Fonte                           |
+| ------------------- | ----------------------- | ------------------------------- |
+| projects            | array ProjectSummary    | progetti con il tag             |
+| related_cheatsheets | array CheatSheetSummary | PDF dei progetti con il tag     |
+| related_resources   | array ResourceSummary   | risorse dei progetti con il tag |
 
-project_count corrisponde alla lunghezza projects. Materiali deduplicati per ID anche quando più progetti li condividono; collezioni ordinate come i riepiloghi.
-Il nome `related_*` indica la relazione indiretta. L’interfaccia li presenta come **“Materiali dei progetti collegati”**. Nessuna descrizione del topic richiesta nell’MVP.
+project*count corrisponde alla lunghezza projects. Materiali deduplicati per ID anche quando più progetti li condividono; collezioni ordinate come i riepiloghi.
+Il nome `related*\*` indica la relazione indiretta. L’interfaccia li presenta come **“Materiali dei progetti collegati”**. Nessuna descrizione del topic richiesta nell’MVP.
 
 ### CatalogStats
 
@@ -208,14 +208,14 @@ Conservare la forma semplice del middleware esistente:
 }
 ```
 
-| Status | Condizione | Message |
-| --- | --- | --- |
-| 400 | Parametro/query/URL non valido | `Invalid request parameters` |
-| 404 | Progetto assente | `Project not found` |
-| 404 | Studente assente | `Student not found` |
-| 404 | Topic assente | `Topic not found` |
-| 404 | Percorso API non registrato | `Not Found` |
-| 500 | Errore inatteso o database non disponibile a runtime | `Internal Server Error` |
+| Status | Condizione                                           | Message                      |
+| ------ | ---------------------------------------------------- | ---------------------------- |
+| 400    | Parametro/query/URL non valido                       | `Invalid request parameters` |
+| 404    | Progetto assente                                     | `Project not found`          |
+| 404    | Studente assente                                     | `Student not found`          |
+| 404    | Topic assente                                        | `Topic not found`            |
+| 404    | Percorso API non registrato                          | `Not Found`                  |
+| 500    | Errore inatteso o database non disponibile a runtime | `Internal Server Error`      |
 
 Nessun errore per una lista vuota o una relazione vuota. Non restituire SQL, stack, credenziali o messaggi interni al client; dettagli server solo nei log.
 Il messaggio è descrittivo: il frontend sceglie il comportamento usando lo status, non confrontando il testo. Se il controllo DB fallisce all’avvio, il server non ascolta e termina con codice non zero: non può produrre una risposta HTTP 500.
@@ -230,7 +230,7 @@ Il messaggio è descrittivo: il frontend sceglie il comportamento usando lo stat
 
 ## Criteri di verifica dell'implementazione
 
-I criteri seguenti hanno guidato le verifiche delle fasi backend e frontend. Il 29 settembre 2026 sono stati ripetuti pochi controlli HTTP dei flussi principali: liste filtrate, dettagli, contatori e 404. Le verifiche più estese dei dati e delle relazioni sono documentate in [KANBAN.md](../KANBAN.md). Il deployment resta da definire.
+I criteri seguenti hanno guidato le verifiche delle fasi backend e frontend. Il 29 settembre 2026 sono stati ripetuti pochi controlli HTTP dei flussi principali: liste filtrate, dettagli, contatori e 404. Le verifiche più estese dei dati e delle relazioni sono documentate in [KANBAN.md](KANBAN.md). Il deployment resta da definire.
 
 - Liste/dettagli rispettano esattamente i campi, nullabilità e ordinamenti descritti; gli ID derivano dal DB, non dai numeri di esempio.
 - Progetto con più studenti/PDF/risorse non moltiplica gli oggetti per effetto dei join.

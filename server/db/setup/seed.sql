@@ -1,5 +1,5 @@
--- Generated from assets/ by node scripts/generate-seed.mjs. Do not edit by hand.
--- Run schema.sql first. Re-running this file updates rows with the same natural key.
+-- Class14 data: run schema.sql first. No source assets are needed for this import.
+-- Re-running this file updates rows with the same natural key.
 use class14;
 
 set names utf8mb4;
@@ -2722,7 +2722,7 @@ where
 on duplicate key update
   repo_url = values(repo_url);
 
--- Curated project-to-PDF links; also available separately in project-cheatsheets.sql.
+-- Curated project-to-PDF links.
 insert ignore into
   project_cheatsheets (project_id, cheatsheet_id)
 select
@@ -3191,7 +3191,7 @@ where
   projects.slug = 'react-hello-world'
   and cheatsheets.slug = 'react-classname';
 
--- Topic-based project-to-resource links; also available separately in project-resources.sql.
+-- Topic-based project-to-resource links.
 insert ignore into
   project_resources (project_id, resource_id)
 select

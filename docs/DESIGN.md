@@ -1,6 +1,6 @@
 # Class14 — direzione design e UX
 
-Questo documento guida il frontend dell'MVP. [PLAN.md](PLAN.md) descrive la visione più ampia, [AGENTS.md](AGENTS.md) ne delimita il perimetro attuale e [docs/API-CONTRACT.md](docs/API-CONTRACT.md) definisce i dati disponibili. Le regole qui sotto sono scelte di design, non feature già implementate nel client.
+Questo documento guida il frontend dell'MVP. [PLAN.md](PLAN.md) descrive la visione più ampia, [AGENTS.md](../AGENTS.md) ne delimita il perimetro attuale e [API-CONTRACT.md](API-CONTRACT.md) definisce i dati disponibili. Le regole qui sotto sono scelte di design, non feature già implementate nel client.
 
 ## Identità
 
@@ -41,17 +41,17 @@ Studenti → Profilo studente → Progetti con repository disponibili
 
 Ogni catalogo resta comunque raggiungibile direttamente. Le relazioni devono funzionare nei due sensi quando l'API fornisce i dati: il progetto porta ai profili degli studenti e ai materiali; il profilo torna ai progetti; PDF e risorse mostrano i progetti collegati. Un topic raggruppa progetti e mostra i **“Materiali dei progetti collegati”**: il legame con PDF e risorse è indiretto, non una categorizzazione editoriale del materiale. Gli studenti mostrati in un progetto hanno una repository pubblica verificata per quello slug; questo non certifica che abbiano concluso l'esercizio.
 
-| Vista | Contenuto principale | Azioni e collegamenti |
-| --- | --- | --- |
-| Home | Introduzione breve, accessi alle sezioni, contatori | Iniziare dagli Argomenti; aprire Progetti o Studenti |
-| Argomenti | Elenco dei tag con numero di progetti | Aprire il dettaglio dell'argomento |
-| Dettaglio argomento | Progetti associati, PDF e risorse ricavati dai progetti | Aprire un progetto o un materiale; distinguere il legame indiretto dei materiali |
-| Progetti | Titolo e tag in un catalogo leggibile | Cercare per titolo/slug, filtrare per topic, aprire il dettaglio |
-| Dettaglio progetto | Descrizione Markdown, tag, studenti con repository, PDF e risorse | Aprire profili, repository, PDF, risorse e argomenti |
-| Studenti | Avatar, nome e username GitHub | Cercare per nome/username, filtrare per topic, aprire il profilo |
-| Profilo studente | Identità, argomenti dei progetti associati e repository disponibili | Aprire GitHub, progetto o repository verificata |
-| Catalogo Cheat sheet | Tutti i PDF e i rispettivi progetti collegati | Aprire o scaricare il PDF; aprire un progetto |
-| Catalogo Risorse | Tutti i link esterni e i rispettivi progetti collegati | Aprire la risorsa; aprire un progetto |
+| Vista                | Contenuto principale                                                | Azioni e collegamenti                                                            |
+| -------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Home                 | Introduzione breve, accessi alle sezioni, contatori                 | Iniziare dagli Argomenti; aprire Progetti o Studenti                             |
+| Argomenti            | Elenco dei tag con numero di progetti                               | Aprire il dettaglio dell'argomento                                               |
+| Dettaglio argomento  | Progetti associati, PDF e risorse ricavati dai progetti             | Aprire un progetto o un materiale; distinguere il legame indiretto dei materiali |
+| Progetti             | Titolo e tag in un catalogo leggibile                               | Cercare per titolo/slug, filtrare per topic, aprire il dettaglio                 |
+| Dettaglio progetto   | Descrizione Markdown, tag, studenti con repository, PDF e risorse   | Aprire profili, repository, PDF, risorse e argomenti                             |
+| Studenti             | Avatar, nome e username GitHub                                      | Cercare per nome/username, filtrare per topic, aprire il profilo                 |
+| Profilo studente     | Identità, argomenti dei progetti associati e repository disponibili | Aprire GitHub, progetto o repository verificata                                  |
+| Catalogo Cheat sheet | Tutti i PDF e i rispettivi progetti collegati                       | Aprire o scaricare il PDF; aprire un progetto                                    |
+| Catalogo Risorse     | Tutti i link esterni e i rispettivi progetti collegati              | Aprire la risorsa; aprire un progetto                                            |
 
 Nelle pagine di dettaglio, l'intestazione mostra titolo e metadati essenziali. Il contenuto principale occupa la colonna di lettura; su desktop le azioni e le relazioni più brevi possono stare in una colonna secondaria, solo se questo aiuta la consultazione. Su schermi stretti tutto segue un ordine verticale naturale. Non aggiungere indici laterali, tab o pannelli persistenti prima che la quantità reale di contenuti lo richieda.
 
@@ -78,4 +78,4 @@ Prima di considerare pronta una pagina, verificare che:
 4. Stati di caricamento, assenza di dati, errore e 404 siano chiari senza aggiungere pannelli o controlli superflui.
 5. Il design resti ordinato anche togliendo ombre e animazioni.
 
-Riferimenti: [API e semantica dei dati](docs/API-CONTRACT.md), [fasi frontend](KANBAN.md), [visione del prodotto](PLAN.md), [Vega di shadcn/ui](https://ui.shadcn.com/docs/changelog/2025-12-shadcn-create), [token semantici shadcn/ui](https://ui.shadcn.com/docs/theming).
+Riferimenti: [API e semantica dei dati](API-CONTRACT.md), [fasi frontend](KANBAN.md), [visione del prodotto](PLAN.md), [Vega di shadcn/ui](https://ui.shadcn.com/docs/changelog/2025-12-shadcn-create), [token semantici shadcn/ui](https://ui.shadcn.com/docs/theming).

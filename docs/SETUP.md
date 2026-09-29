@@ -46,6 +46,6 @@ Vite inoltra `/api`, `/avatars` e i file sotto `/cheatsheets/` a `http://localho
 
 Se si cambia la porta backend, avviare entrambi con la stessa variabile esportata, per esempio `PORT=3001 npm run dev`. Il proxy legge `PORT` dal terminale, non da `server/.env`: se si modifica soltanto quel file, allineare anche il target Vite. Riavviare Vite dopo il cambio.
 
-Avatar e PDF sono in `server/public/avatars` e `server/public/cheatsheets`; gli script usano queste cartelle. `assets/` conserva dati e mappature.
+Avatar e PDF sono in `server/public/avatars` e `server/public/cheatsheets`; il seed SQL contiene già i loro percorsi. I dati di preparazione in `.local/` non servono per importare il database.
 
 Il proxy è una configurazione locale Vite, non viene incorporato nella build. Deployment e hosting restano una decisione futura dopo il confronto con l'insegnante; nessun URL pubblico è attualmente configurato.
