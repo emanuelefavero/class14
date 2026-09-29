@@ -62,3 +62,7 @@ Il server Express è in `server/`, il client React/Vite in `client/`. Il databas
 - [Setup del database](server/db/setup/README.md)
 - [Contratto API](docs/API-CONTRACT.md)
 - [Piano del progetto](docs/PLAN.md) e [design frontend](docs/DESIGN.md)
+
+## License
+
+- [MIT](LICENSE.md)
