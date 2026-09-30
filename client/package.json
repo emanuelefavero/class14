@@ -3,6 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emanuelefavero/webapp-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/emanuelefavero/webapp-react/issues"
+  },
+  "homepage": "https://github.com/emanuelefavero/webapp-react#readme",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

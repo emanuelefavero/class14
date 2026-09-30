@@ -2,6 +2,8 @@
 
 Richiede Node.js 24.14 o successivo e il database MySQL `class14` già popolato.
 
+Questa guida riguarda il monorepo [class14](https://github.com/emanuelefavero/class14), che resta la fonte di verità. Il frontend e il backend sono disponibili anche nelle repository separate [webapp-react](https://github.com/emanuelefavero/webapp-react) e [webapp-express](https://github.com/emanuelefavero/webapp-express).
+
 ## Installazione
 
 Dalla root, dopo il clone:

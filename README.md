@@ -6,9 +6,20 @@ Ogni progetto raccoglie la sua descrizione, i materiali collegati e le repositor
 
 ![mockup](./mockup.png 'mockup')
 
+## Repository collegate
+
+Questa repository `class14` è il monorepo principale di:
+
+- [webapp-react](https://github.com/emanuelefavero/webapp-react): frontend React/Vite contenuto in `client/`;
+- [webapp-express](https://github.com/emanuelefavero/webapp-express): backend Express contenuto in `server/`.
+
+> Nota: Lo sviluppo avviene nel monorepo. Le repository separate sono mirror di pubblicazione.
+
 ## Sviluppo locale
 
-Servono Node.js 24.14 o successivo e MySQL avviato. Dopo aver clonato la repository, esegui questi passaggi dalla sua cartella principale:
+> Servono Node.js 24.14 o successivo e MySQL avviato.
+
+Dopo aver clonato la repository, esegui questi passaggi dalla sua cartella principale:
 
 - Installa le dipendenze di root, server e client:
 
@@ -64,6 +75,7 @@ Il server Express è in `server/`, il client React/Vite in `client/`. Il databas
 - [Setup del database](server/db/setup/README.md)
 - [Contratto API](docs/API-CONTRACT.md)
 - [Piano del progetto](docs/PLAN.md) e [design frontend](docs/DESIGN.md)
+- [Configurazione Git e pubblicazione delle repository separate](GIT-SETUP.md)
 
 ## License
 

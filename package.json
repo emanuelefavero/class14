@@ -15,16 +15,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emanuelefavero/webapp-express.git"
+    "url": "git+https://github.com/emanuelefavero/class14.git"
   },
   "keywords": [],
   "author": "Emanuele Favero <emafaux89@gmail.com> (https://emanuelefavero.com/)",
   "license": "MIT",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/emanuelefavero/webapp-express/issues"
+    "url": "https://github.com/emanuelefavero/class14/issues"
   },
-  "homepage": "https://github.com/emanuelefavero/webapp-express#readme",
+  "homepage": "https://github.com/emanuelefavero/class14#readme",
   "private": true,
   "devDependencies": {
     "concurrently": "^9.2.1"

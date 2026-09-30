@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "Class14 Express API",
   "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emanuelefavero/webapp-express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/emanuelefavero/webapp-express/issues"
+  },
+  "homepage": "https://github.com/emanuelefavero/webapp-express#readme",
   "scripts": {
     "start": "node --env-file-if-exists=.env .",
     "dev": "node --env-file-if-exists=.env --watch ."

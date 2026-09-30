@@ -1,19 +1,20 @@
 # Class14 — guida per continuare il progetto
 
-Ultimo aggiornamento del contesto: 29 settembre 2026. Questo file raccoglie le decisioni confermate e lo stato del lavoro per riprendere in una nuova chat. Verificare sempre i file e `git status` prima di intervenire: lo stato descritto può evolvere.
+Ultimo aggiornamento del contesto: 30 settembre 2026. Questo file raccoglie le decisioni confermate e lo stato del lavoro per riprendere in una nuova chat. Verificare sempre i file e `git status` prima di intervenire: lo stato descritto può evolvere.
 
 ## Obiettivo e contesto
 
 - L'utente è Emanuele Favero (`emanuelefavero` su GitHub), studente Boolean Web Development Part Time, classe **WDPT14**.
 - Il corso base sta terminando. Questo è il progetto finale full stack, da mostrare ai recruiter, con tema scelto liberamente: un hub della classe per esplorare studenti, progetti svolti e materiali di ripasso.
-- Il brand visibile è **Class14**. La cartella e la repository restano **webapp-express**: non rinominarle.
-- L'utente ha inizializzato Git e pubblicato la repository, dichiarandola privata per ora. Non fare commit, push o cambi di visibilità senza richiesta.
+- Il brand visibile e il monorepo principale sono **Class14**. La repository GitHub è stata rinominata da `webapp-express` a `class14`; l'utente rinominerà manualmente la cartella locale quando lo riterrà opportuno.
+- Le tre repository pubbliche sono state create: `class14` come source of truth, `webapp-react` per `client/` e `webapp-express` per `server/`. I remote locali `origin`, `client` e `server` sono configurati; la prima pubblicazione Git subtree non è ancora stata eseguita. Non fare commit, push, rinomine o cambi di visibilità senza richiesta esplicita.
 - Il catalogo comprende i **15 progetti dal periodo React in poi**, inclusi i successivi esercizi Node, Express e database. Gli esercizi precedenti HTML/CSS/JavaScript restano fuori.
 - Lavorare una fase alla volta. La priorità è una soluzione completa, leggibile e professionale, con tecniche appropriate al corso, senza architetture speculative.
 
 ## Organizzazione della documentazione
 
 - Nella root restano `README.md` e `AGENTS.md`.
+- `GIT-SETUP.md` e `GIT-MIGRATION-KANBAN.md` descrivono la migrazione e il flusso di pubblicazione delle repository separate; non sostituiscono `docs/KANBAN.md`.
 - `docs/` contiene `PLAN.md`, `KANBAN.md`, `DESIGN.md`, il contratto API, le istruzioni di setup e le linee guida di stile.
 - I documenti e i dati usati per preparare il database sono stati spostati in `.local/`, ignorata da Git. Non sono necessari per eseguire l'app o importare gli SQL; il README SQL resta in `server/db/setup/`.
 - I percorsi scritti nei documenti si riferiscono alla root del progetto, salvo i link Markdown relativi.
@@ -126,7 +127,7 @@ L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` 
 - Il package client si chiama `class14-client`. Home, tre sezioni principali, cataloghi materiali, dettagli e footer sono adattati a Class14. I vecchi componenti Products, provider, route e chiamate Fake Store API sono stati rimossi dopo l'implementazione di Projects.
 - Le risposte del catalogo sono validate con Zod in `client/src/features/catalog/`; `react-markdown` rende le descrizioni senza HTML non attendibile. Vite inoltra `/cheatsheets/` per i PDF, lasciando `/cheatsheets` alla route React.
 - Il fetching client usa hook espliciti per risorsa in `client/src/features/catalog/` e `client/src/features/stats/`. `useCatalogFilters` gestisce soltanto i parametri URL; non passare funzioni `fetch*` a hook generici né reintrodurre dependency injection senza una necessità concreta.
-- L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. Rinominare progressivamente package, titoli, documentazione e contenuti al brand Class14 nel sottoprogetto su cui si sta lavorando; non rinominare la repository.
+- L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. I package restano `class14-server` e `class14-client`; i nomi `webapp-express` e `webapp-react` identificano soltanto le repository separate richieste dal corso.
 - Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. I riferimenti sono riallineati a `../AGENTS.md`, `../docs/CODE-STYLE-GUIDELINES.md` e `../docs/API-CONTRACT.md`.
 - È stata rilevata anche una cartella aggiuntiva `express-blog-sql/` nella root. Non è il backend attivo, che è `server/`; non rimuoverla o modificarla senza verificarne lo scopo con l’utente.
 
@@ -190,10 +191,10 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 - Progetti, Studenti, Cheat sheet e Risorse usano `q` e `topic` dell'API. Il client conserva i filtri nell'URL e offre reset e stato senza risultati.
 - Le icone SVG delle tecnologie sono asset frontend in `client/src/assets/icons/`. `client/src/features/catalog/catalogIcons.js` associa topic e slug progetto alle icone, senza campi SQL o modifiche al contratto API; il componente condiviso `CatalogIcon` le mostra come elementi decorativi nei titoli delle liste e dei dettagli.
 
-### 3. Rifinitura locale completata; pubblicazione da decidere
+### 3. Rifinitura locale completata; separazione delle repository in preparazione
 
 - L'utente ha verificato navigazione incrociata, link esterni, avatar, PDF, accessi diretti, mobile, tastiera, focus, etichette e temi chiaro/scuro. Ha eseguito Lighthouse e riferito un buon punteggio. Lint, build e controlli HTTP essenziali sono riusciti il 29 settembre 2026. README root, setup e contratto API sono aggiornati. La build mostra un avviso Vite per un bundle JavaScript oltre 500 kB.
-- Deployment e hosting restano decisioni future, da affrontare dopo il confronto con l'insegnante. La repository rimane privata; l'utente deciderà i prossimi passi prima di renderla pubblica. Non fare commit, push, deployment o cambi di visibilità senza richiesta.
+- Deployment e hosting restano decisioni future. La repository è già pubblica; la migrazione verso `class14`, `webapp-react` e `webapp-express` va eseguita una fase alla volta seguendo `GIT-MIGRATION-KANBAN.md`. Non fare commit, push, deployment o cambi di visibilità senza richiesta.
 - Contatori di commit e Recruiter View avanzata sono futuri; la nuova direzione esclude classifiche competitive. Non aggiungere autenticazione, CRUD amministrativo o recensioni senza definirne prima lo scopo con l’utente.
 
 ## Regole operative per gli agenti
@@ -297,4 +298,4 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 - Verifiche visive e di accessibilità riferite dall'utente: navigazione incrociata, link esterni, avatar, PDF, accessi diretti, mobile, tastiera, focus, etichette, temi e buon punteggio Lighthouse. Non sono stati ripetuti test visivi automatizzati in questa fase.
 - `npm run lint` e `npm run build` passano. La build emette un avviso sul bundle JavaScript da 516,62 kB; non impedisce la build.
 - HTTP locali verificati per root API, stats, lista/dettaglio topics, liste filtrate di Projects/Students/Cheat Sheets/Resources, dettagli progetto/studente e 404 di un progetto inesistente. Server di verifica arrestato; nessun processo Vite avviato in questa fase.
-- `README.md`, `client/README.md`, `docs/SETUP.md`, `docs/API-CONTRACT.md` e `docs/KANBAN.md` aggiornati. Deployment e pubblicazione della repository rimangono fuori dal ticket, in attesa della decisione dell'utente dopo il confronto con l'insegnante.
+- `README.md`, `client/README.md`, `docs/SETUP.md`, `docs/API-CONTRACT.md` e `docs/KANBAN.md` erano stati aggiornati per la consegna dell'MVP. La successiva migrazione Git mantiene `docs/KANBAN.md` indipendente e usa il kanban dedicato nella root. Deployment e hosting rimangono decisioni future.

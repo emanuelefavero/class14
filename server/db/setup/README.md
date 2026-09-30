@@ -6,11 +6,11 @@
 
 ## Creare e popolare il database
 
-Dalla radice del progetto:
+Dalla root della repository backend, oppure da `server/` nel monorepo:
 
 ```bash
-mysql -u root -p < server/db/setup/schema.sql
-mysql -u root -p < server/db/setup/seed.sql
+mysql -u root -p < db/setup/schema.sql
+mysql -u root -p < db/setup/seed.sql
 ```
 
 Gli stessi due file SQL possono essere aperti ed eseguiti in MySQL Workbench, prima lo schema e poi il seed. `schema.sql` crea il database e le tabelle solo se mancano. Il seed aggiorna le righe con la stessa chiave naturale e non duplica le associazioni; non elimina eventuali righe obsolete o aggiunte manualmente.
@@ -28,4 +28,4 @@ SELECT COUNT(*) FROM resources;          -- 17
 SELECT COUNT(*) FROM project_resources;  -- 54
 ```
 
-I percorsi `/avatars/...` e `/cheatsheets/...` sono salvati nel seed. Per visualizzare avatar e PDF nell'app servono anche i file in `server/public/avatars/` e `server/public/cheatsheets/`.
+I percorsi `/avatars/...` e `/cheatsheets/...` sono salvati nel seed. Per visualizzare avatar e PDF nell'app servono anche i file in `public/avatars/` e `public/cheatsheets/`.

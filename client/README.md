@@ -3,9 +3,16 @@
 Frontend React/Vite del Learning Hub WDPT14. Permette di esplorare argomenti,
 progetti, studenti, cheat sheet e risorse della classe.
 
-La direzione UI e UX è descritta in [DESIGN.md](../docs/DESIGN.md), mentre le
-risposte attese dal backend sono definite in
-[API-CONTRACT.md](../docs/API-CONTRACT.md).
+Questa repository contiene il frontend pubblicato da `client/` del monorepo
+[class14](https://github.com/emanuelefavero/class14). Il backend si trova in
+[webapp-express](https://github.com/emanuelefavero/webapp-express). Lo sviluppo
+principale avviene nel monorepo; questa repository viene aggiornata tramite Git
+subtree e non deve ricevere modifiche dirette.
+
+La direzione UI e UX è descritta nel
+[documento di design](https://github.com/emanuelefavero/class14/blob/main/docs/DESIGN.md),
+mentre le risposte attese dal backend sono definite nel
+[contratto API](https://github.com/emanuelefavero/class14/blob/main/docs/API-CONTRACT.md).
 
 ## Funzionalità principali
 
@@ -78,13 +85,25 @@ Dentro `CatalogFilters`, `draft` contiene temporaneamente il testo digitato. Il
 valore viene applicato all'URL solo al submit, evitando una richiesta per ogni
 carattere inserito.
 
-## Avvio e controlli
+## Installazione e avvio
 
-Seguire [SETUP.md](../docs/SETUP.md) dalla root del repository. Durante lo
-sviluppo Vite inoltra `/api`, `/avatars` e i file sotto `/cheatsheets/` al server
-Express; il client usa quindi URL relativi.
+Richiede Node.js 24.14 o successivo. Clona la repository e installa le
+dipendenze dal suo percorso principale:
 
-Dal percorso `client/` sono disponibili:
+```bash
+git clone https://github.com/emanuelefavero/webapp-react.git
+cd webapp-react
+npm ci
+npm run dev
+```
+
+Durante lo sviluppo deve essere in esecuzione anche il backend Express sulla
+porta 3000. Vite inoltra `/api`, `/avatars` e i file sotto `/cheatsheets/` al
+backend; il client può quindi usare URL relativi. Se il server usa un'altra
+porta, esporta la stessa variabile prima di avviare Vite, per esempio
+`PORT=3001 npm run dev`.
+
+## Comandi disponibili
 
 ```bash
 npm run dev
@@ -93,5 +112,12 @@ npm run build
 npm run preview
 ```
 
-L'MVP locale è completo. Deployment e pubblicazione della repository saranno
-decisi dopo il confronto con l'insegnante.
+`npm run lint` controlla il codice e `npm run build` genera la build di
+produzione in `dist/`. `npm run preview` serve la build localmente, ma non avvia
+il backend.
+
+Per avviare frontend e backend insieme e preparare anche il database, seguire
+il [setup del monorepo](https://github.com/emanuelefavero/class14/blob/main/docs/SETUP.md).
+
+L'MVP locale è completo. Il deployment dell'applicazione resta una decisione
+successiva.

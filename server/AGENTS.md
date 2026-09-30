@@ -4,9 +4,12 @@
 
 - Read `README.md`, `package.json`, and relevant project documentation if present.
 - Inspect the existing structure, conventions, and current Git changes before editing.
-- Read and follow `../AGENTS.md`, `../docs/CODE-STYLE-GUIDELINES.md`, and
-  `../docs/API-CONTRACT.md`. If project requirements
-  conflict with it, report the conflict instead of choosing silently.
+- Nel monorepo, leggere e seguire `../AGENTS.md`,
+  `../docs/CODE-STYLE-GUIDELINES.md` e `../docs/API-CONTRACT.md`. Nella
+  repository backend autonoma, consultare gli stessi documenti nella
+  repository pubblica `emanuelefavero/class14` collegata dal README. Se i
+  requisiti entrano in conflitto, segnalare il conflitto senza scegliere in
+  silenzio.
 - If `.agents/skills/` exists, use only skills relevant to the current task and
   read their `SKILL.md` before acting.
 
@@ -28,6 +31,9 @@
 
 ## Git
 
+- Il monorepo `class14` è la source of truth. La repository autonoma
+  `webapp-express` viene pubblicata da `server/` tramite Git subtree: non
+  sviluppare o sincronizzare modifiche nella direzione opposta.
 - Commit or push only when explicitly requested.
 - Use concise Conventional Commit messages such as `feat:`, `fix:`, `refactor:`,
   `test:`, `docs:`, `style:`, `build:`, and `chore:`.
