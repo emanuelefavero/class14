@@ -7,7 +7,7 @@ Ultimo aggiornamento del contesto: 30 settembre 2026. Questo file raccoglie le d
 - L'utente è Emanuele Favero (`emanuelefavero` su GitHub), studente Boolean Web Development Part Time, classe **WDPT14**.
 - Il corso base sta terminando. Questo è il progetto finale full stack, da mostrare ai recruiter, con tema scelto liberamente: un hub della classe per esplorare studenti, progetti svolti e materiali di ripasso.
 - Il brand visibile e il monorepo principale sono **Class14**. La repository GitHub è stata rinominata da `webapp-express` a `class14`; l'utente rinominerà manualmente la cartella locale quando lo riterrà opportuno.
-- Le tre repository pubbliche sono state create: `class14` come source of truth, `webapp-react` per `client/` e `webapp-express` per `server/`. I remote locali `origin`, `client` e `server` sono configurati; la prima pubblicazione Git subtree non è ancora stata eseguita. Non fare commit, push, rinomine o cambi di visibilità senza richiesta esplicita.
+- Le tre repository pubbliche sono attive: `class14` come source of truth, `webapp-react` per `client/` e `webapp-express` per `server/`. I remote locali `origin`, `client` e `server` sono configurati e la prima pubblicazione Git subtree è stata verificata. Continuare a committare soltanto nel monorepo e pubblicare poi il subtree interessato; non fare commit, push, rinomine o cambi di visibilità senza richiesta esplicita.
 - Il catalogo comprende i **15 progetti dal periodo React in poi**, inclusi i successivi esercizi Node, Express e database. Gli esercizi precedenti HTML/CSS/JavaScript restano fuori.
 - Lavorare una fase alla volta. La priorità è una soluzione completa, leggibile e professionale, con tecniche appropriate al corso, senza architetture speculative.
 
@@ -191,10 +191,10 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 - Progetti, Studenti, Cheat sheet e Risorse usano `q` e `topic` dell'API. Il client conserva i filtri nell'URL e offre reset e stato senza risultati.
 - Le icone SVG delle tecnologie sono asset frontend in `client/src/assets/icons/`. `client/src/features/catalog/catalogIcons.js` associa topic e slug progetto alle icone, senza campi SQL o modifiche al contratto API; il componente condiviso `CatalogIcon` le mostra come elementi decorativi nei titoli delle liste e dei dettagli.
 
-### 3. Rifinitura locale completata; separazione delle repository in preparazione
+### 3. Rifinitura locale e separazione delle repository completate
 
 - L'utente ha verificato navigazione incrociata, link esterni, avatar, PDF, accessi diretti, mobile, tastiera, focus, etichette e temi chiaro/scuro. Ha eseguito Lighthouse e riferito un buon punteggio. Lint, build e controlli HTTP essenziali sono riusciti il 29 settembre 2026. README root, setup e contratto API sono aggiornati. La build mostra un avviso Vite per un bundle JavaScript oltre 500 kB.
-- Deployment e hosting restano decisioni future. La repository è già pubblica; la migrazione verso `class14`, `webapp-react` e `webapp-express` va eseguita una fase alla volta seguendo `GIT-MIGRATION-KANBAN.md`. Non fare commit, push, deployment o cambi di visibilità senza richiesta.
+- Deployment e hosting restano decisioni future. La migrazione verso `class14`, `webapp-react` e `webapp-express` è completata e verificata in `GIT-MIGRATION-KANBAN.md`: gli alberi remoti coincidono con i rispettivi subtree e i setup standalone sono riusciti. Non fare commit, push, deployment o cambi di visibilità senza richiesta.
 - Contatori di commit e Recruiter View avanzata sono futuri; la nuova direzione esclude classifiche competitive. Non aggiungere autenticazione, CRUD amministrativo o recensioni senza definirne prima lo scopo con l’utente.
 
 ## Regole operative per gli agenti

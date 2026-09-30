@@ -5,7 +5,7 @@ dell'MVP continua a essere tracciato in `docs/KANBAN.md`.
 
 ## 1. Preparare il monorepo
 
-- [ ] Verificare documentazione, metadati e setup autonomo di `client/` e `server/`, poi creare un commit pulito in `class14`.
+- [x] Verificare documentazione, metadati e setup autonomo di `client/` e `server/`, poi creare un commit pulito in `class14`.
 
 ## 2. Preparare GitHub
 
@@ -17,8 +17,10 @@ dell'MVP continua a essere tracciato in `docs/KANBAN.md`.
 
 ## 4. Pubblicare i subtree
 
-- [ ] Pubblicare `client/` su `webapp-react` e `server/` su `webapp-express` dalla cronologia committata del monorepo.
+- [x] Pubblicare `client/` su `webapp-react` e `server/` su `webapp-express` dalla cronologia committata del monorepo.
 
 ## 5. Verificare il risultato
 
-- [ ] Confrontare gli alberi Git, provare i setup standalone e documentare il flusso di sincronizzazione completato.
+- [x] Confrontare gli alberi Git, provare i setup standalone e documentare il flusso di sincronizzazione completato.
+
+Migrazione completata e verificata il 30 settembre 2026. Gli alberi remoti coincidono con `client/` e `server/`; installazione standalone riuscita per entrambi, con lint e build riusciti per il frontend.
