@@ -11,7 +11,8 @@
     "preview": "npm --prefix client run preview",
     "lint": "npm --prefix client run lint",
     "install:all": "npm ci && npm --prefix server ci && npm --prefix client ci",
-    "audit:all": "npm audit && npm --prefix server audit && npm --prefix client audit"
+    "audit:all": "npm audit && npm --prefix server audit && npm --prefix client audit",
+    "push": "git push && git subtree push --prefix=server server main && git subtree push --prefix=client client main"
   },
   "repository": {
     "type": "git",
