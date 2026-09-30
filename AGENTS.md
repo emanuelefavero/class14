@@ -14,7 +14,7 @@ Ultimo aggiornamento del contesto: 30 settembre 2026. Questo file raccoglie le d
 ## Organizzazione della documentazione
 
 - Nella root restano `README.md` e `AGENTS.md`.
-- `GIT-SETUP.md` e `GIT-MIGRATION-KANBAN.md` descrivono la migrazione e il flusso di pubblicazione delle repository separate; non sostituiscono `docs/KANBAN.md`.
+- `GIT-PUSH-WORKFLOW.md` è il promemoria per pubblicare monorepo e subtree. La gestione operativa di Git spetta all'utente: non eseguire commit, push o comandi subtree al suo posto.
 - `docs/` contiene `PLAN.md`, `KANBAN.md`, `DESIGN.md`, il contratto API, le istruzioni di setup e le linee guida di stile.
 - I documenti e i dati usati per preparare il database sono stati spostati in `.local/`, ignorata da Git. Non sono necessari per eseguire l'app o importare gli SQL; il README SQL resta in `server/db/setup/`.
 - I percorsi scritti nei documenti si riferiscono alla root del progetto, salvo i link Markdown relativi.
@@ -194,7 +194,7 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 ### 3. Rifinitura locale e separazione delle repository completate
 
 - L'utente ha verificato navigazione incrociata, link esterni, avatar, PDF, accessi diretti, mobile, tastiera, focus, etichette e temi chiaro/scuro. Ha eseguito Lighthouse e riferito un buon punteggio. Lint, build e controlli HTTP essenziali sono riusciti il 29 settembre 2026. README root, setup e contratto API sono aggiornati. La build mostra un avviso Vite per un bundle JavaScript oltre 500 kB.
-- Deployment e hosting restano decisioni future. La migrazione verso `class14`, `webapp-react` e `webapp-express` è completata e verificata in `GIT-MIGRATION-KANBAN.md`: gli alberi remoti coincidono con i rispettivi subtree e i setup standalone sono riusciti. Non fare commit, push, deployment o cambi di visibilità senza richiesta.
+- Deployment e hosting restano decisioni future. La migrazione verso `class14`, `webapp-react` e `webapp-express` è completata e verificata: gli alberi remoti coincidono con i rispettivi subtree e i setup standalone sono riusciti. Non fare commit, push, deployment o cambi di visibilità senza richiesta.
 - Contatori di commit e Recruiter View avanzata sono futuri; la nuova direzione esclude classifiche competitive. Non aggiungere autenticazione, CRUD amministrativo o recensioni senza definirne prima lo scopo con l’utente.
 
 ## Regole operative per gli agenti

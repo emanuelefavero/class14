@@ -13,7 +13,7 @@ Questa repository `class14` è il monorepo principale di:
 - [webapp-react](https://github.com/emanuelefavero/webapp-react): frontend React/Vite contenuto in `client/`;
 - [webapp-express](https://github.com/emanuelefavero/webapp-express): backend Express contenuto in `server/`.
 
-> Nota: Lo sviluppo avviene nel monorepo. Le repository separate sono mirror di pubblicazione.
+> Nota: Lo sviluppo avviene nel monorepo. Le repository separate sono mirror di pubblicazione, per aggiornare le modifiche su tutte e tre dai un occhiata a [Git Push Workflow](GIT-PUSH-WORKFLOW.md).
 
 ## Sviluppo locale
 
@@ -75,7 +75,6 @@ Il server Express è in `server/`, il client React/Vite in `client/`. Il databas
 - [Setup del database](server/db/setup/README.md)
 - [Contratto API](docs/API-CONTRACT.md)
 - [Piano del progetto](docs/PLAN.md) e [design frontend](docs/DESIGN.md)
-- [Configurazione Git e pubblicazione delle repository separate](GIT-SETUP.md)
 
 ## License
 
