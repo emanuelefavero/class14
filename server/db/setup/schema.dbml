@@ -1,0 +1,93 @@
+Project class14 {
+  database_type: 'MySQL'
+  Note: 'Learning Hub and Student Showcase database for Class14'
+}
+
+Table students {
+  id "int unsigned" [pk, increment, not null]
+  name varchar(100) [not null]
+  github_username varchar(100) [not null]
+  avatar_path varchar(255)
+  created_at timestamp [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    github_username [unique, name: 'students_github_username_unique']
+  }
+}
+
+Table projects {
+  id "int unsigned" [pk, increment, not null]
+  slug varchar(150) [not null]
+  title varchar(150) [not null]
+  description text
+  topics varchar(255) [note: 'Comma-separated topic names, normalized only when read by the application']
+  created_at timestamp [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    slug [unique, name: 'projects_slug_unique']
+  }
+}
+
+Table cheatsheets {
+  id "int unsigned" [pk, increment, not null]
+  slug varchar(150) [not null]
+  title varchar(150) [not null]
+  file_path varchar(255) [not null]
+  created_at timestamp [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    slug [unique, name: 'cheatsheets_slug_unique']
+  }
+}
+
+Table resources {
+  id "int unsigned" [pk, increment, not null]
+  title varchar(150) [not null]
+  url varchar(255) [not null]
+  created_at timestamp [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    url [unique, name: 'resources_url_unique']
+  }
+}
+
+Table student_projects {
+  student_id "int unsigned" [not null]
+  project_id "int unsigned" [not null]
+  repo_url varchar(255) [not null]
+  created_at timestamp [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    (student_id, project_id) [pk]
+    project_id [name: 'student_projects_project_id_index']
+  }
+}
+
+Table project_cheatsheets {
+  project_id "int unsigned" [not null]
+  cheatsheet_id "int unsigned" [not null]
+
+  Indexes {
+    (project_id, cheatsheet_id) [pk]
+    cheatsheet_id [name: 'project_cheatsheets_cheatsheet_id_index']
+  }
+}
+
+Table project_resources {
+  project_id "int unsigned" [not null]
+  resource_id "int unsigned" [not null]
+
+  Indexes {
+    (project_id, resource_id) [pk]
+    resource_id [name: 'project_resources_resource_id_index']
+  }
+}
+
+Ref student_projects_student_id_foreign: student_projects.student_id > students.id [delete: cascade]
+Ref student_projects_project_id_foreign: student_projects.project_id > projects.id [delete: cascade]
+
+Ref project_cheatsheets_project_id_foreign: project_cheatsheets.project_id > projects.id [delete: cascade]
+Ref project_cheatsheets_cheatsheet_id_foreign: project_cheatsheets.cheatsheet_id > cheatsheets.id [delete: cascade]
+
+Ref project_resources_project_id_foreign: project_resources.project_id > projects.id [delete: cascade]
+Ref project_resources_resource_id_foreign: project_resources.resource_id > resources.id [delete: cascade]

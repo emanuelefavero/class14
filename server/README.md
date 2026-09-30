@@ -9,6 +9,10 @@ Questa repository contiene il backend pubblicato da `server/` del monorepo
 principale avviene nel monorepo; questa repository viene aggiornata tramite Git
 subtree e non deve ricevere modifiche dirette.
 
+## Diagramma ER del DB
+
+![ER Diagram](./er-diagram.png 'ER Diagram')
+
 ## Stato
 
 Configurazione e avvio sono adattati a Class14. `GET /` restituisce il brand e lo stato della conversione.
