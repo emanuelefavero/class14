@@ -1,5 +1,6 @@
 import Markdown from 'react-markdown';
 import { Link, useParams } from 'react-router';
+import { Breadcrumb } from '@/components/shared/Breadcrumb';
 import { MaterialLinks, TopicLinks } from '@/components/shared/CatalogContent';
 import { CatalogTitle } from '@/components/shared/CatalogIcon';
 import { CatalogState } from '@/components/shared/CatalogState';
@@ -26,9 +27,13 @@ export const Project = () => {
   return (
     <article className='catalog-page'>
       <header className='catalog-heading catalog-detail-heading'>
-        <Link className='catalog-back' to={paths.projects}>
-          ← Tutti i progetti
-        </Link>
+        <Breadcrumb
+          items={[
+            { label: 'Home', to: paths.home },
+            { label: 'Progetti', to: paths.projects },
+            { label: data.title },
+          ]}
+        />
         <p className='catalog-eyebrow'>Progetto · {data.slug}</p>
         <h1>
           <CatalogTitle icon={getProjectIcon(data.slug)} size='heading'>

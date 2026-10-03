@@ -7,7 +7,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Breadcrumb } from '@/components/shared/Breadcrumb';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { createResource } from '@/features/catalog/createResource';
@@ -126,9 +126,13 @@ export const NewResource = () => {
   return (
     <div className='catalog-page resource-create-page'>
       <header className='catalog-heading'>
-        <Link className='catalog-back' to={paths.resources}>
-          ← Tutte le risorse
-        </Link>
+        <Breadcrumb
+          items={[
+            { label: 'Home', to: paths.home },
+            { label: 'Risorse', to: paths.resources },
+            { label: 'Nuova risorsa' },
+          ]}
+        />
         <p className='catalog-eyebrow'>Contribuisci · Learning Hub</p>
         <h1>Aggiungi una risorsa</h1>
         <p>

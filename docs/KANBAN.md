@@ -204,8 +204,8 @@ contiene 18 risorse. Nessun errore o warning nella console del browser.
 
 ### 15. Toast globale — completato
 
-- [x] Aggiungere un Context dedicato in `features/context`, senza spostare nel
-      Provider lo stato del form o altri dati applicativi.
+- [x] Aggiungere un Context dedicato in `features/toast/context`, senza spostare
+      nel Provider lo stato del form o altri dati applicativi.
 - [x] Renderizzare una sola istanza del toast nel `RootLayout`.
 - [x] Mostrare il toast dopo una creazione riuscita e mantenere inline gli
       errori del form.
@@ -218,6 +218,18 @@ Il test browser reale ha verificato POST 201, comparsa e chiusura del toast,
 reset di titolo/URL, permanenza della chiave nella scheda e assenza di errori
 console. La risorsa temporanea è stata rimossa con DELETE 204.
 
+### 16. Breadcrumb — completato
+
+- [x] Aggiungere un componente condiviso che riceve gli elementi tramite props.
+- [x] Riutilizzare i percorsi esistenti di `router/paths.js` e i dati dinamici
+      già caricati dalle pagine.
+- [x] Sostituire i link indietro nei dettagli Project, Student e Topic e nella
+      pagina New Resource.
+- [x] Usare markup semantico con `nav`, lista ordinata e `aria-current`.
+
+Lint e build passano; il test visivo viene lasciato alla verifica manuale
+dell'utente. Resta il precedente avviso Vite sul bundle oltre 500 kB.
+
 ## Idee future — fuori dall’MVP
 
 - Concordare deployment e visibilità della repository prima della pubblicazione. La repository resta privata finché l'utente non decide il passaggio a pubblica.
@@ -229,9 +241,8 @@ console. La risorsa temporanea è stata rimossa con DELETE 204.
 
 ## In corso
 
-Creazione Resources, protezione delle scritture e toast globale con Context sono
-completati. Il prossimo passo è il breadcrumb. Il deployment rimane una
-decisione futura.
+Creazione Resources, protezione delle scritture, toast globale e breadcrumb sono
+completati. Il deployment rimane una decisione futura.
 
 ### Refactoring fetching frontend — 29 settembre 2026
 

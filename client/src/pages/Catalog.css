@@ -72,23 +72,6 @@
   gap: 1.25rem;
 }
 
-.catalog-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--foreground-muted);
-  font-size: 0.8rem;
-  font-weight: 600;
-  transition:
-    color 150ms ease,
-    transform 150ms ease;
-
-  &:hover {
-    color: var(--primary);
-    transform: translateX(-0.15rem);
-  }
-}
-
 .catalog-row-title:hover,
 .catalog-link-list a:hover,
 .catalog-project-links a:hover {

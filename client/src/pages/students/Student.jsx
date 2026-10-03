@@ -1,4 +1,5 @@
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
+import { Breadcrumb } from '@/components/shared/Breadcrumb';
 import {
   ProjectTitleLink,
   TopicLinks,
@@ -26,9 +27,13 @@ export const Student = () => {
   return (
     <article className='catalog-page'>
       <header className='catalog-heading catalog-detail-heading'>
-        <Link className='catalog-back' to={paths.students}>
-          ← Tutti gli studenti
-        </Link>
+        <Breadcrumb
+          items={[
+            { label: 'Home', to: paths.home },
+            { label: 'Studenti', to: paths.students },
+            { label: data.name },
+          ]}
+        />
         <p className='catalog-eyebrow'>Studente · WDPT14</p>
         <div className='catalog-person catalog-profile-heading'>
           <StudentAvatar

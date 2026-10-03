@@ -1,4 +1,5 @@
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
+import { Breadcrumb } from '@/components/shared/Breadcrumb';
 import { MaterialLinks, ProjectList } from '@/components/shared/CatalogContent';
 import { CatalogTitle } from '@/components/shared/CatalogIcon';
 import { CatalogState } from '@/components/shared/CatalogState';
@@ -24,9 +25,13 @@ export const Topic = () => {
   return (
     <article className='catalog-page'>
       <header className='catalog-heading catalog-detail-heading'>
-        <Link className='catalog-back' to={paths.topics}>
-          ← Tutti gli argomenti
-        </Link>
+        <Breadcrumb
+          items={[
+            { label: 'Home', to: paths.home },
+            { label: 'Argomenti', to: paths.topics },
+            { label: data.name },
+          ]}
+        />
         <p className='catalog-eyebrow'>
           Argomento · {data.project_count}{' '}
           {data.project_count === 1 ? 'progetto' : 'progetti'}
