@@ -16,7 +16,16 @@ export const Footer = () => {
           <Link to={paths.cheatsheets}>Cheat sheet</Link>
           <Link to={paths.resources}>Risorse</Link>
         </nav>
-        <p className='footer-credit'>Un progetto di Emanuele Favero</p>
+        <p className='footer-credit'>
+          Un progetto di&nbsp;
+          <a
+            href='https://emanuelefavero.com'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            Emanuele Favero
+          </a>
+        </p>
       </div>
     </footer>
   );

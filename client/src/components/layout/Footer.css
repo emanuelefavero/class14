@@ -56,6 +56,10 @@
   gap: 0.5rem 1.25rem;
 }
 
+.footer a {
+  text-decoration: underline;
+}
+
 .footer nav a:hover {
   color: var(--primary);
   text-decoration: underline;
