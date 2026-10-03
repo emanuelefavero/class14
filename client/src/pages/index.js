@@ -7,4 +7,5 @@ export { Students } from './students/Students';
 export { Student } from './students/Student';
 export { Cheatsheets } from './materials/Cheatsheets';
 export { Resources } from './materials/Resources';
+export { NewResource } from './materials/NewResource';
 export { NotFound } from './NotFound';

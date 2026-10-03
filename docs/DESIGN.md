@@ -51,11 +51,18 @@ Ogni catalogo resta comunque raggiungibile direttamente. Le relazioni devono fun
 | Studenti             | Avatar, nome e username GitHub                                      | Cercare per nome/username, filtrare per topic, aprire il profilo                 |
 | Profilo studente     | Identità, argomenti dei progetti associati e repository disponibili | Aprire GitHub, progetto o repository verificata                                  |
 | Catalogo Cheat sheet | Tutti i PDF e i rispettivi progetti collegati                       | Aprire o scaricare il PDF; aprire un progetto                                    |
-| Catalogo Risorse     | Tutti i link esterni e i rispettivi progetti collegati              | Aprire la risorsa; aprire un progetto                                            |
+| Catalogo Risorse     | Tutti i link esterni e i rispettivi progetti collegati              | Aprire la risorsa o un progetto; accedere al form di inserimento                 |
+| Nuova risorsa        | Titolo, URL e selezione di uno o più progetti                       | Salvare la risorsa; tornare al catalogo                                          |
 
 Nelle pagine di dettaglio, l'intestazione mostra titolo e metadati essenziali. Il contenuto principale occupa la colonna di lettura; su desktop le azioni e le relazioni più brevi possono stare in una colonna secondaria, solo se questo aiuta la consultazione. Su schermi stretti tutto segue un ordine verticale naturale. Non aggiungere indici laterali, tab o pannelli persistenti prima che la quantità reale di contenuti lo richieda.
 
 Il client mostra le tre voci principali nell'header e le liste, i dettagli e i cataloghi dell'MVP. Cheat sheet e Risorse sono raggiungibili dalla Home, dal footer e dai progetti; i loro percorsi diretti sono `/cheatsheets` e `/resources`. Le quattro liste supportate dall'API hanno ricerca per testo e filtro per argomento, con stato nell'URL.
+
+La creazione di una risorsa usa una pagina dedicata in `/resources/new`, aperta
+dal catalogo. Il form mantiene lo stato localmente, carica l'elenco dei progetti
+e permette associazioni multiple tramite checkbox. Dopo una creazione riuscita
+mostra per ora una conferma inline; il toast globale e il breadcrumb sono
+evoluzioni successive separate.
 
 ## Interazioni e stati
 

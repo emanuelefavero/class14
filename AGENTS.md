@@ -135,6 +135,11 @@ L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` 
 - Il package client si chiama `class14-client`. Home, tre sezioni principali, cataloghi materiali, dettagli e footer sono adattati a Class14. I vecchi componenti Products, provider, route e chiamate Fake Store API sono stati rimossi dopo l'implementazione di Projects.
 - Le risposte del catalogo sono validate con Zod in `client/src/features/catalog/`; `react-markdown` rende le descrizioni senza HTML non attendibile. Vite inoltra `/cheatsheets/` per i PDF, lasciando `/cheatsheets` alla route React.
 - Il fetching client usa hook espliciti per risorsa in `client/src/features/catalog/` e `client/src/features/stats/`. `useCatalogFilters` gestisce soltanto i parametri URL; non passare funzioni `fetch*` a hook generici né reintrodurre dependency injection senza una necessità concreta.
+- La creazione Resources è disponibile in `/resources/new`: form con stato locale,
+  progetti caricati tramite `useProjects`, mutazione esplicita `createResource` e
+  risposta validata con Zod. `postData` vive accanto a `fetchData` in
+  `client/src/lib/api.js`. La conferma è ancora inline; toast con Context e
+  breadcrumb restano le prossime fasi separate.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. I package restano `class14-server` e `class14-client`; i nomi `webapp-express` e `webapp-react` identificano soltanto le repository separate richieste dal corso.
 - Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. I riferimenti sono riallineati a `../AGENTS.md`, `../docs/CODE-STYLE-GUIDELINES.md` e `../docs/API-CONTRACT.md`.
 - È stata rilevata anche una cartella aggiuntiva `express-blog-sql/` nella root. Non è il backend attivo, che è `server/`; non rimuoverla o modificarla senza verificarne lo scopo con l’utente.
@@ -204,6 +209,10 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 - Le route di lista e dettaglio sono in `client/src/router/paths.js`; i link tra argomenti, progetti, studenti, repository e materiali sono attivi. Products e Fake Store API sono stati rimossi.
 - Progetti, Studenti, Cheat sheet e Risorse usano `q` e `topic` dell'API. Il client conserva i filtri nell'URL e offre reset e stato senza risultati.
 - Le icone SVG delle tecnologie sono asset frontend in `client/src/assets/icons/`. `client/src/features/catalog/catalogIcons.js` associa topic e slug progetto alle icone, senza campi SQL o modifiche al contratto API; il componente condiviso `CatalogIcon` le mostra come elementi decorativi nei titoli delle liste e dei dettagli.
+- Il catalogo Risorse collega alla pagina `/resources/new`. Il form invia titolo,
+  URL e uno o più `project_ids`, usa validazione client essenziale e mostra gli
+  stati di caricamento, invio, errore e successo. Verificati desktop/mobile e il
+  ciclo reale POST → DELETE senza lasciare dati di prova; lint e build passano.
 
 ### 3. Rifinitura locale e separazione delle repository completate
 

@@ -60,6 +60,7 @@ export const studentSchema = studentSummary.extend({
 export const cheatsheetsSchema = z.array(
   cheatsheetSummary.extend({ projects: projectsSchema }),
 );
-export const resourcesSchema = z.array(
-  resourceSummary.extend({ projects: projectsSchema }),
-);
+export const resourceSchema = resourceSummary.extend({
+  projects: projectsSchema,
+});
+export const resourcesSchema = z.array(resourceSchema);

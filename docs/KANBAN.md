@@ -165,6 +165,26 @@ body, 400 per ID non valido e 404 ripetendo la cancellazione. Le query di
 controllo hanno confermato zero righe residue in `resources` e
 `project_resources`; il contatore è tornato a 17.
 
+### 13. Creazione Resources — frontend completato
+
+- [x] Aggiungere la pagina dedicata `/resources/new` e un accesso dal catalogo
+      Risorse.
+- [x] Gestire localmente titolo, URL e selezione di uno o più progetti, senza
+      introdurre un form provider o validazioni duplicate.
+- [x] Caricare i progetti tramite l'hook esistente e presentarli come checkbox.
+- [x] Aggiungere `postData` accanto a `fetchData` e validare con Zod la risposta
+      201 prima di usarla nell'interfaccia.
+- [x] Gestire caricamento progetti, invio, errori e conferma locale di successo.
+- [x] Verificare il flusso reale su desktop e mobile e rimuovere tramite DELETE
+      la risorsa temporanea creata dal test.
+
+La pagina usa stato React locale e invia `title`, `url` e `project_ids`. La
+validazione client resta intenzionalmente essenziale: campi richiesti, input URL
+nativo e almeno un progetto; il backend rimane il confine autorevole. Lint e
+build passano. Il flusso browser ha verificato errore locale, creazione con due
+progetti, reset del form, conferma di successo e ritorno del catalogo a 17
+risorse dopo la cancellazione della fixture.
+
 ## Idee future — fuori dall’MVP
 
 - Concordare deployment e visibilità della repository prima della pubblicazione. La repository resta privata finché l'utente non decide il passaggio a pubblica.
@@ -176,9 +196,9 @@ controllo hanno confermato zero righe residue in `resources` e
 
 ## In corso
 
-Backend di creazione e cancellazione Resources completato. Il prossimo passo è
-il form frontend; toast con Context e breadcrumb verranno affrontati
-separatamente. Il deployment rimane una decisione futura.
+Creazione Resources completata nel backend e nel frontend. Il prossimo passo è
+il toast con Context; il breadcrumb verrà affrontato separatamente subito dopo.
+Il deployment rimane una decisione futura.
 
 ### Refactoring fetching frontend — 29 settembre 2026
 

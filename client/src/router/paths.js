@@ -11,6 +11,7 @@ export const paths = Object.freeze({
   topic: '/topics/:name',
   cheatsheets: '/cheatsheets',
   resources: '/resources',
+  resourcesNew: '/resources/new',
 });
 
 /** Build concrete paths for routes with dynamic segments. */

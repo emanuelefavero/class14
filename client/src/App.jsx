@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 import {
   Cheatsheets,
   Home,
+  NewResource,
   NotFound,
   Project,
   Projects,
@@ -27,6 +28,7 @@ export const App = () => (
         <Route path={paths.student} element={<Student />} />
         <Route path={paths.cheatsheets} element={<Cheatsheets />} />
         <Route path={paths.resources} element={<Resources />} />
+        <Route path={paths.resourcesNew} element={<NewResource />} />
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>

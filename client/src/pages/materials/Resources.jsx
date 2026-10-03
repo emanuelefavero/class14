@@ -1,10 +1,12 @@
-import { Library } from 'lucide-react';
+import { Library, Plus } from 'lucide-react';
+import { Link } from 'react-router';
 import { ProjectTitleLink } from '@/components/shared/CatalogContent';
 import { CatalogFilters } from '@/components/shared/CatalogFilters';
 import { CatalogState } from '@/components/shared/CatalogState';
 import { useCatalogFilters } from '@/features/catalog/hooks/useCatalogFilters';
 import { useResources } from '@/features/catalog/hooks/useResources';
 import { useTopics } from '@/features/catalog/hooks/useTopics';
+import { paths } from '@/router/paths';
 import '../Catalog.css';
 
 export const Resources = () => {
@@ -91,6 +93,9 @@ export const Resources = () => {
         <p>
           Documentazione e tutorial esterni utili per i progetti del percorso.
         </p>
+        <Link className='link' to={paths.resourcesNew}>
+          <Plus aria-hidden='true' /> Aggiungi risorsa
+        </Link>
       </header>
       <section className='catalog-results' aria-label='Catalogo risorse'>
         <CatalogFilters

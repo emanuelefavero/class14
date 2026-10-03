@@ -19,6 +19,7 @@ mentre le risposte attese dal backend sono definite nel
 - Home editoriale con i contatori generali del catalogo.
 - Liste e dettagli collegati di argomenti, progetti e studenti.
 - Cataloghi autonomi di cheat sheet e risorse.
+- Pagina dedicata per aggiungere una risorsa e associarla a uno o più progetti.
 - Ricerca e filtro per argomento nelle liste di progetti, studenti, cheat sheet
   e risorse.
 - Descrizioni dei progetti renderizzate da Markdown senza HTML non attendibile.
@@ -63,6 +64,18 @@ Gli hook conservano lo stato della richiesta. La pagina decide poi se mostrare
 `CatalogState`, un messaggio senza risultati oppure i dati ricevuti. Gli hook di
 dettaglio ricevono dalla pagina lo slug, lo username o il nome del topic letto
 dai parametri della route.
+
+Le mutazioni restano esplicite e vicine alla feature. La pagina
+`/resources/new` gestisce localmente il form e usa questo flusso:
+
+```text
+NewResource → createResource → postData (Axios) → API Express
+                                     ↓
+                         validazione Zod della risposta
+```
+
+Il form usa i controlli HTML per titolo e URL e richiede almeno un progetto. Il
+backend conserva la validazione completa dei dati e delle relazioni.
 
 ## Flusso dei filtri
 
@@ -119,5 +132,5 @@ il backend.
 Per avviare frontend e backend insieme e preparare anche il database, seguire
 il [setup del monorepo](https://github.com/emanuelefavero/class14/blob/main/docs/SETUP.md).
 
-L'MVP locale è completo. Il deployment dell'applicazione resta una decisione
-successiva.
+L'MVP locale e il form di creazione delle risorse sono completi. Toast globale,
+breadcrumb e deployment restano evoluzioni successive.
