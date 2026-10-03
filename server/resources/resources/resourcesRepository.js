@@ -99,6 +99,7 @@ export const create = async ({ title, url, project_ids }) => {
       [title, url],
     );
 
+    // Link the newly created resource to the specified projects.
     const resourceId = result.insertId;
     const placeholders = project_ids.map(() => '(?, ?)').join(', ');
     const values = project_ids.flatMap((projectId) => [projectId, resourceId]);
@@ -126,4 +127,10 @@ export const create = async ({ title, url, project_ids }) => {
   } finally {
     connection.release();
   }
+};
+
+/** Deletes a resource by ID; junction rows are removed by ON DELETE CASCADE. */
+export const removeById = async (id) => {
+  const [result] = await db.query('DELETE FROM resources WHERE id = ?', [id]);
+  return result.affectedRows > 0;
 };

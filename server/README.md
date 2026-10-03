@@ -27,6 +27,8 @@ Le API Projects, Students, Cheat Sheets, Resources, Topics e Stats sono implemen
 - `GET /api/resources`: catalogo link con tutti i progetti collegati; ricerca sul titolo e filtro topic indiretto.
 - `POST /api/resources`: crea una risorsa e la associa a uno o più progetti in
   una transazione; restituisce lo stesso oggetto del catalogo con status 201.
+- `DELETE /api/resources/:id`: elimina una risorsa; le associazioni vengono
+  rimosse in cascata e il successo restituisce 204 senza body.
 
 - `GET /api/topics`: tag unici con conteggio dei progetti.
 - `GET /api/topics/:name`: progetti e materiali indiretti, deduplicati.
@@ -47,6 +49,8 @@ I metodi repository hanno JSDoc descrittivi senza annotazioni di typing; i comme
 La creazione Resources valida titolo, URL HTTP/HTTPS e ID distinti dei progetti;
 la transazione evita risorse o associazioni parziali. Un progetto assente produce
 404 e un URL già presente 409.
+La cancellazione valida l'ID, restituisce 404 per una risorsa assente e si affida
+alla foreign key `ON DELETE CASCADE` per le righe ponte.
 
 ## Configurazione locale
 
@@ -103,7 +107,7 @@ curl http://localhost:3000/
 ```
 
 `test.http` contiene richieste Projects, Students, Cheat Sheets e Resources
-ripetibili, inclusi creazione Resource e casi 400/404/409. La verifica dei GET
+ripetibili, inclusi il ciclo POST → DELETE e i casi 400/404/409. La verifica dei GET
 ha confrontato tutte le relazioni dei 15 dettagli con il database: 124
 repository, 39 associazioni PDF e 54 risorse, senza duplicati. Verificati anche
 tutti i 15 profili (3 senza repository), i 18 PDF e le 17 risorse, i filtri

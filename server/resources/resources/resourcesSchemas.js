@@ -17,3 +17,11 @@ export const createResourceSchema = z.strictObject({
     .min(1)
     .refine((ids) => new Set(ids).size === ids.length),
 });
+
+export const resourceParamsSchema = z.strictObject({
+  id: z
+    .string()
+    .regex(/^[1-9]\d*$/)
+    .transform(Number)
+    .refine(Number.isSafeInteger),
+});

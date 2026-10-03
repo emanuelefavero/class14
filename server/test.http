@@ -1,5 +1,7 @@
 @baseUrl = http://localhost:3000
 
+# GET Endpoints
+
 ### Root - Informazioni Class14
 GET {{baseUrl}}/
 
@@ -33,7 +35,34 @@ GET {{baseUrl}}/api/resources
 ### Resources - Ricerca e filtro topic
 GET {{baseUrl}}/api/resources?q=React&topic=React
 
-### Resources - Crea risorsa e associa i progetti (modificare URL per ripetere)
+### Topics - Lista con conteggio progetti
+GET {{baseUrl}}/api/topics
+
+### Topics - Progetti e materiali collegati
+GET {{baseUrl}}/api/topics/React
+
+### Home - Contatori del catalogo
+GET {{baseUrl}}/api/stats
+
+### Avatar - Esempio
+GET {{baseUrl}}/avatars/emanuelefavero.jpg
+
+### PDF - Esempio
+GET {{baseUrl}}/cheatsheets/react-props.pdf
+
+### 400 - Parametro non supportato
+GET {{baseUrl}}/api/projects?limit=1
+
+### 404 - Topic inesistente
+GET {{baseUrl}}/api/topics/not-a-real-topic
+
+### 500 - Errore di prova senza dettagli interni
+GET {{baseUrl}}/errors
+
+# POST Endpoints
+
+### Resources - Crea risorsa e associa i progetti
+# @name createResource
 POST {{baseUrl}}/api/resources
 Content-Type: application/json
 
@@ -73,26 +102,13 @@ Content-Type: application/json
   "project_ids": [1]
 }
 
-### Topics - Lista con conteggio progetti
-GET {{baseUrl}}/api/topics
+# DELETE Endpoints
 
-### Topics - Progetti e materiali collegati
-GET {{baseUrl}}/api/topics/React
+### Resources - Elimina risorsa per ID
+DELETE {{baseUrl}}/api/resources/{{createResource.response.body.$.id}}
 
-### Home - Contatori del catalogo
-GET {{baseUrl}}/api/stats
+### Resources - 404 per risorsa inesistente
+DELETE {{baseUrl}}/api/resources/999999
 
-### Avatar - Esempio
-GET {{baseUrl}}/avatars/emanuelefavero.jpg
-
-### PDF - Esempio
-GET {{baseUrl}}/cheatsheets/react-props.pdf
-
-### 400 - Parametro non supportato
-GET {{baseUrl}}/api/projects?limit=1
-
-### 404 - Topic inesistente
-GET {{baseUrl}}/api/topics/not-a-real-topic
-
-### 500 - Errore di prova senza dettagli interni
-GET {{baseUrl}}/errors
+### Resources - 400 per ID non valido
+DELETE {{baseUrl}}/api/resources/not-a-number

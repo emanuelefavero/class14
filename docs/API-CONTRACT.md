@@ -6,10 +6,11 @@ Contratto definito il 26 settembre 2026 per implementare l’MVP concordato in
 [AGENTS.md](../AGENTS.md) e [KANBAN.md](KANBAN.md), secondo la direzione
 [PLAN.md](PLAN.md). **Questo documento è la specifica di riferimento: Projects,
 Students, Cheat Sheets/Resources, Topics e Stats sono implementati e usati dal
-client; la creazione Resources è implementata nel backend e precede il form.**
+client; creazione e cancellazione Resources sono implementate nel backend e
+precedono il form.**
 
-L'API è principalmente di lettura e aggiunge una sola scrittura mirata per le
-risorse. Non include autenticazione, CRUD completo o chiamate GitHub live.
+L'API è principalmente di lettura e aggiunge creazione e cancellazione mirate
+per le risorse. Non include autenticazione, CRUD completo o chiamate GitHub live.
 Riutilizza le sette tabelle di [schema.sql](../server/db/setup/schema.sql), senza
 migrazioni. La scrittura è destinata per ora allo sviluppo locale; la protezione
 in deployment verrà decisa in futuro. Le vecchie routes posts non fanno parte
@@ -19,7 +20,8 @@ del contratto.
 
 - Base path `/api`; origine locale prevista `http://localhost:3000`.
 - Tutti gli endpoint sotto `/api` restituiscono JSON con `Content-Type: application/json`.
-- Successo: `200`, array diretto per liste e oggetto diretto per dettagli/contatori. Nessun envelope `data` o `meta`.
+- Successo: GET `200`, POST `201`, DELETE `204` senza body. Liste e dettagli
+  usano JSON diretto, senza envelope `data` o `meta`.
 - Nomi JSON in `snake_case`, coerenti con il database; `topics` è sempre un array di stringhe, mai la stringa SQL separata da virgole.
 - ID SQL come numeri interi positivi. Identificatori di navigazione: slug progetto, username studente, slug PDF; risorse identificate dal loro ID SQL perché non hanno slug.
 - Nessuna paginazione per il piccolo catalogo attuale. Tutti i risultati filtrati sono restituiti; non troncarli silenziosamente. Parametri page/limit/sort non sono supportati.
@@ -40,6 +42,7 @@ del contratto.
 | GET    | `/api/cheatsheets`               | Array CheatSheetCatalogItem | `q`, `topic`  |
 | GET    | `/api/resources`                 | Array ResourceCatalogItem   | `q`, `topic`  |
 | POST   | `/api/resources`                 | ResourceCatalogItem         | Ignorate      |
+| DELETE | `/api/resources/:id`             | Nessun body                 | Ignorate      |
 | GET    | `/api/topics`                    | Array TopicSummary          | Ignorate      |
 | GET    | `/api/topics/:name`              | TopicDetail                 | Ignorate      |
 | GET    | `/api/stats`                     | CatalogStats                | Ignorate      |
@@ -55,6 +58,8 @@ risorsa dall’URL esterno. Nessun endpoint di dettaglio numerico alternativo.
 - Slug progetto/PDF: stringa di 1–150 caratteri, lettere ASCII, numeri e trattini. L’identificatore di percorso progetto viene risolto senza distinguere maiuscole/minuscole; la risposta conserva lo slug nel DB.
 - Username: 1–100 caratteri, lettere ASCII, numeri e trattini; lookup case insensitive, risposta con grafia salvata. Non usare il primo nome come identità.
 - Topic `:name`: tag originale codificato con `encodeURIComponent`, non uno slug generato. Per esempio `/api/topics/Node.js` e `/api/topics/MySQL`. Lunghezza 1–255 caratteri dopo trim; nessuna virgola o carattere di controllo. Confronto case insensitive su tag intero.
+- ID Resource: intero positivo nel percorso `/api/resources/:id`. Valori non
+  numerici, zero o negativi restituiscono 400.
 - La decodifica URL avviene una volta nel framework; una codifica percentuale non valida restituisce 400.
 - Percorso sintatticamente valido ma entità assente: 404. Per i percorsi sconosciuti sotto `/api`, 404.
 
@@ -178,6 +183,18 @@ La lista `/api/students` restituisce solo StudentSummary: i campi aggregati appa
 - Il successo restituisce 201 e un ResourceCatalogItem. I progetti sono completi
   di topics canonici e ordinati come nelle risposte GET.
 
+### Cancellazione Resource
+
+`DELETE /api/resources/:id` elimina la risorsa identificata dal suo ID SQL.
+
+- Un ID non valido restituisce 400.
+- Una risorsa inesistente restituisce 404.
+- Il successo restituisce 204 senza body.
+- La query elimina soltanto la riga `resources`; le associazioni in
+  `project_resources` vengono rimosse dalla foreign key `ON DELETE CASCADE`.
+- Non serve una transazione applicativa: la cancellazione e la cascata sono una
+  singola operazione del database.
+
 ### TopicSummary e TopicDetail
 
 Non esiste una tabella topics. La trasformazione comune separa projects.topics sulla virgola, applica trim, elimina stringhe vuote e deduplica case insensitive. NULL/vuoto produce `[]`.
@@ -245,6 +262,7 @@ Conservare la forma semplice del middleware esistente:
 | 404    | Studente assente                                     | `Student not found`           |
 | 404    | Topic assente                                        | `Topic not found`             |
 | 404    | Progetto indicato nella creazione Resource assente   | `Project not found`           |
+| 404    | Resource da eliminare assente                        | `Resource not found`          |
 | 404    | Percorso API non registrato                          | `Not Found`                   |
 | 409    | URL Resource già presente                            | `Resource URL already exists` |
 | 500    | Errore inatteso o database non disponibile a runtime | `Internal Server Error`       |
@@ -276,3 +294,5 @@ I criteri seguenti hanno guidato le verifiche delle fasi backend e frontend. Il 
 - 404/409/500 rispettano la forma comune e non espongono dati interni. Le vecchie routes posts vengono rimosse nella fase Projects.
 - La creazione Resource restituisce la stessa forma del catalogo, rifiuta URL
   duplicati e progetti assenti e non lascia righe parziali in caso di errore.
+- La cancellazione Resource restituisce 204, 404 se ripetuta e rimuove in
+  cascata tutte le associazioni della risorsa.

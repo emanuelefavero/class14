@@ -137,7 +137,7 @@ Controllate via HTTP attraverso Vite le quattro liste senza parametri, con `q` e
 
 L'utente ha verificato navigazione, link, avatar, PDF, accesso diretto, mobile, tastiera, focus, etichette e temi; ha inoltre ottenuto un buon risultato Lighthouse. Lint e build passano; controllati via HTTP contatori, argomenti, progetti, studenti, cataloghi materiali e 404. La build segnala un bundle JavaScript oltre la soglia di avviso Vite. Il deployment resta da decidere dopo il confronto con l'insegnante.
 
-### 12. Creazione Resources — backend completato
+### 12. Creazione e cancellazione Resources — backend completato
 
 - [x] Estendere il contratto con `POST /api/resources`, senza modificare lo
       schema.
@@ -147,6 +147,11 @@ L'utente ha verificato navigazione, link, avatar, PDF, accesso diretto, mobile, 
 - [x] Gestire body invalido con 400, progetto assente con 404 e URL duplicato
       con 409.
 - [x] Aggiungere richieste ripetibili e casi limite in `server/test.http`.
+- [x] Implementare `DELETE /api/resources/:id` con validazione dell'ID, 204 e 404.
+- [x] Usare la cascata del database per eliminare le associazioni senza una
+      seconda query o una transazione applicativa.
+- [x] Collegare in `test.http` la risposta nominata della POST alla DELETE, così
+      il ciclo può essere ripetuto senza lasciare dati di prova.
 
 Verifica HTTP con MySQL reale: creata una risorsa temporanea collegata a due
 progetti e riletta dal catalogo con topics e ordinamento corretti. Verificati
@@ -154,6 +159,11 @@ progetti e riletta dal catalogo con topics e ordinamento corretti. Verificati
 risorsa temporanea è stata eliminata tramite ID/URL esatti e la cascata ha
 rimosso le due associazioni. Il contatore Resources è tornato a 17. Prossimo
 passo concordato: form frontend, poi toast con Context e breadcrumb.
+
+La successiva DELETE è stata verificata con il ciclo POST → DELETE: 204 senza
+body, 400 per ID non valido e 404 ripetendo la cancellazione. Le query di
+controllo hanno confermato zero righe residue in `resources` e
+`project_resources`; il contatore è tornato a 17.
 
 ## Idee future — fuori dall’MVP
 
@@ -166,9 +176,9 @@ passo concordato: form frontend, poi toast con Context e breadcrumb.
 
 ## In corso
 
-Backend della creazione Resources completato. Il prossimo passo è il form
-frontend; toast con Context e breadcrumb verranno affrontati separatamente. Il
-deployment rimane una decisione futura.
+Backend di creazione e cancellazione Resources completato. Il prossimo passo è
+il form frontend; toast con Context e breadcrumb verranno affrontati
+separatamente. Il deployment rimane una decisione futura.
 
 ### Refactoring fetching frontend — 29 settembre 2026
 

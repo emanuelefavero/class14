@@ -63,6 +63,9 @@ La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificat
   `ResourceCatalogItem` con 201; body invalido 400, progetto assente 404 e URL
   duplicato 409. Per ora è una scrittura locale senza autenticazione; il
   deployment verrà valutato successivamente.
+- DELETE `/api/resources/:id`: elimina una risorsa per ID e restituisce 204
+  senza body; ID invalido 400 e risorsa assente 404. `project_resources` viene
+  pulita dalla foreign key `ON DELETE CASCADE`.
 - Dettagli progetto per slug, studente per github_username; topic per nome del tag URL-encoded (non un nuovo slug o ID). Lookup case insensitive con grafia salvata/canonica in risposta.
 - JSON diretto, array per liste e oggetto per dettagli, campi snake_case coerenti col DB; topics trasformato in array. Collezioni vuote `[]`, valori nullable `null`, niente created_at nell’MVP.
 - Riepiloghi condivisi e collezioni non ricorsive, deduplicate per ID. StudentDetail contiene repository_count e topics derivati; TopicDetail contiene related_cheatsheets/related_resources come collegamenti indiretti.
@@ -191,6 +194,8 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
   le associazioni ai progetti in transazione, senza migrazioni. Verificati 201,
   400, 404 e 409 con MySQL reale; la fixture temporanea è stata rimossa e il
   catalogo è tornato a 17 risorse. Prossimo passo: form frontend.
+- Completato anche `DELETE /api/resources/:id`: verificato il ciclo POST →
+  DELETE, 204 senza body, 400/404 e rimozione in cascata delle associazioni.
 - L'alias degli import Node usa `#app/*` in `server/package.json` e nel codice server; `#/…` impediva l'avvio con Node locale.
 
 ### 2. Frontend React — pagine MVP e filtri completati

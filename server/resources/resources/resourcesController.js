@@ -1,6 +1,9 @@
 import { catalogQuerySchema } from '#app/schemas/querySchemas.js';
 import * as resourcesRepository from './resourcesRepository.js';
-import { createResourceSchema } from './resourcesSchemas.js';
+import {
+  createResourceSchema,
+  resourceParamsSchema,
+} from './resourcesSchemas.js';
 
 export const index = async (req, res) => {
   const result = catalogQuerySchema.safeParse(req.query);
@@ -32,4 +35,18 @@ export const store = async (req, res) => {
   }
 
   return res.status(201).json(creation.resource);
+};
+
+export const destroy = async (req, res) => {
+  const params = resourceParamsSchema.safeParse(req.params);
+  if (!params.success) {
+    return res.status(400).json({ message: 'Invalid request parameters' });
+  }
+
+  const removed = await resourcesRepository.removeById(params.data.id);
+  if (!removed) {
+    return res.status(404).json({ message: 'Resource not found' });
+  }
+
+  return res.status(204).send();
 };
