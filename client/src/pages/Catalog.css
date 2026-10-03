@@ -553,7 +553,6 @@
   display: grid;
   align-content: space-between;
   gap: 1.75rem;
-  min-height: 10.5rem;
   padding: 1.15rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -689,10 +688,6 @@
   .catalog-topic-grid,
   .catalog-student-grid {
     grid-template-columns: 1fr;
-  }
-
-  .catalog-card {
-    min-height: 9rem;
   }
 }
 
