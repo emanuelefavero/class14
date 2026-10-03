@@ -25,6 +25,8 @@ Le API Projects, Students, Cheat Sheets, Resources, Topics e Stats sono implemen
 - `GET /api/students/:github_username`: profilo con repository del catalogo, conteggio e topics derivati.
 - `GET /api/cheatsheets`: catalogo PDF con tutti i progetti collegati; ricerca su titolo/slug e filtro topic indiretto.
 - `GET /api/resources`: catalogo link con tutti i progetti collegati; ricerca sul titolo e filtro topic indiretto.
+- `POST /api/resources`: crea una risorsa e la associa a uno o più progetti in
+  una transazione; restituisce lo stesso oggetto del catalogo con status 201.
 
 - `GET /api/topics`: tag unici con conteggio dei progetti.
 - `GET /api/topics/:name`: progetti e materiali indiretti, deduplicati.
@@ -42,6 +44,9 @@ La validazione riguarda i filtri utilizzati; nei dettagli si valida il parametro
 I cataloghi materiali usano LEFT JOIN con le tabelle ponte, conservando gli elementi senza progetti.
 Il filtro topic degli studenti usa un JOIN con DISTINCT. I riepiloghi Projects sono riutilizzati per mantenere coerenti topics e ordinamento.
 I metodi repository hanno JSDoc descrittivi senza annotazioni di typing; i commenti interni spiegano i passaggi di associazione.
+La creazione Resources valida titolo, URL HTTP/HTTPS e ID distinti dei progetti;
+la transazione evita risorse o associazioni parziali. Un progetto assente produce
+404 e un URL già presente 409.
 
 ## Configurazione locale
 
@@ -97,7 +102,18 @@ Un errore di ascolto (per esempio porta occupata) chiude il pool e segnala un co
 curl http://localhost:3000/
 ```
 
-`test.http` contiene richieste Projects, Students, Cheat Sheets e Resources ripetibili, con pochi esempi di filtri e casi 400/404/500. La verifica effettuata ha confrontato tutte le relazioni dei 15 dettagli con il database: 124 repository, 39 associazioni PDF e 54 risorse, senza duplicati. Verificati anche tutti i 15 profili (3 senza repository), i 18 PDF e le 17 risorse, i filtri combinati e le associazioni inverse. Il caso dei materiali senza collegamenti è stato verificato con fixture isolate, senza scritture nel database. Avatar/PDF sono in `public/`; verificato un file per tipo e file assenti 404, anche attraverso il proxy Vite. Verificati errori 400/404/500 senza dettagli interni. Vedere il [collegamento client–server](https://github.com/emanuelefavero/class14/blob/main/docs/SETUP.md#collegamento-clientserver).
+`test.http` contiene richieste Projects, Students, Cheat Sheets e Resources
+ripetibili, inclusi creazione Resource e casi 400/404/409. La verifica dei GET
+ha confrontato tutte le relazioni dei 15 dettagli con il database: 124
+repository, 39 associazioni PDF e 54 risorse, senza duplicati. Verificati anche
+tutti i 15 profili (3 senza repository), i 18 PDF e le 17 risorse, i filtri
+combinati e le associazioni inverse. La POST è stata verificata creando una
+risorsa temporanea collegata a due progetti: risposta 201 e catalogo coerenti,
+nessuna scrittura nei casi non validi. La riga temporanea è stata eliminata e il
+conteggio è tornato a 17. Avatar/PDF sono in `public/`; verificato un file per
+tipo e file assenti 404, anche attraverso il proxy Vite. Verificati errori
+400/404/409/500 senza dettagli interni. Vedere il
+[collegamento client–server](https://github.com/emanuelefavero/class14/blob/main/docs/SETUP.md#collegamento-clientserver).
 
 ## Riferimenti
 

@@ -4,11 +4,16 @@
 
 Contratto definito il 26 settembre 2026 per implementare l’MVP concordato in
 [AGENTS.md](../AGENTS.md) e [KANBAN.md](KANBAN.md), secondo la direzione
-[PLAN.md](PLAN.md). **Questo documento è la specifica di riferimento: Projects, Students, Cheat Sheets/Resources, Topics e Stats sono implementati e usati dal client.**
+[PLAN.md](PLAN.md). **Questo documento è la specifica di riferimento: Projects,
+Students, Cheat Sheets/Resources, Topics e Stats sono implementati e usati dal
+client; la creazione Resources è implementata nel backend e precede il form.**
 
-API pubblica di sola lettura, senza autenticazione, CRUD o chiamate GitHub live.
+L'API è principalmente di lettura e aggiunge una sola scrittura mirata per le
+risorse. Non include autenticazione, CRUD completo o chiamate GitHub live.
 Riutilizza le sette tabelle di [schema.sql](../server/db/setup/schema.sql), senza
-migrazioni. Le vecchie routes posts non fanno parte del contratto.
+migrazioni. La scrittura è destinata per ora allo sviluppo locale; la protezione
+in deployment verrà decisa in futuro. Le vecchie routes posts non fanno parte
+del contratto.
 
 ## Convenzioni comuni
 
@@ -26,19 +31,18 @@ migrazioni. Le vecchie routes posts non fanno parte del contratto.
 
 ## Endpoint
 
-Tutte le routes nella tabella usano GET.
-
-| Percorso                         | Risposta                    | Query ammesse |
-| -------------------------------- | --------------------------- | ------------- |
-| `/api/projects`                  | Array ProjectSummary        | `q`, `topic`  |
-| `/api/projects/:slug`            | ProjectDetail               | Ignorate      |
-| `/api/students`                  | Array StudentSummary        | `q`, `topic`  |
-| `/api/students/:github_username` | StudentDetail               | Ignorate      |
-| `/api/cheatsheets`               | Array CheatSheetCatalogItem | `q`, `topic`  |
-| `/api/resources`                 | Array ResourceCatalogItem   | `q`, `topic`  |
-| `/api/topics`                    | Array TopicSummary          | Ignorate      |
-| `/api/topics/:name`              | TopicDetail                 | Ignorate      |
-| `/api/stats`                     | CatalogStats                | Ignorate      |
+| Metodo | Percorso                         | Risposta                    | Query ammesse |
+| ------ | -------------------------------- | --------------------------- | ------------- |
+| GET    | `/api/projects`                  | Array ProjectSummary        | `q`, `topic`  |
+| GET    | `/api/projects/:slug`            | ProjectDetail               | Ignorate      |
+| GET    | `/api/students`                  | Array StudentSummary        | `q`, `topic`  |
+| GET    | `/api/students/:github_username` | StudentDetail               | Ignorate      |
+| GET    | `/api/cheatsheets`               | Array CheatSheetCatalogItem | `q`, `topic`  |
+| GET    | `/api/resources`                 | Array ResourceCatalogItem   | `q`, `topic`  |
+| POST   | `/api/resources`                 | ResourceCatalogItem         | Ignorate      |
+| GET    | `/api/topics`                    | Array TopicSummary          | Ignorate      |
+| GET    | `/api/topics/:name`              | TopicDetail                 | Ignorate      |
+| GET    | `/api/stats`                     | CatalogStats                | Ignorate      |
 
 Non servono endpoint di dettaglio autonomi per PDF e risorse nella prima versione:
 i cataloghi contengono i progetti collegati; il PDF si apre dal file_path e la
@@ -148,6 +152,32 @@ La lista `/api/students` restituisce solo StudentSummary: i campi aggregati appa
 - Cataloghi includono anche eventuali record senza collegamenti, con projects `[]`; il filtro topic li esclude.
 - Deduplicare projects per ID e rispettare l’ordinamento ProjectSummary.
 
+### Creazione Resource
+
+`POST /api/resources` accetta JSON con questa forma:
+
+```json
+{
+  "title": "React documentation",
+  "url": "https://react.dev/",
+  "project_ids": [1, 3, 8]
+}
+```
+
+- Il body è un oggetto stretto: campi sconosciuti, mancanti o di tipo errato
+  restituiscono 400.
+- `title` applica trim e deve contenere 1–150 caratteri.
+- `url` applica trim, deve contenere al massimo 255 caratteri ed essere un URL
+  assoluto con protocollo HTTP o HTTPS.
+- `project_ids` deve essere un array non vuoto di interi positivi distinti.
+- Tutti i progetti devono esistere; almeno un ID assente restituisce 404 e non
+  crea alcuna riga.
+- Un URL già presente restituisce 409 e non aggiunge associazioni implicitamente.
+- Risorsa e righe di `project_resources` vengono inserite nella stessa
+  transazione. Un errore non lascia scritture parziali.
+- Il successo restituisce 201 e un ResourceCatalogItem. I progetti sono completi
+  di topics canonici e ordinati come nelle risposte GET.
+
 ### TopicSummary e TopicDetail
 
 Non esiste una tabella topics. La trasformazione comune separa projects.topics sulla virgola, applica trim, elimina stringhe vuote e deduplica case insensitive. NULL/vuoto produce `[]`.
@@ -208,14 +238,16 @@ Conservare la forma semplice del middleware esistente:
 }
 ```
 
-| Status | Condizione                                           | Message                      |
-| ------ | ---------------------------------------------------- | ---------------------------- |
-| 400    | Parametro/query/URL non valido                       | `Invalid request parameters` |
-| 404    | Progetto assente                                     | `Project not found`          |
-| 404    | Studente assente                                     | `Student not found`          |
-| 404    | Topic assente                                        | `Topic not found`            |
-| 404    | Percorso API non registrato                          | `Not Found`                  |
-| 500    | Errore inatteso o database non disponibile a runtime | `Internal Server Error`      |
+| Status | Condizione                                           | Message                       |
+| ------ | ---------------------------------------------------- | ----------------------------- |
+| 400    | Parametro/query/URL non valido                       | `Invalid request parameters`  |
+| 404    | Progetto assente                                     | `Project not found`           |
+| 404    | Studente assente                                     | `Student not found`           |
+| 404    | Topic assente                                        | `Topic not found`             |
+| 404    | Progetto indicato nella creazione Resource assente   | `Project not found`           |
+| 404    | Percorso API non registrato                          | `Not Found`                   |
+| 409    | URL Resource già presente                            | `Resource URL already exists` |
+| 500    | Errore inatteso o database non disponibile a runtime | `Internal Server Error`       |
 
 Nessun errore per una lista vuota o una relazione vuota. Non restituire SQL, stack, credenziali o messaggi interni al client; dettagli server solo nei log.
 Il messaggio è descrittivo: il frontend sceglie il comportamento usando lo status, non confrontando il testo. Se il controllo DB fallisce all’avvio, il server non ascolta e termina con codice non zero: non può produrre una risposta HTTP 500.
@@ -241,4 +273,6 @@ I criteri seguenti hanno guidato le verifiche delle fasi backend e frontend. Il 
 - Query di lista ripetute, strutturate, sconosciute o troppo lunghe e URL di percorso malformati producono 400. Query aggiuntive nei dettagli Projects/Students non modificano risposta o status.
 - Contatori corrispondono alle cinque tabelle; nessuna moltiplicazione dovuta a join o filtro della pagina.
 - File statici e URL funzionano con la configurazione di integrazione scelta, senza esporre percorsi interni.
-- 404/500 rispettano la forma comune e non espongono dati interni. Le vecchie routes posts vengono rimosse nella fase Projects.
+- 404/409/500 rispettano la forma comune e non espongono dati interni. Le vecchie routes posts vengono rimosse nella fase Projects.
+- La creazione Resource restituisce la stessa forma del catalogo, rifiuta URL
+  duplicati e progetti assenti e non lascia righe parziali in caso di errore.

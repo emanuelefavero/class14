@@ -58,6 +58,11 @@ L’utente ha approvato la prima versione proposta dopo il confronto di `docs/PL
 La specifica completa è [docs/API-CONTRACT.md](docs/API-CONTRACT.md), verificata rispetto allo schema e ai percorsi del generatore. **Projects, Students, Cheat Sheets/Resources, Topics e Stats sono implementati.**
 
 - GET sotto `/api`: projects e students con lista/dettaglio; cheatsheets e resources come cataloghi autonomi con progetti collegati; topics con lista/dettaglio; stats per i cinque contatori globali.
+- POST `/api/resources`: prima evoluzione dopo l'MVP, crea una risorsa e la
+  associa ad almeno un progetto esistente nella stessa transazione. Restituisce
+  `ResourceCatalogItem` con 201; body invalido 400, progetto assente 404 e URL
+  duplicato 409. Per ora è una scrittura locale senza autenticazione; il
+  deployment verrà valutato successivamente.
 - Dettagli progetto per slug, studente per github_username; topic per nome del tag URL-encoded (non un nuovo slug o ID). Lookup case insensitive con grafia salvata/canonica in risposta.
 - JSON diretto, array per liste e oggetto per dettagli, campi snake_case coerenti col DB; topics trasformato in array. Collezioni vuote `[]`, valori nullable `null`, niente created_at nell’MVP.
 - Riepiloghi condivisi e collezioni non ricorsive, deduplicate per ID. StudentDetail contiene repository_count e topics derivati; TopicDetail contiene related_cheatsheets/related_resources come collegamenti indiretti.
@@ -182,6 +187,10 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 - Configurazione ambiente, pool, template e controllo connessione sono completati; usare `server/README.md` per il setup.
 - File statici già spostati dall’utente in server/public; mantenere i percorsi già salvati nel database.
 - Liste e dettagli di Projects/Students, cataloghi PDF/risorse, Topics e contatori sono implementati secondo `docs/API-CONTRACT.md` e verificati con dati reali.
+- Prima evoluzione post-MVP completata: `POST /api/resources` crea una risorsa e
+  le associazioni ai progetti in transazione, senza migrazioni. Verificati 201,
+  400, 404 e 409 con MySQL reale; la fixture temporanea è stata rimossa e il
+  catalogo è tornato a 17 risorse. Prossimo passo: form frontend.
 - L'alias degli import Node usa `#app/*` in `server/package.json` e nel codice server; `#/…` impediva l'avvio con Node locale.
 
 ### 2. Frontend React — pagine MVP e filtri completati

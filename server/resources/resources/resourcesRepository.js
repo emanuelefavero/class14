@@ -1,6 +1,10 @@
 import { db } from '#app/db/db.js';
 import * as projectsRepository from '#app/resources/projects/projectsRepository.js';
-import { compareProjects, compareText } from '#app/utils/catalog.js';
+import {
+  compareProjects,
+  compareText,
+  normalizeProjectTopics,
+} from '#app/utils/catalog.js';
 
 /**
  * Returns the resources catalog with all linked project summaries.
@@ -62,4 +66,64 @@ export const findAll = async ({ search, topic } = {}) => {
   return filteredItems.sort(
     (left, right) => compareText(left.title, right.title) || left.id - right.id,
   );
+};
+
+/**
+ * Creates a resource and links it to existing projects in one transaction.
+ * Returns an explicit outcome for expected duplicate or missing-project cases.
+ */
+export const create = async ({ title, url, project_ids }) => {
+  const connection = await db.getConnection();
+
+  try {
+    await connection.beginTransaction();
+
+    // Load every project to preserve the catalog's canonical topic spelling.
+    const [projectRows] = await connection.query(`
+      SELECT id, slug, title, topics
+      FROM projects
+      ORDER BY id
+    `);
+    const requestedIds = new Set(project_ids);
+    const projects = normalizeProjectTopics(projectRows)
+      .filter((project) => requestedIds.has(project.id))
+      .sort(compareProjects);
+
+    if (projects.length !== requestedIds.size) {
+      await connection.rollback();
+      return { outcome: 'project_not_found' };
+    }
+
+    const [result] = await connection.query(
+      'INSERT INTO resources (title, url) VALUES (?, ?)',
+      [title, url],
+    );
+
+    const resourceId = result.insertId;
+    const placeholders = project_ids.map(() => '(?, ?)').join(', ');
+    const values = project_ids.flatMap((projectId) => [projectId, resourceId]);
+
+    await connection.query(
+      `INSERT INTO project_resources (project_id, resource_id)
+       VALUES ${placeholders}`,
+      values,
+    );
+
+    await connection.commit();
+
+    return {
+      outcome: 'created',
+      resource: { id: resourceId, title, url, projects },
+    };
+  } catch (error) {
+    await connection.rollback();
+
+    if (error.code === 'ER_DUP_ENTRY') {
+      return { outcome: 'duplicate_url' };
+    }
+
+    throw error;
+  } finally {
+    connection.release();
+  }
 };

@@ -33,6 +33,46 @@ GET {{baseUrl}}/api/resources
 ### Resources - Ricerca e filtro topic
 GET {{baseUrl}}/api/resources?q=React&topic=React
 
+### Resources - Crea risorsa e associa i progetti (modificare URL per ripetere)
+POST {{baseUrl}}/api/resources
+Content-Type: application/json
+
+{
+  "title": "Web development reference",
+  "url": "https://example.com/class14-resource",
+  "project_ids": [1, 2]
+}
+
+### Resources - 400 per ID progetto duplicato
+POST {{baseUrl}}/api/resources
+Content-Type: application/json
+
+{
+  "title": "Invalid resource",
+  "url": "https://example.com/invalid-resource",
+  "project_ids": [1, 1]
+}
+
+### Resources - 404 per progetto inesistente
+POST {{baseUrl}}/api/resources
+Content-Type: application/json
+
+{
+  "title": "Missing project resource",
+  "url": "https://example.com/missing-project-resource",
+  "project_ids": [999999]
+}
+
+### Resources - 409 per URL già presente
+POST {{baseUrl}}/api/resources
+Content-Type: application/json
+
+{
+  "title": "Duplicate URL resource",
+  "url": "https://drawsql.app/",
+  "project_ids": [1]
+}
+
 ### Topics - Lista con conteggio progetti
 GET {{baseUrl}}/api/topics
 

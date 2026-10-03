@@ -137,6 +137,24 @@ Controllate via HTTP attraverso Vite le quattro liste senza parametri, con `q` e
 
 L'utente ha verificato navigazione, link, avatar, PDF, accesso diretto, mobile, tastiera, focus, etichette e temi; ha inoltre ottenuto un buon risultato Lighthouse. Lint e build passano; controllati via HTTP contatori, argomenti, progetti, studenti, cataloghi materiali e 404. La build segnala un bundle JavaScript oltre la soglia di avviso Vite. Il deployment resta da decidere dopo il confronto con l'insegnante.
 
+### 12. Creazione Resources — backend completato
+
+- [x] Estendere il contratto con `POST /api/resources`, senza modificare lo
+      schema.
+- [x] Validare titolo, URL HTTP/HTTPS e almeno un ID progetto distinto.
+- [x] Inserire risorsa e associazioni nella stessa transazione.
+- [x] Restituire 201 con la stessa forma `ResourceCatalogItem` del catalogo.
+- [x] Gestire body invalido con 400, progetto assente con 404 e URL duplicato
+      con 409.
+- [x] Aggiungere richieste ripetibili e casi limite in `server/test.http`.
+
+Verifica HTTP con MySQL reale: creata una risorsa temporanea collegata a due
+progetti e riletta dal catalogo con topics e ordinamento corretti. Verificati
+400, 404 e 409; il caso con progetto assente non ha lasciato scritture. La
+risorsa temporanea è stata eliminata tramite ID/URL esatti e la cascata ha
+rimosso le due associazioni. Il contatore Resources è tornato a 17. Prossimo
+passo concordato: form frontend, poi toast con Context e breadcrumb.
+
 ## Idee future — fuori dall’MVP
 
 - Concordare deployment e visibilità della repository prima della pubblicazione. La repository resta privata finché l'utente non decide il passaggio a pubblica.
@@ -148,7 +166,9 @@ L'utente ha verificato navigazione, link, avatar, PDF, accesso diretto, mobile, 
 
 ## In corso
 
-MVP locale completato. L'utente deciderà i prossimi passi prima della pubblicazione della repository; il deployment rimane una decisione futura.
+Backend della creazione Resources completato. Il prossimo passo è il form
+frontend; toast con Context e breadcrumb verranno affrontati separatamente. Il
+deployment rimane una decisione futura.
 
 ### Refactoring fetching frontend — 29 settembre 2026
 
