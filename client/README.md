@@ -20,6 +20,7 @@ mentre le risposte attese dal backend sono definite nel
 - Liste e dettagli collegati di argomenti, progetti e studenti.
 - Cataloghi autonomi di cheat sheet e risorse.
 - Pagina dedicata per aggiungere una risorsa e associarla a uno o più progetti.
+- Toast globale di conferma dopo la creazione di una risorsa.
 - Ricerca e filtro per argomento nelle liste di progetti, studenti, cheat sheet
   e risorse.
 - Descrizioni dei progetti renderizzate da Markdown senza HTML non attendibile.
@@ -36,6 +37,7 @@ src/
 │   └── ui/           componenti di base come Button, Card, Input e Select
 ├── features/
 │   ├── catalog/      hook di fetching, filtri e schemi Zod del catalogo
+│   ├── context/      Context, Provider e hook del toast globale
 │   └── stats/        hook e schema Zod dei contatori della Home
 ├── lib/              utilità comuni e configurazione delle richieste Axios
 ├── pages/            pagine lista, dettaglio, Home e Not Found
@@ -135,5 +137,5 @@ il backend.
 Per avviare frontend e backend insieme e preparare anche il database, seguire
 il [setup del monorepo](https://github.com/emanuelefavero/class14/blob/main/docs/SETUP.md).
 
-L'MVP locale e il form di creazione delle risorse sono completi. Toast globale,
-breadcrumb e deployment restano evoluzioni successive.
+L'MVP locale, il form di creazione delle risorse e il toast globale sono
+completi. Breadcrumb e deployment restano evoluzioni successive.

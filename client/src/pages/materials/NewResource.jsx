@@ -1,7 +1,6 @@
 import { isAxiosError } from 'axios';
 import {
   CircleAlert,
-  CircleCheck,
   FolderKanban,
   Library,
   LoaderCircle,
@@ -13,6 +12,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { createResource } from '@/features/catalog/createResource';
 import { useProjects } from '@/features/catalog/hooks/useProjects';
+import { useToast } from '@/features/context/useToast';
 import { paths } from '@/router/paths';
 import '../Catalog.css';
 import './ResourceForm.css';
@@ -46,6 +46,7 @@ const getErrorMessage = (error) => {
 
 export const NewResource = () => {
   const projects = useProjects();
+  const { showToast } = useToast();
   const [form, setForm] = useState(initialForm);
   const [adminKey, setAdminKey] = useState(
     () => sessionStorage.getItem(adminKeyStorage) ?? '',
@@ -113,7 +114,8 @@ export const NewResource = () => {
       const resource = await createResource(payload, normalizedAdminKey);
       sessionStorage.setItem(adminKeyStorage, normalizedAdminKey);
       setForm(initialForm);
-      setSubmission({ step: 'success', resource });
+      setSubmission({ step: 'idle' });
+      showToast(`“${resource.title}” è ora disponibile nel catalogo.`);
     } catch (error) {
       setSubmission({ step: 'error', message: getErrorMessage(error) });
     }
@@ -294,13 +296,6 @@ export const NewResource = () => {
               {submission.step === 'error' && (
                 <p className='is-error' role='alert'>
                   <CircleAlert aria-hidden='true' /> {submission.message}
-                </p>
-              )}
-              {submission.step === 'success' && (
-                <p className='is-success' role='status'>
-                  <CircleCheck aria-hidden='true' /> “
-                  {submission.resource.title}” è stata aggiunta.{' '}
-                  <Link to={paths.resources}>Vai al catalogo</Link>
                 </p>
               )}
             </div>

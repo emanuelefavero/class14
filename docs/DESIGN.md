@@ -62,9 +62,10 @@ La creazione di una risorsa usa una pagina dedicata in `/resources/new`, aperta
 dal catalogo. Il form mantiene lo stato localmente, carica l'elenco dei progetti
 e permette associazioni multiple tramite checkbox. La chiave amministratore è
 un campo password e, dopo un invio riuscito, resta soltanto nella scheda corrente
-tramite `sessionStorage`. Dopo una creazione riuscita il form mostra per ora una
-conferma inline; il toast globale e il breadcrumb sono evoluzioni successive
-separate.
+tramite `sessionStorage`. Dopo una creazione riuscita il form mostra una
+notifica globale, annunciata in modo non invasivo e richiudibile. Il relativo
+Context gestisce soltanto lo stato del toast; il breadcrumb resta un'evoluzione
+successiva separata.
 
 ## Interazioni e stati
 

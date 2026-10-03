@@ -139,9 +139,9 @@ L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` 
   progetti caricati tramite `useProjects`, mutazione esplicita `createResource` e
   risposta validata con Zod. `postData` vive accanto a `fetchData` in
   `client/src/lib/api.js`. POST e DELETE richiedono `ADMIN_KEY` come Bearer token;
-  il form la conserva in `sessionStorage` solo dopo una creazione riuscita. La
-  conferma è ancora inline; toast con Context e breadcrumb restano le prossime
-  fasi separate.
+  il form la conserva in `sessionStorage` solo dopo una creazione riuscita.
+  `ToastProvider` gestisce esclusivamente la notifica globale di conferma, con
+  chiusura automatica e manuale; il breadcrumb resta la prossima fase separata.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. I package restano `class14-server` e `class14-client`; i nomi `webapp-express` e `webapp-react` identificano soltanto le repository separate richieste dal corso.
 - Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. I riferimenti sono riallineati a `../AGENTS.md`, `../docs/CODE-STYLE-GUIDELINES.md` e `../docs/API-CONTRACT.md`.
 - È stata rilevata anche una cartella aggiuntiva `express-blog-sql/` nella root. Non è il backend attivo, che è `server/`; non rimuoverla o modificarla senza verificarne lo scopo con l’utente.

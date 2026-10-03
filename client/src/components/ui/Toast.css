@@ -1,0 +1,93 @@
+.toast-region {
+  position: fixed;
+  z-index: 20;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  width: min(calc(100% - 2rem), 24rem);
+  pointer-events: none;
+}
+
+.toast {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.8rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--success) 35%, var(--border));
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  pointer-events: auto;
+  animation: toast-enter 240ms var(--ease-out);
+}
+
+.toast-icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  color: var(--success);
+  background: var(--background-success);
+
+  svg {
+    width: 1rem;
+  }
+}
+
+.toast-copy {
+  min-width: 0;
+
+  strong {
+    display: block;
+    font-size: 0.82rem;
+  }
+
+  p {
+    margin-top: 0.15rem;
+    color: var(--foreground-muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+}
+
+.toast-close {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  color: var(--foreground-muted);
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
+
+  &:hover {
+    color: var(--foreground);
+    background: var(--surface-strong);
+  }
+
+  svg {
+    width: 0.95rem;
+  }
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@media (width < 500px) {
+  .toast-region {
+    right: 1rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}

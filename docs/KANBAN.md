@@ -202,6 +202,22 @@ DELETE senza chiave 401 e DELETE autorizzata 204. La fixture ID 25 è stata
 rimossa; la risorsa preesistente ID 24 è stata preservata e il catalogo finale
 contiene 18 risorse. Nessun errore o warning nella console del browser.
 
+### 15. Toast globale — completato
+
+- [x] Aggiungere un Context dedicato in `features/context`, senza spostare nel
+      Provider lo stato del form o altri dati applicativi.
+- [x] Renderizzare una sola istanza del toast nel `RootLayout`.
+- [x] Mostrare il toast dopo una creazione riuscita e mantenere inline gli
+      errori del form.
+- [x] Permettere la chiusura manuale e automatica, rispettando
+      `prefers-reduced-motion` e annunciando il messaggio alle tecnologie
+      assistive.
+
+Lint e build passano; resta il precedente avviso Vite sul bundle oltre 500 kB.
+Il test browser reale ha verificato POST 201, comparsa e chiusura del toast,
+reset di titolo/URL, permanenza della chiave nella scheda e assenza di errori
+console. La risorsa temporanea è stata rimossa con DELETE 204.
+
 ## Idee future — fuori dall’MVP
 
 - Concordare deployment e visibilità della repository prima della pubblicazione. La repository resta privata finché l'utente non decide il passaggio a pubblica.
@@ -213,9 +229,9 @@ contiene 18 risorse. Nessun errore o warning nella console del browser.
 
 ## In corso
 
-Creazione Resources e protezione delle scritture completate nel backend e nel
-frontend. Il prossimo passo è il toast con Context; il breadcrumb verrà
-affrontato separatamente subito dopo. Il deployment rimane una decisione futura.
+Creazione Resources, protezione delle scritture e toast globale con Context sono
+completati. Il prossimo passo è il breadcrumb. Il deployment rimane una
+decisione futura.
 
 ### Refactoring fetching frontend — 29 settembre 2026
 

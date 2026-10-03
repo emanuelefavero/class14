@@ -308,16 +308,6 @@
   .is-error {
     color: var(--danger);
   }
-
-  .is-success {
-    color: var(--success);
-  }
-
-  a {
-    color: var(--primary);
-    font-weight: 600;
-    text-decoration: underline;
-  }
 }
 
 .resource-submit-spinner {
