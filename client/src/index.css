@@ -29,6 +29,7 @@
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.35rem;
+  --control-height: 2.625rem;
   --header-height: 4.5rem;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --sans: system-ui, sans-serif;
