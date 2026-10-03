@@ -1,5 +1,5 @@
 import { CircleCheck, X } from 'lucide-react';
-import { useToast } from '@/features/context/useToast';
+import { useToast } from '@/features/toast/context/ToastContext';
 import './Toast.css';
 
 export const Toast = () => {

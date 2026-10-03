@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { createResource } from '@/features/catalog/createResource';
 import { useProjects } from '@/features/catalog/hooks/useProjects';
-import { useToast } from '@/features/context/useToast';
+import { useToast } from '@/features/toast/context/ToastContext';
 import { paths } from '@/router/paths';
 import '../Catalog.css';
 import './ResourceForm.css';
