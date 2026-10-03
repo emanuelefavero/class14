@@ -7,7 +7,8 @@ import { compareProjects, compareText } from '#app/utils/catalog.js';
  * Search is literal; topic selects items through their projects without
  * trimming the returned associations. Unlinked items have projects: [].
  * @example
- * await findAll({ search: 'react', topic: 'React' });
+ * const cheatsheets = await findAll({ search: 'react', topic: 'React' });
+ * // [{ id, slug, title, file_path, projects: [{ id, slug, title, topics }] }]
  */
 export const findAll = async ({ search, topic } = {}) => {
   // LEFT JOIN retains catalog entries that have no project associations.
@@ -33,7 +34,7 @@ export const findAll = async ({ search, topic } = {}) => {
     if (project) itemsById.get(row.id).projects.push(project);
   }
 
-  // Filter projects by the provided topic, if any.
+  // Build a lookup of matching project IDs while keeping every linked project in the returned item.
   const topicName = topic?.toLowerCase();
   const matchingProjectIds = new Set();
   if (topicName) {
@@ -45,7 +46,6 @@ export const findAll = async ({ search, topic } = {}) => {
     }
   }
 
-  // Filter items by the provided search term, if any.
   const searchTerm = search?.toLowerCase();
   const items = [...itemsById.values()];
   const filteredItems = items.filter((item) => {
@@ -59,7 +59,6 @@ export const findAll = async ({ search, topic } = {}) => {
     return item.projects.some((project) => matchingProjectIds.has(project.id));
   });
 
-  // Sort the projects within each item and then sort the items themselves.
   for (const item of filteredItems) item.projects.sort(compareProjects);
   return filteredItems.sort(
     (left, right) =>

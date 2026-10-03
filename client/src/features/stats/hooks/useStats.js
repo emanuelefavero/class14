@@ -6,6 +6,7 @@ export const useStats = () => {
   const [state, setState] = useState({ step: 'idle' });
 
   useEffect(() => {
+    // Ignore the request result if the component unmounts before it settles.
     let active = true;
     setState({ step: 'loading' });
 

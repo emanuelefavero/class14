@@ -3,11 +3,16 @@ import * as projectsRepository from '#app/resources/projects/projectsRepository.
 import * as resourcesRepository from '#app/resources/resources/resourcesRepository.js';
 import { compareTopics } from '#app/utils/catalog.js';
 
-/** Returns unique project topics and the number of projects for each tag. */
+/**
+ * Returns topics derived from the project catalog with their project count.
+ * @example
+ * const topics = await findAll();
+ * // [{ name: 'React', project_count: 5 }]
+ */
 export const findAll = async () => {
   const projects = await projectsRepository.findAll();
 
-  // Count the occurrences of each topic across all projects.
+  // Project topics are already canonical and unique within each project, so every occurrence represents one project.
   const counts = new Map();
   for (const project of projects) {
     for (const name of project.topics) {
@@ -15,32 +20,37 @@ export const findAll = async () => {
     }
   }
 
-  // Transform the counts map into an array of topic objects.
   const topics = [...counts].map(([name, project_count]) => ({
     name,
     project_count,
   }));
 
-  // Sort topics alphabetically by name before returning.
   return topics.sort((left, right) => compareTopics(left.name, right.name));
 };
 
-/** Returns projects and indirectly related materials; null for an unknown tag. */
+/**
+ * Returns projects and materials indirectly related through those projects.
+ * Returns null when the topic does not exist.
+ * @example
+ * const topic = await findByName('React');
+ * // { name, project_count, projects, related_cheatsheets, related_resources }
+ */
 export const findByName = async (name) => {
-  // Get all projects associated with the given topic.
   const projects = await projectsRepository.findAll({ topic: name });
   if (!projects.length) return null;
+
+  // Reuse the spelling selected during project normalization instead of the casing received from the URL.
   const canonicalName = projects[0].topics.find(
     (topic) => topic.toLowerCase() === name.toLowerCase(),
   );
 
-  // Fetch related cheatsheets and resources concurrently.
+  // Fetch both material catalogs concurrently because neither query depends on the other.
   const [cheatsheets, resources] = await Promise.all([
     cheatsheetsRepository.findAll({ topic: canonicalName }),
     resourcesRepository.findAll({ topic: canonicalName }),
   ]);
 
-  // Catalogs already contain one item per ID, even when projects share materials.
+  // Catalog repositories already deduplicate materials shared by multiple projects, so only their nested projects are removed here.
   return {
     name: canonicalName,
     project_count: projects.length,

@@ -12,7 +12,8 @@ const toSummary = (student) => ({
  * Returns student summaries sorted by name and username.
  * Search matches name/username; topic selects students with a linked project.
  * @example
- * await findAll({ search: 'emanuele', topic: 'React' });
+ * const students = await findAll({ search: 'emanuele', topic: 'React' });
+ * // [{ id, name, github_username, github_url, avatar_path }]
  */
 export const findAll = async ({ search, topic } = {}) => {
   let sql =
@@ -37,7 +38,6 @@ export const findAll = async ({ search, topic } = {}) => {
 
   const [rows] = await db.query(sql, values);
 
-  // Filter students by the provided search term, if any.
   const searchTerm = search?.toLowerCase();
   const students = rows.filter((student) => {
     if (!searchTerm) return true;
@@ -48,7 +48,6 @@ export const findAll = async ({ search, topic } = {}) => {
     return matchesName || matchesUsername;
   });
 
-  // Map the filtered students to summaries and sort them by name and username.
   return students
     .map(toSummary)
     .sort(
@@ -62,6 +61,9 @@ export const findAll = async ({ search, topic } = {}) => {
  * Returns a student profile, available repositories and derived topics.
  * Username lookup ignores case; returns null if absent. A student without
  * repositories has projects: [], repository_count: 0 and topics: [].
+ * @example
+ * const student = await findByUsername('emanuelefavero');
+ * // { id, name, github_username, github_url, avatar_path, projects, repository_count, topics }
  */
 export const findByUsername = async (username) => {
   const [[student]] = await db.query(
@@ -78,7 +80,8 @@ export const findByUsername = async (username) => {
   const repositoryUrls = new Map(
     links.map((link) => [link.project_id, link.repo_url]),
   );
-  // Reuse canonical topics and project ordering from the catalog.
+
+  // Reuse the project catalog so derived topics keep their canonical spelling and projects keep the shared ordering.
   const allProjects = await projectsRepository.findAll();
   const projects = [];
   const topicNames = new Set();

@@ -9,7 +9,8 @@ import {
  * Returns project summaries with canonical topics, sorted by title and slug.
  * Optional search matches title/slug literally; topic matches a whole tag.
  * @example
- * await findAll({ search: 'react', topic: 'React' });
+ * const projects = await findAll({ search: 'react', topic: 'React' });
+ * // [{ id: 1, slug: 'react-router', title: 'React Router', topics: ['React'] }]
  */
 export const findAll = async ({ search, topic } = {}) => {
   const [rows] = await db.query(`
@@ -42,6 +43,9 @@ export const findAll = async ({ search, topic } = {}) => {
 /**
  * Returns a project with its students/repositories, PDFs and resources.
  * Slug lookup ignores case; returns null when the project does not exist.
+ * @example
+ * const project = await findBySlug('react-router');
+ * // { id, slug, title, topics, description, students, cheatsheets, resources }
  */
 export const findBySlug = async (slug) => {
   const [[row]] = await db.query(
@@ -55,7 +59,7 @@ export const findBySlug = async (slug) => {
   const project = projects.find(({ id }) => id === row.id);
   if (!project) return null;
 
-  // Separate joins avoid multiplying the three independent collections.
+  // Separate queries prevent the three many-to-many relations from multiplying each other in a single JOIN.
   const [[students], [cheatsheets], [resources]] = await Promise.all([
     db.query(
       `SELECT students.id, students.name, students.github_username,

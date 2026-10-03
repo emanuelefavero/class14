@@ -11,7 +11,8 @@ import {
  * Search is literal; topic selects items through their projects without
  * trimming the returned associations. Unlinked items have projects: [].
  * @example
- * await findAll({ search: 'react', topic: 'React' });
+ * const resources = await findAll({ search: 'react', topic: 'React' });
+ * // [{ id, title, url, projects: [{ id, slug, title, topics }] }]
  */
 export const findAll = async ({ search, topic } = {}) => {
   // LEFT JOIN retains catalog entries that have no project associations.
@@ -37,7 +38,7 @@ export const findAll = async ({ search, topic } = {}) => {
     if (project) itemsById.get(row.id).projects.push(project);
   }
 
-  // Filter projects by the provided topic, if any.
+  // Build a lookup of matching project IDs while keeping every linked project in the returned item.
   const topicName = topic?.toLowerCase();
   const matchingProjectIds = new Set();
   if (topicName) {
@@ -49,7 +50,6 @@ export const findAll = async ({ search, topic } = {}) => {
     }
   }
 
-  // Filter items by the provided search term, if any.
   const searchTerm = search?.toLowerCase();
   const items = [...itemsById.values()];
   const filteredItems = items.filter((item) => {
@@ -61,7 +61,6 @@ export const findAll = async ({ search, topic } = {}) => {
     return item.projects.some((project) => matchingProjectIds.has(project.id));
   });
 
-  // Sort the projects within each item and then sort the items themselves.
   for (const item of filteredItems) item.projects.sort(compareProjects);
   return filteredItems.sort(
     (left, right) => compareText(left.title, right.title) || left.id - right.id,
@@ -71,6 +70,9 @@ export const findAll = async ({ search, topic } = {}) => {
 /**
  * Creates a resource and links it to existing projects in one transaction.
  * Returns an explicit outcome for expected duplicate or missing-project cases.
+ * @example
+ * const result = await create({ title, url, project_ids: [1, 2] });
+ * // { outcome: 'created', resource: { id, title, url, projects } }
  */
 export const create = async ({ title, url, project_ids }) => {
   const connection = await db.getConnection();
@@ -90,6 +92,7 @@ export const create = async ({ title, url, project_ids }) => {
       .sort(compareProjects);
 
     if (projects.length !== requestedIds.size) {
+      // Roll back before inserting anything when at least one requested project does not exist.
       await connection.rollback();
       return { outcome: 'project_not_found' };
     }
@@ -99,7 +102,7 @@ export const create = async ({ title, url, project_ids }) => {
       [title, url],
     );
 
-    // Link the newly created resource to the specified projects.
+    // Insert all junction rows before committing so the resource cannot be saved with partial associations.
     const resourceId = result.insertId;
     const placeholders = project_ids.map(() => '(?, ?)').join(', ');
     const values = project_ids.flatMap((projectId) => [projectId, resourceId]);

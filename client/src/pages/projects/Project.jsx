@@ -68,7 +68,7 @@ export const Project = () => {
               <div className='catalog-markdown'>
                 <Markdown
                   skipHtml
-                  // Tip: scale heading levels for better accessibility: h1=h2
+                  // Shift Markdown headings to preserve a single page-level h1.
                   components={{
                     h1: ({ children }) => <h2>{children}</h2>,
                     h2: ({ children }) => <h3>{children}</h3>,

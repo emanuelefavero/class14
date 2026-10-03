@@ -1,22 +1,8 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 
 /**
- * @template Item
- * @typedef {Object} IncrementalListProps
- * @property {Item[]} items
- * @property {(visibleItems: Item[]) => React.ReactNode} renderList
- * @property {number} [batchSize]
- * @property {string} [rootMargin]
- * @property {string} [buttonLabel]
- */
-
-/**
- * Renders a list of items with incremental rendering and a "Load more" button. It accepts a renderList function to customize the rendering of the list items.
- *
- * @template Item
- * @param {IncrementalListProps<Item>} props
- *
+ * Renders items in batches and automatically activates the same button available for manual loading.
  * @example
  * <IncrementalList
  *   items={items}
@@ -48,6 +34,7 @@ export const IncrementalList = ({
 
     if (!loadMoreButton || !hasMore) return;
 
+    // Observing the real button preserves manual loading while also loading automatically before it enters the viewport.
     const observer = new IntersectionObserver(
       ([entry]) => entry.isIntersecting && loadMore(),
       { rootMargin },

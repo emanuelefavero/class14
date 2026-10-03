@@ -6,6 +6,7 @@ export const useCheatsheets = (search, topic) => {
   const [state, setState] = useState({ step: 'idle', search, topic });
 
   useEffect(() => {
+    // Ignore a request result if the component unmounts or the filters change before it settles (prevents race conditions)
     let active = true;
     setState({ step: 'loading', search, topic });
 
@@ -27,6 +28,7 @@ export const useCheatsheets = (search, topic) => {
     };
   }, [search, topic]);
 
+  // Avoid exposing data loaded for the previous filters during the render before this effect restarts.
   if (state.search !== search || state.topic !== topic) {
     return { step: 'loading', search, topic };
   }

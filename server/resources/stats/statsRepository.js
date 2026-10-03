@@ -1,6 +1,11 @@
 import { db } from '#app/db/db.js';
 
-/** Counts catalog entries independently, without multiplying rows through joins. */
+/**
+ * Counts catalog entries independently, without multiplying rows through joins.
+ * @example
+ * const counts = await getCounts();
+ * // { students_count, projects_count, repositories_count, cheatsheets_count, resources_count }
+ */
 export const getCounts = async () => {
   const [[counts]] = await db.query(`
     SELECT

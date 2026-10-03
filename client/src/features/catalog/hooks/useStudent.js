@@ -6,6 +6,7 @@ export const useStudent = (username) => {
   const [state, setState] = useState({ step: 'idle', username });
 
   useEffect(() => {
+    // Ignore a request result if the component unmounts or the username changes before it settles. (prevents race conditions)
     let active = true;
     setState({ step: 'loading', username });
 
@@ -25,6 +26,7 @@ export const useStudent = (username) => {
     };
   }, [username]);
 
+  // Avoid exposing data loaded for the previous username during the render before this effect restarts.
   if (state.username !== username) return { step: 'loading', username };
 
   return state;

@@ -21,11 +21,11 @@ export const CatalogFilters = ({
   const topicLoading =
     topicsState.step === 'idle' || topicsState.step === 'loading';
 
-  // Keeps typed text local until the user submits the search.
+  // Keep typed text local until submit to avoid a request for every character.
   const [draft, setDraft] = useState(search);
   const hasFilters = Boolean(search || topic);
 
-  // Keeps the input in sync when the search changes through the URL.
+  // Sync the draft when browser navigation or an external link changes the URL.
   useEffect(() => {
     setDraft(search);
   }, [search]);

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// These schemas validate untrusted API responses at the feature boundary before pages render their data.
 const projectSummary = z.object({
   id: z.number().int().positive(),
   slug: z.string(),

@@ -48,6 +48,7 @@ export const NewResource = () => {
   const projects = useProjects();
   const { showToast } = useToast();
   const [form, setForm] = useState(initialForm);
+  // sessionStorage keeps the key only in the current browser tab and avoids including it in the application bundle.
   const [adminKey, setAdminKey] = useState(
     () => sessionStorage.getItem(adminKeyStorage) ?? '',
   );
@@ -86,6 +87,7 @@ export const NewResource = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Normalize the request once while leaving complete validation and relationship checks to the API.
     const payload = {
       title: form.title.trim(),
       url: form.url.trim(),
@@ -112,6 +114,7 @@ export const NewResource = () => {
 
     try {
       const resource = await createResource(payload, normalizedAdminKey);
+      // Persist the key only after the server has accepted it successfully.
       sessionStorage.setItem(adminKeyStorage, normalizedAdminKey);
       setForm(initialForm);
       setSubmission({ step: 'idle' });
