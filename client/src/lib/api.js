@@ -10,5 +10,5 @@ import axios from 'axios';
 export const fetchData = (url, params = {}) =>
   axios.get(url, { params }).then(({ data }) => data);
 
-export const postData = (url, payload) =>
-  axios.post(url, payload).then(({ data }) => data);
+export const postData = (url, payload, config = {}) =>
+  axios.post(url, payload, config).then(({ data }) => data);

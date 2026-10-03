@@ -75,7 +75,10 @@ NewResource → createResource → postData (Axios) → API Express
 ```
 
 Il form usa i controlli HTML per titolo e URL e richiede almeno un progetto. Il
-backend conserva la validazione completa dei dati e delle relazioni.
+backend conserva la validazione completa dei dati e delle relazioni. La POST
+invia anche la chiave amministratore nell'header `Authorization`; dopo una
+creazione riuscita il valore resta in `sessionStorage` soltanto per la scheda
+corrente del browser e non viene incluso nel bundle frontend.
 
 ## Flusso dei filtri
 

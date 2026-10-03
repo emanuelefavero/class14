@@ -138,8 +138,10 @@ L’utente ha copiato `express-blog-sql` dentro `server/` e `react-context-api` 
 - La creazione Resources è disponibile in `/resources/new`: form con stato locale,
   progetti caricati tramite `useProjects`, mutazione esplicita `createResource` e
   risposta validata con Zod. `postData` vive accanto a `fetchData` in
-  `client/src/lib/api.js`. La conferma è ancora inline; toast con Context e
-  breadcrumb restano le prossime fasi separate.
+  `client/src/lib/api.js`. POST e DELETE richiedono `ADMIN_KEY` come Bearer token;
+  il form la conserva in `sessionStorage` solo dopo una creazione riuscita. La
+  conferma è ancora inline; toast con Context e breadcrumb restano le prossime
+  fasi separate.
 - L’ordine concordato è **prima server, poi client**, una modifica verificabile alla volta. I package restano `class14-server` e `class14-client`; i nomi `webapp-express` e `webapp-react` identificano soltanto le repository separate richieste dal corso.
 - Esiste anche `server/AGENTS.md`, copiato dal riferimento: leggerlo per modifiche al server. I riferimenti sono riallineati a `../AGENTS.md`, `../docs/CODE-STYLE-GUIDELINES.md` e `../docs/API-CONTRACT.md`.
 - È stata rilevata anche una cartella aggiuntiva `express-blog-sql/` nella root. Non è il backend attivo, che è `server/`; non rimuoverla o modificarla senza verificarne lo scopo con l’utente.
@@ -151,12 +153,12 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 | `students`            |               15 |
 | `projects`            |               15 |
 | `cheatsheets`         |               18 |
-| `resources`           |               17 |
+| `resources`           |               18 |
 | `student_projects`    |              124 |
 | `project_cheatsheets` |               39 |
-| `project_resources`   |               54 |
+| `project_resources`   |               56 |
 
-- Tutti i 15 progetti hanno almeno un PDF e una risorsa; tutti i 18 PDF e le 17 risorse sono collegati.
+- Tutti i 15 progetti hanno almeno un PDF e una risorsa; tutti i 18 PDF e le 18 risorse sono collegati. Il seed versionato conserva le 17 risorse e 54 associazioni iniziali; la risorsa ID 24 aggiunta tramite form porta il database locale a 18 risorse e 56 associazioni.
 - Le tre tabelle ponte hanno chiavi primarie composte e foreign key con `ON DELETE CASCADE`.
 - `projects.topics` è attualmente una stringa di tag separati da virgola; non è una relazione normalizzata. Non cambiarla implicitamente durante l'implementazione delle API.
 - `students.github_username`, `projects.slug`, `cheatsheets.slug` e `resources.url` sono chiavi naturali uniche. Le associazioni SQL cercano gli ID tramite queste chiavi: non dipendono da ID numerici fissi.
@@ -201,6 +203,9 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
   catalogo è tornato a 17 risorse. Prossimo passo: form frontend.
 - Completato anche `DELETE /api/resources/:id`: verificato il ciclo POST →
   DELETE, 204 senza body, 400/404 e rimozione in cascata delle associazioni.
+- Le scritture Resources sono protette dal middleware `requireAdmin`: la
+  configurazione server richiede `ADMIN_KEY` senza default, POST e DELETE
+  accettano `Authorization: Bearer <ADMIN_KEY>`, mentre i GET restano pubblici.
 - L'alias degli import Node usa `#app/*` in `server/package.json` e nel codice server; `#/…` impediva l'avvio con Node locale.
 
 ### 2. Frontend React — pagine MVP e filtri completati

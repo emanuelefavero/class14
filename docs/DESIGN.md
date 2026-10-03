@@ -60,9 +60,11 @@ Il client mostra le tre voci principali nell'header e le liste, i dettagli e i c
 
 La creazione di una risorsa usa una pagina dedicata in `/resources/new`, aperta
 dal catalogo. Il form mantiene lo stato localmente, carica l'elenco dei progetti
-e permette associazioni multiple tramite checkbox. Dopo una creazione riuscita
-mostra per ora una conferma inline; il toast globale e il breadcrumb sono
-evoluzioni successive separate.
+e permette associazioni multiple tramite checkbox. La chiave amministratore è
+un campo password e, dopo un invio riuscito, resta soltanto nella scheda corrente
+tramite `sessionStorage`. Dopo una creazione riuscita il form mostra per ora una
+conferma inline; il toast globale e il breadcrumb sono evoluzioni successive
+separate.
 
 ## Interazioni e stati
 
@@ -75,7 +77,7 @@ evoluzioni successive separate.
 
 ## Limiti dei dati e verifica del design
 
-Il catalogo documentato contiene 15 studenti, 15 progetti da React in poi, 18 PDF, 17 risorse e 124 repository pubbliche verificate; i numeri mostrati dall'app provengono da `/api/stats`, non da costanti nel frontend. L'API espone anche `/api/topics`, `/api/projects`, `/api/students`, `/api/cheatsheets` e `/api/resources` con i dettagli previsti dal contratto. Non inventare date didattiche, percentuali di completamento, competenze certificate, commit, bio, immagini dei progetti o collegamenti diretti topic–materiale. Le possibilità descritte in `PLAN.md` oltre l'MVP restano future.
+Il catalogo locale documentato contiene 15 studenti, 15 progetti da React in poi, 18 PDF, 18 risorse e 124 repository pubbliche verificate; il seed versionato conserva le 17 risorse iniziali. I numeri mostrati dall'app provengono da `/api/stats`, non da costanti nel frontend. L'API espone anche `/api/topics`, `/api/projects`, `/api/students`, `/api/cheatsheets` e `/api/resources` con i dettagli previsti dal contratto. Non inventare date didattiche, percentuali di completamento, competenze certificate, commit, bio, immagini dei progetti o collegamenti diretti topic–materiale. Le possibilità descritte in `PLAN.md` oltre l'MVP restano future.
 
 Prima di considerare pronta una pagina, verificare che:
 

@@ -1,4 +1,5 @@
 @baseUrl = http://localhost:3000
+@adminKey = admin_key
 
 # GET Endpoints
 
@@ -61,10 +62,21 @@ GET {{baseUrl}}/errors
 
 # POST Endpoints
 
+### Resources - 401 senza chiave amministratore
+POST {{baseUrl}}/api/resources
+Content-Type: application/json
+
+{
+  "title": "Unauthorized resource",
+  "url": "https://example.com/unauthorized-resource",
+  "project_ids": [1]
+}
+
 ### Resources - Crea risorsa e associa i progetti
 # @name createResource
 POST {{baseUrl}}/api/resources
 Content-Type: application/json
+Authorization: Bearer {{adminKey}}
 
 {
   "title": "Web development reference",
@@ -75,6 +87,7 @@ Content-Type: application/json
 ### Resources - 400 per ID progetto duplicato
 POST {{baseUrl}}/api/resources
 Content-Type: application/json
+Authorization: Bearer {{adminKey}}
 
 {
   "title": "Invalid resource",
@@ -85,6 +98,7 @@ Content-Type: application/json
 ### Resources - 404 per progetto inesistente
 POST {{baseUrl}}/api/resources
 Content-Type: application/json
+Authorization: Bearer {{adminKey}}
 
 {
   "title": "Missing project resource",
@@ -95,6 +109,7 @@ Content-Type: application/json
 ### Resources - 409 per URL già presente
 POST {{baseUrl}}/api/resources
 Content-Type: application/json
+Authorization: Bearer {{adminKey}}
 
 {
   "title": "Duplicate URL resource",
@@ -106,9 +121,12 @@ Content-Type: application/json
 
 ### Resources - Elimina risorsa per ID
 DELETE {{baseUrl}}/api/resources/{{createResource.response.body.$.id}}
+Authorization: Bearer {{adminKey}}
 
 ### Resources - 404 per risorsa inesistente
 DELETE {{baseUrl}}/api/resources/999999
+Authorization: Bearer {{adminKey}}
 
 ### Resources - 400 per ID non valido
 DELETE {{baseUrl}}/api/resources/not-a-number
+Authorization: Bearer {{adminKey}}

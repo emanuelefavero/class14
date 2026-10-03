@@ -4,6 +4,7 @@ const positiveInteger = (maximum) =>
   z.coerce.number().int().min(1).max(maximum);
 
 const envSchema = z.object({
+  ADMIN_KEY: z.string().trim().min(1),
   PORT: positiveInteger(65535).default(3000),
   DB_HOST: z.string().trim().min(1).default('localhost'),
   DB_PORT: positiveInteger(65535).default(3306),

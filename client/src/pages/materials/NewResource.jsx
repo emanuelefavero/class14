@@ -23,12 +23,16 @@ const initialForm = {
   project_ids: [],
 };
 
+const adminKeyStorage = 'class14.adminKey';
+
 const getErrorMessage = (error) => {
   if (!isAxiosError(error)) {
     return 'Non è stato possibile aggiungere la risorsa.';
   }
 
   switch (error.response?.status) {
+    case 401:
+      return 'La chiave amministratore non è corretta.';
     case 400:
       return 'Controlla i dati inseriti e riprova.';
     case 404:
@@ -43,6 +47,9 @@ const getErrorMessage = (error) => {
 export const NewResource = () => {
   const projects = useProjects();
   const [form, setForm] = useState(initialForm);
+  const [adminKey, setAdminKey] = useState(
+    () => sessionStorage.getItem(adminKeyStorage) ?? '',
+  );
   const [submission, setSubmission] = useState({ step: 'idle' });
   const isSubmitting = submission.step === 'submitting';
 
@@ -70,6 +77,11 @@ export const NewResource = () => {
     }));
   };
 
+  const handleAdminKeyChange = (event) => {
+    resetSubmission();
+    setAdminKey(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -79,10 +91,18 @@ export const NewResource = () => {
       project_ids: form.project_ids,
     };
 
-    if (!payload.title || !payload.url || payload.project_ids.length === 0) {
+    const normalizedAdminKey = adminKey.trim();
+
+    if (
+      !payload.title ||
+      !payload.url ||
+      payload.project_ids.length === 0 ||
+      !normalizedAdminKey
+    ) {
       setSubmission({
         step: 'error',
-        message: 'Compila i campi e seleziona almeno un progetto.',
+        message:
+          'Compila i campi, seleziona almeno un progetto e inserisci la chiave amministratore.',
       });
       return;
     }
@@ -90,7 +110,8 @@ export const NewResource = () => {
     setSubmission({ step: 'submitting' });
 
     try {
-      const resource = await createResource(payload);
+      const resource = await createResource(payload, normalizedAdminKey);
+      sessionStorage.setItem(adminKeyStorage, normalizedAdminKey);
       setForm(initialForm);
       setSubmission({ step: 'success', resource });
     } catch (error) {
@@ -241,6 +262,31 @@ export const NewResource = () => {
                 </ul>
               </fieldset>
             )}
+          </section>
+
+          <section className='resource-form-section'>
+            <div className='resource-form-section-heading'>
+              <span>03</span>
+              <div>
+                <h2>Accesso amministratore</h2>
+                <p>La chiave resta soltanto nella scheda corrente.</p>
+              </div>
+            </div>
+
+            <label className='resource-field' htmlFor='resource-admin-key'>
+              <span>Chiave amministratore</span>
+              <Input
+                id='resource-admin-key'
+                name='admin_key'
+                type='password'
+                value={adminKey}
+                onChange={handleAdminKeyChange}
+                autoComplete='current-password'
+                placeholder='Inserisci la chiave'
+                disabled={isSubmitting}
+                required
+              />
+            </label>
           </section>
 
           <footer className='resource-form-footer'>

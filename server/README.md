@@ -26,15 +26,17 @@ Le API Projects, Students, Cheat Sheets, Resources, Topics e Stats sono implemen
 - `GET /api/cheatsheets`: catalogo PDF con tutti i progetti collegati; ricerca su titolo/slug e filtro topic indiretto.
 - `GET /api/resources`: catalogo link con tutti i progetti collegati; ricerca sul titolo e filtro topic indiretto.
 - `POST /api/resources`: crea una risorsa e la associa a uno o più progetti in
-  una transazione; restituisce lo stesso oggetto del catalogo con status 201.
+  una transazione; richiede la chiave amministratore e restituisce lo stesso
+  oggetto del catalogo con status 201.
 - `DELETE /api/resources/:id`: elimina una risorsa; le associazioni vengono
-  rimosse in cascata e il successo restituisce 204 senza body.
+  rimosse in cascata, richiede la chiave amministratore e il successo restituisce
+  204 senza body.
 
 - `GET /api/topics`: tag unici con conteggio dei progetti.
 - `GET /api/topics/:name`: progetti e materiali indiretti, deduplicati.
 - `GET /api/stats`: cinque conteggi globali del catalogo.
 
-Topics riutilizza i repository esistenti; Stats esegue una query con cinque COUNT indipendenti. Nessun JSON duplicato o modifica al database. Verificati tutti i 7 topics e i conteggi 15 studenti, 15 progetti, 124 repository, 18 PDF e 17 risorse.
+Topics riutilizza i repository esistenti; Stats esegue una query con cinque COUNT indipendenti. Nessun JSON duplicato o modifica allo schema. Verificati tutti i 7 topics; il database locale contiene 15 studenti, 15 progetti, 124 repository, 18 PDF e 18 risorse, mentre il seed conserva le 17 risorse iniziali.
 
 La feature posts è stata rimossa; le routes di prova errors restano per i controlli dei middleware.
 
@@ -75,6 +77,7 @@ mysql -u root -p < db/setup/seed.sql
 
 | Variabile           | Default / requisito                                             |
 | ------------------- | --------------------------------------------------------------- |
+| ADMIN_KEY           | Obbligatoria; chiave condivisa per le operazioni di scrittura   |
 | PORT                | 3000; intero 1–65535                                            |
 | DB_HOST             | localhost; stringa non vuota                                    |
 | DB_PORT             | 3306; intero 1–65535                                            |
@@ -85,6 +88,10 @@ mysql -u root -p < db/setup/seed.sql
 | DB_CONNECT_TIMEOUT  | 10000 millisecondi; intero 1–60000                              |
 
 Gli script caricano `.env` se presente. Le variabili esportate nel terminale hanno precedenza. Il token GitHub non è utilizzato dal backend.
+
+`ADMIN_KEY` non ha un default nel codice. POST e DELETE Resources richiedono
+`Authorization: Bearer <ADMIN_KEY>`; i GET restano pubblici. Il valore di
+esempio va sostituito con una chiave non prevedibile prima di pubblicare l'app.
 
 ## Avvio
 

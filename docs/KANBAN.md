@@ -185,6 +185,23 @@ build passano. Il flusso browser ha verificato errore locale, creazione con due
 progetti, reset del form, conferma di successo e ritorno del catalogo a 17
 risorse dopo la cancellazione della fixture.
 
+### 14. Protezione scritture Resources — completata
+
+- [x] Rendere `ADMIN_KEY` obbligatoria nella configurazione server, senza un
+      default noto nel codice.
+- [x] Proteggere POST e DELETE Resources con un middleware Bearer condiviso,
+      lasciando pubblici i GET.
+- [x] Inviare la chiave dal form nell'header `Authorization` e gestire il 401.
+- [x] Conservare la chiave in `sessionStorage` soltanto dopo una creazione
+      riuscita.
+- [x] Aggiornare contratto API, configurazione, README e richieste HTTP.
+
+Verificati GET pubblico 200, POST senza chiave e con chiave errata 401, creazione
+autorizzata dal form, permanenza della chiave dopo il reload della stessa scheda,
+DELETE senza chiave 401 e DELETE autorizzata 204. La fixture ID 25 è stata
+rimossa; la risorsa preesistente ID 24 è stata preservata e il catalogo finale
+contiene 18 risorse. Nessun errore o warning nella console del browser.
+
 ## Idee future — fuori dall’MVP
 
 - Concordare deployment e visibilità della repository prima della pubblicazione. La repository resta privata finché l'utente non decide il passaggio a pubblica.
@@ -196,9 +213,9 @@ risorse dopo la cancellazione della fixture.
 
 ## In corso
 
-Creazione Resources completata nel backend e nel frontend. Il prossimo passo è
-il toast con Context; il breadcrumb verrà affrontato separatamente subito dopo.
-Il deployment rimane una decisione futura.
+Creazione Resources e protezione delle scritture completate nel backend e nel
+frontend. Il prossimo passo è il toast con Context; il breadcrumb verrà
+affrontato separatamente subito dopo. Il deployment rimane una decisione futura.
 
 ### Refactoring fetching frontend — 29 settembre 2026
 

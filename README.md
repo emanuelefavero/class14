@@ -4,7 +4,7 @@ Class14 è una piattaforma di studio per la classe WDPT14 del corso Web Developm
 
 Ogni progetto raccoglie la sua descrizione, i materiali collegati e le repository pubbliche degli studenti. Si può partire da un argomento, esplorare i progetti della classe e trovare gli appunti o i link utili per studiarlo.
 
-![mockup](./mockup.png 'mockup')
+![mockup](./mockup.png "mockup")
 
 ## Repository collegate
 
@@ -65,7 +65,7 @@ Apri l'indirizzo mostrato da Vite nel terminale (di solito `http://localhost:517
 - **Studenti:** profili con avatar, GitHub e repository presenti nel catalogo.
 - **Cheat sheet e Risorse:** cataloghi accessibili dalla Home, dal footer e dai progetti.
 
-Le liste hanno ricerca e filtri. Il catalogo comprende 15 studenti, 15 progetti, 18 PDF, 17 risorse e 124 repository pubbliche verificate.
+Le liste hanno ricerca e filtri. Il catalogo locale comprende 15 studenti, 15 progetti, 18 PDF, 18 risorse e 124 repository pubbliche verificate; il seed versionato contiene le 17 risorse iniziali.
 
 ## Struttura e documentazione
 

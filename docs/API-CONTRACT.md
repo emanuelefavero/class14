@@ -6,15 +6,14 @@ Contratto definito il 26 settembre 2026 per implementare l’MVP concordato in
 [AGENTS.md](../AGENTS.md) e [KANBAN.md](KANBAN.md), secondo la direzione
 [PLAN.md](PLAN.md). **Questo documento è la specifica di riferimento: Projects,
 Students, Cheat Sheets/Resources, Topics e Stats sono implementati e usati dal
-client; creazione e cancellazione Resources sono implementate nel backend e
-precedono il form.**
+client; creazione e cancellazione Resources sono protette da una chiave
+amministratore.**
 
 L'API è principalmente di lettura e aggiunge creazione e cancellazione mirate
-per le risorse. Non include autenticazione, CRUD completo o chiamate GitHub live.
+per le risorse. Non include utenti, login, CRUD completo o chiamate GitHub live.
 Riutilizza le sette tabelle di [schema.sql](../server/db/setup/schema.sql), senza
-migrazioni. La scrittura è destinata per ora allo sviluppo locale; la protezione
-in deployment verrà decisa in futuro. Le vecchie routes posts non fanno parte
-del contratto.
+migrazioni. Le scritture richiedono una chiave amministratore configurata nel
+server. Le vecchie routes posts non fanno parte del contratto.
 
 ## Convenzioni comuni
 
@@ -30,6 +29,17 @@ del contratto.
 - `created_at` non viene esposto nell’MVP: è una data di inserimento, non una data didattica o di completamento.
 - Ordinamento fisso crescente, confronto testuale case insensitive (`localeCompare` con locale `en` e sensitivity `base`); a parità, identificatore univoco crescente. Per i tag: a parità usare confronto della stringa originale per rendere l’ordine deterministico.
 - Le descrizioni sono Markdown come stringa; il frontend deve renderizzarle senza eseguire HTML non attendibile.
+
+### Protezione delle scritture
+
+- `POST /api/resources` e `DELETE /api/resources/:id` richiedono l'header
+  `Authorization: Bearer <ADMIN_KEY>`.
+- `ADMIN_KEY` è obbligatoria nella configurazione del server e non ha un valore
+  predefinito nel codice.
+- Header assente, schema diverso da `Bearer` o chiave errata restituiscono 401
+  con `{ "message": "Unauthorized" }`, prima di eseguire il controller.
+- Gli endpoint GET restano pubblici. Questa protezione è una singola chiave
+  condivisa per l'amministratore, non un sistema di account o login.
 
 ## Endpoint
 
@@ -228,11 +238,14 @@ Oggetto di soli conteggi globali, non influenzati dai filtri delle liste:
   "projects_count": 15,
   "repositories_count": 124,
   "cheatsheets_count": 18,
-  "resources_count": 17
+  "resources_count": 18
 }
 ```
 
-I numeri sono l’ultima verifica documentata, non costanti da codificare. Calcolare COUNT delle rispettive tabelle: students, projects, student_projects, cheatsheets, resources. Non contare righe moltiplicate da join.
+I numeri sono l’ultima verifica del database locale, non costanti da codificare;
+il seed versionato contiene le 17 risorse iniziali. Calcolare COUNT delle
+rispettive tabelle: students, projects, student_projects, cheatsheets, resources.
+Non contare righe moltiplicate da join.
 Catalogo vuoto: tutti zero. Nessuna percentuale di completamento, numero totale dei repository GitHub o commit.
 
 ## URL statici e GitHub
