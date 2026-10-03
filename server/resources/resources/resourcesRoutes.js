@@ -1,6 +1,5 @@
 import { index, store } from './resourcesController.js';
 
 export const registerResources = (app) => {
-  app.get('/api/resources', index);
-  app.post('/api/resources', store);
+  app.route('/api/resources').get(index).post(store);
 };

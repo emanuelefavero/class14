@@ -1,6 +1,6 @@
 import { index, show } from './studentsController.js';
 
 export const registerStudents = (app) => {
-  app.get('/api/students', index);
-  app.get('/api/students/:github_username', show);
+  app.route('/api/students').get(index);
+  app.route('/api/students/:github_username').get(show);
 };

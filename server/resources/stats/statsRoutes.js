@@ -1,5 +1,5 @@
 import { index } from './statsController.js';
 
 export const registerStats = (app) => {
-  app.get('/api/stats', index);
+  app.route('/api/stats').get(index);
 };
