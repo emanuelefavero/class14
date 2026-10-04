@@ -6,12 +6,13 @@
     "dev": "concurrently --kill-others --names server,client \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
-    "start": "npm --prefix server start",
+    "start:server": "npm --prefix server start",
     "build": "npm --prefix client run build",
-    "preview": "npm --prefix client run preview",
+    "preview:client": "npm --prefix client run preview",
+    "preview": "concurrently --kill-others --names server,client \"npm run start:server\" \"npm run preview:client\"",
     "lint": "npm --prefix client run lint",
-    "install:all": "npm ci && npm --prefix server ci && npm --prefix client ci",
-    "audit:all": "npm audit && npm --prefix server audit && npm --prefix client audit",
+    "install": "npm ci && npm --prefix server ci && npm --prefix client ci",
+    "audit": "npm audit && npm --prefix server audit && npm --prefix client audit",
     "push": "git push && git subtree push --prefix=server server main && git subtree push --prefix=client client main"
   },
   "repository": {

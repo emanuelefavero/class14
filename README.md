@@ -24,7 +24,7 @@ Dopo aver clonato la repository, esegui questi passaggi dalla sua cartella princ
 - Installa le dipendenze di root, server e client:
 
   ```bash
-  npm run install:all
+  npm run install
   ```
 
 - Crea il database `class14` e importa i dati. Se il tuo utente MySQL non è `root`, sostituiscilo in entrambi i comandi:

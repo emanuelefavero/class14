@@ -131,8 +131,7 @@ npm run preview
 ```
 
 `npm run lint` controlla il codice e `npm run build` genera la build di
-produzione in `dist/`. `npm run preview` serve la build localmente, ma non avvia
-il backend.
+produzione in `dist/`. `npm run preview` serve la build localmente, avviando anche il backend.
 
 Per avviare frontend e backend insieme e preparare anche il database, seguire
 il [setup del monorepo](https://github.com/emanuelefavero/class14/blob/main/docs/SETUP.md).

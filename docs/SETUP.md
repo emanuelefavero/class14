@@ -9,7 +9,7 @@ Questa guida riguarda il monorepo [class14](https://github.com/emanuelefavero/cl
 Dalla root, dopo il clone:
 
 ```bash
-npm run install:all
+npm run install
 ```
 
 Lo script esegue `npm ci` nella root, in `server/` e in `client/` usando i tre lockfile. Le dipendenze restano separate; non sono configurati workspaces.
@@ -30,11 +30,11 @@ Il pool legge host, porta, utente, password, database, limite connessioni e time
 
 ## Comandi dalla root
 
-- `npm start`: avvia solo Express senza watch.
+- `npm run start:server`: avvia solo Express senza watch.
 - `npm run build`: genera `client/dist/`.
-- `npm run preview`: serve la build client per verifica locale; non avvia Express.
+- `npm run preview`: serve la build client per verifica locale e avvia express.
 - `npm run lint`: controlla il client con Oxlint.
-- `npm run audit:all`: verifica i tre package; si interrompe al primo audit fallito.
+- `npm run audit`: verifica i tre package; si interrompe al primo audit fallito.
 
 Il progetto usa JavaScript, senza script TypeScript/typecheck e senza richiedere JSDoc. `client/jsconfig.json` mantiene gli alias per l’editor. I lockfile vanno versionati; node_modules, dist e .env sono già ignorati.
 

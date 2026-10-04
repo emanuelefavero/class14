@@ -238,7 +238,7 @@ Il database locale **class14** è stato creato e popolato dall'utente. Successiv
 ## Setup npm verificato
 
 - Il package root privato `class14` coordina server e client con concurrently, senza workspaces. I tre package hanno lockfile separati.
-- Comandi e configurazione: [docs/SETUP.md](docs/SETUP.md). `npm run dev` avvia entrambi; `npm run install:all` reinstalla dai lockfile.
+- Comandi e configurazione: [docs/SETUP.md](docs/SETUP.md). `npm run dev` avvia entrambi; `npm run install` reinstalla dai lockfile.
 - Rimossi script typecheck, dipendenza diretta TypeScript e tipi React; il client usa JavaScript e jsconfig per alias/editor. Nessun JSDoc per typing; conservare l’esempio esplicativo richiesto per `normalizeProjectTopics`. Il formatter usa il plugin di ordinamento import già impiegato nel server.
 - Verificati build e lint client, connessione MySQL e i flussi principali con dati reali. Il vecchio Products non è più nel client. Le verifiche precedenti di audit dei tre package avevano dato zero vulnerabilità; l'installazione di `react-markdown` ha dato zero vulnerabilità nell'audit npm del client.
 - Gli script server caricano opzionalmente `server/.env`; la `.env` root non viene caricata dal server. Non richiedere il token GitHub per avviare l’app.
