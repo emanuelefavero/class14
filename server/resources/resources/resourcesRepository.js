@@ -15,7 +15,9 @@ import {
  * // [{ id, title, url, projects: [{ id, slug, title, topics }] }]
  */
 export const findAll = async ({ search, topic } = {}) => {
+  // Fetch all resources along with their project associations.
   // LEFT JOIN retains catalog entries that have no project associations.
+  // Each row represents a resource potentially linked to a project.
   const [rows] = await db.query(`
     SELECT resources.id, title, url, project_resources.project_id
     FROM resources
@@ -25,10 +27,11 @@ export const findAll = async ({ search, topic } = {}) => {
   const projectsById = new Map(
     projects.map((project) => [project.id, project]),
   );
+
+  // Prepare a map to collect resources by their ID for easy grouping.
   const itemsById = new Map();
 
-  // One result row per association becomes one item with a projects array.
-  // The junction primary key already guarantees unique item/project pairs.
+  // Group rows by resource ID, accumulating linked projects.
   for (const row of rows) {
     const { project_id, ...summary } = row;
     if (!itemsById.has(row.id)) {
@@ -38,7 +41,7 @@ export const findAll = async ({ search, topic } = {}) => {
     if (project) itemsById.get(row.id).projects.push(project);
   }
 
-  // Build a lookup of matching project IDs while keeping every linked project in the returned item.
+  // Determine which projects match the given topic, if any.
   const topicName = topic?.toLowerCase();
   const matchingProjectIds = new Set();
   if (topicName) {
@@ -50,6 +53,7 @@ export const findAll = async ({ search, topic } = {}) => {
     }
   }
 
+  // Prepare the search term for literal matching.
   const searchTerm = search?.toLowerCase();
   const items = [...itemsById.values()];
   const filteredItems = items.filter((item) => {
@@ -61,6 +65,7 @@ export const findAll = async ({ search, topic } = {}) => {
     return item.projects.some((project) => matchingProjectIds.has(project.id));
   });
 
+  // Sort the projects within each filtered resource and then sort the resources themselves.
   for (const item of filteredItems) item.projects.sort(compareProjects);
   return filteredItems.sort(
     (left, right) => compareText(left.title, right.title) || left.id - right.id,

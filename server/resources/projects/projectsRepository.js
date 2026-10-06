@@ -22,6 +22,7 @@ export const findAll = async ({ search, topic } = {}) => {
   const searchTerm = search?.toLowerCase();
   const tag = topic?.toLowerCase();
 
+  // Filter and normalize the project data based on the search term and topic tag.
   return normalizeProjectTopics(rows)
     .filter((project) => {
       if (
@@ -48,6 +49,7 @@ export const findAll = async ({ search, topic } = {}) => {
  * // { id, slug, title, topics, description, students, cheatsheets, resources }
  */
 export const findBySlug = async (slug) => {
+  // Query for getting project description and to check that the project exists
   const [[row]] = await db.query(
     'SELECT id, description FROM projects WHERE LOWER(slug) = LOWER(?)',
     [slug],
@@ -55,11 +57,12 @@ export const findBySlug = async (slug) => {
 
   if (!row) return null;
 
+  // Reuse the findAll function to get normalized project data
   const projects = await findAll();
   const project = projects.find(({ id }) => id === row.id);
   if (!project) return null;
 
-  // Separate queries prevent the three many-to-many relations from multiplying each other in a single JOIN.
+  // Query for getting students, cheatsheets, and resources related to the project. We used separate queries to avoid complex JOINs and potential data duplication.
   const [[students], [cheatsheets], [resources]] = await Promise.all([
     db.query(
       `SELECT students.id, students.name, students.github_username,
@@ -85,6 +88,7 @@ export const findBySlug = async (slug) => {
     ),
   ]);
 
+  // Normalize the data by mapping and sorting students, cheatsheets, and resources before returning the final project object.
   return {
     ...project,
     description: row.description,

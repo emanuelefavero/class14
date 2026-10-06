@@ -11,20 +11,24 @@ import { compareProjects, compareText } from '#app/utils/catalog.js';
  * // [{ id, slug, title, file_path, projects: [{ id, slug, title, topics }] }]
  */
 export const findAll = async ({ search, topic } = {}) => {
+  // Fetch all cheatsheets along with their associated project IDs.
   // LEFT JOIN retains catalog entries that have no project associations.
   const [rows] = await db.query(`
     SELECT cheatsheets.id, slug, title, file_path, project_cheatsheets.project_id
     FROM cheatsheets
     LEFT JOIN project_cheatsheets ON project_cheatsheets.cheatsheet_id = cheatsheets.id
   `);
+
+  // Fetch all projects to enable linking them to cheatsheets and filtering by topic.
   const projects = await projectsRepository.findAll();
   const projectsById = new Map(
     projects.map((project) => [project.id, project]),
   );
+
+  // Prepare a map to store cheatsheets by their ID for easy linking to projects.
   const itemsById = new Map();
 
-  // One result row per association becomes one item with a projects array.
-  // The junction primary key already guarantees unique item/project pairs.
+  // Link each cheatsheet to its associated projects using the pre-fetched projects map.
   for (const row of rows) {
     const { project_id, ...summary } = row;
     if (!itemsById.has(row.id)) {
@@ -34,7 +38,7 @@ export const findAll = async ({ search, topic } = {}) => {
     if (project) itemsById.get(row.id).projects.push(project);
   }
 
-  // Build a lookup of matching project IDs while keeping every linked project in the returned item.
+  // Build a lookup of matching project IDs for the given topic while keeping every linked project in the returned item.
   const topicName = topic?.toLowerCase();
   const matchingProjectIds = new Set();
   if (topicName) {
@@ -46,6 +50,7 @@ export const findAll = async ({ search, topic } = {}) => {
     }
   }
 
+  // Prepare the search term for filtering cheatsheets by title or slug.
   const searchTerm = search?.toLowerCase();
   const items = [...itemsById.values()];
   const filteredItems = items.filter((item) => {
@@ -59,6 +64,7 @@ export const findAll = async ({ search, topic } = {}) => {
     return item.projects.some((project) => matchingProjectIds.has(project.id));
   });
 
+  // Sort the projects within each filtered cheatsheet and then sort the cheatsheets themselves by title and slug.
   for (const item of filteredItems) item.projects.sort(compareProjects);
   return filteredItems.sort(
     (left, right) =>

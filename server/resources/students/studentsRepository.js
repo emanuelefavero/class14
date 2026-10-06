@@ -16,28 +16,35 @@ const toSummary = (student) => ({
  * // [{ id, name, github_username, github_url, avatar_path }]
  */
 export const findAll = async ({ search, topic } = {}) => {
+  // Get all students initially
   let sql =
     'SELECT students.id, name, github_username, avatar_path FROM students';
   const values = [];
 
   // If topic is provided, filter students by linked projects with that topic.
   if (topic) {
+    // Fetch projects that match the given topic.
     const projects = await projectsRepository.findAll({ topic });
     if (projects.length === 0) return [];
 
+    // Extract the project IDs from available projects.
     const projectIds = projects.map((project) => project.id);
     const placeholders = projectIds.map(() => '?').join(', ');
 
-    // DISTINCT keeps a student appearing once even with several matching projects.
+    // Select students who are linked to the filtered projects.
     sql = `SELECT DISTINCT students.id, name, github_username, avatar_path
            FROM students
            INNER JOIN student_projects ON student_projects.student_id = students.id
            WHERE student_projects.project_id IN (${placeholders})`;
+
+    // Add the project IDs to the query values.
     values.push(...projectIds);
   }
 
+  // Get students, if topic is provided the student list is already filtered by linked projects.
   const [rows] = await db.query(sql, values);
 
+  // Convert the raw database rows into student summaries and apply search filtering.
   const searchTerm = search?.toLowerCase();
   const students = rows.filter((student) => {
     if (!searchTerm) return true;
@@ -48,6 +55,7 @@ export const findAll = async ({ search, topic } = {}) => {
     return matchesName || matchesUsername;
   });
 
+  // Map the filtered students to their summary representation and sort them by name and username before returning.
   return students
     .map(toSummary)
     .sort(
